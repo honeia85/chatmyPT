@@ -20,7 +20,7 @@ Qwen-1.8B 모델을 사용한 한국어 채팅 웹 인터페이스입니다.
 
 1. 저장소 클론
 ```bash
-git clone [저장소 URL]
+git clone https://github.com/honeia85/chatmyPT.git
 cd chatmyPT
 ```
 
