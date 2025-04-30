@@ -56,9 +56,9 @@ class ChatBot:
                     history=self.history
                 )
                 
-                # 메모리 최적화
-                if len(self.history) > 5:
-                    self.history = self.history[-5:]
+                # 메모리 최적화 (최근 10개의 대화만 유지)
+                if len(self.history) > 10:
+                    self.history = self.history[-10:]
                     gc.collect()
                     torch.mps.empty_cache() if self.device.type == 'mps' else torch.cuda.empty_cache()
                 
