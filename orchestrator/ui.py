@@ -13,35 +13,38 @@ import gradio as gr
 
 from .task import Orchestrator
 from .file_reader import FileReader
-from .departments import DEPARTMENTS
+from .departments import ORGANIZATION
 
 
 INPUT_FOLDER = "input"
 
 
 def _build_org_chart():
-    """초기 조직도 텍스트를 생성합니다."""
+    """전체 조직도 텍스트를 생성합니다."""
     lines = ["```", "🏢 대표이사 (CEO)  ⏸"]
-    for dept in DEPARTMENTS.values():
-        lines.append(f"├─ {dept['icon']} {dept['name']}  대기")
-        members = list(dept["members"].values())
-        for i, member in enumerate(members):
-            prefix = "│  └─" if i == len(members) - 1 else "│  ├─"
-            lines.append(f"{prefix} {member['icon']} {member['name']}")
+    for div in ORGANIZATION.values():
+        _org_lines(div, lines, indent=0, is_last=False)
     lines.append("```")
     return "\n".join(lines)
 
 
+def _org_lines(unit, lines, indent, is_last):
+    prefix = "│  " * indent + ("└─ " if is_last else "├─ ")
+    lines.append(f"{prefix}{unit['icon']} {unit['name']}")
+    subs = list(unit.get("units", {}).values())
+    for i, sub in enumerate(subs):
+        _org_lines(sub, lines, indent + 1, is_last=(i == len(subs) - 1))
+
+
 def _refresh_file_list():
-    """input 폴더의 파일 목록을 새로고침합니다."""
     files = FileReader.scan_folder(INPUT_FOLDER)
     if not files:
         return "파일 없음 — `input/` 폴더에 파일을 넣거나 아래에서 업로드하세요."
     lines = []
     for fi in files:
-        type_badge = {"text": "TXT", "csv": "CSV", "pdf": "PDF",
-                      "json": "JSON", "image": "IMG"}.get(fi.file_type, "???")
-        lines.append(f"- **{fi.name}** `{type_badge}`")
+        badge = {"text": "TXT", "csv": "CSV", "pdf": "PDF",
+                 "json": "JSON", "image": "IMG"}.get(fi.file_type, "???")
+        lines.append(f"- **{fi.name}** `{badge}`")
     return "\n".join(lines)
 
 
@@ -54,11 +57,10 @@ def create_demo():
         css="footer {visibility: hidden}",
     ) as demo:
 
-        # ── 헤더 ──
         gr.Markdown(
             "# 멀티에이전트 연구소\n\n"
             "`input/` 폴더에 파일을 넣거나 업로드한 후, 질문을 입력하세요.\n"
-            "CEO가 적절한 부서에 업무를 배정하고, 부서장은 필요시 팀원에게 위임합니다."
+            "CEO가 본부에 업무를 배정하고, 본부장은 팀장에게, 팀장은 연구원에게 위임합니다."
         )
 
         with gr.Row():
@@ -73,14 +75,14 @@ def create_demo():
                 )
                 refresh_btn = gr.Button("파일 목록 새로고침", size="sm")
 
-                gr.Markdown("### 조직도")
+                gr.Markdown("### 조직도 (실시간)")
                 agent_tree = gr.Markdown(initial_org)
 
             # ── 우측: 대화 ──
             with gr.Column(scale=7):
                 chatbot = gr.Chatbot(
                     label="대화",
-                    height=500,
+                    height=550,
                     bubble_full_width=False,
                     show_copy_button=True,
                 )
@@ -102,9 +104,9 @@ def create_demo():
                 "1. `input/` 폴더에 분석할 파일(PDF, CSV, TXT 등)을 넣습니다.\n"
                 "2. 또는 위 '파일 업로드'로 직접 업로드합니다.\n"
                 "3. 메시지 입력창에 원하는 분석을 요청합니다.\n"
-                "4. CEO가 요청을 분석하고 적절한 부서에 업무를 배정합니다.\n"
-                "5. 부서장이 필요시 팀원에게 세부 업무를 위임합니다.\n"
-                "6. 모든 결과가 종합되어 최종 답변이 제공됩니다.\n\n"
+                "4. **CEO**가 요청을 분석하고 적절한 **본부**에 업무를 배정합니다.\n"
+                "5. **본부장**이 필요시 **팀장**에게, 팀장은 **연구원**에게 위임합니다.\n"
+                "6. 모든 결과가 계층을 따라 종합되어 최종 답변이 제공됩니다.\n\n"
                 "**예시 질문:**\n"
                 "- 이 CSV 파일의 주요 통계를 분석해주세요\n"
                 "- 이 보고서의 핵심 내용을 요약해주세요\n"
@@ -134,7 +136,6 @@ def create_demo():
 
             for update in lab.process(message):
                 phase = update["phase"]
-                agent = update["agent_name"]
                 title = update["agent_title"]
                 content = update["content"]
                 tree = update["tree"]
@@ -143,7 +144,7 @@ def create_demo():
                 current.append((None, entry))
 
                 tree_display = f"```\n{tree}\n```"
-                status_text = f"**{agent}** 처리 중..."
+                status_text = f"**{update['agent_name']}** 처리 중..."
                 yield current, "", tree_display, status_text
 
             yield current, "", tree_display, "**완료!**"
@@ -152,7 +153,6 @@ def create_demo():
             lab.clear()
             return [], "", initial_org, ""
 
-        # ── 이벤트 바인딩 ──
         refresh_btn.click(_refresh_file_list, outputs=[file_list])
         file_upload.change(on_upload, inputs=[file_upload], outputs=[file_list])
 

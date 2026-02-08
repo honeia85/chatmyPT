@@ -1,23 +1,18 @@
 """
-SharedModel - 모든 에이전트가 공유하는 단일 모델 인스턴스 (싱글턴)
+SharedModel - Anthropic Claude API 클라이언트 (싱글턴)
+
+환경변수 ANTHROPIC_API_KEY 필요.
 """
 
-import gc
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers.generation import GenerationConfig
+import os
+from anthropic import Anthropic
 
-
-def _get_device():
-    if torch.backends.mps.is_available() and torch.backends.mps.is_built():
-        return torch.device("mps")
-    elif torch.cuda.is_available():
-        return torch.device("cuda")
-    return torch.device("cpu")
+DEFAULT_MODEL = "claude-sonnet-4-5-20250929"
+MAX_TOKENS = 1024
 
 
 class SharedModel:
-    """Qwen-1.8B-Chat 싱글턴. 모든 에이전트가 이 인스턴스를 공유합니다."""
+    """Claude API 싱글턴. 모든 에이전트가 이 클라이언트를 공유합니다."""
 
     _instance = None
 
@@ -28,44 +23,44 @@ class SharedModel:
         return cls._instance
 
     def __init__(self):
-        model_name = "Qwen/Qwen-1_8B-Chat"
-        self.device = _get_device()
-        print(f"Using device: {self.device}")
-
-        self.tokenizer = AutoTokenizer.from_pretrained(
-            model_name, trust_remote_code=True
-        )
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            torch_dtype=torch.float16,
-            trust_remote_code=True,
-            use_cache=True,
-        ).to(self.device).eval()
-
-        self.model.generation_config = GenerationConfig.from_pretrained(
-            model_name,
-            trust_remote_code=True,
-            max_new_tokens=512,
-            temperature=0.8,
-            top_p=0.9,
-            repetition_penalty=1.1,
-        )
-        self.clean_memory()
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise RuntimeError(
+                "ANTHROPIC_API_KEY 환경변수가 설정되지 않았습니다.\n"
+                "export ANTHROPIC_API_KEY='your-api-key' 를 실행하세요."
+            )
+        self.client = Anthropic(api_key=api_key)
+        self.model = os.environ.get("CLAUDE_MODEL", DEFAULT_MODEL)
+        self.max_tokens = int(os.environ.get("CLAUDE_MAX_TOKENS", MAX_TOKENS))
+        print(f"Claude API 연결 완료 (model: {self.model})")
 
     def chat(self, query, history=None, system=""):
-        """model.chat() 래퍼. torch.no_grad() 자동 적용."""
-        with torch.no_grad():
-            response, new_history = self.model.chat(
-                self.tokenizer,
-                query,
-                history=history or [],
-                system=system,
-            )
-        return response, new_history
+        """
+        Claude API를 호출하여 응답을 생성합니다.
+
+        Args:
+            query: 사용자 메시지
+            history: 이전 대화 기록 [{"role": ..., "content": ...}, ...]
+            system: 시스템 프롬프트
+
+        Returns:
+            (response_text, updated_history)
+        """
+        messages = list(history or [])
+        messages.append({"role": "user", "content": query})
+
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=self.max_tokens,
+            system=system,
+            messages=messages,
+        )
+
+        assistant_text = response.content[0].text
+        messages.append({"role": "assistant", "content": assistant_text})
+
+        return assistant_text, messages
 
     def clean_memory(self):
-        gc.collect()
-        if self.device.type == "mps":
-            torch.mps.empty_cache()
-        elif self.device.type == "cuda":
-            torch.cuda.empty_cache()
+        """API 기반이므로 로컬 메모리 정리 불필요. 호환성 유지용."""
+        pass

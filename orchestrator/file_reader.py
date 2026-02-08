@@ -1,17 +1,17 @@
 """
 FileReader - input 폴더의 파일을 읽고 요약하는 유틸리티
 
+Claude API의 200K 컨텍스트 윈도우에 맞춰 파일 예산을 대폭 확대.
 지원 형식: .txt, .md, .csv, .tsv, .pdf, .json
-토큰 예산: 파일당 최대 2000자 (~500토큰)
 """
 
 import csv
 import json
 from pathlib import Path
 
-MAX_CONTENT_CHARS = 2000
-MAX_CSV_ROWS = 20
-MULTI_FILE_BUDGET = 4000
+MAX_CONTENT_CHARS = 10000   # 파일당 최대 (~2500 토큰)
+MAX_CSV_ROWS = 100          # CSV 상위 행 수
+MULTI_FILE_BUDGET = 50000   # 전체 파일 합산 예산 (~12500 토큰)
 
 
 class FileInfo:
@@ -74,7 +74,7 @@ class FileReader:
         text = path.read_text(encoding="utf-8", errors="replace")
         truncated = text[:MAX_CONTENT_CHARS]
         if len(text) > MAX_CONTENT_CHARS:
-            truncated += "..."
+            truncated += f"\n\n... (총 {len(text)}자 중 {MAX_CONTENT_CHARS}자 표시)"
         return FileInfo(path, file_type, truncated, f"{path.name}: 텍스트 ({len(text)}자)")
 
     @classmethod
@@ -103,17 +103,18 @@ class FileReader:
             full = "\n\n".join(pages)
             truncated = full[:MAX_CONTENT_CHARS]
             if len(full) > MAX_CONTENT_CHARS:
-                truncated += "..."
+                truncated += f"\n\n... (총 {len(full)}자 중 {MAX_CONTENT_CHARS}자 표시)"
             return FileInfo(path, file_type, truncated, f"{path.name}: PDF ({len(reader.pages)}페이지)")
         except ImportError:
-            return FileInfo(path, file_type, "", f"{path.name}: PDF (PyPDF2 미설치로 읽기 불가)")
+            return FileInfo(path, file_type, "", f"{path.name}: PDF (PyPDF2 미설치)")
 
     @classmethod
     def _read_json(cls, path, file_type):
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         text = json.dumps(data, ensure_ascii=False, indent=2)
-        return FileInfo(path, file_type, text[:MAX_CONTENT_CHARS], f"{path.name}: JSON")
+        truncated = text[:MAX_CONTENT_CHARS]
+        return FileInfo(path, file_type, truncated, f"{path.name}: JSON")
 
     @classmethod
     def _read_image(cls, path, file_type):

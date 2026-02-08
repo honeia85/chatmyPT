@@ -1,26 +1,27 @@
 """
-Orchestrator - CEO 오케스트레이션 핵심 로직
+Orchestrator - CEO 오케스트레이션 핵심 로직 (재귀적 위임)
 
 흐름:
-  1. 사용자 메시지 수신
-  2. input/ 파일 스캔
-  3. CEO가 업무 배정 결정 (직접답변 or 부서 배정)
-  4. 부서장이 업무 수행 (직접 or 팀원 위임)
-  5. 결과를 계층적으로 종합하여 최종 답변
+  1. 사용자 메시지 수신 + input/ 파일 스캔
+  2. CEO가 업무 배정 결정 (직접답변 or 본부 배정)
+  3. 본부장이 업무 수행 (직접 or 팀 배정)
+  4. 팀장이 업무 수행 (직접 or 연구원 배정)
+  5. 연구원이 직접 실행
+  6. 결과가 계층을 따라 역순으로 종합
 """
 
 import re
 from pathlib import Path
 
 from .model import SharedModel
-from .agent import Agent
+from .agent import Agent, MAX_DEPTH
 from .file_reader import FileReader
 from .departments import (
     CEO_SYSTEM,
-    DEPARTMENTS,
-    TASK_ASSIGNMENT_TEMPLATE,
-    DEPT_HEAD_TASK_TEMPLATE,
-    STAFF_TASK_TEMPLATE,
+    ORGANIZATION,
+    CEO_ASSIGNMENT_TEMPLATE,
+    DELEGATION_TEMPLATE,
+    TASK_TEMPLATE,
     SYNTHESIS_TEMPLATE,
     DIRECT_RESPONSE_TEMPLATE,
 )
@@ -29,7 +30,7 @@ from .departments import (
 class Orchestrator:
     """
     대표이사(CEO) 역할의 최상위 오케스트레이터.
-    사용자와 대화하며, 하위 부서/직원 에이전트를 동적으로 생성합니다.
+    재귀적으로 하위 조직에 업무를 위임합니다.
     """
 
     def __init__(self, input_folder="input"):
@@ -47,24 +48,26 @@ class Orchestrator:
             role="작업 분배 및 종합",
             system_prompt=CEO_SYSTEM,
             icon="🏢",
-            max_history=3,
+            max_history=5,
         )
 
         print("  🏢 대표이사 에이전트 준비 완료")
-        for key, dept in DEPARTMENTS.items():
-            print(f"  {dept['icon']} {dept['name']} 대기")
+        for key, div in ORGANIZATION.items():
+            self._print_org(div, indent=1)
         print("=" * 50)
         print("  연구소 준비 완료!")
         print("=" * 50)
 
+    def _print_org(self, unit, indent):
+        print(f"{'  ' * indent}{unit['icon']} {unit['name']} 대기")
+        for sub in unit.get("units", {}).values():
+            self._print_org(sub, indent + 1)
+
     def process(self, user_message, uploaded_files=None):
         """
         메인 처리 루프. 제너레이터로 진행 상황을 단계별 yield.
-
-        각 yield:
-          {"phase": str, "agent": str, "role": str, "content": str, "tree": str}
         """
-        # 이전 부서 에이전트 정리 (CEO 히스토리는 대화 연속성 유지)
+        # 이전 하위 에이전트 정리 (CEO 히스토리는 대화 연속성 유지)
         for child in self.ceo.children:
             child.clear()
         self.ceo.children = []
@@ -83,32 +86,31 @@ class Orchestrator:
 
         # 2. CEO가 업무 배정 결정
         self.ceo.task_description = "업무 분석 중"
-        assignment_prompt = TASK_ASSIGNMENT_TEMPLATE.format(
+        available = ", ".join(ORGANIZATION.keys())
+        assignment_prompt = CEO_ASSIGNMENT_TEMPLATE.format(
             user_message=user_message,
             file_manifest=manifest,
+            available_units=available,
         )
         plan = self.ceo.respond(assignment_prompt)
         yield self._update("업무 배정", self.ceo, plan)
 
-        # 3. 배정 결과 파싱
-        assignments = self._parse_assignments(plan)
+        # 3. 배정 파싱
+        assignments = self._parse_ceo_assignments(plan)
 
         if not assignments:
-            # 직접 답변 모드
             yield from self._direct_response(user_message, file_infos)
         else:
-            # 부서별 실행 + 종합
-            yield from self._execute_departments(assignments, file_infos, user_message)
+            yield from self._execute_assignments(
+                assignments, file_infos, user_message
+            )
 
-        self.model.clean_memory()
+    # ══════════════════════════════════════════════════════
+    # 파싱
+    # ══════════════════════════════════════════════════════
 
-    # ── 파싱 ──────────────────────────────────────────────
-
-    def _parse_assignments(self, plan_text):
-        """
-        CEO 응답에서 부서 배정을 파싱합니다.
-        형식: [배정] 부서코드 | 업무: 설명 | 파일: 파일명
-        """
+    def _parse_ceo_assignments(self, plan_text):
+        """CEO 응답에서 본부 배정을 파싱합니다."""
         if "[직접답변]" in plan_text:
             return []
 
@@ -117,27 +119,32 @@ class Orchestrator:
         for line in plan_text.split("\n"):
             m = re.match(pattern, line.strip())
             if m:
-                dept_code = m.group(1).strip()
-                task_desc = m.group(2).strip()
+                code = m.group(1).strip()
+                task = m.group(2).strip()
                 files = [f.strip() for f in m.group(3).split(",")] if m.group(3) else []
-
-                if dept_code in DEPARTMENTS:
-                    assignments.append({
-                        "dept": dept_code,
-                        "task": task_desc,
-                        "files": files,
-                    })
-
-        # 파싱 실패시 직접답변 폴백
-        if not assignments:
-            return []
+                if code in ORGANIZATION:
+                    assignments.append({"code": code, "task": task, "files": files})
 
         return assignments
 
-    # ── 직접 답변 ────────────────────────────────────────
+    def _parse_delegations(self, response_text, available_units):
+        """중간 관리자 응답에서 하위 배정을 파싱합니다."""
+        delegations = []
+        pattern = r'\[배정\]\s*(\w+)\s*\|\s*업무:\s*(.+?)$'
+        for line in response_text.split("\n"):
+            m = re.match(pattern, line.strip())
+            if m:
+                code = m.group(1).strip()
+                task = m.group(2).strip()
+                if code in available_units:
+                    delegations.append({"code": code, "task": task})
+        return delegations
+
+    # ══════════════════════════════════════════════════════
+    # 직접 답변
+    # ══════════════════════════════════════════════════════
 
     def _direct_response(self, user_message, file_infos):
-        """CEO가 직접 답변합니다."""
         self.ceo.task_description = "직접 답변 작성 중"
         file_context = FileReader.get_content(file_infos) if file_infos else ""
         prompt = DIRECT_RESPONSE_TEMPLATE.format(
@@ -147,125 +154,131 @@ class Orchestrator:
         response = self.ceo.respond(prompt)
         yield self._update("답변", self.ceo, response)
 
-    # ── 부서 실행 ────────────────────────────────────────
+    # ══════════════════════════════════════════════════════
+    # 재귀적 실행
+    # ══════════════════════════════════════════════════════
 
-    def _execute_departments(self, assignments, file_infos, original_question):
-        """부서장 에이전트를 생성하고 업무를 수행합니다."""
-        dept_results = []
+    def _execute_assignments(self, assignments, file_infos, original_question):
+        """CEO 배정을 실행하고 최종 종합합니다."""
+        div_results = []
 
         for assignment in assignments:
-            dept_code = assignment["dept"]
-            dept_info = DEPARTMENTS[dept_code]
+            code = assignment["code"]
+            org_unit = ORGANIZATION[code]
 
-            # 부서장 에이전트 생성
+            # 본부장 생성
             head = self.ceo.spawn_child(
-                name=f"{dept_info['name']} 부장",
-                role=dept_info["name"],
-                system_prompt=dept_info["head_system"],
-                icon=dept_info["icon"],
+                name=org_unit["name"],
+                role=org_unit["name"],
+                system_prompt=org_unit["system"],
+                icon=org_unit["icon"],
             )
             head.task_description = assignment["task"]
-            yield self._update("부서 배정", head, f"업무: {assignment['task']}")
+            yield self._update("본부 배정", head, f"업무: {assignment['task']}")
 
-            # 부서장이 업무 수행
-            result = yield from self._run_department(
-                head, assignment, dept_info, file_infos
+            # 재귀적 실행
+            file_content = FileReader.get_content(
+                file_infos,
+                filenames=assignment["files"] if assignment["files"] else None,
             )
-            dept_results.append((head.display_name, result))
+            result = yield from self._run_unit(
+                agent=head,
+                task_desc=assignment["task"],
+                file_content=file_content,
+                sub_units=org_unit.get("units", {}),
+                original_question=original_question,
+            )
+            div_results.append((head.display_name, result))
 
-            self.model.clean_memory()
-
-        # CEO가 종합
+        # CEO 최종 종합
         self.ceo.task_description = "최종 보고 종합 중"
         results_text = "\n\n".join(
-            f"[{name}]\n{result}" for name, result in dept_results
+            f"[{name}]\n{result}" for name, result in div_results
         )
-        synthesis_prompt = SYNTHESIS_TEMPLATE.format(
+        final = self.ceo.respond(SYNTHESIS_TEMPLATE.format(
             question=original_question,
-            dept_results=results_text,
-        )
-        final = self.ceo.respond(synthesis_prompt)
+            sub_results=results_text,
+        ))
         yield self._update("최종 보고", self.ceo, final)
 
-    def _run_department(self, head, assignment, dept_info, file_infos):
+    def _run_unit(self, agent, task_desc, file_content, sub_units, original_question):
         """
-        부서장이 업무를 수행합니다.
-        복잡하면 팀원에게 위임, 아니면 직접 처리.
-        """
-        file_content = FileReader.get_content(
-            file_infos,
-            filenames=assignment["files"] if assignment["files"] else None,
-        )
-        member_codes = ", ".join(dept_info["members"].keys())
+        재귀적 업무 실행.
 
-        prompt = DEPT_HEAD_TASK_TEMPLATE.format(
-            task_description=assignment["task"],
+        sub_units가 있으면 → 위임 가능한 중간 관리자
+        sub_units가 없으면 → 말단 실행자 (직접 수행)
+
+        Returns: 이 에이전트의 최종 결과 문자열
+        """
+        if not sub_units:
+            # 말단 (연구원): 직접 실행
+            prompt = TASK_TEMPLATE.format(
+                task_description=task_desc,
+                file_content=file_content,
+            )
+            result = agent.respond(prompt)
+            yield self._update("보고", agent, result)
+            return result
+
+        # 중간 관리자: 위임 또는 직접 처리 결정
+        available = ", ".join(sub_units.keys())
+        prompt = DELEGATION_TEMPLATE.format(
+            task_description=task_desc,
             file_content=file_content,
-            member_codes=member_codes,
+            available_units=available,
         )
-        head_response = head.respond(prompt)
-        yield self._update("분석 중", head, head_response)
+        response = agent.respond(prompt)
+        yield self._update("분석 중", agent, response)
 
-        # 위임 여부 확인
-        delegations = self._parse_delegations(head_response, dept_info)
+        # 위임 파싱
+        delegations = self._parse_delegations(response, sub_units)
 
-        if delegations:
-            # 팀원에게 위임
-            staff_results = []
-            for delegation in delegations:
-                member_key = delegation["member"]
-                member_info = dept_info["members"][member_key]
+        if not delegations:
+            # 직접 처리 완료
+            return response
 
-                staff = head.spawn_child(
-                    name=member_info["name"],
-                    role=member_info["name"],
-                    system_prompt=member_info["system"],
-                    icon=member_info["icon"],
-                )
-                staff.task_description = delegation["task"]
-                yield self._update("직원 배정", staff, f"업무: {delegation['task']}")
+        # 하위 에이전트에 위임
+        sub_results = []
+        for delegation in delegations:
+            sub_code = delegation["code"]
+            sub_info = sub_units[sub_code]
 
-                staff_prompt = STAFF_TASK_TEMPLATE.format(
-                    task_description=delegation["task"],
-                    file_content=file_content,
-                )
-                staff_result = staff.respond(staff_prompt)
-                staff_results.append((staff.display_name, staff_result))
-                yield self._update("보고", staff, staff_result)
-
-                self.model.clean_memory()
-
-            # 부서장이 팀원 결과 종합
-            head.task_description = "팀 결과 종합 중"
-            team_text = "\n\n".join(
-                f"[{name}] {result}" for name, result in staff_results
+            child = agent.spawn_child(
+                name=sub_info["name"],
+                role=sub_info["name"],
+                system_prompt=sub_info["system"],
+                icon=sub_info["icon"],
             )
-            synthesis = head.respond(
-                f"팀원들의 보고를 종합하여 부서 최종 결과를 작성하세요:\n\n{team_text}"
+            child.task_description = delegation["task"]
+            yield self._update("배정", child, f"업무: {delegation['task']}")
+
+            # 재귀 호출
+            child_result = yield from self._run_unit(
+                agent=child,
+                task_desc=delegation["task"],
+                file_content=file_content,
+                sub_units=sub_info.get("units", {}),
+                original_question=original_question,
             )
-            yield self._update("부서 종합", head, synthesis)
-            return synthesis
-        else:
-            # 부서장이 직접 처리한 결과 반환
-            return head_response
+            sub_results.append((child.display_name, child_result))
 
-    def _parse_delegations(self, head_response, dept_info):
-        """부서장 응답에서 팀원 위임을 파싱합니다."""
-        delegations = []
-        pattern = r'\[위임\]\s*(\w+)\s*\|\s*업무:\s*(.+?)$'
-        for line in head_response.split("\n"):
-            m = re.match(pattern, line.strip())
-            if m:
-                member_key = m.group(1).strip()
-                task = m.group(2).strip()
-                if member_key in dept_info["members"]:
-                    delegations.append({"member": member_key, "task": task})
-        return delegations
+        # 하위 결과 종합
+        agent.task_description = "결과 종합 중"
+        team_text = "\n\n".join(
+            f"[{name}]\n{result}" for name, result in sub_results
+        )
+        synthesis = agent.respond(SYNTHESIS_TEMPLATE.format(
+            question=original_question,
+            sub_results=team_text,
+        ))
+        yield self._update("종합", agent, synthesis)
+        return synthesis
 
-    # ── 유틸리티 ────────────────────────────────────────
+    # ══════════════════════════════════════════════════════
+    # 유틸리티
+    # ══════════════════════════════════════════════════════
 
     def _update(self, phase, agent, content):
-        """UI에 전달할 진행 상황 딕셔너리를 생성합니다."""
         return {
             "phase": phase,
             "agent_name": agent.display_name,
@@ -276,6 +289,4 @@ class Orchestrator:
         }
 
     def clear(self):
-        """모든 상태를 초기화합니다."""
         self.ceo.clear()
-        self.model.clean_memory()

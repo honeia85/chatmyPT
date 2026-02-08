@@ -52,4 +52,7 @@ flagged/
 
 # Input files (keep .gitkeep only)
 input/*
-!input/.gitkeep 
+!input/.gitkeep
+
+# API keys
+.env 
