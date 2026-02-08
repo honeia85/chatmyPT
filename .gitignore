@@ -48,4 +48,8 @@ model_cache/
 
 # Gradio
 gradio_cached_examples/
-flagged/ 
+flagged/
+
+# Input files (keep .gitkeep only)
+input/*
+!input/.gitkeep 

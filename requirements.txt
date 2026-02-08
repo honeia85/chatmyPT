@@ -4,4 +4,5 @@ gradio>=4.19.0
 accelerate>=0.27.0
 tiktoken>=0.6.0
 einops>=0.7.0
-transformers_stream_generator>=0.0.4 
+transformers_stream_generator>=0.0.4
+PyPDF2>=3.0.0 
