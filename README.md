@@ -57,6 +57,28 @@ python app.py
 - Apple Silicon 사용 시 자동으로 MPS 가속을 활용합니다.
 - 메모리 사용량 최적화를 위해 대화 히스토리는 최근 5개로 제한됩니다.
 
+## NotebookLM Claude Code 스킬
+
+이 저장소에는 [teng-lin/notebooklm-py](https://github.com/teng-lin/notebooklm-py)
+기반의 Google NotebookLM 자동화를 Claude Code 에이전트 스킬로 설치할 수 있도록
+`SKILL.md` 가 함께 포함되어 있습니다.
+
+- 위치: `.claude/skills/notebooklm/SKILL.md`
+- 자세한 설명: `.claude/skills/notebooklm/README.md`
+
+설치 방법 (최초 1회):
+
+```bash
+# 기본 설치
+bash scripts/install-notebooklm-skill.sh
+
+# 브라우저 로그인(Playwright) 포함 설치
+WITH_BROWSER=1 bash scripts/install-notebooklm-skill.sh
+```
+
+설치 후 Claude Code 세션을 새로 시작하면 `/notebooklm` 또는 "팟캐스트 만들어 줘",
+"퀴즈 생성해 줘" 같은 의도 기반 프롬프트로 스킬이 자동 발동됩니다.
+
 ## 라이선스
 
 이 프로젝트는 MIT 라이선스를 따릅니다. 
