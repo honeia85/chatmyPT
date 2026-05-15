@@ -1,0 +1,27 @@
+# API keys / secrets
+.env
+*.key
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Downloaded PDFs (저작권 - 외부 공유 시 제외)
+corpus/pdfs/*.pdf
+!corpus/.gitkeep
+
+# Outputs (선택적으로 commit)
+# outputs/*.jsonl
+# outputs/*.png
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
