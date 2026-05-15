@@ -1,0 +1,47 @@
+﻿PMID,Year,Journal_ISO,Title,DOI,PMC,Danbee_Position,Has_Abstract,Num_Authors
+41490113,2026,JAMA Netw Open,Racial and Ethnic Disparities in Persistent Chemotherapy-Induced Alopecia Among Women With Breast Cancer.,10.1001/jamanetworkopen.2025.49146,PMC12771251,first,yes,15
+41572547,2025,Int J Surg,Autologous vs. implant-based breast reconstruction and long-term mental disorder risk: a retrospective cohort study emulating a target trial.,10.1097/JS9.0000000000003537,PMC12825906,first,yes,11
+41432961,2025,Qual Life Res,"Quality of life, function, and symptom trajectory patterns following salivary gland cancer treatment: a 5-year prospective cohort study.",10.1007/s11136-025-04125-4,,first,yes,7
+41383953,2025,Hum Reprod Open,Association of maternal pre-existing atherosclerotic cardiovascular disease and neonatal and long-term offspring outcomes: a nationwide mother-child paired cohort.,10.1093/hropen/hoaf074,PMC12690663,first,yes,14
+40930618,2025,J Am Coll Cardiol,Statins in Type 1 Diabetes: Bridging the Evidence Gap With Target Trial Emulation.,10.1016/j.jacc.2025.07.021,,first,yes,3
+40863442,2025,J Pers Med,Real-World Evidence on Low-Dose Olanzapine (≤1.25 mg) for Personalized Antipsychotic Dosing.,10.3390/jpm15080380,PMC12387202,first,yes,4
+40627066,2025,Eur J Epidemiol,Breast Cancer Information Grand Round for Survivorship (BIG-S) prospective cohort.,10.1007/s10654-025-01262-5,PMC12374896,first,yes,11
+40516881,2025,J Am Acad Dermatol,Scalp cooling for preventing persistent chemotherapy-induced alopecia in anthracycline-treated patients: A single-arm trial.,10.1016/j.jaad.2025.06.023,,first,yes,12
+40294950,2025,CMAJ,Clinical significance of low-density lipoprotein cholesterol percentage reduction and attained levels after percutaneous coronary intervention.,10.1503/cmaj.241713,PMC12040332,first,yes,12
+40131016,2025,Eur Heart J,Less harmful alternative for smoking: addressing concerns on the observational study of electronic cigarettes and cardiovascular outcomes.,10.1093/eurheartj/ehaf153,,first,yes,2
+40096290,2025,Circulation,Risk of Cancer in Newborns With Congenital Heart Disease and Their Mothers: A Nationwide Cohort Study.,10.1161/CIRCULATIONAHA.124.071811,,first,yes,9
+40008373,2025,Patient Prefer Adherence,Development and Validation of Facial Line Distress Scale-Glabellar Lines (FINE-GL).,10.2147/PPA.S497415,PMC11853867,first,yes,6
+39962947,2025,EuroIntervention,Effects of proton pump inhibitors on gastrointestinal bleeding and cardiovascular outcomes in myocardial infarction patients treated with DAPT.,10.4244/EIJ-D-24-00673,PMC11809224,first,yes,12
+39775792,2025,Eur Heart J,Combustible cigarette smoking harms nearly every organ in the body.,10.1093/eurheartj/ehae896,,first,yes,2
+39429032,2025,Eur Heart J,Prognosis after switching to electronic cigarettes following percutaneous coronary intervention: a Korean nationwide study.,10.1093/eurheartj/ehae705,,first,yes,13
+39126264,2024,Cancer Med,Measuring patient-reported distress from breast magnetic resonance imaging: Development and validation of the MRI-related distress scale (MRI-DS).,10.1002/cam4.70089,PMC11316135,first,yes,7
+38843479,2024,J Clin Oncol,Scalp Cooling in Preventing Persistent Chemotherapy-Induced Alopecia: A Randomized Controlled Trial.,10.1200/JCO.23.02374,,first,yes,12
+38484885,2024,J Affect Disord,Emulating trial to evaluate the effectiveness of routine supportive care on mortality among cancer patients experiencing distress at the time of diagnosis.,10.1016/j.jad.2024.03.024,,first,yes,9
+38472736,2024,Breast Cancer,"Comprehensive Young Age Breast Cancer registry from clinical, genomics, and patient-reported outcomes measured with 15 years follow-up: the CHARM cohort profile.",10.1007/s12282-024-01559-5,,first,yes,13
+37669709,2023,Cancer Res Treat,Impact of Social Support during Diagnosis and Treatment on Disease Progression in Young Patients with Breast Cancer: A Prospective Cohort Study.,10.4143/crt.2023.673,PMC10789941,first,yes,11
+37547446,2023,Ther Adv Med Oncol,Pretreatment endocrine symptoms and recurrence-free survival among young premenopausal patients with breast cancer: a prospective cohort study.,10.1177/17588359231189421,PMC10399274,first,yes,11
+37309655,2023,JMIR Public Health Surveill,Prediction Model for Postoperative Quality of Life Among Breast Cancer Survivors Along the Survivorship Trajectory From Pretreatment to 5 Years: Machine Learning-Based Analysis.,10.2196/45212,PMC10485708,first,yes,12
+36884274,2023,JMIR Public Health Surveill,Surveillance of Symptom Burden Using the Patient-Reported Outcome Version of the Common Terminology Criteria for Adverse Events in Patients With Various Types of Cancers During Chemoradiation Therapy: Real-World Study.,10.2196/44105,PMC10034615,first,yes,9
+36942579,2022,Palliat Support Care,Divorce after breast cancer diagnosis and its impact on quality of life.,10.1017/S1478951521001711,,first,yes,15
+36512301,2022,Qual Life Res,Pre-treatment quality of life in patients with salivary gland cancer in comparison with those of head and neck cancer patients.,10.1007/s11136-022-03323-8,,first,yes,6
+36397237,2022,Cancer Res Treat,"Effectiveness of Self-Assessment, TAilored Information, and Lifestyle Management for Cancer Patients' Returning to Work (START): A Multi-center, Randomized Controlled Trial.",10.4143/crt.2022.939,PMC10101798,first,yes,13
+36008854,2022,BMC Cancer,"Changes in working status after cancer diagnosis and socio-demographic, clinical, work-related, and psychological factors associated with it.",10.1186/s12885-022-10013-8,PMC9404600,first,yes,11
+35361864,2022,Sci Rep,Temporal patterns of chronic disease incidence after breast cancer: a nationwide population-based cohort study.,10.1038/s41598-022-09542-w,PMC8971484,first,yes,13
+35209702,2022,Cancer Res Treat,Psychometric Validation of the Korean Version of the Cancer Survivors' Unmet Needs (CaSUN) Scale among Korean Non-Small Cell Lung Cancer Survivors.,10.4143/crt.2021.1583,PMC9873323,first,yes,14
+35174421,2022,Support Care Cancer,Impact of objective financial burden and subjective financial distress on spiritual well-being and quality of life among working-age cancer survivors.,10.1007/s00520-022-06906-w,,first,yes,8
+34907177,2021,Blood Cancer J,Risk of non-Hodgkin lymphoma in breast cancer survivors: a nationwide cohort study.,10.1038/s41408-021-00595-0,PMC8671407,first,yes,14
+34795924,2021,J Thorac Dis,Psychometric validation of the Korean Patient-Reported Outcome Measurement Information System (PROMIS)-29 Profile V2.1 among patients with chronic pulmonary diseases.,10.21037/jtd-21-591,PMC8575797,first,yes,14
+34728262,2021,J Am Acad Dermatol,Efficacy of a tailored moisturizer for reducing chemotherapy-induced skin dryness in breast cancer patients: A randomized controlled clinical trial.,10.1016/j.jaad.2021.10.047,,first,yes,11
+34507971,2021,Cancer Prev Res (Phila),The Relationship Between Breast Density Change During Menopause and the Risk of Breast Cancer in Korean Women.,10.1158/1940-6207.CAPR-20-0542,,first,yes,24
+34368886,2021,Support Care Cancer,Effect of mind and body education on quality of life among young breast cancer patients: a randomized controlled trial.,10.1007/s00520-021-06459-4,,first,yes,8
+33848414,2021,Cancer Res Treat,Validation of the Korean Version of the Patient-Reported Outcomes Measurement Information System 29 Profile V2.1 among Cancer Survivors.,10.4143/crt.2020.1200,PMC8756127,first,yes,15
+33299030,2020,Sci Rep,Author Correction: Perceived stress and non-alcoholic fatty liver disease in apparently healthy men and women.,10.1038/s41598-020-78911-0,PMC7726026,first,yes,9
+33241506,2020,Support Care Cancer,Association between body image dissatisfaction and poor quality of life and depression among patients with hematopoietic stem cell transplantation.,10.1007/s00520-020-05884-1,,first,yes,9
+32410403,2020,Korean J Radiol,Systematic Review of Studies Assessing the Health-Related Quality of Life of Hepatocellular Carcinoma Patients from 2009 to 2018.,10.3348/kjr.2019.0808,PMC7231617,first,yes,4
+31913326,2020,Sci Rep,Perceived stress and non-alcoholic fatty liver disease in apparently healthy men and women.,10.1038/s41598-019-57036-z,PMC6949298,first,yes,9
+31338640,2019,Support Care Cancer,"Impact of a topical lotion, CG428, on permanent chemotherapy-induced alopecia in breast cancer survivors: a pilot randomized double-blind controlled clinical trial (VOLUME RCT).",10.1007/s00520-019-04982-z,,first,yes,8
+30120165,2018,Oncologist,Permanent Chemotherapy-Induced Alopecia in Patients with Breast Cancer: A 3-Year Prospective Cohort Study.,10.1634/theoncologist.2018-0184,PMC6519756,first,yes,14
+29121713,2017,Cancer Res Treat,Health-Related Quality of Life in Non-Hodgkin Lymphoma Survivors: A Prospective Cohort Study.,10.4143/crt.2017.207,PMC6192930,first,yes,6
+28262081,2017,Palliat Support Care,Distress and body image due to altered appearance in posttreatment and active treatment of breast cancer patients and in general population controls.,10.1017/S1478951517000062,,first,yes,9
+28233366,2017,Psychooncology,"Who are happy survivors? Physical, psychosocial, and spiritual factors associated with happiness of breast cancer survivors during the transition from cancer patient to survivor.",10.1002/pon.4408,,first,yes,10
+26198993,2015,Breast Cancer Res Treat,Quantitative changes in skin composition parameters due to chemotherapy in breast cancer patients: a cohort study.,10.1007/s10549-015-3502-4,,first,yes,12

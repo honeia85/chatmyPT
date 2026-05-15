@@ -1,0 +1,108 @@
+# PMID: 40008373 | PMC: PMC11853867 | DOI: 10.2147/PPA.S497415
+Introduction
+
+Glabellar lines (GL) constitute one of the most visible signs of aging.,As the glabellar is located in the center of the face, it is an easy focal point of attention for a person and those around them. GL give the impression of being angry or sad, which can negatively affect social interactions.According to a previous study of 945 patients with a minimum of three consecutive treatments in more than one area of the face, the glabellar was the most frequently treated area (93.9%).It is one of the facial lines the general population prefers to undergo cosmetic procedures.
+
+Recently, minimally invasive aesthetic procedures, such as botulinum toxin, filler injections, and laser abrasion have gained attention in the prevention or treatment of GL. Both objective and subjective outcomes have been used to evaluate the effects of these treatments. Skin imitationand three-dimensional (3D) imaging,are the most accurate and reliable quantitative methods of assessment. However, they require special equipment and professional manpower. As subjective measurements, photographic scales, such as the Facial Wrinkle Scale, Glabellar Line Scale, and Merz Aesthetic Scale (MAS), are commonly used.However, they are based on a single question and only assess the severity of lines without assessing their consequent psychological distress. Furthermore, physicians’ assessments of aesthetic outcomes differed from those of the patients.
+
+Recently, several patient-reported outcome measures (PROM) such as the Facial Line Satisfaction Questionnaire,Facial Line Outcomes,and FACE-Q have been developed to assess both the severity of facial lines and their psychosocial impact.,While we developed a specific PROM, existing measures are designed for general facial lines, and they may not adequately capture the unique functional and aesthetic concerns specific to the glabellar area, such as its central role in facial expressions and its high visibility in social interactions. To fill this gap, we provided a condition-specific tool that evaluates both the severity and the psychosocial distress caused by GL. By addressing these unique aspects, the instrument enables clinicians to better identify patients in need of treatment, assess treatment outcomes, and consider the psychological dimensions of care, thereby improving patient-centered outcomes in clinical and research settings. Thus, we developed and validated “Facial line distress scale-glabellar lines (FINE-GL)” to evaluate the severity and psychosocial distress associated with glabellar lines.
+
+Methods
+
+We developed the FINE-GL according to the COnsensus-based Standards for the Selection of Health Measurement Instruments (COSMIN) checklistand the US FDA criteria for PROM.The development of the facial line distress scale for GL process included two phases. Phase I is the instrument development phase, which includes item development and content validation. Phase II involved item reduction and psychometric validation. To develop this tool, we established an expert group of two clinicians and four behavior scientists.
+
+Initially, we planned to develop a tool to assess the severity of and distress due to 3 upper facial lines including GL, lateral canthal line (LCL), and forehead lines (FL). However, during Phase I, we found that the tool needs to be specific for each type of line to accurately evaluate the concerned severity and distress. Subsequently, the research team decided to develop a separate tool for GL in view of its utility and feasibility.
+
+Phase 1: Instrument Development
+
+Item Development
+
+To develop items, we conducted an extensive literature review and semi-structured in-depth interviews with 25 adults (>18 years) who were concerned about upper facial lines. The participants were asked how much they were aware of each upper facial line and how these affected their daily living and social activities. We found that people experienced different levels of distress due to upper facial lines. People were concerned about these lines when they had facial expressions, concentrate, or look in the mirror. Some people with severe lines had a negative self-image and felt less confident about their appearance. Sometimes, people avoid participating in social activities due to concerns of GL or FL. People were less stressed about LCL than about GL or FL.
+
+Based on the literature review and qualitative study, experts including 2 clinicians, 2 nurses and 3 behavior scientists reviewed the items for relevance, resulting in a preliminary pool of 54 items in six domains (general appraisal of line, n = 8; aging appearance appraisal, n = 2; appraisal of line in certain situations n = 11; public self-consciousness, n = 9; psychological distress, n = 8; and social distress, n = 16) were included in the initial version of the Facial Line Distress Scale (iFINE). All questions were answered based on the present time point on a 5-point Likert scale (1 = Not at all, 2 = A little, 3 = Somewhat, 4 = Quite a bit, and 5 = Very much).
+
+Content Validation
+
+To validate the content of the iFINE, we conducted cognitive interviews. We recruited participants until saturation; 15 participants with and without experience with aesthetic procedures for any facial lines participated in the cognitive interviews; 26.7% of the patients were men and 46.7% were over 50 years old. Participants underwent 30–60-minute interviews for evaluation of comprehension, ease of responses, and acceptability of the terminology, phrasing, and response options.
+
+The cognitive debriefing revealed that the participants generally comprehended the iFINE well. However, participants thought of different facial lines and gave different answers to general questions. In other words, unless the question did not specify a type of upper facial line, participants answered the questions based on evaluation of certain facial lines that they perceived to be most stressful. Therefore, we developed a glabellar line-specific PROM, the FINE-GL, based on qualitative interviews and feedback on glabellar line-specific concerns. Items such as “I look angry because of the glabellar lines” reflect common concerns identified during interviews. All participants reported that the questionnaire covered the aspects of distress due to GL and understood all items clearly except one question related to aging appraisal. After discussing with experts, we decided to exclude the item due to its ambiguity, thus resulting in 36 items in the FINE-GL draft.
+
+Phase 2: Item Reduction and Psychometric Validation of FINE-GL
+
+Study Participants
+
+We conducted a cross-sectional survey at a tertiary hospital and two local clinics in Korea between April 18 and June 17, 2022. The eligibility criteria were 1) adults aged 18 years or older; 2) who were concerned or distressed about GL; and 3) who could read and write Korean. We excluded participants who had severe scars on the upper face or mental disorders. The sample size was determined using guidelines for psychometric validation, with a target of 5 participants per item.Since the number of draft items was 38, it might need to have 180 participants, and considering 5% missing values, we need to have 190 participants. The first 80 participants who completed the FINE-GL to re-take it to provide measures to assess its test–retest reliability. The study was conducted in accordance with the Declaration of Helsinki and approved by the Institutional Review Board of the Samsung Medical Center, Seoul, Republic of Korea (SMC-2021-07-166). Informed consent was obtained from the study participants. We provided the participants with a $10 as an incentive for their participation.
+
+Item Reduction
+
+To reduce the number of items and to extract factor structure, we performed exploratory factor analysis (EFA) using varimax rotation. We used the maximum likelihood methods and checked for Tucker Lewis Index (TLW) for factoring reliability >0.9 to confirm the adequacy of the number of factors. For an efficient scale with improved item information, low-discriminatory items were removed. The item response theory (IRT)-graded response model (GRM) was used in the distress domain. Measures of between-item relationships, unidimensionality, and monotonicity were estimated before applying the 2-PL logistic IRT model. To confirm monotonicity, we used the S-X2 statistic with a value <0.001, indicating a poor fit. To confirm the informative item, we calculated the discriminatory and informative scores. Discriminatory values were computed for item assessment. Information score >1.7 is generally considered informative.Differential item functioning (DIF) analyses were performed to evaluate whether persons from different groups, given similar levels of distress due to GL, have different probabilities of providing a response after conditioning on the level of the state measured.
+
+After item reduction, no follow-up cognitive debriefing was conducted as the retained items had already been validated for comprehension and appropriateness. Confirmatory factor analysis (CFA) was performed with the retained items using the maximum likelihood without missing values method.CFI indicates Comparative fit index and SRMR indicates standardized root mean squared residual. CFI > 0.9 and SRMR < 0.08 indicated a good fit.,
+
+Psychometric Validation
+
+Measurement
+
+To evaluate the convergent and discriminant validity of the FINE-GL, PROMs for health-related quality of life (HRQoL), body image, and appearance appraisal were included. For HRQoL, the World Health Organization-Quality of Life assessment instrument (WHOQoL)-BREFwas included. The body image scale (BIS) was used to measure the body image.The line severity was measured using the MAS.The scores of these PORMs were calculated according to scoring manuals.Additional sociodemographic and clinical information, including age, sex, marital status, education, monthly family income, employment, and GL treatment experience was noted.
+
+Statistical Analysis
+
+We calculated the internal consistency of FINE-GL using Cronbach’s α. Cronbach’s α, a widely used statistical measure that evaluates how well a set of items in a questionnaire measure a single underlying construct. Higher values of Cronbach’s α indicate better internal consistency, with an α-value ≥0.8 commonly interpreted as very good reliability.
+
+The test–retest reliability of the FINE-GL was measured using the intra-class correlation coefficient (ICC) using a two-way mixed model. A questionnaire is considered reliable at ICC values >0.70.Using the repeated measure data set, the standard error of measurement (SEM) was also calculated by first creating a variable for the difference between the score obtained during the first and second administrations.Subsequently, we calculated the smallest detectable change (SDC). The SDC can be calculated as SEM x 1.96 x √2.
+
+Convergent and discriminant validity were tested using Pearson’s correlations between the FINE-GL and the WHOQoL-BREF, BIS, and MAS. Our hypothesis was that FINE-GL to demonstrate negative correlations with WHOQoL-BREF (−0.70 ≤≥ −0.30) and positive correlations with BIS and MAS in convergent validity (0.30 ≤≥ 0.70). To adjust for multiple comparisons, we estimated the adjusted p-values using the Holm–Bonferroni method.
+
+To test criterion validity, we calculated the area under the curve (AUC) of the FINE-GL for severe GL according to physicians (severe glabellar line and “very severe glabellar line”). We also used the Youden index to determine the cut-off values.
+
+The significance level was set at p <0.05 (two-sided). Statistical analyses were performed using STATA v16 (StataCorp LP, College Station, TX, USA) and R 4.1.2 (R Foundation for Statistical Computing, Vienna, Austria).
+
+Results
+
+Study Participants
+
+Of 198 patients, we excluded six with missing data on at least one item of FINE-GL. The mean age (SD) of participants was 47.68 (13.71) years; 81.2% were women, and 30.7% had experience with facial aesthetic treatments (). While more than 22% of the participants were aged >60 years, 97% completed all the questions without problems.
+
+Item Reduction
+
+All 36 semi-final items () were satisfied. EFA indicated a five-factor solution with an eigenvalue >1.0, while it was initially designed for a six-factor solution (). For individual items, one item loaded significantly on the interpretable factor solution. Three items (#19, #34, #36) that loaded on ≥ two-factor solutions with low loading values (r < 0.5) were excluded. #14 was loaded on the “public self-consciousness” domain with a relatively low factor-loading; however, participants considered it important in the qualitative interview, and therefore, we decided to retain it (). Five items (#20–#24) that were initially designed for the “psychological distress” domain loaded on the “social distress” domain; therefore, we combined the “psychological distress” and “social distress” domains into the “psychosocial distress” domain.
+
+IRT for Distress Domain
+
+Following IRT in the psychosocial domain, #33 which was a non-monotonic item, was excluded. In IRT-GRM, the probability values for the S-X2 statistics ranged from 0.007 to 0.268. Consequently, four items (#22, #23, #29, #30) with a poor fit (RMSEA > 0.6 and pS-X2 < 0.05) were excludedand). We excluded two more items: #28 (McFadden’s pseudo R2 for sex = 0.038) and #24 (McFadden’s pseudo R2 for age = 0.03) based on DIF by sex and age, respectively.
+
+The factor structure of the final 20 items in FINE-GL was evaluated using CFA, which revealed high loading (0.77–0.94). The fit indices for this model were good (CFI = 0.918, SRMR = 0.05) (). The final version of FINE-GL included 20 items in two domains and five subscales (1. appearance appraisal: general, facial expression, and certain situations; and 2. distress due to GL: self-consciousness and psychosocial distress). FINE-GL score (0–4) was calculated by summing the responses for the items in each domain. Higher scores indicated higher levels of distress due to GL.
+
+Psychometric Validation
+
+Internal Consistency
+
+The possible range of scores on FINE-GL was 0–100. The mean (SD) total score on FINE-GL was 47.88 (21.74). Floor and ceiling effects were 1.0% and 0.5%, respectively. Cronbach’s alpha coefficients of the five subscales ranged from 0.92 to 0.95 indicating satisfactory internal consistency (). Cronbach’s alpha coefficient of the total score was 0.97 ().
+
+Test–Retest
+
+The range of ICC was 0.77–0.90, which indicated satisfactory consistency. The SEM of the total score was 6.66, and the SDC score was 13 ().
+
+Hypothesis Testing for Construct Validity
+
+The self-evaluation of GL at rest and dynamic on FINE-GL was moderately correlated with the MAS score at rest (rest, r = 0.79; dynamic, r = 0.62) and at dynamic (rest, r = 0.67; dynamic, r = 0.73). FINE-GL subscales of the distress domain were moderately correlated with body image. While WHOQoL was moderately correlated with the psychosocial distress subscale on FINE-GL, a weak correlation was noted with other subscales ().
+
+Criterion Validity
+
+When the physician evaluated using MAS, 35.9% of the participants had severe GL. A difference of 16.6 points on FINE-GL was noted between participants with severe GL and those without, as evaluated by the physician (58.5 vs 41.9; P < 0.01) (data not shown). The accuracy of FINE-GL score in predicting severe GL was characterized by an AUC of 0.73 (95% confidence interval = 0.66–0.80;). The mean (SD) FINE-GL was 47.9 (21.7), and the cut-off value for severe GL was 50.6.
+
+Discussion
+
+In this study, we developed a condition-specific PROM in evaluating the severity and distress due to GL following the COSMIN and US FDA guidelines for PROM development and reported that FINE-GL is a reliable and valid PROM.
+
+Using qualitative interviews, patients expressed specific concerns about GL, such as feeling they appeared angry or sad, which impacted their social interactions. Some avoided certain social settings due to the belief that GL negatively affected how others perceived them.Additionally, we found that we cannot measure GL-specific distress if we use a general question for upper facial lines; thus, we developed FINE-GL to evaluate the severity and distress due to GL. FINE-GL includes two domains—appraisal of GL and distress due to GL. Appraisal of GL includes items to assess the severity of GL not only generally but also in situations where people experience concerns or distress due to GL, such as during facial expressions or in certain situations, such as talking, looking in the mirror, and concentrating. This reflects a real situation in which people are concerned about the GL associated with the high content validity of FINE-GL. Unlike general PROMs, the FINE-GL captures psychosocial distress specific to GL by including items that reflect GL-related concerns in real-life scenarios. This specificity makes it particularly useful for evaluating the impact of treatments targeting GL.
+
+Distress due to GL includes a subscale called public self-consciousness. It includes items related to how a person with GL perceives themselves, which reflects the person’s perspectives on their physical selves. According to the objectification theory, people are typically acculturated to internalizing an observer’s perspective as the primary view of their physical selves, which can lead to habitual body monitoring and shame and anxiety.The theory could explain the association between psychological and social distress caused by GL. Initially, psychological and social distress were separate subscales; however, after EFA, they were combined into one domain. According to previous studies, GL gives the impression of being angry or sad, which can negatively affect social interactions.Participants in our study might also have considered the social and psychological domains as a single factor in relation to distress due to GL.Furthermore, the internal consistency reliability of the measure was high, and some of the items were loaded in a domain different from our original hypothesis. “I look older than my peers because of the glabellar lines” was originally included in the self-consciousness domain, but it had similar loading values in self-consciousness and psychosocial distress. Since social norms and cues indicate that people’s social value decreases with age, perceived aging could be associated with social interactions.Thus, perceived aging might be associated with the psychosocial domain as well as self-consciousness.
+
+With test–retest, we confirmed that FINE-GL is a reliable PROM. When assessing a participant, a change in score >13 points on FINE-GL reflects a true change at the 95% confidence level. The minimal clinically important difference (MCID) is defined as the smallest measured change in score that patients perceive to be important. If SDC <MCID, it is possible to distinguish a clinically important change from a measurement error with high certainty.However, it is important to note that the MCIDs derived in this study were based on a shorter time interval without intervention. Further research is needed to determine if the interval between the study assessments is associated with the magnitude of MCID.
+
+Furthermore, concurrent validity was demonstrated by its degree of correlation with the BIS and MAS. As expected, FINE-GL was highly correlated with the MAS. In contrast, body image and WHOQoL had moderate and low correlations with FINE-GL as we expected, respectively. This is because FINE-GL is a specific tool to measure appraisal and distress due to GL and not for general body image and general QoL.
+
+This study has several limitations. First, to confirm convergent validity, we did not include an existing questionnaire that exactly evaluated distress due to GL. However, there are limited PROMs that specifically assess GL-related severity and distress. Second, as this study was cross-sectional, it could not evaluate the longitudinal validity or responsiveness of the FINE-GL to changes in distress levels over time. Longitudinal studies are needed to confirm its sensitivity to clinical improvements or deterioration. Third, we recruited from only 2 local hospitals in Korea, which limits the generalizability of these results. However, we recruited people who were concerned about GL from different groups from multiple sites, which would capture a wider range of potential subjects for FINE-GL.
+
+In conclusion, FINE-GL is a reliable, valid, and comprehensive PROM to measure GL severity and distress. While previous instruments have only examined wrinkle severity, the FINE-GL included specific questions for GL. Thus, the FINE-GL is useful for capturing the patient’s perspective and identifying patient-reported psychosocial effects, which is a current clinical emphasis.In addition, other tools measure the effect of treatment, while the FINE-GL can be used to measure distress due to GL itself. Thus, the FINE-GL could be used to measure pre-treatment patient status as well as efficacy endpoints.

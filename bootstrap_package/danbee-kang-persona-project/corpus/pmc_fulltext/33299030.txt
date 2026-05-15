@@ -1,0 +1,28 @@
+# PMID: 33299030 | PMC: PMC7726026 | DOI: 10.1038/s41598-020-78911-0
+Correction to:10.1038/s41598-019-57036-z, published online 8 January 2020
+
+This Article contains an error in the Figure legends of Figure 1, Figure 2 and Figure 3. The legends of these Figures were inadvertently switched.
+
+The legend of Figure 1:
+
+“Flowchart of study participants.”
+
+should read:
+
+“Multivariable-adjusted odds ratios (95% CI) for non-alcoholic fatty liver disease (NAFLD) by PSI stress score. The curves represent adjusted odds ratios (solid line) and their 95% confidence intervals (dashed lines) for NAFLD based on restricted cubic splines for PSI stress score with knots at the 5, 35, 65and 95percentiles (PSI scores 9, 13, 18, and 31, respectively) of their sample distributions. The reference value (diamond dot) was set at the 50percentile (PSI score 15). The model was adjusted for age, sex, study center, education, marital status, year of visit, smoking, vigorous exercise, alcohol, body mass index, systolic blood pressure, total and HDL cholesterol, triglycerides, and fasting glucose.”
+
+The legend of Figure 2:
+
+“Multivariable-adjusted odds ratios (95% CI) for non-alcoholic fatty liver disease (NAFLD) by PSI stress score. The curves represent adjusted odds ratios (solid line) and their 95% confidence intervals (dashed lines) for NAFLD based on restricted cubic splines for PSI stress score with knots at the 5, 35, 65and 95percentiles (PSI scores 9, 13, 18, and 31, respectively) of their sample distributions. The reference value (diamond dot) was set at the 50percentile (PSI score 15). The model was adjusted for age, sex, study center, education, marital status, year of visit, smoking, vigorous exercise, alcohol, body mass index, systolic blood pressure, total and HDL cholesterol, triglycerides, and fasting glucose.”
+
+should read:
+
+“Multivariable-adjusted odds ratios (95% confidence interval) comparing the 90vs the 10percentiles of PSI stress score (27 vs. 10) by clinically relevant subgroups. Logistic regression models were adjusted for age, sex, study center, education, marital status, year of visit, smoking, vigorous exercise, alcohol, body mass index, systolic blood pressure, total and HDL cholesterol, triglycerides, and fasting glucose.”
+
+The legend of Figure 3:
+
+“Multivariable-adjusted odds ratios (95% confidence internal) comparing the 90vs the 10percentiles of PSI stress score (27 vs. 10) by clinically relevant subgroups. PSI scores were modeled as restricted cubic splines with knots at the 5, 35, 65and 95percentiles of the sample distribution. Logistic regression models were adjusted for age, sex, study center, education, marital status, year of visit, smoking, vigorous exercise, alcohol, body mass index, systolic blood pressure, total and HDL cholesterol, triglycerides, and fasting glucose.”
+
+should read:
+
+“Flowchart of study participants.”

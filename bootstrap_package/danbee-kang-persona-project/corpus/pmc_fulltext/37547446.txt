@@ -1,0 +1,524 @@
+# PMID: 37547446 | PMC: PMC10399274 | DOI: 10.1177/17588359231189421
+Introduction
+
+Recently, evidence has consistently demonstrated associations between patient-reported outcomes at diagnosis as an early marker and clinical outcomes among patients with cancer.According to a cohort study of 1399 postmenopausal women with incident breast cancer, although it was not statistically significant, the risk of breast cancer-specific mortality was higher in breast cancer patients with pretreatment vasomotor symptoms (VMSs) than in patients without VMSs [hazard ratio (HR) = 1.33; 95% confidence interval (CI) = 0.88–2.02].
+
+Many women who have not yet experienced menopause may still experience endocrine symptoms. It is common for most women of reproductive age to experience premenstrual syndrome at least mild recurring emotional, behavioral, and physical symptoms, such as breast tenderness, abdominal bloating, headaches, and swelling, during their menstrual cycles.In addition, prior to menopause, a woman enters the menopausal transition, which can begin 8–10 years before menopause. During this time, the ovaries produce lower levels of estrogen and progesterone possibly causing menopausal symptoms.According to an observational study, 20–50% of premenopausal patients with breast cancer experienced breast pain,fatigue, and decrements in energywhen they were diagnosed. Moreover, the occurrence rates of nighttime awakenings were higher in premenopausal patients with breast cancer than in healthy women.
+
+However, some of the symptoms of menopause can mimic the symptoms of cancers which might be associated with disease progression.Accumulating evidence suggests that common symptoms reported by patients with cancer, such as fatigue, pain, or sleep disturbance, are associated with changes in the levels of proinflammatory and anti-inflammatory cytokines.Particularly, the development of breast cancer-associated thermal discomfort symptoms has led some to suggest that there may be associated underlying changes in proinflammatory cytokine activity.Pretreatment endocrine symptoms among premenopausal women might be a marker of poor prognosis.However, only a few studies have evaluated the association between pretreatment endocrine symptoms and clinical outcomes among premenopausal patients with breast cancer. Although there was a cohort study that aimed to evaluate the risk of incidence of breast cancer among the general population,there were too few premenopausal women with breast cancer to evaluate the association between endocrine symptoms and clinical outcomes. We conducted a cohort study to evaluate the association between endocrine symptoms prior to treatment and recurrence among premenopausal patients with breast cancer aged ⩽40 years.
+
+Patients and methods
+
+Study design and population
+
+Data were obtained from a prospective cohort study of young patients with breast cancer (40 years old or younger) (Samsung Medical Center-Young Breast Cancer Registry,) to identify comprehensive clinicopathological features and long-term outcomes of this patient group. Patients were recruited at initial visit for their initial treatment at outpatient clinics or inpatient rooms at the Samsung Medical Center, Seoul, Korea in May 2013. For this study, we included premenopausal patients (= 977) who were diagnosed with breast cancer between May 2013 and April 2021 and who had completed the endocrine symptom questionnaire [Functional Assessment of Cancer Therapy–Endocrine Symptoms (FACT-ES)] before any type of treatment including surgery and neoadjuvant treatment.
+
+Measurements
+
+The primary outcome measure was recurrence-free survival (RFS). RFS is defined as death or any recurrent events (contralateral breast cancer recurrence, local, regional, and distant) since initial treatment by reviewing the CT scan and the medical record.
+
+Endocrine symptoms, reflecting menopausal and sexual symptoms, were measured using the Korean version of the FACT-ES.The tool consists of 19 items and uses a five-point Likert scale ranging from 0 to 4, where 0 indicates ‘not at all’ and 4 indicates ‘very much’. According to the scoring guideline, the FACT-ES for the endocrine subscale were calculated as reverse scoring. We recode the responses so that a high score is transformed into the corresponding low score on the scale. Thus, the FACT-ES scores range from 0 to 76, with lower scores indicating more endocrine symptoms. We recorded the responses into three groups according to tertiles of the endocrine symptom score. The patients in the lowest, middle, and highest tertiles were categorized into the high, moderate, and low symptom groups, respectively. In terms of individual symptoms, the participants who responded ‘very much’ were categorized as ‘participants with severe symptoms’, while those who responded ‘not at all’, ‘a little’, ‘somewhat’, or ‘quite a bit’ were categorized as ‘participants without severe symptoms’. Physical (seven items), social and family (seven items), emotional (six items), and functional well-being (seven items) were measured using the Korean version of the FACT-General (FACT-G),which consists of 27 questions that assess four primary dimensions of quality of life. It uses five-point Likert-type response categories ranging from 0, indicating ‘not at all’, to 4, indicating ‘very much’. We handled incomplete questionnaires according to developers’ recommendations.
+
+Clinical information, including pregnancy and birth history, body mass index, year of diagnosis, Eastern Cooperative Oncology Group Performance Status (ECOG-PS) score, comorbidity, pathological stage based on the American Joint Committee on Cancer (AJCC) staging manual, subtype, breast cancer susceptibility gene (BRCA) 1 and/or 2, and treatment modalities, was regularly updated by a trained data manager from electronic medical records using Medidata’s Rave Electronic Data Capture. The ECOG-PS is a physician-assigned score indicating a patient’s fitness for treatment which ranges from 0 (fully active) to 5 (dead). Patients were assessed by their treating physicians and assigned an ECOG-PS score based on their ability to carry out daily activities such as self-care, walking, and working. It is a widely used tool for assessing the functional status of cancer patients and has shown to be a significant predictor of survival and treatment response in several types of cancer.At the Samsung Medical Center, two experienced pathologists reviewed and determined the primary tumor characteristics based on size, axillary nodal status, and receptor status [estrogen receptor (ER), progesterone receptor (PR), and anti-human epidermal growth factor receptor 2 (HER2)] using immunohistochemistry (IHC) staining. ER positivity (ER+) and PR positivity (PR+) were defined as Allred scores of 3–8 based on IHC staining with antibodies against ER (Immunotech, Marseille, France) and PR (Novocastra, Newcastle upon Tyne, UK), respectively. HER2 status was evaluated using appropriate antibodies (Dako, Carpinteria, CA, USA) and/or silverhybridization (SISH). HER2 grades 0 and 1 indicated a negative result, while grade 11 indicated a positive result. HER2 amplification was confirmed using SISH for the results of 2+ staining. Triple-negative breast cancer was defined as breast cancer with negative ER (ER−), PR (PR−), and HER2 expression.
+
+In addition, sociodemographic information and serum inflammatory marker levels, which were used as additional variables for this specific study, were also obtained.Since endocrine symptoms might be associated with underlying proinflammatory cytokine activity,we calculated the systemic immune-inflammation index (SII) based on the peripheral blood platelet (), neutrophil (), and lymphocyte () count per liter as follows: SII =×/.
+
+Statistical analysis
+
+Descriptive statistics were used to compare the participants’ characteristics according to the severity of endocrine symptoms. χtest and ANOVA were used to compare the categorical and continuous variables, respectively. We also used descriptive statistics to identify the proportion of endocrine symptom severity according to hormone receptors.
+
+The primary outcome of this study was RFS. Thus, we calculated the year from the date of initial treatment until any type of recurrence, death, or last available clinic visit according to the definition of RFS.In terms of the total score, we used Cox proportional hazard regression models to estimate the HRs with 95% CIs for recurrence or all-cause mortality, comparing the highest and moderate symptom groups with the lowest symptom group. In terms of individual endocrine symptoms, we also calculated the HR for recurrence or all-cause mortality by comparing the participants with and without severe symptoms at diagnosis. In addition, the secondary outcome of this study was recurrence. In this analysis, death was considered a censoring event. For the incidence of recurrence, death can prevent its occurrence. Thus, we used the Fine and Gray subdistribution hazard function to estimate a greater proportion of the risk set including participants who have had the competing event prior to that time.Subdistribution hazard ratios for recurrence were estimated using the Fine and Gray method to account for competing risks by death.
+
+Considering the influence of clinical, demographic, and socioeconomic factors on recurrence, we adjusted for age, ECOG status, pregnancy and birth history, body mass index, year of diagnosis, stage, and subtype. In addition, since worse physical, emotional, functional, and social status scores could be associated with higher endocrines symptoms and worse RFS, we further included these variables as confounders in the model. To evaluate the severity of multicollinearity in the model, we measured the variance inflation factor (VIF)and we found all the variables had less than 5 VIF. Therefore, we confirmed the final model as including all covariates.
+
+Furthermore, we performed linear regression to evaluate the association between the SII and pretreatment endocrine symptom burden. In this analysis, the individual endocrine symptom was considered as a continuous variable to calculatefor trends which is a test to demonstrate a dose–response association between the risk factor and the outcome. Statistical significance was set at< .05, and two-sided tests were used in all calculations. Statistical analyses were performed using STATA 16.0 (StataCorp LP, College Station, TX, USA).
+
+Results
+
+Characteristics of the study population
+
+The mean [standard deviation (SD)] age of the participants was 35.3 (3.9) years, and 72.3% had hormone receptor-positive (ER+ or PR+) disease.
+
+The mean (SD) pretreatment endocrine symptom score was 63.5/76 (range = 24–76) in the overall sample and 72.3 (2.4), 64.7 (2.3), and 52.7 (7.0) in the low, moderate, and high symptom groups, respectively. In the comparison of the characteristics, age, ECOG status, experience of pregnancy and birth before diagnosis, body mass index, year of diagnosis, stage, and subtype did not differ among the three groups. Meanwhile, the high-symptom group was more likely to receive neoadjuvant therapy (38.9%39.5%46.5%) than the low and moderate-symptom groups ().
+
+Table 1.
+
+Characteristics of the study participants (= 977).
+
+Characteristics
+
+Pretreatment endocrine symptom burden
+
+Value
+
+Low symptom (= 337)
+
+Moderate symptom (= 328)
+
+High symptom (= 312)
+
+Age, mean (SD)
+
+35.1 (4.2)
+
+35.4 (3.7)
+
+35.4 (3.7)
+
+0.52
+
+BMI, mean (SD)
+
+22.2 (3.7)
+
+22.1 (3.4)
+
+22.7 (3.4)
+
+0.04
+
+Marital status at diagnosis
+
+0.01
+
+Unmarried
+
+106 (31.5)
+
+90 (27.4)
+
+67 (21.5)
+
+Married/living as married
+
+228 (67.7)
+
+235 (71.4)
+
+235 (75.3)
+
+Not disclosed
+
+3 (0.9)
+
+4 (1.2)
+
+10 (3.2)
+
+Working status at diagnosis, yes
+
+127 (3.7)
+
+126 (38.3)
+
+99 (31.7)
+
+0.15
+
+Pregnancy and birth history, yes
+
+205 (60.8)
+
+216 (65.9)
+
+204 (65.4)
+
+0.33
+
+ECOG status
+
+0.67
+
+0
+
+315 (93.5)
+
+303 (92.1)
+
+288 (91.7)
+
+1
+
+22 (6.5)
+
+26 (7.9)
+
+26 (8.3)
+
+Comorbidity, yes
+
+12 (3.6)
+
+12 (3.7)
+
+12 (3.9)
+
+0.98
+
+Stage at diagnosis
+
+<0.01
+
+Adjuvant setting
+
+I
+
+94 (27.9)
+
+102 (31.0)
+
+78 (25.0)
+
+II
+
+99 (29.4)
+
+76 (23.1)
+
+62 (19.9)
+
+III
+
+9 (2.7)
+
+18 (5.5)
+
+14 (4.5)
+
+Neoadjuvant setting
+
+131 (38.9)
+
+129 (39.3)
+
+145 (46.5)
+
+Palliative
+
+4 (1.2)
+
+3 (0.9)
+
+12 (3.9)
+
+Hormone receptor, positive
+
+254 (75.4)
+
+239 (72.9)
+
+213 (66.3)
+
+0.13
+
+Subtype
+
+0.21
+
+Hormone receptor +, HER2−
+
+208 (61.7)
+
+193 (58.7)
+
+174 (55.4)
+
+Hormone receptor +, HER2+
+
+45 (13.4)
+
+46 (14.0)
+
+39 (12.4)
+
+Hormone receptor +, HER2 unknown
+
+1 (0.3)
+
+0
+
+0
+
+Hormone receptor −, HER2+
+
+26 (7.7)
+
+15 (4.6)
+
+22 (7.0)
+
+TNBC
+
+57 (16.9)
+
+74 (22.6)
+
+77 (24.7)
+
+/pathogenic mutation
+
+32 (9.5)
+
+38 (11.6)
+
+32 (10.3)
+
+0.69
+
+Treatment modality
+
+Surgery
+
+331 (98.2)
+
+322 (98.2)
+
+299 (95.8)
+
+0.09
+
+Chemotherapy (neoadjuvant/adjuvant)
+
+252 (74.8)
+
+247 (75.3)
+
+230 (73.7)
+
+0.69
+
+Radiation therapy
+
+272 (80.7)
+
+258 (78.7)
+
+224 (71.8)
+
+0.07
+
+Hormone therapy
+
+247 (73.3)
+
+225 (67.4)
+
+195 (62.1)
+
+0.01
+
+ESS19 subscale score (0–76), median (range)
+
+72 (69–76)
+
+65 (61–68)
+
+55 (24–60)
+
+Values are presented as n (%), means (SDs), or medians (ranges).
+
+*
+
+Comorbidities included diabetes, hypertension, hyperlipidemia, tuberculosis, and hepatitis.
+
+$
+
+Lower ESS19 scores represent a higher symptom burden.
+
+BRCA, breast cancer susceptibility gene; ECOG, European Cooperative Oncology Group; ESS19, endocrine symptom scale; HER2, human epidermal growth factor receptor 2; TNBC, triple-negative breast cancer.
+
+Pretreatment endocrine symptoms
+
+Prior to treatment, 94.7% of the premenopausal patients with breast cancer reported at least one symptom, and 17.2% of the patients had at least one severe endocrine symptom. The most frequent symptom was mood swings (74.2%), followed by irritability (65.1%) and breast sensitivity/tenderness, and vaginal discharge (61.3%). The most frequent severe symptom was mood swings (6.1%) (). While most symptoms were similar between hormone receptor-positive and -negative patients, hormone receptor-positive patients were less likely to have breast sensitivity/tenderness than the hormone receptor-negative patients (61.5%73.7%,< 0.01).
+
+Figure 1.
+
+Pretreatment endocrine symptom burden according to the hormone receptor status.
+
+Pretreatment endocrine symptoms and RFS
+
+During 3512 person-years of follow-up (median follow-up duration = 4.2 years), 156 recurrences or deaths were observed (number of events = 11; frequencies = 3.9 per 100 person-years). The frequencies in the high, moderate, and low symptom groups were 4.6, 4.1, and 3.3 per 100 person-years, respectively (). The high-symptom group had a higher risk of mortality or recurrence than the low-symptom group, even after adjusting for age, ECOG status, the experience of pregnancy and birth before diagnosis, body mass index, year of diagnosis, stage, subtype, and quality of life [adjusted HR compared with the lowest symptom group (reference) = 2.05; 95% CI = 1.19–3.54] (). For a sensitivity analysis, we excluded the stage from the covariate list. However, the effect size in the sensitivity model was similar to that of the original model [adjusted HR compared with the low symptom group (reference) = 2.17; 95% CI = 1.27–3.70]. In addition, the patients who had at least one severe symptom were more likely to have worse RFS than patients without severe symptoms (HR = 1.62; 95% CI = 1.07–2.46). In particular, severe hot flashes (HR = 5.63; 95% CI = 1.98–16.03) and severe breast sensitivity/tenderness (HR = 1.82; 95% CI = 1.00–3.32) were associated with an increased risk of mortality or recurrence (). In addition, the increased FACT-ES score indicated that decreased menopausal symptoms were associated with decreased SII (for trend = 0.05). Among the symptoms, the SII increased with increasing incidence rates of cold sweats (for trend = 0.03) and night sweats (for trend <0.01) (). In the sensitivity analysis, the high-symptom group had a higher risk of recurrence than the low-symptom group (adjusted HR = 1.93; 95% CI = 1.09–3.42) (). In particular, hot flashes (HR = 4.57; 95% CI = 1.40–14.90) and breast sensitivity/tenderness (HR = 2.04; 95% CI = 1.11–3.73) were associated with a higher risk of recurrence (). Considering the competing risk, the results were similar ().
+
+Figure 2.
+
+Survival probability from the time of initial treatment according to the pretreatment endocrine symptom burden.
+
+Table 2.
+
+HRs for recurrence-free survival according to the pretreatment endocrine symptom burden.
+
+Symptoms
+
+Recurrences or deaths (incidence rate per 100 person-years)
+
+Crude
+
+Adjusted
+
+HR (95% CI)
+
+HR (95% CI)
+
+Overall endocrine symptom burden
+
+Low
+
+48 (3.3)
+
+Reference
+
+Reference
+
+Moderate
+
+53 (4.1)
+
+1.22 (0.82–1.80)
+
+1.48 (0.97–2.27)
+
+High
+
+55 (4.6)
+
+1.36 (0.92–2.00)
+
+2.01 (1.19–3.54)
+
+Severe endocrine symptom
+
+Hot flashes
+
+4 (22.6)
+
+4.97 (1.83–13.46)
+
+5.63 (1.98–16.03)
+
+Cold sweats
+
+2 (14.9)
+
+3.50 (0.87–14.14)
+
+3.86 (0.95–16.46)
+
+Night sweats
+
+2 (10.4)
+
+2.39 (0.59–9.67)
+
+2.05 (0.50–8.49)
+
+Vaginal discharge
+
+3 (6.9)
+
+1.75 (0.56–5.51)
+
+1.50 (0.47–4.79)
+
+Vaginal itching/irritation
+
+1 (4.9)
+
+1.16 (0.16–8.31)
+
+1.07 (0.15–7.89)
+
+Pain or discomfort during intercourse
+
+1 (4.6)
+
+1.23 (0.17–8.80)
+
+1.10 (0.15–8.08)
+
+Weight gain
+
+8 (7.8)
+
+1.92 (0.95–3.93)
+
+1.74 (0.82–3.68)
+
+Diarrhea
+
+1 (6.5)
+
+1.63 (0.23–11.68)
+
+2.91 (0.39–21.51)
+
+Headaches
+
+1 (1.4)
+
+0.36 (0.05–2.60)
+
+0.32 (0.04–2.41)
+
+Bloating
+
+1 (2.5)
+
+0.66 (0.09–4.70)
+
+0.78 (0.10–5.86)
+
+Breast sensitivity/tenderness
+
+13 (8.5)
+
+2.15 (1.22–3.80)
+
+1.84 (1.01–3.37)
+
+Mood swings
+
+9 (4.0)
+
+1.02 (0.52–2.01)
+
+1.19 (0.57–2.45)
+
+Irritability
+
+5 (2.5)
+
+0.64 (0.26–1.56)
+
+0.70 (0.28–1.79)
+
+Joint pain
+
+3 (3.5)
+
+0.89 (0.28–2.79)
+
+0.79 (0.24–2.55)
+
+Severe vaginal bleeding/spotting, vaginal dryness, lightheadedness, and vomiting were not observed. Adjusted for age, ECOG status, experience of pregnancy and birth before diagnosis, body mass index, year of diagnosis, stage, subtype, physical well-being, social well-being, emotional well-being, and functional well-being.
+
+CI, confidence interval; ECOG, European Cooperative Oncology Group; HR, hazard ratio.
+
+Discussion
+
+In this large cohort study of premenopausal patients with breast cancer, we found that most (94.7%) patients aged ⩽40 years had experienced pretreatment endocrine symptoms. While they were premenopausal, one-fifth of them had at least one severe endocrine symptom. The high-endocrine symptom group had worse RFS than the low-symptom group.
+
+Most importantly, the patients with a high endocrine symptom burden had a twofold higher recurrence than those with a low symptom burden. Prior results have shown the risk of breast cancer-specific mortality was higher in patients with pretreatment VMSs than in patients without VMSs.Specifically, worse pretreatment painand fatiguewere associated with poor overall survival in patients with breast cancer. Authors explained that endocrine symptoms, such as VMSs, might affect the quality of lifeand adherence to preventive breast cancer treatment,resulting in worse survival.However, previous studies included postmenopausal patients with breast cancer, and to date, there have been no studies on the association between pretreatment endocrine symptoms and survivors in premenopausal patients with breast cancer. According to an observational study, premenopausal women can experience endocrine symptoms.The prevalence of symptom experience was also similar to our study. While more studies are necessary to confirm our findings, it is important to evaluate endocrine symptoms prior to treatment among premenopausal patients as they could be easily ignored because of their young age.
+
+The mechanisms underlying the increased risk of recurrence according to pretreatment endocrine symptoms are likely multifactorial. First, the symptom is a marker of estrogen increasing which is associated with breast cancer. According to a previous study, women who experience premenstrual syndrome had an imbalance of the hormones including estrogen and progesterone.As estrogen levels increase, serotonin synthesis which affects mood and behavior changes decreases.Excess estrogen also can increase prolactin, which can cause breast pain, and increase aldosterone which contributes to increased sodium levels and water retention which results in breast tension.Pretreatment endocrine symptoms may be associated with immunological processes, including the activation of innate immune inflammatory responses and subsequent regulation by a number of neuroendocrine pathways.In fact, we found a positive association between the SII and symptom score. In an investigation of the relationship between hot flashes and inflammation in postmenopausal women, the hot flash intensity was significantly positively associated with elevated plasma levels of proinflammatory factors.Previous studies have also provided further insight into the molecular pathways that may be involved in the manifestation of symptoms of thermal discomfort,which has been linked to poorer RFS.Understanding the similarities and differences in symptoms is critical to ensure concerning symptoms of a potential underlying cancer are not ignored or misidentified as symptoms of menopause. Moreover, systemic stress-responsive pathways could affect recurrence, considering that the most frequent symptom is psychological symptoms.The hypothalamic–pituitary–adrenal axis and the sympathetic nervous system are the primary players in the regulation of the stress-related cascade that might be related to the increasing recurrence.
+
+Several limitations need to be considered when interpreting our results. First, we were unable to establish the exact mechanisms underlying the association between endocrine symptoms at the time of diagnosis and poor RFS. Unfortunately, we did not have hormone measurements at the time of diagnosis. However, patients who had at least one severe symptom in FACT-ES were more likely to have worse RFS than patients without any severe symptom (HR = 1.62; 95% CI = 1.07–2.46). Further biological studies are required to confirm these results. Second, since this study was an observational study, there may be unmeasured confounding factors. However, we included key clinical factors, such as age at diagnosis, stage, and type of cancer, that would be associated with both exposure and outcomes. Third, there might be reverse causation between symptoms and cancer diagnosis. In other words, patients might experience some symptoms such as breast tenderness or mood swings caused by cancer prior to diagnosis. Unfortunately, we do not know whether the patient experienced symptoms before diagnosis and we also do not have information on how long it takes from symptom to the actual diagnosis. However, 52.24% (majority) of our study participants had stage I or II breast cancer which is detected by regular screening rather than the detection of a lump by symptoms or signs.
+
+In this large cohort study, we found that approximately one-fifth of the premenopausal patients with breast cancer aged ⩽40 years had severe pretreatment endocrine symptoms and that high pretreatment endocrine symptoms were significantly associated with worse RFS. Our findings suggest that close monitoring of pretreatment endocrine symptoms in premenopausal breast cancer patients may be important to identify patients who have a higher risk of poor prognosis. Moreover, a multidisciplinary approach may be needed to identify the mechanism underlying the association between pretreatment endocrine symptoms and poor clinical outcomes and establish optimal management strategies for young patients with breast cancer.
+
+Supplemental Material
+
+sj-docx-1-tam-10.1177_17588359231189421 – Supplemental material for Pretreatment endocrine symptoms and recurrence-free survival among young premenopausal patients with breast cancer: a prospective cohort study
+
+Click here for additional data file.
+
+Supplemental material, sj-docx-1-tam-10.1177_17588359231189421 for Pretreatment endocrine symptoms and recurrence-free survival among young premenopausal patients with breast cancer: a prospective cohort study by Danbee Kang, Juhee Cho, Seri Park, Hyo Jung Kim, Seok Won Kim, Jeong Eon Lee, Jonghan Yu, Se Kyung Lee, Ji-Yeon Kim, Seok Jin Nam and Yeon Hee Park in Therapeutic Advances in Medical Oncology

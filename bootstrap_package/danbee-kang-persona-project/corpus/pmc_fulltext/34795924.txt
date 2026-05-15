@@ -1,0 +1,1028 @@
+# PMID: 34795924 | PMC: PMC8575797 | DOI: 10.21037/jtd-21-591
+Introduction
+
+Over 500 million people have chronic pulmonary disease (CPD) globally, imposing an immense worldwide health burden (,). CPD patients commonly experience multiple respiratory symptoms, including breathlessness, cough, dyspnea, and phlegm (,). In addition, patients experience periodic exacerbations, defined as an acute worsening of their CPD, resulting in unscheduled clinic or emergency-department visits and hospitalization for treatment (,). There have been many studies supporting that these respiratory symptoms and exacerbations have negative impact on quality of life among CPD patients (-). Furthermore, non-respiratory symptoms such as fatigue and anxiety themselves worsen the CPD patients’ quality of life, by limiting physical activities of daily living, and causing sleep disturbance at night-time (,-).
+
+Lung function, such as forced expiratory volume in 1 second and forced vital capacity, are often used to estimate the disease severity, however, they fail to capture the systemic manifestations and patient-experienced disease impact (). Disparity between patient experience and physiological test results complicates patient care and underscores the importance of incorporating the patient’s perspective during counselling and treatment decisions (). Patient-reported outcome (PRO) measures, defined as any report regarding the status of a patient’s health condition coming directly from the patient without interpretation of the patient’s response by a clinician or anyone else (), provide the ideal means of systematically capturing the patient’s perspective and experience ().
+
+To measure PROs in CPD patients, the chronic obstructive pulmonary disease (COPD) assessment test (CAT), modified Medical Research Council (mMRC) dyspnoea scale, and St. George's Respiratory Questionnaire have commonly been used to assess respiratory symptoms, such as cough, sputum production, chest tightness, and dyspnoea (). However, the CAT or mMRC were limited to evaluate worsening of extra-pulmonary symptoms such as fatigue, depression, anxiety, and reduced social functioning (-). In fact, generic measurements, such as the EuroQoL-5D (EQ-5D) () and the 36-item short-form health survey (SF-36) () were frequently used to assess the health-related quality-of-life (HRQoL) in CPD patients (,). However, the EQ-5D had relatively larger ceiling effect than other HRQoL measures and do not discriminate well severe and mild CPD patients (). While SF-36 is more comprehensive than the EQ-5D (), it still does not cover important symptoms for patients with CPD such as fatigue and anxiety (). In 2010, the National Institutes of Health in the U.S. developed the Patient-Reported Outcomes Measurement Information System (PROMIS)-29 is a multi-item measure for assessing generic profile HRQoL (). The PROMIS-29 covers frequently reported symptoms such as fatigue and sleep disturbance in CPD patients which are not covered by other generic PRO measures. The instrument has been used to assess HRQoL in patient with chronic disease and older adults with multiple chronic conditions including arthritis, cancer, congestive heart failure, diabetes, osteoporosis, and stroke (). Thus, we aim to examine the validity of the PROMIS-29 among CPD patients. Thus, we aim to examine the validity of the Korean PROMIS-29 (K-PROMIS-29) among CPD patients.
+
+We present the following article in accordance with the STROBE reporting checklist (available at).
+
+Methods
+
+Study participants and procedure
+
+From September to October 2018, we conducted a cross-sectional survey at respiratory disease outpatient clinics at Samsung Medical Center in Seoul, South Korea to evaluate the HRQoL among patients with respiratory disease. Of total 304 patients who were aged ≥18 years and able to speak and read Korean participated in the survey. To validate the K-PROMIS-29 among CPD patients, we included 212 patients with pulmonary tuberculosis, nontuberculous mycobacterial lung disease, bronchiectasis, COPD, lung cancer, interstitial lung disease, and asthma in this study. We excluded patients who had history of severe cognitive impairment or Alzheimer diseases according to electronic medical records (EMRs). Two researchers of the study team explained the survey purpose and procedures to the participants. After providing informed consent, participants were requested to complete the questionnaire manually. This study was approved by the Institutional Review Board (IRB) of Samsung Medical Center (IRB number: SMC-2017-03-103-012). The study was conducted in accordance with the Declaration of Helsinki (as revised in 2013).
+
+Measurement
+
+We used the Korean version of the PROMIS-29 Profile V2.1 (K-PROMIS-29 V2.1) obtained from the PROMIS Health Organization (). The K-PROMIS-29 V2.1 was translated into Korean using the Functional Assessment of Chronic Illness Therapy (FACIT) translation methodology (). The PROMIS-29 V2.1 comprises 29 items in the following 7 domains: physical function, anxiety, depression, fatigue, sleep disturbance, ability to participate in social roles and activities, pain interference, and pain intensity. We used a 5-point Likert scale (range, 1–5) to measure symptom severity or frequency. The single pain intensity item was scored separately, and the response scale ranged from 0 (no pain) to 10 (worst pain imaginable). Questions regarding physical function and ability to participate in social roles and activities did not provide a specific time frame. Regarding the other 5 domains, questions were asked concerning the past 7 days. Domain scores were obtained by summing the item scores for each domain. The range of each domain was 4 to 20. Higher scores represent better physical function, ability to participate in social roles and activities, and more severe levels of anxiety, depression, fatigue, sleep disturbance, pain interference and pain intensity. In addition, we also converted the raw score into t-scores standardized for the general U.S. population {mean [SD] 50 [10]} using a T-score metric via Assessment Center (; Northwestern University, Evanston, Illinois, USA) (,).
+
+To examine convergent and discriminant validity, we used the Short Form Health Survey version-2.0 (SF-36v2), which is the most widely used tool for measuring generic health status with a 4-week recall period and has been well established in the Korean language (-). The SF-36v2 comprises the following 36 items in 8 domains: physical functioning, role limitations due to physical functioning, bodily pain, general health perceptions, vitality, social functioning, role limitations due to emotional functioning, and mental health. All items were rated on a Likert-type or frequency response scale, ranging from 3 response categories for physical functioning items to 6 response categories for bodily pain items. Using the standard scoring algorithm, scale scores were linearly transformed to range from 0 to 100, with higher scores representing superior health status (). In this study, the Cronbach alpha of SF-36 was 0.96.
+
+In CPD patients at the study institution, CAT scores and mMRC dyspnoea are routinely assessed at outpatient clinics; hence, we use these scores from EMRs which was administered to the patients on the same day patients participated in the survey. The CAT comprises the following 8 items: cough, phlegm, chest tightness, breathlessness, limited activities, confidence leaving home, sleeplessness, and energy, defined using contrasting adjectives. Each item was presented as a semantic 6-point (0–5) differential scale, providing a total score ranging from 0 to 40 points (). The Cronbach alpha of CAT in this study was 0.91. The mMRC scale is a 5-point scale (0–4) based on dyspnoea severity (). The mMRC had a moderate and strong correlation with breathless walking upstairs (r=0.53) and with home activity limited (r=0.69) in CAT score, respectively.
+
+Furthermore, we asked study participants questions regarding their sociodemographic characteristics, including marital status, education level, monthly family income, and working status. Clinical characteristics were obtained from EMRs.
+
+Statistical analyses
+
+Analyses were conducted using raw scores. To assess K-PROMIS-29 V2.1 reliability, we calculated each domain’s internal consistency using Cronbach’s α and each item’s item-rest correlation. It is generally accepted that an α value of 0.6–0.7 indicates an acceptable level and that of ≥0.8 a very good level of reliability ().
+
+An exploratory and confirmatory factor analysis (CFA) was performed to test structural validity of the K-PROMIS-29 V2.1. For the exploratory factor analysis (EFA), a common factor model with an alpha factor extraction was used (). With the CFA, we used the maximum likelihood to test whether our factor structure fit the data. Several goodness-of-fit indices were used to evaluate the model fit, including the goodness-of-fit index (GFI), comparative fit index (CFI), and standardised root mean squared residual (SRMR). A GFI and CFI >0.9 and SRMR <0.08 indicate a good fit to the data ().
+
+To examine convergent and discriminant validity, hypotheses on the direction and magnitude of Pearson’s correlations between the K-PROMIS-29 V2.1 and SF-36v2 were formulated a priori (). We expected high correlations between conceptually similar domains in K-PROMIS-29 V2.1 and SF-36v2 as convergent validity, and relatively low correlations between conceptually different domains as discriminant validity. Moderate (0.5 <|r| <0.7) or large correlations (|r| ≥0.7) were considered to indicate construct validity (). Among the patients who responded to the CAT and mMRC, we also calculated Pearson’s correlations of the K-PROMIS-29 V2.1 with CAT and mMRC dyspnoea scores. We completed a pairwise deletion in the analysis.
+
+All significance tests were two-tailed, and statistical significance was set at P<0.05. All data analyses were performed using STATA version 15 (StataCorp LLC, College Station, TX, USA).
+
+Results
+
+Study participants
+
+A total of 212 participants were enrolled in the study, and 188 (88.7%) completed the study questionnaire. Among the 24 patients excluded from the study due to missing PROMIS-29 items, 17 (70.8%), 5 (20.8%), 1 (4.2%), and 1 (4.2%) had not answered 1, 2, 3, and >4 items, respectively. The most frequently unanswered question was that regarding sleep quality (n=10, 4.7%).
+
+The mean age (SD) was 62.8 (12.0) years, and 19.2% had less than middle-school education (). Disease types included bronchiectasis (n=46, 24.5%), COPD (n=45, 23.9%), nontuberculous mycobacterial lung disease (n=25, 13.3%), interstitial lung disease (n=22, 11.7%), and others (n=50, 26.6%).
+
+Table 1
+
+Characteristics of the study population (N=188)
+
+Characteristics
+
+Value
+
+Age (years), mean (SD)
+
+62.8 (12.0)
+
+Age categories (years)
+
+<50
+
+25 (13.3)
+
+50 to <60
+
+39 (20.7)
+
+60 to <70
+
+66 (35.1)
+
+≥70
+
+58 (30.9)
+
+Sex, male
+
+111 (59.0)
+
+Marriage
+
+Single
+
+8 (4.3)
+
+Married
+
+163 (86.7)
+
+Divorced/bereaved
+
+17 (9.0)
+
+Living alone (yes)
+
+16 (8.6)
+
+Education
+
+≤ Middle school
+
+36 (19.2)
+
+High school
+
+64 (34.0)
+
+≥ College
+
+88 (46.8)
+
+Monthly family income
+
+< $2,000
+
+57 (31.0)
+
+$2,000–$3,999
+
+36 (19.6)
+
+≥ $4,000
+
+91 (49.4)
+
+Current worker (yes)
+
+84 (44.7)
+
+Smoking status
+
+Never
+
+88 (46.8)
+
+Past
+
+94 (50.0)
+
+Current
+
+6 (3.2)
+
+Drinking status
+
+Never
+
+74 (39.4)
+
+Past
+
+56 (29.8)
+
+Current
+
+58 (30.8)
+
+Type of disease
+
+Pulmonary tuberculosis
+
+15 (8.0)
+
+Nontuberculous mycobacterial lung disease
+
+25 (13.3)
+
+Bronchiectasis
+
+46 (24.5)
+
+Chronic obstructive pulmonary disease
+
+45 (23.9)
+
+Lung cancer
+
+15 (8.0)
+
+Interstitial lung disease
+
+22 (11.7)
+
+Asthma
+
+7 (3.7)
+
+Others
+
+13 (6.9)
+
+Values are presented as n (%) or means (standard deviation). In this dataset, living alone (n=1) and monthly family income (n=4) had missing data. For all other variables, the values were available for all participants.
+
+Internal consistency
+
+Cronbach’s alpha coefficients of the 7 sub-domains in the K-PROMIS-29 V2.1 ranged from 0.77 to 0.95, indicating satisfactory internal consistency. Pain interference and ability to participate in social roles and activities had the highest Cronbach’s α coefficient (0.95). Item-rest correlations, when any one of the items was removed, varied from 0.46 to 0.92. While all the items had generally acceptable levels of item-rest correlation (≥0.60), the items “In the past 7 days, my sleep was refreshing” (r=0.46) and “In the past 7 days, I had difficulty falling asleep” (r=0.58) had relatively low correlations with other items related to sleep disturbance ().
+
+Table 2
+
+Percentage variance explained by each domain
+
+Original domain and items
+
+Raw score, mean (SD)
+
+T-score, mean (SD)
+
+Cronbach’s α coefficient
+
+Item-rest correlation
+
+Physical function
+
+17.9 (3.1)
+
+49.5 (7.7)
+
+0.89
+
+Are you able to do chores such as vacuuming or yard work?
+
+0.72
+
+Are you able to go up and down the stairs at a normal pace?
+
+0.71
+
+Are you able to go for a walk of at least 15 min?
+
+0.81
+
+Are you able to run errands and shop?
+
+0.77
+
+Anxiety
+
+6.6 (3.5)
+
+49.3 (9.9)
+
+0.91
+
+In the past 7 days, I felt fearful
+
+0.77
+
+In the past 7 days, I found it hard to focus on anything other than my anxiety
+
+0.85
+
+In the past 7 days, my worries overwhelmed me
+
+0.82
+
+In the past 7 days, I felt uneasy
+
+0.78
+
+Depression
+
+6.8 (3.8)
+
+50.2 (9.5)
+
+0.93
+
+In the past 7 days, I felt worthless
+
+0.83
+
+In the past 7 days, I felt helpless
+
+0.85
+
+In the past 7 days, I felt depressed
+
+0.83
+
+In the past 7 days, I felt hopeless
+
+0.83
+
+Fatigue
+
+8.0 (4.0)
+
+46.5 (10.4)
+
+0.94
+
+During the past 7 days, I felt fatigued
+
+0.80
+
+During the past 7 days, I had trouble starting things because I felt tired
+
+0.86
+
+During the past 7 days, how run-down did you feel on average?
+
+0.87
+
+During the past 7 days, how fatigued were you on average?
+
+0.89
+
+Sleep disturbance
+
+10.6 (3.6)
+
+51.0 (8.4)
+
+0.77
+
+In the past 7 days, my sleep quality was
+
+0.64
+
+In the past 7 days, my sleep was refreshing
+
+0.46
+
+In the past 7 days, I had a problem with my sleep
+
+0.60
+
+In the past 7 days, I had difficulty falling asleep
+
+0.58
+
+Ability to participate in social roles and activities
+
+15.6 (5.0)
+
+53.1 (11.4)
+
+0.95
+
+I have trouble doing all of my regular leisure activities with others
+
+0.87
+
+I have trouble doing all of the family activities that I want to do
+
+0.89
+
+I have trouble doing all of my usual work (include work at home)
+
+0.85
+
+I have trouble doing all of the activities with friends that I want to do
+
+0.86
+
+Pain interference
+
+7.0 (4.1)
+
+50.1 (9.3)
+
+0.95
+
+In the past 7 days, how much did pain interfere with your day-to-day activities?
+
+0.87
+
+In the past 7 days, how much did pain interfere with work around the home?
+
+0.89
+
+In the past 7 days, how much did pain interfere with your ability to participate in social activities?
+
+0.92
+
+In the past 7 days, how much did pain interfere with your household chores?
+
+0.88
+
+Pain intensity
+
+2.2 (2.3)
+
+–
+
+–
+
+–
+
+SD, standard deviation.
+
+Structural validity
+
+In EFA, the factor loadings for the 6 retained and varimax rotated factors were obtained (). The variance explained by the 6-factor solution was 82%. While other domains confirmed our hypothesis regarding the original K-PROMIS-29 V2.1 constructs, “anxiety and fatigue” constituted 1 domain and sleep-disturbance items were separated as “sleep quality” and “sleep was refreshing”, among others.
+
+In CFA, the K-PROMIS-29 V2.1 goodness-of-fit indices () were high (CFI =0.90, SRMR =0.06). However, the “problem with my sleep” and “difficulty falling asleep” items in the sleep domain had relatively large error rates. Regarding correlations between K-PROMIS-29 V2.1 domains, “depression and anxiety” (0.75) and “physical and social” (0.76) also showed strong correlation. However, the factorial correlation between sleep disturbance and other domains was relatively weak.
+
+Table 3
+
+Exploratory factor analysis
+
+Original domain and items
+
+Factor loading
+
+F1
+
+F2
+
+F3
+
+F4
+
+F5
+
+F6
+
+Physical function
+
+Are you able to do chores such as vacuuming or yard work?
+
+0.91
+
+−0.07
+
+0.12
+
+0.00
+
+0.06
+
+0.15
+
+Are you able to go up and down the stairs at a normal pace?
+
+0.86
+
+−0.01
+
+0.08
+
+0.03
+
+0.07
+
+−0.04
+
+Are you able to go for a walk of at least 15 min?
+
+0.94
+
+0.02
+
+0.05
+
+−0.08
+
+0.06
+
+0.13
+
+Are you able to run errands and shop?
+
+0.93
+
+0.03
+
+0.14
+
+−0.04
+
+0.03
+
+0.08
+
+Anxiety
+
+In the past 7 days, I felt fearful
+
+0.05
+
+0.22
+
+0.69
+
+0.35
+
+−0.07
+
+−0.08
+
+In the past 7 days, I found it hard to focus on anything other than my anxiety
+
+0.09
+
+0.30
+
+0.64
+
+0.42
+
+−0.18
+
+−0.07
+
+In the past 7 days, my worries overwhelmed me
+
+0.06
+
+0.22
+
+0.66
+
+0.46
+
+−0.15
+
+−0.01
+
+In the past 7 days, I felt uneasy
+
+0.12
+
+0.32
+
+0.58
+
+0.50
+
+−0.08
+
+0.02
+
+Depression
+
+In the past 7 days, I felt worthless
+
+0.17
+
+0.17
+
+0.27
+
+0.82
+
+0.08
+
+0.03
+
+In the past 7 days, I felt helpless
+
+0.10
+
+0.21
+
+0.32
+
+0.81
+
+0.11
+
+−0.02
+
+In the past 7 days, I felt depressed
+
+0.13
+
+0.21
+
+0.34
+
+0.79
+
+0.03
+
+0.05
+
+In the past 7 days, I felt hopeless
+
+0.14
+
+0.14
+
+0.34
+
+0.81
+
+0.04
+
+−0.06
+
+Fatigue
+
+During the past 7 days, I felt fatigued
+
+0.15
+
+0.28
+
+0.74
+
+0.35
+
+0.08
+
+−0.02
+
+During the past 7 days, I had trouble starting things because I felt tired
+
+0.12
+
+0.38
+
+0.70
+
+0.26
+
+0.18
+
+−0.10
+
+In the past 7 days, how run-down did you feel on average?
+
+0.10
+
+0.29
+
+0.77
+
+0.26
+
+0.23
+
+−0.09
+
+In the past 7 days, how fatigued were you on average?
+
+0.15
+
+0.30
+
+0.78
+
+0.21
+
+0.14
+
+−0.04
+
+Sleep disturbance
+
+In the past 7 days, my sleep quality was
+
+−0.20
+
+0.05
+
+−0.08
+
+0.01
+
+−0.15
+
+0.87
+
+In the past 7 days, my sleep was refreshing
+
+−0.01
+
+−0.02
+
+−0.07
+
+0.00
+
+−0.07
+
+0.91
+
+In the past 7 days, I had a problem with my sleep
+
+0.06
+
+0.21
+
+0.10
+
+0.08
+
+0.89
+
+−0.06
+
+In the past 7 days, I had difficulty falling asleep
+
+0.10
+
+0.11
+
+0.03
+
+0.04
+
+0.90
+
+−0.15
+
+Ability to participate in social roles and activities
+
+I have trouble doing all of my regular leisure activities with others
+
+0.83
+
+0.08
+
+0.02
+
+0.29
+
+0.01
+
+−0.24
+
+I have trouble doing all of the family activities that I want to do
+
+0.86
+
+0.12
+
+0.07
+
+0.23
+
+0.01
+
+−0.19
+
+I have trouble doing all of my usual work (include work at home)
+
+0.87
+
+0.19
+
+0.09
+
+0.18
+
+−0.04
+
+−0.18
+
+I have trouble doing all of the activities with friends that I want to do
+
+0.86
+
+0.16
+
+−0.01
+
+0.22
+
+0.08
+
+−0.23
+
+Pain interference
+
+In the past 7 days, how much did pain interfere with your day-to-day activities?
+
+0.06
+
+0.89
+
+0.20
+
+0.12
+
+0.11
+
+−0.04
+
+In the past 7 days, how much did pain interfere with work around the home?
+
+0.08
+
+0.86
+
+0.32
+
+0.08
+
+0.06
+
+−0.03
+
+In the past 7 days, how much did pain interfere with your ability to participate in social activities?
+
+0.07
+
+0.87
+
+0.32
+
+0.14
+
+0.07
+
+−0.05
+
+In the past 7 days, how much did pain interfere with your household chores?
+
+0.04
+
+0.89
+
+0.18
+
+0.21
+
+0.08
+
+0.05
+
+Pain intensity
+
+0.11
+
+0.78
+
+0.11
+
+0.22
+
+0.14
+
+0.12
+
+Figure 1
+
+Confirmatory factor analysis of the K-PROMIS-29 V2.1 items. K-PROMIS-29 V2.1, Korean version of the Patient-Reported Outcome Measurement Information System 29 Profile V2.1.
+
+Convergent validity
+
+Regarding convergent and discriminant validity, fatigue in the K-PROMIS-29 V2.1 and vitality in the SF-36v2 demonstrated a strong correlation (r=−0.75). In addition, the correlations between physical function in the K-PROMIS-29 V2.1 and physical functioning (r=0.70) in the SF-36v2 were moderate. Regarding the ability to participate in social roles and activities in the K-PROMIS-29 V2.1, moderate correlations with role-physical (r=0.64), role-emotional (r=0.64), and social functioning (r=0.65) in the SF-36v2 were observed. However, sleep disturbance was weakly correlated with all SF-36v2 subdomains ().
+
+Among CPD patients (n=81), CAT activity was moderately correlated with physical function (r=−0.65) and ability to participate in social roles and activities (r=−0.63) in the K-PROMIS-29 V2.1. Fatigue in the K-PROMIS-29 V2.1 and energy in the CAT were also moderately correlated (r=0.70). Furthermore, there was a moderate correlation (r=0.62) between sleep disturbance in the K-PROMIS-29 V2.1 and sleep in the CAT. Regarding correlations between the mMRC dyspnoea score and K-PROMIS-29 V2.1, the mMRC dyspnoea score was strongly correlated with physical function (r=−0.80) and moderately correlated with anxiety (r=0.67), depression (r=0.59), pain interference (r=0.69), and fatigue (r=0.70) (supporting).
+
+Table 4
+
+Pearson’s correlation coefficients comparing the K-PROMIS-29 V2.1 with the SF-36v2
+
+SF-36v2
+
+K-PROMIS-29 V2.1
+
+Physical function
+
+Ability to participate in social roles and activities
+
+Anxiety
+
+Depression
+
+Pain interference
+
+Fatigue
+
+Sleep disturbance
+
+Physical functioning
+
+0.70*
+
+0.59*
+
+−0.42*
+
+−0.41*
+
+−0.52*
+
+−0.59*
+
+−0.27*
+
+Role-physical
+
+0.66*
+
+0.64*
+
+−0.44*
+
+−0.49*
+
+−0.59*
+
+−0.59*
+
+−0.32*
+
+Role-emotional
+
+0.59*
+
+0.64*
+
+−0.50*
+
+−0.51*
+
+−0.58*
+
+−0.59*
+
+−0.29*
+
+Social functioning
+
+0.61*
+
+0.65*
+
+−0.54*
+
+−0.53*
+
+−0.63*
+
+−0.67*
+
+−0.39*
+
+Mental health
+
+0.48*
+
+0.57*
+
+−0.62*
+
+−0.68*
+
+−0.47*
+
+−0.64*
+
+−0.33*
+
+Bodily pain
+
+0.40*
+
+0.50*
+
+−0.37*
+
+−0.38*
+
+−0.69*
+
+−0.48*
+
+−0.38*
+
+Vitality
+
+0.60*
+
+0.64*
+
+−0.55*
+
+−0.55*
+
+−0.61*
+
+−0.75*
+
+−0.45*
+
+General health
+
+0.45*
+
+0.52*
+
+−0.46*
+
+−0.50*
+
+−0.51*
+
+−0.61*
+
+−0.41*
+
+In this data set, role-physical (n=1) and role-emotional (n=1) had missing data. *, Pearson’s correlation coefficient, all P<0.05;, the expected associated domain between similar domains in K-PROMIS-29 V2.1 and SF-36v2. K-PROMIS-29 V2.1, Korean version of the Patient-Reported Outcome Measurement Information System 29 Profile V2.1; SF-36v2, Short Form Health Survey version-2.0.
+
+Discussion
+
+In this study, the K-PROMIS-29 V2.1 was found to be a reliable and valid measure of quality of life among CPD patients. The goodness-of-fit indices for the original K-PROMIS-29 V2.1 domains were high. Convergent PROMIS-29 V2.1 validity was demonstrated by its varying degrees of correlation with the SF-36v2.
+
+In total, 88.7% of the participants responded to all the questions, signifying a higher completion rate than that reported in other studies (,). Considering that >30.9% of the study participants were aged >70 years and 19.2% had less than a middle-school education, the K-PROMIS-29 V2.1 appears to be a feasible instrument for evaluating HRQoL, regardless of age and literacy. In our study, the most commonly unanswered question was that regarding sleep quality (n=10, 4.7%). Participants might have missed this item because the question was formatted differently from others. The other questions were complete statements or questions that participants responded to using a Likert scale (for example, “I feel fatigued” response options: “Not at all”, “A little bit”, … “very much”). However, the sleep-quality question was an open-ended question posed as follows: “My sleep quality was…,” to which participants were obliged to choose the response that best described their sleep quality (very poor, poor, fair, good, or very good). In fact, in a previous study conducted in a Dutch population (), >90% of the study participants marked “My sleep quality was …” as being one of the most difficult items to answer. The authors hypothesised that the item might have been difficult to understand because of the response options ().
+
+The results indicated that the measure’s internal consistency was high.
+
+The instrument has been validated in patient with cancer (), kidney disease () and chronic musculoskeletal pain (). In this study, we also found the Cronbach’s α coefficients for all subdomains fell within the range of acceptable internal consistency (). The CFA also confirmed our hypothesis regarding the original K-PROMIS-29 V2.1 constructs, except in the sleep disturbance subdomain. In this study, the item regarding “sleep refreshing” had relatively weak item-rest correlations (0.46) with the other items: “In the past 7 days, I had a problem with my sleep” and “In the past 7 days, I had difficulty falling asleep”. These items also had a large margin of error in CFA. In fact, they were related to different factors in EFA. In a previous study, sleep initiation and sleep continuity appeared as separate constructs, and people perceived “feeling refreshed in the morning” and “good sleep continuity” as good sleep (). Similarly, our study participants perceived questions regarding “a problem with sleep” and “difficulty with falling asleep” as questions concerning “sleep initiation” and questions regarding “sleep quality” and “refreshment of sleep” as questions concerning “sleep quality”, which is strongly related to sleep continuity (). Furthermore, the correlation between anxiety and fatigue was 0.75, which was a relatively strong association in CFA, and they were combined as 1 domain in EFA. In a previous study, anxiety and depressive disorders commonly cited 25–40% overlap (). However, despite a set of common features, anxiety and depression are clearly not identical emotional states (). Additional cognitive interviews are needed to confirm the patients’ thoughts.
+
+Convergent K-PROMIS-29 V2.1 validity was demonstrated by its varying degrees of correlation with the SF-36v2. K-PROMIS-29 V2.1 domains correlated with their corresponding SF-36v2 subdomains, except for sleep, for which no comparable SF-36v2 element was applicable. Among CPD patients, while mMRC dyspnoea scores had high-to-moderate correlations with all K-PROMIS-29 V2.1 subdomains, the tool was evaluated using only one question regarding the degree of dyspnoea. It did not address other important CPD symptoms, such as coughing, sputum production, chest tightness, and depression. Nevertheless, CAT would be more effective in multidimensional assessments for respiratory symptom severity in CPD patients (); however, anxiety, depression, and pain, which are frequent symptoms reported by CPD patients, were not included ().
+
+Recently, the respiratory disease field has progressed further in assessing patients’ daily living activities; however, there is limited research regarding HRQoL among CPD patients (). Clinicians might hesitate to use HRQoL measures such as the PROMIS-29 due to several reasons. They might not use it because they do not have enough resources such as time and personal (). In addition, researchers and clinicians would not use the PROMIS-29 because it is not a disease-specific measure and they do not know how to interpret it due to lack of data (). While the PROMIS-29 instrument has been tested in other chronic disease patients but is not yet widely used among CPD patients in the clinical settings. More data are necessary to understand how the K-PROMIS-29 would be summarized and presented to patients diagnosed with CPD. This study had some limitations. First, we exclusively recruited individuals who visited a respiratory clinic at one institution in Korea; hence, these findings may not be generalisable to patients in other settings. However, we tested validity in participants who had low literacy levels, including approximately 20% of participants with very little education according to the FACIT methodology guidelines (). Considering the characteristics of our study participants, the K-PROMIS-29 V2.1 has acceptable measurement properties for use in patients with diverse backgrounds and CPDs. Second, the study did not include an existing questionnaire that effectively measures sleep disturbance to confirm the convergent validity of the sleep disturbance subdomain in the PROMIS-29 V2.1. However, we confirmed that the K-PROMIS-29 V2.1 had acceptable convergent validity with sleep items in the CAT, which is a disease-specific measure for COPD.
+
+In conclusion, this study provides psychometric evidence for the reliability and construct validity of K-PROMIS-29 V2.1 in a CPD population. Considering that the PROMIS-29 is one of the standard PRO measures recommended for initial outcome assessment (), it is encouraged to use the K-PROMIS-29 both for research and clinical care of CPD patients.
+
+Supplementary
+
+The article’s supplementary files as
+
+10.21037/jtd-21-591
+
+10.21037/jtd-21-591
+
+10.21037/jtd-21-591
+
+10.21037/jtd-21-591
+
+10.21037/jtd-21-591

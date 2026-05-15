@@ -1,0 +1,124 @@
+# PMID: 30120165 | PMC: PMC6519756 | DOI: 10.1634/theoncologist.2018-0184
+Introduction
+
+As modern chemotherapy has markedly improved survival in breast cancer, there has been increasing interest on the impact of chemotherapy on quality of life [], []. Chemotherapy agents used in patients with breast cancer target rapidly dividing cells, including those in hair follicles. As a consequence, between 40% and 100% of patients with breast cancer experience complete alopecia during chemotherapy, and the rest experience some degree of hair thinning or weakening []. A majority of patients with breast cancer consider hair loss as the most traumatic aspect of chemotherapy [], and up to 8% reject chemotherapy because of extreme anxiety related to chemotherapy‐induced alopecia (CIA) [].
+
+Although a number of different strategies have been used to prevent or treat CIA [], including scalp cooling [], topical application of minoxidil [], intravenous ammonium tricholoro (dioxyethylene‐O‐O')tellurate (AS101) [], immunomodulatory tellurium, and topical vitamin D3 [], most of them have shown little evidence of efficacy, except scalp cooling. In a recent randomized clinical trial, scalp cooling demonstrated success in hair retention during chemotherapy and in preventing CIA [], []. However, the effects varied depending on patient characteristics, type and dose of chemotherapy, and scalp cooling technique []. Scalp cooling prevented CIA in up to 50% of patients with a taxane‐based regime including docetaxel or paclitaxel, but only in 16% of patients with anthracycline‐based chemotherapy []. In addition, scalp cooling causes significant discomfort, including headaches and claustrophobia [].
+
+CIA is often considered temporary [], but some patients show absence of or incomplete hair growth even years after completion of chemotherapy [], []. There is, however, a paucity of long‐term prospective data on the incidence and impact of permanent CIA (PCIA). Most studies are limited by cross‐sectional designs, exclusive use of patient‐reported outcomes, evaluation of single agents, lack of information on hair condition before chemotherapy, or short‐term follow‐up []. The objective of our study was thus to estimate the long‐term incidence of PCIA in a cohort of patients with breast cancer whose hair volume and density were measured prior to chemotherapy and who were followed for 3 years after chemotherapy.
+
+Materials and Methods
+
+We conducted a prospective cohort study of consecutive patients ≥18 years of age with postoperative diagnosis of stage I–III breast cancer expected to receive doxorubicin plus cyclophosphamide (AC), fluorouracil plus cyclophosphamide and doxorubicin (FAC), or AC plus docetaxel as adjuvant chemotherapy at the Breast Cancer Center of the Samsung Medical Center in Seoul, Korea, from February 2012 to July 2013 (= 61). Patients with alopecia, atopic dermatitis, psoriasis, or infectious skin diseases, as well as patients who were taking steroids, antihistamines, antidepressants, or anticonvulsants were excluded from the study. The study was approved by the Institutional Review Board of the Samsung Medical Center. All participants provided written informed consent.
+
+Patients were assessed prior to chemotherapy on the first day of chemotherapy, after two cycles of chemotherapy, at 1, 3, and 6 months after completion of chemotherapy, and after 3 years after completion of chemotherapy. At each visit, hair density (number of hairs per cm) and shaft diameter (μm) were objectively quantified in a reference point on the vertex area [] by a phototrichogram using a Folliscope (LeadM Corp, Seoul, South Korea). The Folliscope has been used in prior studies of alopecia in patients with breast cancer []. The hair shaft diameter of five hairs from the vertex area was measured and averaged []. The study outcome was PCIA, defined as absent or incomplete hair regrowth at ≥6 months after chemotherapy []. In our study, we defined incomplete hair regrowth (PCIA) if hair density or thickness at 6 months were two standard deviations (SDs) or more below the baseline mean (before chemotherapy).
+
+Body image was measured using four questions from the validated Korean version of the European Organization for Research and Treatment of Cancer, Breast Cancer‐Specific Quality of Life Questionnaire (EORTC QLQ‐BR23) []. At the 3‐year visit, we also included extra questions for identifying hair problems due to CIA: hair loss, thinning, oiliness, stiff/coarse hair, curliness, dandruff, scalp pruritus, and gray hair. One of these questions was used to evaluate subjective PCIA (“Do you think your hair has not recovered to its level prior to chemotherapy?”).
+
+Clinical data, including age, body mass index, stage at diagnosis, treatment received, and comorbidities, were obtained from electronic medical records. Information regarding marital status, employment status, and education were collected using standardized questionnaires.
+
+Statistical Analysis
+
+We used linear mixed‐effects models for longitudinal data with random intercepts and random slopes to model the trajectories of hair density and thickness across all visits. To identify risk factors for PCIA, we used multivariable logistic regression to estimate odds ratios with 95% confidence intervals (CIs) for PCIA by type of chemotherapy regimen (regimen without or with taxane), hormone therapy (no or yes), and targeted therapy (no or yes), adjusting for age, hair density, and hair thickness at diagnosis. We also conducted multivariable linear regression to evaluate the impact of PCIA on body image scores, adjusting for age, type of surgery, and type of chemotherapy regimen. All analyses were performed using Stata 14.0 (Stata Corp, College Station, TX). Avalue of <.05 was considered statistically significant.
+
+Results
+
+The mean age of study participants was 47.1 years; 34.4% of participants were diagnosed at stage III, and 52.5% received taxane‐based regimens (Table). The proportion of participants who had PCIA at 6 months and 3 years after chemotherapy was 39.5% and 42.3%, respectively. PCIA was driven by a high proportion of patients with incomplete hair regrowth (Fig.). At 3 years of follow‐up, hair thinning was the most common problem reported by study participants (75.0%), followed by reduced hair volume (53.9%), hair loss (34.6%), and gray hair (34.6%) (Table). After 3 years, 35 of 53 patients (62.5%) reported that their hair had not recovered to its level prior to chemotherapy (subjective PCIA).
+
+Prior to chemotherapy, the average (SD) hair density was 138.7 (34.2) hairs per cmoverall, but the FAC and taxane‐based treatment groups had a lower hair density compared with the AC group (Fig.and supplemental online Table). The average hair density decreased to 12.1 hairs/cmafter two cycles of chemotherapy (< .001) and increased thereafter, returning to baseline levels 6 months after chemotherapy (134.2 hairs per cm;= .66 compared with baseline). The average (SD) hair shaft diameter prior to chemotherapy was 71.1 (12.4 μm). Average hair thickness decreased to 19.7 μm after two cycles of chemotherapy (< .001) and reached a minimum at 1 month after chemotherapy (12.3 μm). Hair thickness increased thereafter, but it did not return to baseline levels. The average hair thickness at 6 months and 3 years after chemotherapy was 49.7 and 52.7 μm, respectively (both< .001 with respect to baseline; Fig, 2, Fig., and supplemental online Table).
+
+Patients with taxane‐based treatment had about eight times higher odds of PCIA 3 years after completion of chemotherapy (8.01; 95% CI, 1.20–53.26) adjusting for age, hair density, and thickness at diagnosis (Table). Participants with PCIA 6 months after completion of chemotherapy had clinically meaningful worse body image scores compared with those without PCIA (51.96 vs. 70.19;= .014; Table). Similar findings were observed when the analyses were adjusted for age, type of surgery, and chemotherapy regimen (= .020).
+
+Figure 1.
+
+Incidence of PCIA at 6 months and 3 years after completion of chemotherapy.
+
+Abbreviations: m, months; PCIA, permanent chemotherapy‐induced alopecia; y, years.
+
+image
+
+Figure 2.
+
+Average hair densityand thicknessduring follow‐up.
+
+Abbreviations: AC, doxorubicin, cyclophosphamide; FAC, fluorouracil, doxorubicin, cyclophosphamide; T1, before chemotherapy; T2, after two cycles of chemotherapy; T3, 1 month after completion of chemotherapy; T4, 3 months after completion of chemotherapy; T5, 6 months after completion of chemotherapy; T6, 3 years after completion of chemotherapy.
+
+image
+
+Figure 3.
+
+Representative photographs of a patient's mid‐frontal hair before chemotherapy and 3 years after completion of chemotherapy.×15.×60.
+
+image
+
+Table 1.
+
+Characteristics of the study population (= 61)
+
+image
+
+John Wiley & Sons, Ltd.
+
+a
+
+Having hypertension, hyperlipidemia, or diabetes.
+
+Abbreviations: AC, doxorubicin, cyclophosphamide; BMI, body mass index; FAC, fluorouracil, doxorubicin, cyclophosphamide; SD, standard deviation; T, taxotere; TAC, taxotere, adriamycin, and cyclophosphamide; TC, taxotere and cyclophosphamide.
+
+Table 2.
+
+Patient‐reported hair problems at 3 years after completion of chemotherapy
+
+image
+
+John Wiley & Sons, Ltd.
+
+Table 3.
+
+Risk of having permanent chemotherapy‐induced alopecia
+
+image
+
+John Wiley & Sons, Ltd.
+
+OR and 95% CI for permanent chemotherapy‐induced alopecia, defined as defined as the presence of reduced hair density and/or thinness (less than two standard deviations compared with the baseline mean before chemotherapy), adjusted for age, hair density, and thickness at diagnosis.
+
+a
+
+Statistically significant (< .05).
+
+Abbreviations: CI, confidence interval; OR, odds ratio.
+
+Table 4.
+
+Impact of permanent chemotherapy‐induced alopecia on body image
+
+image
+
+John Wiley & Sons, Ltd.
+
+Adjusted for age, type of surgery and type of regimen.
+
+Abbreviations: CI, confidence interval; PCIA, permanent chemotherapy‐induced alopecia; SD, standard deviation.
+
+Discussion
+
+This is the first prospective cohort study to evaluate the long‐term incidence of PCIA in patients with breast cancer with adjuvant chemotherapy using both objective methods and patient‐reported outcomes. In this longitudinal study, all patients experienced alopecia within two cycles of chemotherapy. Although hair regrew after completion of chemotherapy, over 40% of patients had PCIA 3 years after completion of chemotherapy, primarily because of partial alopecia. Patients who had received taxane‐based treatment regimens were more likely to experience PCIA than patients with other treatments. Moreover, patients with PCIA had significantly worse body image compared with patients without PCIA, and the difference was clinically meaningful. Our findings indicate that PCIA is a very common problem in patients with breast cancer, with important psychological consequences.
+
+In this study, the incidence of PCIA at 6 months and 3 years after completion of chemotherapy was 39.5% and 46.1%, respectively. Although incomplete hair growth and persistent CIA have been reported after the use of busulfan, cyclophosphamide, thiotepa, melphalan, etoposide, carboplatin, docetaxel, and paclitaxel [], this is the first longitudinal study that has evaluated the incidence of PCIA by using both objective and patient‐reported outcomes in a homogeneous cohort of patients receiving chemotherapy. During chemotherapy, anagen phase hairs are rapidly lost because of massive apoptosis on the proximal bulb region resulting in CIA. Although the cause of PCIA remains to be clarified, epithelial hair‐follicle stem cells seem to play a crucial role. PCIA would be due to toxic damage to stem cells/hair matrix cells of the hair bulb or to disturbances of the signaling pathways to the secondary hair germ [], [], []. Further research is necessary to establish the pathobiological mechanisms for PCIA.
+
+All patients in our study experienced substantial hair loss within two cycles of chemotherapy, and hair began to regrowth after treatment cessation. Hair density became comparable to baseline (before chemotherapy) at 3 months after completion of chemotherapy. However, hair thickness did not return to baseline levels even after 3 years after completion of chemotherapy. As a phenotype, PCIA resembles androgenetic‐like alopecia, with thinning hairs and absence of fibrosis leaving a characteristic scalp alopecia predominating over the crown. In our study, the average (SD) hair shaft diameter prior to chemotherapy was 71.1 (12.4) μm, and the average hair thickness at 6 months after chemotherapy was 49.7 μm, corresponding to a ~30% reduction in hair thickness in less than 1 year. In a general population study in Korean women, the average (SD) hair thickness of women in their 5th, 6th, and 7th decades of life was 96.4 (8.8), 87.7 (9.0), and 81.6 (10.1) μm, respectively []. Although it is difficult to compare the results of this study with those of our study because of differences in setting, design, and methods, chemotherapy‐induced partial alopecia seems to far exceed aging‐related hair thinning [].
+
+In this study, 62.5% of patients reported that their hair had not recovered to the level prior to chemotherapy at 3 years after completion of chemotherapy (subjective PCIA). Indeed, a qualitative study of Korean women with breast cancer reported that treatment‐related alopecia never improved and remained visible several years after treatment []. Also, in an age‐matched study, about 60% of patients after treatment experienced severe hair changes compared with patients undergoing active treatment []. Traditional tools, however, provide only a limited assessment of hair changes. Further research should be conducted to develop tools to more precisely evaluate subjective PCIA and the psychological impact due to PCIA.
+
+The risk of CIA and the degree of hair loss differ substantially between chemotherapeutic agents. Alkylating agents (cyclophosphamide, ifosfamide), cytotoxics (doxorubicin, daunorubicin), antimicrotubule agents (docetaxel, paclitaxel), and topoisomerase inhibitors (etoposide) have frequent and severe effects []. In our study, patients with taxane‐based chemotherapy had much higher risk of PCIA compared with patients with other regimens. Several cases of permanent scalp alopecia in patients with breast cancer have been reported after use of taxane‐based chemotherapy [], [], []. Hair‐follicle stem cells may be more sensitive to selected cytotoxins such as taxanes []. Furthermore, patients with hormone therapy had higher, albeit not statistically significant, risk of PCIA than patients without hormone therapy in our study. Considering that hormone therapy is antiestrogenic, sex hormone levels and activity may also contribute to alopecia among patients with breast cancer []. Further studies with larger sample size should be conducted to obtain more precise estimates of the effect of hormone therapy as well as different chemotherapy regimens on PCIA risk.
+
+Similar to the results of previous studies, patients with PCIA had much worse body image than patients without PCIA []. The difference was almost 20 points of the EORTC QLQ‐BR23 body image score, which is considered clinically meaningful []. In previous studies [], patients with worse body image were more likely to have depression, lower social and role functioning, problems with sexuality, and poorer quality of life []. Considering the psychosocial burden and distress due to poor body image, more satisfactory management strategies for CIA need to be developed and implemented in patients with breast cancer. Development of these strategies will require interdisciplinary collaborations among oncologists, hair biologists, dermatologists, pharmacologists, psychooncologists, and related health care professionals.
+
+There are several limitations to our study. The study was conducted at a single institution and had a small sample size, and the findings may not be generalizable to patients in other settings. However, this is the first longitudinal study that assessed hair parameters from before chemotherapy to 3 years after completion of chemotherapy, evaluating incidence of PCIA at multiple points. Secondly, we measured hair parameters only on the vertex area. Although the results may have differed depending on measurement location, the vertex area is appropriate to assess alopecia in conditions with androgenic‐pattern alopecia, such as breast cancer, characterized by a reduction in hair density over the crown and frontal scalp with retention of the frontal hairline []. Lastly, study participants may have self‐selected to participate because they were interested in CIA or had prior hair problems compared with patients who did not participate, and participants may have over‐reported hair changes or problems due to chemotherapy therapy. However, patients were recruited prior to chemotherapy, and we minimized the potential information bias by measuring skin changes objectively, using a noninvasive bioengineering device in addition to patient‐reported outcomes. In spite of these limitations, our study evidenced a high incidence of PCIA, indicating that it is a major long‐term problem in patients with breast cancer undergoing chemotherapy.
+
+Conclusion
+
+Our study indicates that PCIA, primarily due to incomplete hair regrowth, is very common in patients with breast cancer even after 3 years of follow‐up. Although scalp cooling may prevent hair loss, the success rate is not yet optimal (20%–50%) []. Clinicians should be aware of this distressing adverse event and develop supportive care strategies to prepare patients and minimize the impact on well‐being. The development of more satisfactory management strategies for PCIA remains a major research challenge in clinical oncology.
+
+Seefor supplemental material available online.
