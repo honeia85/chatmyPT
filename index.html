@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatMyPT - AI 채팅 어시스턴트</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --text: #e4e4e7;
+      --muted: #71717a;
+      --accent: #818cf8;
+      --accent-dim: rgba(129, 140, 248, 0.12);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 15, 0.8);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--text); }
+
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      background: var(--accent-dim);
+    }
+
+    .badge::before { content: '\2728'; }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 .gradient {
+      background: linear-gradient(135deg, var(--accent), #c084fc, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #6366f1;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(129, 140, 248, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .demo-window {
+      margin-top: 4rem;
+      width: 100%;
+      max-width: 700px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+    }
+
+    .demo-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #eab308; }
+    .dot-green { background: #22c55e; }
+
+    .demo-body { padding: 1.5rem; }
+
+    .msg {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .msg-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .msg-user .msg-avatar { background: #3b82f6; }
+    .msg-bot .msg-avatar { background: var(--accent); }
+
+    .msg-bubble {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 85%;
+    }
+
+    .msg-user .msg-bubble {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--text);
+    }
+
+    .msg-bot .msg-bubble {
+      background: var(--accent-dim);
+      color: var(--text);
+    }
+
+    .typing {
+      display: flex;
+      gap: 4px;
+      padding: 0.75rem 1rem;
+    }
+
+    .typing span {
+      width: 6px;
+      height: 6px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: blink 1.4s infinite both;
+    }
+
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.3; }
+      40% { opacity: 1; }
+    }
+
+    section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      counter-increment: step;
+    }
+
+    .step::before {
+      content: counter(step);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 400px;
+      background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 { margin-bottom: 1rem; }
+
+    .cta-section p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 4rem 1.25rem; }
+      .demo-window { margin-top: 2.5rem; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Chat<span>MyPT</span></div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="https://github.com/honeia85/chatmyPT" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="badge">AI-Powered Chat Assistant</div>
+  <h1>
+    나만의 AI 어시스턴트<br>
+    <span class="gradient">ChatMyPT</span>
+  </h1>
+  <p>가볍고 빠른 AI 채팅 인터페이스. 로컬에서 실행되는 프라이빗한 대화형 어시스턴트를 경험하세요.</p>
+  <div class="cta-group">
+    <a href="https://github.com/honeia85/chatmyPT" class="btn btn-primary" target="_blank">Get Started</a>
+    <a href="#features" class="btn btn-secondary">Learn More</a>
+  </div>
+
+  <div class="demo-window">
+    <div class="demo-titlebar">
+      <div class="dot dot-red"></div>
+      <div class="dot dot-yellow"></div>
+      <div class="dot dot-green"></div>
+    </div>
+    <div class="demo-body">
+      <div class="msg msg-user">
+        <div class="msg-avatar">U</div>
+        <div class="msg-bubble">AI가 뭐야? 쉽게 설명해줘</div>
+      </div>
+      <div class="msg msg-bot">
+        <div class="msg-avatar">AI</div>
+        <div class="msg-bubble">AI는 사람처럼 학습하고 판단할 수 있는 컴퓨터 프로그램이에요. 데이터를 통해 패턴을 찾고, 질문에 답하거나 문제를 해결할 수 있답니다.</div>
+      </div>
+      <div class="msg msg-user">
+        <div class="msg-avatar">U</div>
+        <div class="msg-bubble">로컬에서도 돌릴 수 있어?</div>
+      </div>
+      <div class="msg msg-bot">
+        <div class="msg-avatar">AI</div>
+        <div class="msg-bubble">
+          <div class="typing">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="section-label">Features</div>
+  <h2>왜 ChatMyPT인가요?</h2>
+  <p class="section-desc">프라이버시와 성능을 모두 잡은 로컬 AI 채팅 솔루션.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">&#x1F512;</div>
+      <h3>완전한 프라이버시</h3>
+      <p>모든 대화가 로컬에서 처리됩니다. 데이터가 외부로 전송되지 않아 민감한 정보도 안심하고 대화할 수 있습니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#x26A1;</div>
+      <h3>빠른 응답 속도</h3>
+      <p>경량화된 Qwen-1.8B 모델로 GPU 가속을 활용해 빠른 응답을 제공합니다. Apple Silicon과 CUDA 모두 지원합니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#x1F4AC;</div>
+      <h3>자연스러운 대화</h3>
+      <p>대화 히스토리를 기억하며 문맥을 이해합니다. 자연스럽고 연속적인 대화가 가능합니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#x1F310;</div>
+      <h3>웹 인터페이스</h3>
+      <p>Gradio 기반의 깔끔한 웹 UI를 제공합니다. 브라우저만 있으면 어디서든 접속할 수 있습니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#x1F9E0;</div>
+      <h3>메모리 최적화</h3>
+      <p>자동 메모리 관리로 장시간 사용에도 안정적입니다. 8GB RAM이면 충분합니다.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#x1F527;</div>
+      <h3>쉬운 설치</h3>
+      <p>Python과 pip만 있으면 됩니다. 복잡한 설정 없이 몇 줄의 명령어로 바로 시작할 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="section-label">How it works</div>
+  <h2>3단계로 시작하세요</h2>
+  <p class="section-desc">복잡한 과정 없이 빠르게 설치하고 사용할 수 있습니다.</p>
+  <div class="steps">
+    <div class="step">
+      <h3>레포지토리 클론</h3>
+      <p>GitHub에서 프로젝트를 클론하고 필요한 패키지를 설치합니다.</p>
+    </div>
+    <div class="step">
+      <h3>모델 다운로드</h3>
+      <p>첫 실행 시 Qwen-1.8B 모델이 자동으로 다운로드됩니다.</p>
+    </div>
+    <div class="step">
+      <h3>대화 시작</h3>
+      <p>브라우저에서 localhost:7860에 접속하면 바로 대화를 시작할 수 있습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>지금 바로 시작하세요</h2>
+  <p>ChatMyPT로 나만의 AI 어시스턴트를 만들어보세요.</p>
+  <a href="https://github.com/honeia85/chatmyPT" class="btn btn-primary" target="_blank">GitHub에서 시작하기</a>
+</section>
+
+<footer>
+  &copy; 2026 ChatMyPT. Built with care.
+</footer>
+
+</body>
+</html>
