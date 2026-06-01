@@ -39,24 +39,37 @@
       z-index: 100;
     }
 
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
+    .logo { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
     .logo span { color: var(--accent); }
 
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
     nav a:hover { color: var(--text); }
 
     .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+    .visitor-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+    }
+
+    .visitor-count .dot-live {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
 
     .hero {
       min-height: 100vh;
@@ -72,11 +85,9 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 50%;
+      top: 0; left: 50%;
       transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
+      width: 600px; height: 600px;
       background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
       pointer-events: none;
     }
@@ -111,19 +122,9 @@
       background-clip: text;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--muted);
-      max-width: 540px;
-      margin-bottom: 2.5rem;
-    }
+    .hero p { font-size: 1.2rem; color: var(--muted); max-width: 540px; margin-bottom: 2.5rem; }
 
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
     .btn {
       padding: 0.8rem 2rem;
@@ -136,114 +137,17 @@
       border: none;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
+    .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover {
       background: #6366f1;
       transform: translateY(-1px);
       box-shadow: 0 8px 24px rgba(129, 140, 248, 0.3);
     }
 
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--accent); background: var(--accent-dim); }
 
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      background: var(--accent-dim);
-    }
-
-    .demo-window {
-      margin-top: 4rem;
-      width: 100%;
-      max-width: 700px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
-    }
-
-    .demo-titlebar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-red { background: #ef4444; }
-    .dot-yellow { background: #eab308; }
-    .dot-green { background: #22c55e; }
-
-    .demo-body { padding: 1.5rem; }
-
-    .msg {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-      align-items: flex-start;
-    }
-
-    .msg-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-
-    .msg-user .msg-avatar { background: #3b82f6; }
-    .msg-bot .msg-avatar { background: var(--accent); }
-
-    .msg-bubble {
-      padding: 0.75rem 1rem;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      max-width: 85%;
-    }
-
-    .msg-user .msg-bubble {
-      background: rgba(59, 130, 246, 0.15);
-      color: var(--text);
-    }
-
-    .msg-bot .msg-bubble {
-      background: var(--accent-dim);
-      color: var(--text);
-    }
-
-    .typing {
-      display: flex;
-      gap: 4px;
-      padding: 0.75rem 1rem;
-    }
-
-    .typing span {
-      width: 6px;
-      height: 6px;
-      background: var(--muted);
-      border-radius: 50%;
-      animation: blink 1.4s infinite both;
-    }
-
-    .typing span:nth-child(2) { animation-delay: 0.2s; }
-    .typing span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes blink {
-      0%, 80%, 100% { opacity: 0.3; }
-      40% { opacity: 1; }
-    }
+    .btn-small { padding: 0.5rem 1.25rem; font-size: 0.85rem; border-radius: 8px; }
 
     section {
       padding: 6rem 2rem;
@@ -259,19 +163,9 @@
       margin-bottom: 0.75rem;
     }
 
-    h2 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
+    h2 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; }
 
-    .section-desc {
-      color: var(--muted);
-      font-size: 1.1rem;
-      max-width: 560px;
-      margin-bottom: 3rem;
-    }
+    .section-desc { color: var(--muted); font-size: 1.1rem; max-width: 560px; margin-bottom: 3rem; }
 
     .features-grid {
       display: grid;
@@ -287,74 +181,222 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .feature-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
+    .feature-card:hover { border-color: var(--accent); transform: translateY(-2px); }
 
     .feature-icon {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       border-radius: 12px;
       background: var(--accent-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 1.4rem;
       margin-bottom: 1.25rem;
     }
 
-    .feature-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
+    .feature-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; font-weight: 600; }
+    .feature-card p { color: var(--muted); font-size: 0.9rem; }
 
-    .feature-card p {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      counter-reset: step;
-    }
-
-    .step {
-      position: relative;
-      padding: 2rem;
+    /* Chat Section */
+    .chat-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      counter-increment: step;
+      overflow: hidden;
     }
 
-    .step::before {
-      content: counter(step);
+    .chat-header {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .chat-messages {
+      height: 400px;
+      overflow-y: auto;
+      padding: 1.25rem;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .msg { display: flex; gap: 0.75rem; align-items: flex-start; }
+
+    .msg-avatar {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; flex-shrink: 0;
+    }
+
+    .msg-user .msg-avatar { background: #3b82f6; }
+    .msg-bot .msg-avatar { background: var(--accent); }
+
+    .msg-bubble {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 85%;
+    }
+
+    .msg-user .msg-bubble { background: rgba(59, 130, 246, 0.15); }
+    .msg-bot .msg-bubble { background: var(--accent-dim); }
+
+    .chat-input-row {
+      display: flex; gap: 0.5rem;
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .chat-input-row input {
+      flex: 1;
+      padding: 0.7rem 1rem;
       border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input-row input:focus { border-color: var(--accent); }
+    .chat-input-row input::placeholder { color: var(--muted); }
+
+    .chat-input-row button {
+      padding: 0.7rem 1.5rem;
+      border-radius: 10px;
+      border: none;
       background: var(--accent);
       color: #fff;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 0.9rem;
-      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
     }
 
-    .step h3 {
-      font-size: 1.05rem;
-      margin-bottom: 0.4rem;
+    .chat-input-row button:hover { background: #6366f1; }
+    .chat-input-row button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .typing { display: inline-flex; gap: 4px; }
+
+    .typing span {
+      width: 6px; height: 6px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: blink 1.4s infinite both;
     }
 
-    .step p {
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.3; }
+      40% { opacity: 1; }
+    }
+
+    /* Guestbook Section */
+    .guestbook-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .guestbook-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .guestbook-form .form-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .guestbook-form input,
+    .guestbook-form textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .guestbook-form input:focus,
+    .guestbook-form textarea:focus { border-color: var(--accent); }
+
+    .guestbook-form input::placeholder,
+    .guestbook-form textarea::placeholder { color: var(--muted); }
+
+    .guestbook-form .form-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .guestbook-entries { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .gb-entry {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .gb-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .gb-entry-name { font-weight: 600; font-size: 0.95rem; }
+    .gb-entry-date { font-size: 0.75rem; color: var(--muted); }
+    .gb-entry-msg { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+    .gb-empty {
+      text-align: center;
+      padding: 3rem;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
     }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      z-index: 200;
+      transition: transform 0.3s ease;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.error { background: #ef4444; }
 
     .cta-section {
       text-align: center;
@@ -365,22 +407,15 @@
     .cta-section::before {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 50%;
+      bottom: 0; left: 50%;
       transform: translateX(-50%);
-      width: 500px;
-      height: 400px;
+      width: 500px; height: 400px;
       background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .cta-section h2 { margin-bottom: 1rem; }
-
-    .cta-section p {
-      color: var(--muted);
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-    }
+    .cta-section p { color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -394,8 +429,9 @@
       nav { padding: 1rem; }
       .nav-links { gap: 1rem; }
       section { padding: 4rem 1.25rem; }
-      .demo-window { margin-top: 2.5rem; }
       .features-grid { grid-template-columns: 1fr; }
+      .chat-messages { height: 300px; }
+      .guestbook-form .form-row { flex-direction: column; }
     }
   </style>
 </head>
@@ -404,8 +440,12 @@
 <nav>
   <div class="logo">Chat<span>MyPT</span></div>
   <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#how-it-works">How it works</a>
+    <div class="visitor-count">
+      <div class="dot-live"></div>
+      <span id="counter">-</span> visits
+    </div>
+    <a href="#chat">Chat</a>
+    <a href="#guestbook">Guestbook</a>
     <a href="https://github.com/honeia85/chatmyPT" target="_blank">GitHub</a>
   </div>
 </nav>
@@ -416,110 +456,215 @@
     나만의 AI 어시스턴트<br>
     <span class="gradient">ChatMyPT</span>
   </h1>
-  <p>가볍고 빠른 AI 채팅 인터페이스. 로컬에서 실행되는 프라이빗한 대화형 어시스턴트를 경험하세요.</p>
+  <p>Cloudflare Workers AI 기반의 채팅 어시스턴트. 방명록을 남기고, AI와 대화해보세요.</p>
   <div class="cta-group">
-    <a href="https://github.com/honeia85/chatmyPT" class="btn btn-primary" target="_blank">Get Started</a>
-    <a href="#features" class="btn btn-secondary">Learn More</a>
-  </div>
-
-  <div class="demo-window">
-    <div class="demo-titlebar">
-      <div class="dot dot-red"></div>
-      <div class="dot dot-yellow"></div>
-      <div class="dot dot-green"></div>
-    </div>
-    <div class="demo-body">
-      <div class="msg msg-user">
-        <div class="msg-avatar">U</div>
-        <div class="msg-bubble">AI가 뭐야? 쉽게 설명해줘</div>
-      </div>
-      <div class="msg msg-bot">
-        <div class="msg-avatar">AI</div>
-        <div class="msg-bubble">AI는 사람처럼 학습하고 판단할 수 있는 컴퓨터 프로그램이에요. 데이터를 통해 패턴을 찾고, 질문에 답하거나 문제를 해결할 수 있답니다.</div>
-      </div>
-      <div class="msg msg-user">
-        <div class="msg-avatar">U</div>
-        <div class="msg-bubble">로컬에서도 돌릴 수 있어?</div>
-      </div>
-      <div class="msg msg-bot">
-        <div class="msg-avatar">AI</div>
-        <div class="msg-bubble">
-          <div class="typing">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <a href="#chat" class="btn btn-primary">AI와 대화하기</a>
+    <a href="#guestbook" class="btn btn-secondary">방명록 남기기</a>
   </div>
 </section>
 
 <section id="features">
   <div class="section-label">Features</div>
-  <h2>왜 ChatMyPT인가요?</h2>
-  <p class="section-desc">프라이버시와 성능을 모두 잡은 로컬 AI 채팅 솔루션.</p>
+  <h2>무엇이 있나요?</h2>
+  <p class="section-desc">서버리스 백엔드로 구동되는 세 가지 기능.</p>
   <div class="features-grid">
     <div class="feature-card">
-      <div class="feature-icon">&#x1F512;</div>
-      <h3>완전한 프라이버시</h3>
-      <p>모든 대화가 로컬에서 처리됩니다. 데이터가 외부로 전송되지 않아 민감한 정보도 안심하고 대화할 수 있습니다.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">&#x26A1;</div>
-      <h3>빠른 응답 속도</h3>
-      <p>경량화된 Qwen-1.8B 모델로 GPU 가속을 활용해 빠른 응답을 제공합니다. Apple Silicon과 CUDA 모두 지원합니다.</p>
-    </div>
-    <div class="feature-card">
       <div class="feature-icon">&#x1F4AC;</div>
-      <h3>자연스러운 대화</h3>
-      <p>대화 히스토리를 기억하며 문맥을 이해합니다. 자연스럽고 연속적인 대화가 가능합니다.</p>
+      <h3>AI 챗봇</h3>
+      <p>Cloudflare Workers AI의 Llama 3.1 모델로 구동되는 한국어 대화 인터페이스입니다.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">&#x1F310;</div>
-      <h3>웹 인터페이스</h3>
-      <p>Gradio 기반의 깔끔한 웹 UI를 제공합니다. 브라우저만 있으면 어디서든 접속할 수 있습니다.</p>
+      <div class="feature-icon">&#x1F4DD;</div>
+      <h3>방명록</h3>
+      <p>Cloudflare D1 데이터베이스에 저장되는 방명록. 방문자들과 소통할 수 있습니다.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">&#x1F9E0;</div>
-      <h3>메모리 최적화</h3>
-      <p>자동 메모리 관리로 장시간 사용에도 안정적입니다. 8GB RAM이면 충분합니다.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">&#x1F527;</div>
-      <h3>쉬운 설치</h3>
-      <p>Python과 pip만 있으면 됩니다. 복잡한 설정 없이 몇 줄의 명령어로 바로 시작할 수 있습니다.</p>
+      <div class="feature-icon">&#x1F4CA;</div>
+      <h3>방문자 카운터</h3>
+      <p>Cloudflare KV로 실시간 추적되는 방문자 수. 네비게이션 바에서 확인하세요.</p>
     </div>
   </div>
 </section>
 
-<section id="how-it-works">
-  <div class="section-label">How it works</div>
-  <h2>3단계로 시작하세요</h2>
-  <p class="section-desc">복잡한 과정 없이 빠르게 설치하고 사용할 수 있습니다.</p>
-  <div class="steps">
-    <div class="step">
-      <h3>레포지토리 클론</h3>
-      <p>GitHub에서 프로젝트를 클론하고 필요한 패키지를 설치합니다.</p>
+<section id="chat">
+  <div class="section-label">AI Chat</div>
+  <h2>AI와 대화하기</h2>
+  <p class="section-desc">Llama 3.1 모델이 한국어로 답변합니다.</p>
+  <div class="chat-container">
+    <div class="chat-header">&#x1F916; ChatMyPT</div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg msg-bot">
+        <div class="msg-avatar">AI</div>
+        <div class="msg-bubble">안녕하세요! 무엇이든 물어보세요.</div>
+      </div>
     </div>
-    <div class="step">
-      <h3>모델 다운로드</h3>
-      <p>첫 실행 시 Qwen-1.8B 모델이 자동으로 다운로드됩니다.</p>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="메시지를 입력하세요..." autocomplete="off">
+      <button id="chatSend">전송</button>
     </div>
-    <div class="step">
-      <h3>대화 시작</h3>
-      <p>브라우저에서 localhost:7860에 접속하면 바로 대화를 시작할 수 있습니다.</p>
+  </div>
+</section>
+
+<section id="guestbook">
+  <div class="section-label">Guestbook</div>
+  <h2>방명록</h2>
+  <p class="section-desc">한마디 남겨주세요.</p>
+  <div class="guestbook-container">
+    <div class="guestbook-form">
+      <div class="form-row">
+        <input type="text" id="gbName" placeholder="이름" maxlength="50">
+      </div>
+      <textarea id="gbMessage" rows="3" placeholder="메시지를 입력하세요..." maxlength="500"></textarea>
+      <div class="form-actions" style="margin-top:0.75rem">
+        <button class="btn btn-primary btn-small" id="gbSubmit">등록</button>
+      </div>
+    </div>
+    <div class="guestbook-entries" id="gbEntries">
+      <div class="gb-empty">아직 방명록이 없습니다. 첫 번째로 남겨보세요!</div>
     </div>
   </div>
 </section>
 
 <section class="cta-section">
-  <h2>지금 바로 시작하세요</h2>
-  <p>ChatMyPT로 나만의 AI 어시스턴트를 만들어보세요.</p>
-  <a href="https://github.com/honeia85/chatmyPT" class="btn btn-primary" target="_blank">GitHub에서 시작하기</a>
+  <h2>직접 만들어보세요</h2>
+  <p>Cloudflare Pages + Functions + KV + D1 + Workers AI로 구축되었습니다.</p>
+  <a href="https://github.com/honeia85/chatmyPT" class="btn btn-primary" target="_blank">GitHub에서 보기</a>
 </section>
 
-<footer>
-  &copy; 2026 ChatMyPT. Built with care.
-</footer>
+<footer>&copy; 2026 ChatMyPT</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
+// Visitor Counter
+(async () => {
+  try {
+    await fetch('/api/counter', { method: 'POST' });
+    const res = await fetch('/api/counter');
+    const { count } = await res.json();
+    document.getElementById('counter').textContent = count.toLocaleString();
+  } catch {
+    document.getElementById('counter').textContent = '-';
+  }
+})();
+
+// Chat
+const chatHistory = [];
+const chatMessages = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+
+function appendMsg(role, text) {
+  const isUser = role === 'user';
+  const div = document.createElement('div');
+  div.className = 'msg ' + (isUser ? 'msg-user' : 'msg-bot');
+  div.innerHTML = `
+    <div class="msg-avatar">${isUser ? 'U' : 'AI'}</div>
+    <div class="msg-bubble">${text}</div>
+  `;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const div = appendMsg('bot', '<div class="typing"><span></span><span></span><span></span></div>');
+  div.id = 'typing-indicator';
+  return div;
+}
+
+async function sendChat() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  chatInput.value = '';
+  chatSend.disabled = true;
+  appendMsg('user', text.replace(/</g, '&lt;'));
+  const typing = showTyping();
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, history: chatHistory })
+    });
+    const data = await res.json();
+    typing.remove();
+    if (data.error) {
+      appendMsg('bot', data.error);
+    } else {
+      appendMsg('bot', data.response.replace(/</g, '&lt;'));
+      chatHistory.push({ user: text, ai: data.response });
+    }
+  } catch {
+    typing.remove();
+    appendMsg('bot', '오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+  }
+  chatSend.disabled = false;
+  chatInput.focus();
+}
+
+chatSend.addEventListener('click', sendChat);
+chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendChat(); });
+
+// Guestbook
+const gbEntries = document.getElementById('gbEntries');
+
+function renderEntries(entries) {
+  if (!entries.length) {
+    gbEntries.innerHTML = '<div class="gb-empty">아직 방명록이 없습니다. 첫 번째로 남겨보세요!</div>';
+    return;
+  }
+  gbEntries.innerHTML = entries.map(e => `
+    <div class="gb-entry">
+      <div class="gb-entry-header">
+        <span class="gb-entry-name">${e.name.replace(/</g, '&lt;')}</span>
+        <span class="gb-entry-date">${new Date(e.created_at + 'Z').toLocaleDateString('ko-KR')}</span>
+      </div>
+      <div class="gb-entry-msg">${e.message.replace(/</g, '&lt;')}</div>
+    </div>
+  `).join('');
+}
+
+async function loadGuestbook() {
+  try {
+    const res = await fetch('/api/guestbook');
+    renderEntries(await res.json());
+  } catch {
+    gbEntries.innerHTML = '<div class="gb-empty">방명록을 불러올 수 없습니다.</div>';
+  }
+}
+
+document.getElementById('gbSubmit').addEventListener('click', async () => {
+  const name = document.getElementById('gbName').value.trim();
+  const message = document.getElementById('gbMessage').value.trim();
+  if (!name || !message) { showToast('이름과 메시지를 모두 입력해주세요.', true); return; }
+
+  try {
+    const res = await fetch('/api/guestbook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, message })
+    });
+    const data = await res.json();
+    if (data.error) { showToast(data.error, true); return; }
+    document.getElementById('gbName').value = '';
+    document.getElementById('gbMessage').value = '';
+    showToast('등록되었습니다!');
+    loadGuestbook();
+  } catch {
+    showToast('오류가 발생했습니다.', true);
+  }
+});
+
+loadGuestbook();
+</script>
 
 </body>
 </html>
