@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - ChatMyPT</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --text: #e4e4e7;
+      --muted: #71717a;
+      --accent: #818cf8;
+      --accent-dim: rgba(129, 140, 248, 0.12);
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Login */
+    .login-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .login-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .login-box h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-box .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .login-box input:focus { border-color: var(--accent); }
+
+    .login-error {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .btn {
+      padding: 0.75rem 2rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; }
+    .btn-primary:hover { background: #6366f1; }
+
+    /* Dashboard */
+    .dashboard { display: none; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-logo { font-size: 1.1rem; font-weight: 700; }
+    .topbar-logo span { color: var(--accent); }
+
+    .topbar-actions { display: flex; gap: 1rem; align-items: center; }
+
+    .btn-ghost {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
+
+    .content { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+
+    .content h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .stat-value { font-size: 2rem; font-weight: 700; }
+    .stat-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* Chart */
+    .chart-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .chart-title { font-size: 1rem; font-weight: 600; margin-bottom: 1.25rem; }
+
+    .chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      height: 160px;
+      padding-top: 1rem;
+    }
+
+    .chart-bar-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .chart-bar {
+      width: 100%;
+      max-width: 48px;
+      background: var(--accent);
+      border-radius: 6px 6px 0 0;
+      min-height: 4px;
+      transition: height 0.5s ease;
+      position: relative;
+    }
+
+    .chart-bar:hover { background: #6366f1; }
+
+    .chart-bar-count {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .chart-bar-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Entries Table */
+    .entries-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .entries-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .entries-header h3 { font-size: 1rem; font-weight: 600; }
+    .entries-count { font-size: 0.8rem; color: var(--muted); }
+
+    .entries-list { max-height: 500px; overflow-y: auto; }
+    .entries-list::-webkit-scrollbar { width: 4px; }
+    .entries-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .entry-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .entry-row:last-child { border-bottom: none; }
+    .entry-row:hover { background: var(--accent-dim); }
+
+    .entry-info { flex: 1; min-width: 0; }
+    .entry-name { font-weight: 600; font-size: 0.9rem; }
+
+    .entry-msg {
+      font-size: 0.85rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .entry-date { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+
+    .btn-delete {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-delete:hover { border-color: var(--danger); color: var(--danger); }
+
+    .entries-empty {
+      padding: 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      z-index: 200;
+      transition: transform 0.3s ease;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.error { background: var(--danger); }
+
+    @media (max-width: 640px) {
+      .content { padding: 1.25rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .entry-msg { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-wrap" id="loginView">
+  <div class="login-box">
+    <h1>Admin</h1>
+    <p class="sub">ChatMyPT 관리자 페이지</p>
+    <div class="login-error" id="loginError">비밀번호가 틀렸습니다.</div>
+    <input type="password" id="loginPw" placeholder="비밀번호">
+    <button class="btn btn-primary" id="loginBtn">로그인</button>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboardView">
+  <div class="topbar">
+    <div class="topbar-logo">Chat<span>MyPT</span> Admin</div>
+    <div class="topbar-actions">
+      <a href="/" class="btn-ghost">사이트 보기</a>
+      <button class="btn-ghost" id="logoutBtn">로그아웃</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2>Dashboard</h2>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Visits</div>
+        <div class="stat-value" id="statTotalVisits">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Today Visits</div>
+        <div class="stat-value" id="statTodayVisits">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Guestbook</div>
+        <div class="stat-value" id="statTotalGb">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Today Guestbook</div>
+        <div class="stat-value" id="statTodayGb">-</div>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <div class="chart-title">Daily Visits (7 days)</div>
+      <div class="chart" id="chart"></div>
+    </div>
+
+    <div class="entries-section">
+      <div class="entries-header">
+        <h3>Guestbook Entries</h3>
+        <span class="entries-count" id="entriesCount"></span>
+      </div>
+      <div class="entries-list" id="entriesList">
+        <div class="entries-empty">Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
+function esc(s) { return s.replace(/</g, '&lt;'); }
+
+// Login
+const loginView = document.getElementById('loginView');
+const dashboardView = document.getElementById('dashboardView');
+const loginPw = document.getElementById('loginPw');
+const loginError = document.getElementById('loginError');
+
+async function doLogin() {
+  loginError.style.display = 'none';
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: loginPw.value }),
+  });
+  if (!res.ok) {
+    loginError.style.display = 'block';
+    return;
+  }
+  loginView.style.display = 'none';
+  dashboardView.style.display = 'block';
+  loadDashboard();
+}
+
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+loginPw.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  document.cookie = 'admin_session=; Path=/; Max-Age=0';
+  location.reload();
+});
+
+// Check existing session
+(async () => {
+  try {
+    const res = await fetch('/api/admin/stats');
+    if (res.ok) {
+      loginView.style.display = 'none';
+      dashboardView.style.display = 'block';
+      renderStats(await res.json());
+      loadEntries();
+    }
+  } catch {}
+})();
+
+// Dashboard
+async function loadDashboard() {
+  try {
+    const res = await fetch('/api/admin/stats');
+    if (!res.ok) throw new Error();
+    renderStats(await res.json());
+  } catch {
+    showToast('통계를 불러올 수 없습니다.', true);
+  }
+  loadEntries();
+}
+
+function renderStats(data) {
+  document.getElementById('statTotalVisits').textContent = data.totalVisits.toLocaleString();
+  document.getElementById('statTodayVisits').textContent = data.todayVisits.toLocaleString();
+  document.getElementById('statTotalGb').textContent = data.totalGuestbook.toLocaleString();
+  document.getElementById('statTodayGb').textContent = data.todayGuestbook.toLocaleString();
+
+  const chart = document.getElementById('chart');
+  const max = Math.max(...data.dailyVisits.map(d => d.count), 1);
+  chart.innerHTML = data.dailyVisits.map(d => {
+    const pct = (d.count / max) * 100;
+    const label = d.date.slice(5);
+    return `
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-count">${d.count}</div>
+        <div class="chart-bar" style="height:${Math.max(pct, 3)}%"></div>
+        <div class="chart-bar-label">${label}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function loadEntries() {
+  try {
+    const res = await fetch('/api/admin/entries');
+    if (!res.ok) throw new Error();
+    const entries = await res.json();
+    renderEntries(entries);
+  } catch {
+    document.getElementById('entriesList').innerHTML = '<div class="entries-empty">불러올 수 없습니다.</div>';
+  }
+}
+
+function renderEntries(entries) {
+  document.getElementById('entriesCount').textContent = `${entries.length}건`;
+  if (!entries.length) {
+    document.getElementById('entriesList').innerHTML = '<div class="entries-empty">방명록이 없습니다.</div>';
+    return;
+  }
+  document.getElementById('entriesList').innerHTML = entries.map(e => `
+    <div class="entry-row" data-id="${e.id}">
+      <div class="entry-info">
+        <div class="entry-name">${esc(e.name)}</div>
+        <div class="entry-msg">${esc(e.message)}</div>
+      </div>
+      <div class="entry-date">${new Date(e.created_at + 'Z').toLocaleDateString('ko-KR')}</div>
+      <button class="btn-delete" onclick="deleteEntry(${e.id})">삭제</button>
+    </div>
+  `).join('');
+}
+
+async function deleteEntry(id) {
+  if (!confirm('정말 삭제하시겠습니까?')) return;
+  try {
+    const res = await fetch(`/api/admin/entries?id=${id}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error();
+    showToast('삭제되었습니다.');
+    loadEntries();
+  } catch {
+    showToast('삭제에 실패했습니다.', true);
+  }
+}
+</script>
+
+</body>
+</html>
