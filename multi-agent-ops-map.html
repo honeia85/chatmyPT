@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HONEIA Multi-Agent Ops Map</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(10, 18, 34, 0.88);
+      --panel-2: rgba(14, 24, 44, 0.96);
+      --border: rgba(148, 163, 184, 0.18);
+      --text: #e5eefc;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent-2: #a78bfa;
+      --good: #34d399;
+      --warn: #f59e0b;
+      --danger: #fb7185;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: radial-gradient(circle at top, #10203a 0%, var(--bg) 42%, #040914 100%); color: var(--text); font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { min-height: 100vh; }
+    .page {
+      width: min(1480px, calc(100vw - 28px));
+      margin: 18px auto 28px;
+      display: grid;
+      grid-template-columns: 340px 1fr 360px;
+      gap: 16px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .left, .right { padding: 18px; }
+    .center { padding: 12px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px; font-size: 12px; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent); background: rgba(96,165,250,.1); border: 1px solid rgba(96,165,250,.18);
+    }
+    h1 { margin: 14px 0 8px; font-size: 30px; line-height: 1.1; letter-spacing: -.04em; }
+    .sub { color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .stack { display: grid; gap: 12px; margin-top: 18px; }
+    .legend {
+      padding: 14px; border-radius: 16px; background: rgba(255,255,255,.02); border: 1px solid var(--border);
+    }
+    .legend h3, .section-title { margin: 0 0 10px; font-size: 13px; color: #d8e5ff; letter-spacing: .04em; text-transform: uppercase; }
+    .legend-row, .stat-row { display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:13px; color: var(--muted); margin:8px 0; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display:inline-block; }
+    .pill { padding: 6px 10px; border-radius: 999px; font-size: 12px; border:1px solid var(--border); color: var(--text); background: rgba(255,255,255,.03); }
+    .pill.good { color: var(--good); border-color: rgba(52,211,153,.24); background: rgba(52,211,153,.08); }
+    .pill.warn { color: var(--warn); border-color: rgba(245,158,11,.24); background: rgba(245,158,11,.08); }
+    .pill.accent { color: var(--accent); border-color: rgba(96,165,250,.24); background: rgba(96,165,250,.08); }
+
+    .toolbar {
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center; padding: 8px 8px 14px;
+    }
+    .toggle {
+      appearance:none; border:none; cursor:pointer; padding:10px 14px; border-radius: 12px;
+      background: rgba(255,255,255,.04); color: var(--muted); border:1px solid var(--border); font-weight:600;
+    }
+    .toggle.active { color: white; background: linear-gradient(135deg, rgba(96,165,250,.2), rgba(167,139,250,.18)); border-color: rgba(96,165,250,.35); }
+
+    .canvas {
+      position: relative;
+      min-height: 900px;
+      overflow: hidden;
+      border-radius: 18px;
+      background:
+        linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(17,24,39,.35), rgba(17,24,39,.15));
+      background-size: 32px 32px, 32px 32px, auto;
+      border: 1px solid var(--border);
+    }
+    .node {
+      position: absolute;
+      width: 220px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+    }
+    .node:hover { transform: translateY(-3px); border-color: rgba(96,165,250,.45); }
+    .node.active { border-color: rgba(167,139,250,.55); box-shadow: 0 0 0 1px rgba(167,139,250,.35), 0 18px 38px rgba(0,0,0,.32); }
+    .node .type { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+    .node .name { font-size: 18px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 6px; }
+    .node .desc { font-size: 12px; line-height: 1.5; color: #c8d8f4; }
+    .node .foot { display:flex; justify-content:space-between; align-items:center; margin-top: 12px; gap:8px; }
+    .mini { font-size: 11px; color: var(--muted); }
+    .line {
+      position:absolute; height:2px; transform-origin:left center; background: linear-gradient(90deg, rgba(96,165,250,.7), rgba(167,139,250,.45)); opacity:.85;
+    }
+    .line.soft { background: linear-gradient(90deg, rgba(52,211,153,.6), rgba(96,165,250,.25)); opacity:.75; }
+    .line.warn { background: linear-gradient(90deg, rgba(245,158,11,.65), rgba(251,113,133,.35)); }
+
+    .status-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin-top: 14px; }
+    .status-card { padding: 12px; border-radius: 14px; background: rgba(255,255,255,.03); border:1px solid var(--border); }
+    .status-card strong { display:block; font-size: 24px; margin-top: 2px; }
+    .status-card span { font-size: 12px; color: var(--muted); }
+
+    .detail-title { font-size: 22px; margin: 10px 0 4px; letter-spacing: -.03em; }
+    .detail-sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .detail-box { padding: 14px; border-radius: 16px; border:1px solid var(--border); background: rgba(255,255,255,.03); margin-bottom: 12px; }
+    .detail-box h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #dce7fd; }
+    .detail-box ul { margin: 0; padding-left: 18px; color: #d2def6; }
+    .detail-box li { margin: 6px 0; line-height: 1.55; font-size: 13px; }
+
+    .timeline-step { display:flex; gap:12px; margin: 14px 0; }
+    .timeline-dot { width: 26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; font-size:12px; font-weight:700; background: rgba(96,165,250,.12); color: var(--accent); border:1px solid rgba(96,165,250,.2); }
+    .timeline-step h5 { margin: 0 0 4px; font-size: 14px; }
+    .timeline-step p { margin:0; font-size:13px; color: var(--muted); line-height:1.55; }
+
+    .publish {
+      margin-top: 16px; padding: 14px; border-radius: 16px; border:1px dashed rgba(96,165,250,.35); background: rgba(96,165,250,.06);
+    }
+    .publish code { color: #d8e5ff; font-size: 12px; }
+
+    .footer-note { margin-top: 16px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    @media (max-width: 1280px) {
+      .page { grid-template-columns: 1fr; }
+      .canvas { min-height: 1220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside class="left card">
+      <div class="eyebrow">Operations GUI</div>
+      <h1>멀티에이전트 시스템을 한눈에</h1>
+      <p class="sub">현재 HONEIA 운영 구조를 웹 GUI처럼 파악하기 위한 1차 프로토타입입니다. 지금은 구조 시각화와 읽기 중심이지만, 이후에는 보드 상태 연결, lane drill-down, 인터랙션까지 확장할 수 있게 설계했습니다.</p>
+
+      <div class="stack">
+        <div class="legend">
+          <h3>View Modes</h3>
+          <div class="toolbar">
+            <button class="toggle active" data-mode="global">Global</button>
+            <button class="toggle" data-mode="research">Research</button>
+            <button class="toggle" data-mode="trading">Trading</button>
+          </div>
+          <div class="sub">버튼을 누르면 해당 운영 루프 중심으로 레이어를 강조합니다.</div>
+        </div>
+
+        <div class="legend">
+          <h3>Legend</h3>
+          <div class="legend-row"><span><span class="dot" style="background: var(--accent);"></span> Front / Orchestrator</span><span>대화/분해/보고</span></div>
+          <div class="legend-row"><span><span class="dot" style="background: var(--good);"></span> Worker Lane</span><span>실무 수행</span></div>
+          <div class="legend-row"><span><span class="dot" style="background: var(--warn);"></span> Gate / Review</span><span>검증/승인</span></div>
+        </div>
+
+        <div class="legend">
+          <h3>Current Ops Snapshot</h3>
+          <div class="status-grid">
+            <div class="status-card"><span>Research Ops</span><strong>done 8</strong></div>
+            <div class="status-card"><span>Trading Ops</span><strong>running 5</strong></div>
+            <div class="status-card"><span>Trading Risk</span><strong>blocked 1</strong></div>
+            <div class="status-card"><span>Future Mode</span><strong>interactive</strong></div>
+          </div>
+        </div>
+
+        <div class="publish">
+          <strong>바로 게시 가능</strong>
+          <p class="sub" style="margin-top:8px">현재 사이트가 정적 Cloudflare Pages이므로, 이 페이지를 repo 루트에 <code>multi-agent-ops-map.html</code> 로 추가하고 index에서 링크만 걸면 바로 게시 가능합니다.</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="center card">
+      <div class="canvas" id="canvas">
+        <div class="line" style="left:260px; top:98px; width:220px; transform:rotate(0deg)"></div>
+        <div class="line" style="left:700px; top:98px; width:240px; transform:rotate(0deg)"></div>
+        <div class="line soft" style="left:260px; top:298px; width:220px; transform:rotate(0deg)"></div>
+        <div class="line soft" style="left:700px; top:298px; width:240px; transform:rotate(0deg)"></div>
+        <div class="line" style="left:500px; top:160px; width:2px; height:120px; transform:rotate(90deg)"></div>
+        <div class="line warn" style="left:990px; top:498px; width:200px; transform:rotate(0deg)"></div>
+
+        <div class="node active" data-node="default" data-group="global" style="left:28px; top:36px;">
+          <div class="type">Front Orchestrator</div>
+          <div class="name">default</div>
+          <div class="desc">사용자와 직접 대화하고, 방향을 정하고, 어떤 총괄에게 넘길지 판단합니다.</div>
+          <div class="foot"><span class="pill accent">conversation</span><span class="mini">main window</span></div>
+        </div>
+
+        <div class="node" data-node="researchorchestrator" data-group="research" style="left:496px; top:36px;">
+          <div class="type">Research Orchestrator</div>
+          <div class="name">researchorchestrator</div>
+          <div class="desc">vault 정비, SOP 확장, Notion/Source→Knowledge 루프를 백그라운드에서 운영합니다.</div>
+          <div class="foot"><span class="pill good">research-ops</span><span class="mini">done 8</span></div>
+        </div>
+
+        <div class="node" data-node="tradingorchestrator" data-group="trading" style="left:968px; top:36px;">
+          <div class="type">Trading Orchestrator</div>
+          <div class="name">tradingorchestrator</div>
+          <div class="desc">트레이딩 spec → verification → scaffold → next gate 루프를 유지합니다.</div>
+          <div class="foot"><span class="pill good">trading-ops</span><span class="mini">running 5</span></div>
+        </div>
+
+        <div class="node" data-node="hybtriage" data-group="trading research" style="left:28px; top:236px;">
+          <div class="type">Lane</div>
+          <div class="name">hybtriage</div>
+          <div class="desc">backlog를 실제 실행 단위로 쪼개고, implementation-critical blocker를 먼저 드러냅니다.</div>
+          <div class="foot"><span class="pill good">triage</span><span class="mini">done</span></div>
+        </div>
+
+        <div class="node" data-node="hybresearch" data-group="trading research" style="left:496px; top:236px;">
+          <div class="type">Lane</div>
+          <div class="name">hybresearch</div>
+          <div class="desc">공식 문서와 source를 읽어 spec을 implementation-ready 상태로 밀어올립니다.</div>
+          <div class="foot"><span class="pill good">verification research</span><span class="mini">done / running</span></div>
+        </div>
+
+        <div class="node" data-node="hybbuild" data-group="trading research" style="left:968px; top:236px;">
+          <div class="type">Lane</div>
+          <div class="name">hybbuild</div>
+          <div class="desc">knowledge hub, project links, source-of-truth 구조를 정리해 총괄이 빠르게 읽게 합니다.</div>
+          <div class="foot"><span class="pill good">hub maintenance</span><span class="mini">done / running</span></div>
+        </div>
+
+        <div class="node" data-node="dev" data-group="trading" style="left:496px; top:448px;">
+          <div class="type">Implementation Lane</div>
+          <div class="name">dev</div>
+          <div class="desc">코드 스캐폴드와 최소 구조를 만듭니다. 현재 trading-bot scaffold와 normalize test를 남긴 상태입니다.</div>
+          <div class="foot"><span class="pill warn">review-required</span><span class="mini">blocked</span></div>
+        </div>
+
+        <div class="node" data-node="hybverify" data-group="trading research" style="left:968px; top:448px;">
+          <div class="type">Gate</div>
+          <div class="name">hybverify</div>
+          <div class="desc">선행 결과를 모아 "지금 구현 들어가도 되는가"를 점검하고, unsafe assumption을 분리합니다.</div>
+          <div class="foot"><span class="pill warn">gate</span><span class="mini">todo</span></div>
+        </div>
+
+        <div class="node" data-node="ops" data-group="trading research" style="left:28px; top:448px;">
+          <div class="type">Ops Lane</div>
+          <div class="name">ops</div>
+          <div class="desc">보드 hygiene, stale card 정리, cron 기반 주기 점검과 drift 감시를 담당합니다.</div>
+          <div class="foot"><span class="pill accent">cron</span><span class="mini">weekly hygiene</span></div>
+        </div>
+
+        <div class="node" data-node="notion" data-group="research" style="left:28px; top:662px; width:300px;">
+          <div class="type">Source Reservoir</div>
+          <div class="name">Notion / HONEIA Brain</div>
+          <div class="desc">Notion 루트 페이지, Obsidian Source/Knowledge, 프로젝트 노트가 총괄과 worker의 공통 지식 기반 역할을 합니다.</div>
+          <div class="foot"><span class="pill accent">live restored</span><span class="mini">inventory ready</span></div>
+        </div>
+
+        <div class="node" data-node="tradingbot" data-group="trading" style="left:496px; top:662px; width:320px;">
+          <div class="type">Implementation Target</div>
+          <div class="name">trading-bot scaffold</div>
+          <div class="desc">KR/US normalize model, config placeholders, tests, pretrade / intent / execution adapter로 이어질 실제 코드베이스 시작점입니다.</div>
+          <div class="foot"><span class="pill good">desktop repo</span><span class="mini">pytest ok</span></div>
+        </div>
+
+        <div class="node" data-node="future" data-group="global trading research" style="left:968px; top:662px; width:300px;">
+          <div class="type">Future Interactive Layer</div>
+          <div class="name">Live GUI / Command Surface</div>
+          <div class="desc">다음 단계에서는 보드 상태 JSON, lane drill-down, 카드 클릭, 로그 미리보기, 실행 승인 버튼 같은 interaction을 붙일 수 있습니다.</div>
+          <div class="foot"><span class="pill accent">next phase</span><span class="mini">interactive</span></div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="right card">
+      <div class="eyebrow">Selected Node</div>
+      <div id="detailRoot">
+        <div class="detail-title">default</div>
+        <div class="detail-sub">사용자 대화 전면 창구</div>
+        <div class="detail-box">
+          <h4>현재 역할</h4>
+          <ul>
+            <li>사용자와 직접 대화</li>
+            <li>연구/트레이딩 총괄에게 백그라운드 작업 위임</li>
+            <li>보드 상태와 보고서를 읽어 다시 브리핑</li>
+          </ul>
+        </div>
+        <div class="detail-box">
+          <h4>왜 이 페이지가 유용한가</h4>
+          <ul>
+            <li>현재 어느 총괄이 어떤 worker를 굴리는지 한눈에 보임</li>
+            <li>연구팀과 트레이딩팀 구조를 시각적으로 비교 가능</li>
+            <li>나중에 실시간 상태판으로 확장하기 쉬움</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="detail-box" style="margin-top: 18px;">
+        <h4>Suggested Publish Plan</h4>
+        <div class="timeline-step"><div class="timeline-dot">1</div><div><h5>정적 페이지 추가</h5><p>repo 루트에 <code>multi-agent-ops-map.html</code> 추가</p></div></div>
+        <div class="timeline-step"><div class="timeline-dot">2</div><div><h5>메인 index에서 링크</h5><p>현재 ChatMyPT 페이지에 “Operations Map” CTA 추가</p></div></div>
+        <div class="timeline-step"><div class="timeline-dot">3</div><div><h5>상태 연결</h5><p>JSON 또는 build-time export로 board summary read-only 연결</p></div></div>
+        <div class="timeline-step"><div class="timeline-dot">4</div><div><h5>인터랙션</h5><p>카드 클릭 → task details / logs / notes drill-down</p></div></div>
+      </div>
+
+      <div class="footer-note">이 프로토타입은 현재 운영 구조를 “대시보드처럼 이해”하게 만드는 1차 버전입니다. 나중에는 task summary JSON, kanban export, Notion inventory 결과를 받아 진짜 상태판처럼 만들 수 있습니다.</div>
+    </aside>
+  </div>
+
+  <script>
+    const details = {
+      default: {
+        title: 'default',
+        subtitle: '사용자 대화 전면 창구',
+        sections: [
+          { title: '주요 책임', items: ['사용자와 직접 대화', '필요한 경우 research / trading 총괄에게 위임', '보드/보고서/로그를 읽고 다시 브리핑'] },
+          { title: '의미', items: ['사용자는 계속 default와만 이야기해도 된다', '백그라운드 루프가 대화창을 점유하지 않게 유지한다'] }
+        ]
+      },
+      researchorchestrator: {
+        title: 'researchorchestrator', subtitle: '연구 운영 총괄', sections: [
+          { title: '다루는 것', items: ['vault 정비', 'SOP 확장', 'Notion → Source → Knowledge 승격', 'research-ops 보드 운영'] },
+          { title: '현재 분위기', items: ['이미 한 바퀴 완료된 done 8 상태', '정리형/문서형 백그라운드 루프에 강함'] }
+        ]
+      },
+      tradingorchestrator: {
+        title: 'tradingorchestrator', subtitle: '트레이딩 운영 총괄', sections: [
+          { title: '다루는 것', items: ['KIS endpoint 검증', 'spec → scaffold → verify 루프', 'trading-ops 보드 운영'] },
+          { title: '현재 분위기', items: ['트레이딩 팀을 문서에서 실제 운영 체계로 승격하는 중', '현재 5개 lane이 동시 진행되는 구조'] }
+        ]
+      },
+      hybtriage: {
+        title: 'hybtriage', subtitle: '백로그 정리 lane', sections: [
+          { title: '최근 역할', items: ['트레이딩 backlog에서 implementation-critical blocker top-5 추출 완료', '다음 스프린트 우선순위를 좁히는 역할'] }
+        ]
+      },
+      hybresearch: {
+        title: 'hybresearch', subtitle: '공식 소스 검증 lane', sections: [
+          { title: '현재 하고 있는 일', items: ['KIS GitHub 예제와 공식 문서 파싱', 'TR ID / body keys / continuation keys / session uncertainty 정리'] },
+          { title: '핵심 가치', items: ['"문서에 있다"를 "구현해도 된다" 수준으로 끌어올림'] }
+        ]
+      },
+      hybbuild: {
+        title: 'hybbuild', subtitle: '지식 구조화 lane', sections: [
+          { title: '현재 하고 있는 일', items: ['Investment Automation 허브와 프로젝트 링크 정리', 'source of truth 구조 보강'] }
+        ]
+      },
+      dev: {
+        title: 'dev', subtitle: '코드 스캐폴드 / 구현 준비 lane', sections: [
+          { title: '현재 산출물', items: ['Desktop/trading-bot scaffold 생성', 'normalize 모델/테스트 생성', 'pytest 통과'] },
+          { title: '왜 blocked 인가', items: ['실패가 아니라 review-required 상태', '다음 단계는 scaffold 승인 후 execution loop 쪽으로 연결'] }
+        ]
+      },
+      hybverify: {
+        title: 'hybverify', subtitle: '게이트 / 리뷰 lane', sections: [
+          { title: '다음 역할', items: ['research/build/dev 결과를 모아 spec stack coherence 점검', 'verified-ready / unresolved blockers / unsafe assumptions 분리'] }
+        ]
+      },
+      ops: {
+        title: 'ops', subtitle: '운영 hygiene lane', sections: [
+          { title: '현재 역할', items: ['주간 보드 점검', 'stale / blocked / duplicate 카드 감시', '작은 follow-up card 생성 여부 판단'] }
+        ]
+      },
+      notion: {
+        title: 'Notion / HONEIA Brain', subtitle: '지식 기반', sections: [
+          { title: '현재 상태', items: ['Notion live 연결 복구 완료', 'HONEIA RESEARCH LAB / Personal Home root inventory 가능', 'Obsidian은 SOP/knowledge 허브로 사용'] }
+        ]
+      },
+      tradingbot: {
+        title: 'trading-bot scaffold', subtitle: '실구현 시작점', sections: [
+          { title: '현재 의미', items: ['문서상 계획을 실제 파일 구조로 옮기는 첫 단추', 'normalize → precheck → intents → execution adapter로 확장 예정'] }
+        ]
+      },
+      future: {
+        title: 'Future Interactive Layer', subtitle: '나중에 붙일 인터랙션', sections: [
+          { title: '다음 단계 후보', items: ['board summary JSON 연동', 'node 클릭 시 task drawer 열기', 'lane별 카드 필터링', '상태 타임라인 / 로그 미리보기', '승인 버튼/드릴다운 추가'] }
+        ]
+      }
+    };
+
+    const root = document.getElementById('detailRoot');
+    const nodes = [...document.querySelectorAll('.node')];
+    const toggles = [...document.querySelectorAll('.toggle')];
+
+    function renderDetail(key) {
+      const d = details[key];
+      if (!d) return;
+      root.innerHTML = `
+        <div class="detail-title">${d.title}</div>
+        <div class="detail-sub">${d.subtitle}</div>
+        ${d.sections.map(section => `
+          <div class="detail-box">
+            <h4>${section.title}</h4>
+            <ul>${section.items.map(item => `<li>${item}</li>`).join('')}</ul>
+          </div>
+        `).join('')}
+      `;
+    }
+
+    function activateNode(node) {
+      nodes.forEach(n => n.classList.remove('active'));
+      node.classList.add('active');
+      renderDetail(node.dataset.node);
+    }
+
+    nodes.forEach(node => node.addEventListener('click', () => activateNode(node)));
+
+    function setMode(mode) {
+      toggles.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+      nodes.forEach(node => {
+        if (mode === 'global') {
+          node.style.opacity = '1';
+          node.style.filter = 'none';
+          return;
+        }
+        const groups = (node.dataset.group || '').split(/\s+/);
+        const on = groups.includes(mode);
+        node.style.opacity = on ? '1' : '0.22';
+        node.style.filter = on ? 'none' : 'grayscale(.2)';
+      });
+    }
+
+    toggles.forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+    setMode('global');
+  </script>
+</body>
+</html>
