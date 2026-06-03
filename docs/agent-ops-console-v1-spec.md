@@ -457,6 +457,7 @@ Allowed only with confirmation / policy checks:
 - generate state JSON from actual orchestrator/worker metadata
 - consume reports and recent outputs
 - connect to knowledge refs from vault / docs
+- start with a minimal runtime exporter snapshot (`runtime-state-v0.json`) that separates configured vs observed state and computes drift flags
 
 ### Phase 4 — Safe editing
 - persist metadata edits
@@ -473,3 +474,7 @@ Use a fixture file such as:
 - `/data/agent-ops-console-v1.json`
 
 This lets us validate the UX before wiring it to real Hermes state.
+
+Current bridge artifact for that wiring:
+- `/data/runtime-state-v0.json`
+- spec: `/docs/runtime-state-exporter-v0.md`

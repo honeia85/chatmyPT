@@ -191,11 +191,13 @@
         <div class="legend">
           <h3>Current Ops Snapshot</h3>
           <div class="status-grid">
-            <div class="status-card"><span>Research Ops</span><strong>done 8</strong></div>
-            <div class="status-card"><span>Trading Ops</span><strong>running 5</strong></div>
-            <div class="status-card"><span>Trading Risk</span><strong>blocked 1</strong></div>
-            <div class="status-card"><span>Future Mode</span><strong>interactive</strong></div>
+            <div class="status-card"><span>Runtime Profiles</span><strong id="runtimeProfiles">-</strong></div>
+            <div class="status-card"><span>Observed Active</span><strong id="runtimeActive">-</strong></div>
+            <div class="status-card"><span>Drift Signals</span><strong id="runtimeDrift">-</strong></div>
+            <div class="status-card"><span>Snapshot</span><strong id="runtimeSnapshotLabel">fixture</strong></div>
+            <div class="status-card"><span>Evidence Gaps</span><strong id="runtimeEvidenceGaps">-</strong></div>
           </div>
+          <div class="footer-note" id="runtimeSnapshotAt" style="margin-top:10px;">generated runtime snapshot not loaded yet</div>
         </div>
 
         <div class="publish">
@@ -409,6 +411,12 @@
     const root = document.getElementById('detailRoot');
     const nodes = [...document.querySelectorAll('.node')];
     const toggles = [...document.querySelectorAll('.toggle')];
+    const runtimeProfiles = document.getElementById('runtimeProfiles');
+    const runtimeActive = document.getElementById('runtimeActive');
+    const runtimeDrift = document.getElementById('runtimeDrift');
+    const runtimeSnapshotLabel = document.getElementById('runtimeSnapshotLabel');
+    const runtimeEvidenceGaps = document.getElementById('runtimeEvidenceGaps');
+    const runtimeSnapshotAt = document.getElementById('runtimeSnapshotAt');
 
     function renderDetail(key) {
       const d = details[key];
@@ -450,6 +458,30 @@
 
     toggles.forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
     setMode('global');
+
+    async function loadRuntimeSnapshotMeta() {
+      try {
+        const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`runtime snapshot HTTP ${response.status}`);
+        const runtime = await response.json();
+        const driftSummary = runtime?.drift_summary || {};
+        const missingCount = (driftSummary.missing_observation || []).length;
+        const staleCount = (driftSummary.stale_observation || []).length;
+        const driftCount = Object.values(driftSummary).reduce((sum, value) => sum + (Array.isArray(value) ? value.length : 0), 0);
+        runtimeProfiles.textContent = String(runtime?.summary?.total_profiles ?? '-');
+        runtimeActive.textContent = String(runtime?.summary?.active ?? '-');
+        runtimeDrift.textContent = String(driftCount);
+        runtimeEvidenceGaps.textContent = `${missingCount} missing · ${staleCount} stale`;
+        runtimeSnapshotLabel.textContent = runtime?.source_kind || 'generated';
+        runtimeSnapshotAt.textContent = `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · source=${runtime?.source_kind || 'generated'}`;
+      } catch (error) {
+        runtimeSnapshotLabel.textContent = 'fixture';
+        runtimeEvidenceGaps.textContent = 'fixture';
+        runtimeSnapshotAt.textContent = `runtime snapshot unavailable: ${error.message}`;
+      }
+    }
+
+    loadRuntimeSnapshotMeta();
   </script>
 </body>
 </html>

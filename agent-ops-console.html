@@ -412,7 +412,9 @@
         <a class="pill" href="/index.html"><strong>Landing</strong> 돌아가기</a>
         <a class="pill" href="/multi-agent-ops-map.html"><strong>Ops Map</strong> 열기</a>
         <a class="pill" href="/agent-ops-console.html"><strong>Ops Console</strong> 현재 페이지</a>
-        <div class="pill"><strong id="generatedAt">-</strong> fixture timestamp</div>
+        <div class="pill"><strong id="generatedAt">-</strong> <span id="snapshotLabel">fixture snapshot</span></div>
+        <div class="pill"><strong id="runtimeDrift">-</strong> runtime drift</div>
+        <div class="pill"><strong id="runtimeEvidence">-</strong> evidence gaps</div>
       </div>
     </section>
 
@@ -501,6 +503,9 @@
     const reportList = document.getElementById('reportList');
     const activityList = document.getElementById('activityList');
     const generatedAt = document.getElementById('generatedAt');
+    const snapshotLabel = document.getElementById('snapshotLabel');
+    const runtimeDrift = document.getElementById('runtimeDrift');
+    const runtimeEvidence = document.getElementById('runtimeEvidence');
     const searchInput = document.getElementById('searchInput');
     const teamFilter = document.getElementById('teamFilter');
     const statusFilter = document.getElementById('statusFilter');
@@ -543,11 +548,11 @@
 
     function renderSummary() {
       const stats = [
-        ['Total Agents', store.summary.total_agents],
+        ['Console Nodes', store.summary.total_agents],
+        ['Runtime Profiles', store.summary.runtime_profiles ?? store.summary.total_agents],
         ['Active', store.summary.active_agents],
         ['Waiting', store.summary.waiting_agents],
         ['Blocked', store.summary.blocked_agents],
-        ['Offline', store.summary.offline_agents],
         ['Reports 24h', store.summary.reports_last_24h]
       ];
       summaryGrid.innerHTML = stats.map(([label, value]) => `
@@ -690,6 +695,8 @@
           ${kv('Agent ID', escapeHtml(agent.id))}
           ${kv('Mission', escapeHtml(agent.mission))}
           ${kv('Layer', escapeHtml(String(agent.layer)))}
+          ${kv('Source kind', escapeHtml(agent.source_kind || 'fixture'))}
+          ${kv('Backing profiles', chips(agent.backing_profiles || [], value => value))}
           ${kv('Child agents', chips(agent.child_ids, id => store.agentMap[id]?.display_name || id))}
         </div>
 
@@ -778,9 +785,50 @@
       });
     }
 
+    async function loadRuntimeSnapshotMeta() {
+      try {
+        const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`runtime snapshot HTTP ${response.status}`);
+        const runtime = await response.json();
+        const driftSummary = runtime?.drift_summary || {};
+        const sourceKind = runtime?.source_kind || 'generated-runtime-snapshot';
+        const missingCount = (driftSummary.missing_observation || []).length;
+        const staleCount = (driftSummary.stale_observation || []).length;
+        const staleThreshold = runtime?.reconciliation?.stale_threshold_hours;
+        const driftCount = Object.values(driftSummary).reduce((sum, value) => {
+          return sum + (Array.isArray(value) ? value.length : 0);
+        }, 0);
+        generatedAt.textContent = formatDate(runtime.generated_at);
+        snapshotLabel.textContent = `${sourceKind} · ${staleThreshold ?? '?'}h stale rule`;
+        runtimeDrift.textContent = String(driftCount);
+        runtimeEvidence.textContent = `${missingCount} missing · ${staleCount} stale`;
+      } catch {
+        runtimeDrift.textContent = 'fixture';
+        runtimeEvidence.textContent = 'fixture';
+      }
+    }
+
+    async function loadConsoleData() {
+      const candidates = [
+        '/data/agent-ops-console-runtime.json',
+        '/data/agent-ops-console-v1.json'
+      ];
+      let lastError = null;
+      for (const url of candidates) {
+        try {
+          const response = await fetch(url, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`${url} HTTP ${response.status}`);
+          const data = await response.json();
+          return { data, url };
+        } catch (error) {
+          lastError = error;
+        }
+      }
+      throw lastError || new Error('No console data source could be loaded.');
+    }
+
     async function init() {
-      const response = await fetch('/data/agent-ops-console-v1.json');
-      const data = await response.json();
+      const { data, url } = await loadConsoleData();
       store = {
         ...data,
         teamMap: mapById(data.teams),
@@ -790,9 +838,17 @@
       };
       selectedAgentId = data.agents[0]?.id || null;
       generatedAt.textContent = formatDate(data.generated_at);
+      snapshotLabel.textContent = url.includes('runtime')
+        ? `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'}`
+        : 'fixture snapshot';
+      if (url.includes('runtime')) {
+        const driftSummary = data.drift_summary || {};
+        runtimeEvidence.textContent = `${(driftSummary.missing_observation || []).length} missing · ${(driftSummary.stale_observation || []).length} stale`;
+      }
       renderFilters();
       bindFilters();
       renderAll();
+      await loadRuntimeSnapshotMeta();
     }
 
     init().catch((error) => {

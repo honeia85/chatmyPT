@@ -1,0 +1,58 @@
+# HONEIA Website Operations Playbook v1
+
+## Scope
+- Production site: `https://honeia-lab.uk/`
+- Supporting pages:
+  - `/multi-agent-ops-map.html`
+  - `/agent-ops-console.html`
+
+## Delivery model
+- Repository: `honeia85/chatmyPT`
+- Host: Cloudflare Pages
+- Production branch: `main`
+- Custom domain: `honeia-lab.uk`
+
+## Recommended workflow
+1. Create a work branch: `feature/*`, `fix/*`, or `ops/*`
+2. Make the change
+3. Verify on preview or `*.pages.dev`
+4. Merge/push to `main`
+5. Verify on `honeia-lab.uk`
+
+## Roles
+- `default`: decides scope/priorities and reports back to the user
+- `ops`: checks deploy, domain, Cloudflare, and runtime health
+- `dev`: changes repo files, tests, branches, and pushes
+
+## Release checklist
+- `https://honeia-lab.uk/` opens
+- `Ops Map` opens
+- `Ops Console` opens
+- main navigation still shows expected links
+- custom domain remains active in Cloudflare Pages
+
+## Incident shortcuts
+### Pages works, custom domain fails
+Check:
+- DNS records
+- Pages custom domain status
+- SSL/TLS issuance state
+
+### Neither Pages nor custom domain works
+Check:
+- recent repo changes
+- Pages deploy/build status
+- missing files or broken paths
+
+### One subpage fails
+Check:
+- file exists in repo
+- link path is correct
+- extensionless rewrite behavior
+
+## GitHub operating notes
+- Git remote push is configured and working
+- branch pushes are possible
+- `gh` CLI is not installed on this machine right now
+- therefore, code fix + branch push is available now
+- PR creation is possible later via GitHub web UI or a dedicated API path, but not via `gh` out of the box
