@@ -1,0 +1,411 @@
+{
+  "generated_at": "2026-06-03T13:10:00+09:00",
+  "summary": {
+    "total_agents": 9,
+    "active_agents": 3,
+    "waiting_agents": 1,
+    "blocked_agents": 1,
+    "offline_agents": 0,
+    "reports_last_24h": 5
+  },
+  "teams": [
+    {
+      "id": "executive",
+      "name": "Executive",
+      "mission": "User-facing orchestration and final reporting."
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "mission": "Research planning, evidence synthesis, and knowledge base growth."
+    },
+    {
+      "id": "trading",
+      "name": "Trading",
+      "mission": "Trading automation planning, blockers, and execution governance."
+    },
+    {
+      "id": "ops",
+      "name": "Ops",
+      "mission": "System hygiene, deployment, runtime health, and verification."
+    }
+  ],
+  "knowledge_refs": [
+    {
+      "id": "kb-hermes-automation",
+      "title": "Hermes & Automation",
+      "kind": "vault-note",
+      "path": "HONEIA Brain/01 Areas/Hermes & Automation.md",
+      "description": "Main hub for Hermes operating patterns, profiles, and automation notes."
+    },
+    {
+      "id": "kb-investment-automation",
+      "title": "Investment Automation",
+      "kind": "vault-note",
+      "path": "HONEIA Brain/01 Areas/Investment Automation.md",
+      "description": "Architecture, risk, broker integration, and monitoring notes."
+    },
+    {
+      "id": "kb-medical-ai",
+      "title": "Medical AI",
+      "kind": "vault-note",
+      "path": "HONEIA Brain/01 Areas/Medical AI.md",
+      "description": "Research area hub for Medical AI strategy, sources, and projects."
+    },
+    {
+      "id": "kb-research-lab",
+      "title": "HONEIA RESEARCH LAB",
+      "kind": "vault-note",
+      "path": "HONEIA Brain/01 Areas/HONEIA RESEARCH LAB.md",
+      "description": "Main lab hub for research projects, writing standards, and implementation radar."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-user-facing-owner",
+      "scope": "global",
+      "text": "The default orchestrator owns user-facing synthesis and final responsibility.",
+      "severity": "medium",
+      "requires_approval": false,
+      "source": "system"
+    },
+    {
+      "id": "rule-real-money-approval",
+      "scope": "team",
+      "team": "trading",
+      "text": "Real-money order actions require explicit user approval.",
+      "severity": "high",
+      "requires_approval": true,
+      "source": "user preference"
+    },
+    {
+      "id": "rule-api-first-cloudflare",
+      "scope": "team",
+      "team": "ops",
+      "text": "Cloudflare operations should prefer API-first automation; browser UI is a fallback.",
+      "severity": "medium",
+      "requires_approval": false,
+      "source": "user preference"
+    },
+    {
+      "id": "rule-report-attempted-failed-verified",
+      "scope": "global",
+      "text": "Operational reports should separate attempted, failed, fallback, and verified outcomes.",
+      "severity": "medium",
+      "requires_approval": false,
+      "source": "user preference"
+    }
+  ],
+  "reports": [
+    {
+      "id": "report-001",
+      "agent_id": "default",
+      "team": "executive",
+      "type": "status_summary",
+      "title": "System briefing",
+      "summary": "Integrated current progress across research, trading, and website operations.",
+      "created_at": "2026-06-03T12:45:00+09:00",
+      "destination": "telegram",
+      "status": "published"
+    },
+    {
+      "id": "report-002",
+      "agent_id": "tradingorchestrator",
+      "team": "trading",
+      "type": "blocker_report",
+      "title": "Domain routing blocker",
+      "summary": "Custom domain attach succeeded, but DNS verification is still pending.",
+      "created_at": "2026-06-03T12:10:00+09:00",
+      "destination": "local",
+      "status": "draft"
+    },
+    {
+      "id": "report-003",
+      "agent_id": "researchorchestrator",
+      "team": "research",
+      "type": "research_digest",
+      "title": "Research ops digest",
+      "summary": "Recent notes and source migrations were linked into HONEIA Brain.",
+      "created_at": "2026-06-03T11:20:00+09:00",
+      "destination": "vault",
+      "status": "published"
+    }
+  ],
+  "activity": [
+    {
+      "id": "evt-001",
+      "timestamp": "2026-06-03T12:58:00+09:00",
+      "type": "task_updated",
+      "agent_id": "default",
+      "summary": "Ops Console concept refined around identity, runtime, soul, knowledge, rules, and subagents."
+    },
+    {
+      "id": "evt-002",
+      "timestamp": "2026-06-03T12:40:00+09:00",
+      "type": "blocker_opened",
+      "agent_id": "tradingorchestrator",
+      "summary": "Cloudflare Pages custom domain remains pending until DNS is verified."
+    },
+    {
+      "id": "evt-003",
+      "timestamp": "2026-06-03T12:05:00+09:00",
+      "type": "report_generated",
+      "agent_id": "researchorchestrator",
+      "summary": "Published a research digest into the knowledge workflow."
+    }
+  ],
+  "agents": [
+    {
+      "id": "default",
+      "display_name": "Default Orchestrator",
+      "team": "executive",
+      "layer": 0,
+      "type": "orchestrator",
+      "parent_id": null,
+      "child_ids": ["researchorchestrator", "tradingorchestrator", "opsorchestrator"],
+      "description": "Top-level user-facing orchestrator that synthesizes work and communicates with the user.",
+      "mission": "Route work to the right teams, integrate outputs, and report clearly.",
+      "soul": {
+        "tone": "direct",
+        "decision_posture": "pragmatic",
+        "risk_appetite": "medium",
+        "reporting_style": "attempted-failed-verified"
+      },
+      "runtime": {
+        "status": "active",
+        "current_task": "Design the Agent Ops Console and track website publication progress.",
+        "last_heartbeat_at": "2026-06-03T13:00:00+09:00",
+        "last_report_at": "2026-06-03T12:45:00+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": ["kb-hermes-automation", "kb-research-lab"],
+      "rule_refs": ["rule-user-facing-owner", "rule-report-attempted-failed-verified"],
+      "report_types": ["status_summary", "decision_brief"]
+    },
+    {
+      "id": "researchorchestrator",
+      "display_name": "Research Orchestrator",
+      "team": "research",
+      "layer": 1,
+      "type": "domain-owner",
+      "parent_id": "default",
+      "child_ids": ["paper-scout", "source-synthesizer"],
+      "description": "Owns research planning, source review, and structured note synthesis.",
+      "mission": "Turn incoming research questions into organized evidence and reusable knowledge.",
+      "soul": {
+        "tone": "analytical",
+        "decision_posture": "exploratory",
+        "risk_appetite": "low",
+        "reporting_style": "source-grounded"
+      },
+      "runtime": {
+        "status": "active",
+        "current_task": "Maintain knowledge migration quality and research digestion.",
+        "last_heartbeat_at": "2026-06-03T12:57:00+09:00",
+        "last_report_at": "2026-06-03T11:20:00+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": ["kb-medical-ai", "kb-research-lab"],
+      "rule_refs": ["rule-report-attempted-failed-verified"],
+      "report_types": ["research_digest", "source_summary"]
+    },
+    {
+      "id": "tradingorchestrator",
+      "display_name": "Trading Orchestrator",
+      "team": "trading",
+      "layer": 1,
+      "type": "domain-owner",
+      "parent_id": "default",
+      "child_ids": ["hybtriage", "hybresearch", "hybbuild", "hybverify", "ops"],
+      "description": "Owns trading automation planning, system blockers, and execution governance.",
+      "mission": "Coordinate trading workers without violating approval and risk rules.",
+      "soul": {
+        "tone": "compact",
+        "decision_posture": "conservative",
+        "risk_appetite": "low",
+        "reporting_style": "blocker-first"
+      },
+      "runtime": {
+        "status": "blocked",
+        "current_task": "Complete Cloudflare Pages custom-domain routing for the ops site.",
+        "last_heartbeat_at": "2026-06-03T12:52:00+09:00",
+        "last_report_at": "2026-06-03T12:10:00+09:00",
+        "blocked_reason": "DNS verification pending for honeia-lab.uk",
+        "waiting_reason": null
+      },
+      "knowledge_refs": ["kb-investment-automation", "kb-hermes-automation"],
+      "rule_refs": ["rule-real-money-approval", "rule-report-attempted-failed-verified"],
+      "report_types": ["blocker_report", "execution_status"]
+    },
+    {
+      "id": "opsorchestrator",
+      "display_name": "Ops Orchestrator",
+      "team": "ops",
+      "layer": 1,
+      "type": "domain-owner",
+      "parent_id": "default",
+      "child_ids": ["deploy-watchdog"],
+      "description": "Coordinates service operations, verification, and deployment hygiene.",
+      "mission": "Keep mutable systems verifiable, healthy, and well reported.",
+      "soul": {
+        "tone": "precise",
+        "decision_posture": "verification-first",
+        "risk_appetite": "low",
+        "reporting_style": "requested-attempted-verified"
+      },
+      "runtime": {
+        "status": "waiting",
+        "current_task": "Observe Cloudflare publication loops and notify when live.",
+        "last_heartbeat_at": "2026-06-03T12:50:00+09:00",
+        "last_report_at": "2026-06-03T12:40:00+09:00",
+        "blocked_reason": null,
+        "waiting_reason": "Awaiting background cron verification results"
+      },
+      "knowledge_refs": ["kb-hermes-automation"],
+      "rule_refs": ["rule-api-first-cloudflare", "rule-report-attempted-failed-verified"],
+      "report_types": ["ops_report", "verification_report"]
+    },
+    {
+      "id": "hybtriage",
+      "display_name": "Hybrid Triage Worker",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Breaks incoming trading work into blockers, opportunities, and next actions.",
+      "mission": "Produce fast structured triage for trading tasks.",
+      "soul": {
+        "tone": "brief",
+        "decision_posture": "diagnostic",
+        "risk_appetite": "low",
+        "reporting_style": "bullet-summary"
+      },
+      "runtime": {
+        "status": "idle",
+        "current_task": "No active task",
+        "last_heartbeat_at": "2026-06-03T12:20:00+09:00",
+        "last_report_at": "2026-06-03T11:50:00+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": ["kb-investment-automation"],
+      "rule_refs": ["rule-real-money-approval"],
+      "report_types": ["triage_summary"]
+    },
+    {
+      "id": "hybresearch",
+      "display_name": "Hybrid Research Worker",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Looks up APIs, references, and implementation constraints for trading automation.",
+      "mission": "Supply grounded research for engineering and operations decisions.",
+      "soul": {
+        "tone": "evidence-led",
+        "decision_posture": "exploratory",
+        "risk_appetite": "low",
+        "reporting_style": "source-and-implication"
+      },
+      "runtime": {
+        "status": "idle",
+        "current_task": "No active task",
+        "last_heartbeat_at": "2026-06-03T12:15:00+09:00",
+        "last_report_at": "2026-06-03T11:45:00+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": ["kb-investment-automation"],
+      "rule_refs": ["rule-real-money-approval"],
+      "report_types": ["research_note"]
+    },
+    {
+      "id": "hybbuild",
+      "display_name": "Hybrid Build Worker",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Implements code and page changes for trading and operations tooling.",
+      "mission": "Ship narrow, verifiable implementation slices.",
+      "soul": {
+        "tone": "engineering",
+        "decision_posture": "incremental",
+        "risk_appetite": "medium",
+        "reporting_style": "spec-vs-state"
+      },
+      "runtime": {
+        "status": "active",
+        "current_task": "Prepare ops map and future console pages inside chatmyPT repo.",
+        "last_heartbeat_at": "2026-06-03T12:59:00+09:00",
+        "last_report_at": "2026-06-03T12:00:00+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": ["kb-hermes-automation"],
+      "rule_refs": ["rule-report-attempted-failed-verified"],
+      "report_types": ["build_report"]
+    },
+    {
+      "id": "hybverify",
+      "display_name": "Hybrid Verify Worker",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Checks that changes, deployments, and assumptions match real state.",
+      "mission": "Prevent narrative drift with explicit verification.",
+      "soul": {
+        "tone": "skeptical",
+        "decision_posture": "verification-first",
+        "risk_appetite": "low",
+        "reporting_style": "verified-only"
+      },
+      "runtime": {
+        "status": "idle",
+        "current_task": "No active task",
+        "last_heartbeat_at": "2026-06-03T12:00:00+09:00",
+        "last_report_at": "2026-06-03T11:35:00+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": ["kb-hermes-automation"],
+      "rule_refs": ["rule-report-attempted-failed-verified"],
+      "report_types": ["verification_report"]
+    },
+    {
+      "id": "deploy-watchdog",
+      "display_name": "Deploy Watchdog",
+      "team": "ops",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "opsorchestrator",
+      "child_ids": [],
+      "description": "Background watcher for deployment health and route activation.",
+      "mission": "Stay quiet until there is something concrete to report.",
+      "soul": {
+        "tone": "silent",
+        "decision_posture": "watchful",
+        "risk_appetite": "low",
+        "reporting_style": "notify-on-signal"
+      },
+      "runtime": {
+        "status": "waiting",
+        "current_task": "Polling Cloudflare custom-domain readiness.",
+        "last_heartbeat_at": "2026-06-03T13:00:00+09:00",
+        "last_report_at": null,
+        "blocked_reason": null,
+        "waiting_reason": "Waiting for active domain and 200 OK checks"
+      },
+      "knowledge_refs": ["kb-hermes-automation"],
+      "rule_refs": ["rule-api-first-cloudflare"],
+      "report_types": ["watchdog_signal"]
+    }
+  ]
+}

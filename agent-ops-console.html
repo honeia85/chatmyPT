@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HONEIA Agent Ops Console</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(12, 19, 34, 0.94);
+      --panel-2: rgba(16, 26, 46, 0.96);
+      --panel-3: rgba(10, 17, 29, 0.96);
+      --border: rgba(148, 163, 184, 0.18);
+      --text: #e5eefc;
+      --muted: #8ea0ba;
+      --accent: #7c9cff;
+      --accent-2: #5eead4;
+      --danger: #fb7185;
+      --warn: #fbbf24;
+      --ok: #34d399;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,156,255,0.18), transparent 22%),
+        radial-gradient(circle at top right, rgba(94,234,212,0.12), transparent 18%),
+        linear-gradient(180deg, #050b15 0%, #08111d 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .shell {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(8, 14, 24, 0.72);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
+    }
+    .brand p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 780px;
+      line-height: 1.5;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(18, 28, 48, 0.8);
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    .pill strong { color: var(--text); }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap: 12px;
+    }
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .stat .label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat .value {
+      margin-top: 10px;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 420px);
+      gap: 18px;
+      align-items: start;
+    }
+    .left-column, .right-column {
+      display: grid;
+      gap: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 18px 20px 12px;
+      border-bottom: 1px solid rgba(148,163,184,0.12);
+    }
+    .panel-title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .panel-desc {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.92rem;
+    }
+    .graph {
+      padding: 20px;
+      display: grid;
+      gap: 16px;
+    }
+    .layer {
+      display: grid;
+      gap: 10px;
+    }
+    .layer-label {
+      color: var(--accent-2);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+    .node-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .node {
+      min-width: 220px;
+      flex: 1 1 220px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--panel-2);
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .node:hover,
+    .node.active {
+      transform: translateY(-2px);
+      border-color: rgba(124,156,255,0.55);
+      background: rgba(18, 32, 58, 0.98);
+    }
+    .node-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .node-name {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .node-role,
+    .node-task,
+    .meta-line,
+    .activity-line,
+    .report-line,
+    .knowledge-line,
+    .rule-line,
+    .subagent-line {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+    .node-task {
+      margin-top: 10px;
+      color: var(--text);
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .status::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.9;
+    }
+    .status-active { color: var(--ok); background: rgba(52, 211, 153, 0.12); }
+    .status-idle { color: #93c5fd; background: rgba(147, 197, 253, 0.12); }
+    .status-waiting { color: var(--warn); background: rgba(251, 191, 36, 0.14); }
+    .status-blocked { color: var(--danger); background: rgba(251, 113, 133, 0.14); }
+    .list {
+      padding: 10px 18px 18px;
+      display: grid;
+      gap: 12px;
+    }
+    .list-card {
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.12);
+      background: rgba(10, 18, 31, 0.72);
+    }
+    .list-card h4 {
+      margin: 0 0 6px;
+      font-size: 0.98rem;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px 18px 0;
+    }
+    select, input {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid rgba(148,163,184,0.18);
+      background: rgba(9, 15, 26, 0.92);
+      color: var(--text);
+      outline: none;
+    }
+    .filters > * {
+      min-width: 160px;
+      flex: 1 1 160px;
+    }
+    .agent-grid {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .agent-card {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(148,163,184,0.14);
+      background: rgba(10, 17, 29, 0.88);
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .agent-card:hover,
+    .agent-card.active {
+      transform: translateY(-2px);
+      border-color: rgba(124,156,255,0.5);
+    }
+    .agent-card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+    .agent-card .small {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+    .agent-card .task {
+      margin-top: 10px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .detail-body {
+      padding: 18px;
+      display: grid;
+      gap: 16px;
+    }
+    .detail-top h2 {
+      margin: 0;
+      font-size: 1.45rem;
+    }
+    .detail-top p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .detail-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .detail-box {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.12);
+      background: var(--panel-3);
+    }
+    .detail-box .k {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .detail-box .v {
+      margin-top: 8px;
+      line-height: 1.45;
+      font-size: 0.94rem;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tab-btn {
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.14);
+      background: rgba(12, 20, 34, 0.92);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.86rem;
+    }
+    .tab-btn.active {
+      color: var(--text);
+      border-color: rgba(124,156,255,0.5);
+      background: rgba(124,156,255,0.12);
+    }
+    .tab-panel {
+      display: none;
+      gap: 12px;
+    }
+    .tab-panel.active {
+      display: grid;
+    }
+    .key-value {
+      padding: 13px 14px;
+      border-radius: 14px;
+      background: rgba(10, 17, 29, 0.84);
+      border: 1px solid rgba(148,163,184,0.1);
+    }
+    .key-value .key {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .key-value .val {
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .inline-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .chip {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.16);
+      background: rgba(20, 33, 56, 0.85);
+      color: var(--text);
+      font-size: 0.82rem;
+    }
+    .empty {
+      color: var(--muted);
+      font-style: italic;
+    }
+    @media (max-width: 1160px) {
+      .layout { grid-template-columns: 1fr; }
+      .summary-grid { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      .shell { padding: 14px; }
+      .topbar { padding: 18px; }
+      .summary-grid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .detail-meta { grid-template-columns: 1fr; }
+      .actions { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="topbar">
+      <div class="brand">
+        <h1>HONEIA Agent Ops Console</h1>
+        <p>
+          캐릭터 대신 운영 관점에 집중한 멀티에이전트 관리자 패널. 각 에이전트의 역할, 소울,
+          런타임 상태, 보고서, 배경지식, 규칙, 서브에이전트를 한곳에서 확인하는 1차 프로토타입입니다.
+        </p>
+      </div>
+      <div class="actions">
+        <a class="pill" href="/index.html"><strong>Landing</strong> 돌아가기</a>
+        <a class="pill" href="/multi-agent-ops-map.html"><strong>Ops Map</strong> 열기</a>
+        <div class="pill"><strong id="generatedAt">-</strong> fixture timestamp</div>
+      </div>
+    </section>
+
+    <section class="summary-grid" id="summaryGrid"></section>
+
+    <section class="layout">
+      <div class="left-column">
+        <article class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Overview · Layer Map</h2>
+            <p class="panel-desc">Layer 0 → 1 → 2 구조로 현재 에이전트 조직과 실시간 상태를 읽습니다.</p>
+          </div>
+          <div class="graph" id="graph"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Agents</h2>
+            <p class="panel-desc">필터링 후 클릭하면 오른쪽 패널에서 Identity / Runtime / Soul / Knowledge / Rules / Reports / Subagents 를 확인할 수 있습니다.</p>
+          </div>
+          <div class="filters">
+            <input id="searchInput" type="text" placeholder="Search agent name, mission, current task..." />
+            <select id="teamFilter"><option value="all">All teams</option></select>
+            <select id="statusFilter">
+              <option value="all">All statuses</option>
+              <option value="active">Active</option>
+              <option value="idle">Idle</option>
+              <option value="waiting">Waiting</option>
+              <option value="blocked">Blocked</option>
+            </select>
+            <select id="typeFilter">
+              <option value="all">All types</option>
+              <option value="orchestrator">Orchestrator</option>
+              <option value="domain-owner">Domain owner</option>
+              <option value="worker">Worker</option>
+            </select>
+          </div>
+          <div class="agent-grid" id="agentGrid"></div>
+        </article>
+      </div>
+
+      <div class="right-column">
+        <article class="panel" id="detailPanel">
+          <div class="panel-header">
+            <h2 class="panel-title">Agent Detail</h2>
+            <p class="panel-desc">왼쪽 카드나 맵 노드를 클릭해 상세를 확인하세요.</p>
+          </div>
+          <div class="detail-body" id="detailBody"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Reports</h2>
+            <p class="panel-desc">최근 보고서와 배포/운영 관련 메시지를 한눈에 봅니다.</p>
+          </div>
+          <div class="list" id="reportList"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Activity</h2>
+            <p class="panel-desc">최근 이벤트 흐름입니다.</p>
+          </div>
+          <div class="list" id="activityList"></div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const STATUS_CLASS = {
+      active: 'status-active',
+      idle: 'status-idle',
+      waiting: 'status-waiting',
+      blocked: 'status-blocked'
+    };
+
+    let store = null;
+    let selectedAgentId = null;
+    let activeTab = 'identity';
+
+    const summaryGrid = document.getElementById('summaryGrid');
+    const graph = document.getElementById('graph');
+    const agentGrid = document.getElementById('agentGrid');
+    const detailBody = document.getElementById('detailBody');
+    const reportList = document.getElementById('reportList');
+    const activityList = document.getElementById('activityList');
+    const generatedAt = document.getElementById('generatedAt');
+    const searchInput = document.getElementById('searchInput');
+    const teamFilter = document.getElementById('teamFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const typeFilter = document.getElementById('typeFilter');
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function statusBadge(status) {
+      const safe = escapeHtml(status || 'unknown');
+      const cls = STATUS_CLASS[status] || 'status-idle';
+      return `<span class="status ${cls}">${safe}</span>`;
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      try {
+        return new Date(iso).toLocaleString('ko-KR', {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit'
+        });
+      } catch {
+        return iso;
+      }
+    }
+
+    function mapById(items) {
+      return Object.fromEntries(items.map(item => [item.id, item]));
+    }
+
+    function getSelectedAgent() {
+      return store.agentMap[selectedAgentId] || store.agents[0] || null;
+    }
+
+    function renderSummary() {
+      const stats = [
+        ['Total Agents', store.summary.total_agents],
+        ['Active', store.summary.active_agents],
+        ['Waiting', store.summary.waiting_agents],
+        ['Blocked', store.summary.blocked_agents],
+        ['Offline', store.summary.offline_agents],
+        ['Reports 24h', store.summary.reports_last_24h]
+      ];
+      summaryGrid.innerHTML = stats.map(([label, value]) => `
+        <div class="stat">
+          <div class="label">${escapeHtml(label)}</div>
+          <div class="value">${escapeHtml(value)}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderGraph() {
+      const layers = [0, 1, 2];
+      graph.innerHTML = layers.map(layer => {
+        const agents = store.agents.filter(agent => agent.layer === layer);
+        return `
+          <div class="layer">
+            <div class="layer-label">Layer ${layer}</div>
+            <div class="node-row">
+              ${agents.map(agent => `
+                <div class="node ${agent.id === selectedAgentId ? 'active' : ''}" data-agent-id="${escapeHtml(agent.id)}">
+                  <div class="node-top">
+                    <div>
+                      <h3 class="node-name">${escapeHtml(agent.display_name)}</h3>
+                      <div class="node-role">${escapeHtml(agent.team)} · ${escapeHtml(agent.type)}</div>
+                    </div>
+                    ${statusBadge(agent.runtime.status)}
+                  </div>
+                  <div class="node-task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
+                  <div class="meta-line">Children: ${escapeHtml((agent.child_ids || []).length)}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderFilters() {
+      const teams = ['all', ...store.teams.map(team => team.id)];
+      teamFilter.innerHTML = teams.map(teamId => {
+        const label = teamId === 'all' ? 'All teams' : store.teamMap[teamId]?.name || teamId;
+        return `<option value="${escapeHtml(teamId)}">${escapeHtml(label)}</option>`;
+      }).join('');
+    }
+
+    function getFilteredAgents() {
+      const q = searchInput.value.trim().toLowerCase();
+      const team = teamFilter.value;
+      const status = statusFilter.value;
+      const type = typeFilter.value;
+      return store.agents.filter(agent => {
+        if (team !== 'all' && agent.team !== team) return false;
+        if (status !== 'all' && agent.runtime.status !== status) return false;
+        if (type !== 'all' && agent.type !== type) return false;
+        if (!q) return true;
+        const hay = [
+          agent.display_name,
+          agent.description,
+          agent.mission,
+          agent.runtime.current_task,
+          agent.team,
+          agent.type
+        ].join(' ').toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    function renderAgents() {
+      const agents = getFilteredAgents();
+      agentGrid.innerHTML = agents.map(agent => `
+        <div class="agent-card ${agent.id === selectedAgentId ? 'active' : ''}" data-agent-id="${escapeHtml(agent.id)}">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;">
+            <div>
+              <h3>${escapeHtml(agent.display_name)}</h3>
+              <div class="small">${escapeHtml(agent.team)} · Layer ${escapeHtml(agent.layer)} · ${escapeHtml(agent.type)}</div>
+            </div>
+            ${statusBadge(agent.runtime.status)}
+          </div>
+          <div class="task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
+          <div class="small" style="margin-top:10px;">Subagents: ${escapeHtml((agent.child_ids || []).length)} · Last update: ${escapeHtml(formatDate(agent.runtime.last_heartbeat_at))}</div>
+        </div>
+      `).join('');
+    }
+
+    function kv(key, val) {
+      return `<div class="key-value"><div class="key">${escapeHtml(key)}</div><div class="val">${val}</div></div>`;
+    }
+
+    function chips(items, resolver) {
+      if (!items || !items.length) return '<div class="empty">None</div>';
+      return `<div class="inline-list">${items.map(item => `<span class="chip">${escapeHtml(resolver(item))}</span>`).join('')}</div>`;
+    }
+
+    function renderDetail() {
+      const agent = getSelectedAgent();
+      if (!agent) {
+        detailBody.innerHTML = '<div class="empty">No agent selected.</div>';
+        return;
+      }
+
+      const reportRefs = store.reports.filter(report => report.agent_id === agent.id);
+      const childAgents = (agent.child_ids || []).map(id => store.agentMap[id]).filter(Boolean);
+      const knowledgeRefs = (agent.knowledge_refs || []).map(id => store.knowledgeMap[id]).filter(Boolean);
+      const ruleRefs = (agent.rule_refs || []).map(id => store.ruleMap[id]).filter(Boolean);
+      const parent = agent.parent_id ? store.agentMap[agent.parent_id] : null;
+
+      const tabs = [
+        ['identity', 'Identity'],
+        ['runtime', 'Runtime'],
+        ['soul', 'Soul'],
+        ['knowledge', 'Knowledge'],
+        ['rules', 'Rules'],
+        ['reports', 'Reports'],
+        ['subagents', 'Subagents']
+      ];
+
+      detailBody.innerHTML = `
+        <div class="detail-top">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;">
+            <div>
+              <h2>${escapeHtml(agent.display_name)}</h2>
+              <p>${escapeHtml(agent.description)}</p>
+            </div>
+            ${statusBadge(agent.runtime.status)}
+          </div>
+        </div>
+
+        <div class="detail-meta">
+          <div class="detail-box"><div class="k">Team</div><div class="v">${escapeHtml(store.teamMap[agent.team]?.name || agent.team)}</div></div>
+          <div class="detail-box"><div class="k">Role Type</div><div class="v">${escapeHtml(agent.type)}</div></div>
+          <div class="detail-box"><div class="k">Current Task</div><div class="v">${escapeHtml(agent.runtime.current_task || 'No active task')}</div></div>
+          <div class="detail-box"><div class="k">Parent</div><div class="v">${escapeHtml(parent?.display_name || 'None')}</div></div>
+        </div>
+
+        <div class="tabs">
+          ${tabs.map(([id, label]) => `<button class="tab-btn ${activeTab === id ? 'active' : ''}" data-tab="${escapeHtml(id)}">${escapeHtml(label)}</button>`).join('')}
+        </div>
+
+        <div class="tab-panel ${activeTab === 'identity' ? 'active' : ''}" data-panel="identity">
+          ${kv('Agent ID', escapeHtml(agent.id))}
+          ${kv('Mission', escapeHtml(agent.mission))}
+          ${kv('Layer', escapeHtml(String(agent.layer)))}
+          ${kv('Child agents', chips(agent.child_ids, id => store.agentMap[id]?.display_name || id))}
+        </div>
+
+        <div class="tab-panel ${activeTab === 'runtime' ? 'active' : ''}" data-panel="runtime">
+          ${kv('Last heartbeat', escapeHtml(formatDate(agent.runtime.last_heartbeat_at)))}
+          ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
+          ${kv('Blocked reason', agent.runtime.blocked_reason ? escapeHtml(agent.runtime.blocked_reason) : '<span class="empty">None</span>')}
+          ${kv('Waiting reason', agent.runtime.waiting_reason ? escapeHtml(agent.runtime.waiting_reason) : '<span class="empty">None</span>')}
+        </div>
+
+        <div class="tab-panel ${activeTab === 'soul' ? 'active' : ''}" data-panel="soul">
+          ${kv('Tone', escapeHtml(agent.soul.tone))}
+          ${kv('Decision posture', escapeHtml(agent.soul.decision_posture))}
+          ${kv('Risk appetite', escapeHtml(agent.soul.risk_appetite))}
+          ${kv('Reporting style', escapeHtml(agent.soul.reporting_style))}
+        </div>
+
+        <div class="tab-panel ${activeTab === 'knowledge' ? 'active' : ''}" data-panel="knowledge">
+          ${knowledgeRefs.length ? knowledgeRefs.map(ref => kv(ref.title, `${escapeHtml(ref.description)}<div class="meta-line" style="margin-top:8px;">${escapeHtml(ref.kind)} · ${escapeHtml(ref.path)}</div>`)).join('') : '<div class="empty">No linked knowledge refs.</div>'}
+        </div>
+
+        <div class="tab-panel ${activeTab === 'rules' ? 'active' : ''}" data-panel="rules">
+          ${ruleRefs.length ? ruleRefs.map(rule => kv(rule.id, `${escapeHtml(rule.text)}<div class="meta-line" style="margin-top:8px;">scope: ${escapeHtml(rule.scope)} · severity: ${escapeHtml(rule.severity)} · approval: ${escapeHtml(rule.requires_approval ? 'yes' : 'no')}</div>`)).join('') : '<div class="empty">No linked rules.</div>'}
+        </div>
+
+        <div class="tab-panel ${activeTab === 'reports' ? 'active' : ''}" data-panel="reports">
+          ${reportRefs.length ? reportRefs.map(report => kv(report.title, `${escapeHtml(report.summary)}<div class="meta-line" style="margin-top:8px;">${escapeHtml(report.type)} · ${escapeHtml(formatDate(report.created_at))} · ${escapeHtml(report.status)}</div>`)).join('') : '<div class="empty">No reports for this agent.</div>'}
+        </div>
+
+        <div class="tab-panel ${activeTab === 'subagents' ? 'active' : ''}" data-panel="subagents">
+          ${childAgents.length ? childAgents.map(child => kv(child.display_name, `${statusBadge(child.runtime.status)}<div class="meta-line" style="margin-top:10px;">${escapeHtml(child.runtime.current_task || 'No active task')}</div>`)).join('') : '<div class="empty">No subagents.</div>'}
+        </div>
+      `;
+    }
+
+    function renderReports() {
+      reportList.innerHTML = store.reports.map(report => `
+        <div class="list-card">
+          <h4>${escapeHtml(report.title)}</h4>
+          <div class="report-line">${escapeHtml(report.summary)}</div>
+          <div class="meta-line" style="margin-top:8px;">${escapeHtml(store.agentMap[report.agent_id]?.display_name || report.agent_id)} · ${escapeHtml(report.type)} · ${escapeHtml(formatDate(report.created_at))}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderActivity() {
+      activityList.innerHTML = store.activity.map(event => `
+        <div class="list-card">
+          <h4>${escapeHtml(event.type)}</h4>
+          <div class="activity-line">${escapeHtml(event.summary)}</div>
+          <div class="meta-line" style="margin-top:8px;">${escapeHtml(store.agentMap[event.agent_id]?.display_name || event.agent_id)} · ${escapeHtml(formatDate(event.timestamp))}</div>
+        </div>
+      `).join('');
+    }
+
+    function attachEvents() {
+      document.querySelectorAll('[data-agent-id]').forEach(el => {
+        el.addEventListener('click', () => {
+          selectedAgentId = el.getAttribute('data-agent-id');
+          renderAll();
+        });
+      });
+      document.querySelectorAll('[data-tab]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeTab = btn.getAttribute('data-tab');
+          renderDetail();
+          attachEvents();
+        });
+      });
+    }
+
+    function renderAll() {
+      renderSummary();
+      renderGraph();
+      renderAgents();
+      renderDetail();
+      renderReports();
+      renderActivity();
+      attachEvents();
+    }
+
+    function bindFilters() {
+      [searchInput, teamFilter, statusFilter, typeFilter].forEach(input => {
+        input.addEventListener('input', renderAll);
+        input.addEventListener('change', renderAll);
+      });
+    }
+
+    async function init() {
+      const response = await fetch('/data/agent-ops-console-v1.json');
+      const data = await response.json();
+      store = {
+        ...data,
+        teamMap: mapById(data.teams),
+        agentMap: mapById(data.agents),
+        knowledgeMap: mapById(data.knowledge_refs),
+        ruleMap: mapById(data.rules)
+      };
+      selectedAgentId = data.agents[0]?.id || null;
+      generatedAt.textContent = formatDate(data.generated_at);
+      renderFilters();
+      bindFilters();
+      renderAll();
+    }
+
+    init().catch((error) => {
+      detailBody.innerHTML = `<div class="empty">Failed to load fixture: ${escapeHtml(error.message)}</div>`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
