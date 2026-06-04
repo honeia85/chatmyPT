@@ -9,6 +9,7 @@ BASE = Path(__file__).resolve().parents[1]
 FIXTURE_PATH = BASE / "data" / "agent-ops-console-v1.json"
 RUNTIME_PATH = BASE / "data" / "runtime-state-v0.json"
 OUTPUT_PATH = BASE / "data" / "agent-ops-console-runtime.json"
+PUBLIC_RUNTIME_SOURCE = str(RUNTIME_PATH.relative_to(BASE)).replace("\\", "/")
 GENERATOR_VERSION = "0.1.0"
 
 TEAM_DISPLAY = {
@@ -198,7 +199,7 @@ def main() -> None:
     payload["generated_at"] = runtime.get("generated_at")
     payload["generator_version"] = GENERATOR_VERSION
     payload["source_kind"] = "generated-bridge-from-runtime-and-fixture"
-    payload["runtime_state_source"] = str(RUNTIME_PATH)
+    payload["runtime_state_source"] = PUBLIC_RUNTIME_SOURCE
     payload["runtime_state_source_kind"] = runtime.get("source_kind")
     payload["drift_summary"] = runtime.get("drift_summary", {})
     payload["reconciliation"] = runtime.get("reconciliation", {})

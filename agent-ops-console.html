@@ -582,6 +582,7 @@
                   </div>
                   <div class="node-task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
                   <div class="meta-line">Children: ${escapeHtml((agent.child_ids || []).length)}</div>
+                  <div class="meta-line">Provenance: ${escapeHtml(agent.source_kind || 'fixture')} · backing ${(agent.backing_profiles || []).length}</div>
                 </div>
               `).join('')}
             </div>
@@ -633,6 +634,7 @@
           </div>
           <div class="task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
           <div class="small" style="margin-top:10px;">Subagents: ${escapeHtml((agent.child_ids || []).length)} · Last update: ${escapeHtml(formatDate(agent.runtime.last_heartbeat_at))}</div>
+          <div class="small" style="margin-top:6px;">Source: ${escapeHtml(agent.source_kind || 'fixture')} · Backing: ${escapeHtml((agent.backing_profiles || []).join(', ') || 'none')}</div>
         </div>
       `).join('');
     }
@@ -703,6 +705,9 @@
         <div class="tab-panel ${activeTab === 'runtime' ? 'active' : ''}" data-panel="runtime">
           ${kv('Last heartbeat', escapeHtml(formatDate(agent.runtime.last_heartbeat_at)))}
           ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
+          ${kv('Runtime source', escapeHtml(store.runtime_state_source || 'fixture-only payload'))}
+          ${kv('Bridge source kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'fixture'))}
+          ${kv('Drift semantics', escapeHtml(`missing=${(store.drift_summary?.missing_observation || []).length} · stale=${(store.drift_summary?.stale_observation || []).length} · stale>${store.reconciliation?.stale_threshold_hours ?? '?'}h`))}
           ${kv('Blocked reason', agent.runtime.blocked_reason ? escapeHtml(agent.runtime.blocked_reason) : '<span class="empty">None</span>')}
           ${kv('Waiting reason', agent.runtime.waiting_reason ? escapeHtml(agent.runtime.waiting_reason) : '<span class="empty">None</span>')}
         </div>
@@ -839,7 +844,7 @@
       selectedAgentId = data.agents[0]?.id || null;
       generatedAt.textContent = formatDate(data.generated_at);
       snapshotLabel.textContent = url.includes('runtime')
-        ? `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'}`
+        ? `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`
         : 'fixture snapshot';
       if (url.includes('runtime')) {
         const driftSummary = data.drift_summary || {};

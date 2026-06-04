@@ -417,6 +417,48 @@
     const runtimeSnapshotLabel = document.getElementById('runtimeSnapshotLabel');
     const runtimeEvidenceGaps = document.getElementById('runtimeEvidenceGaps');
     const runtimeSnapshotAt = document.getElementById('runtimeSnapshotAt');
+    let runtimeBridge = null;
+
+    function renderRuntimeBoxes(key) {
+      const agent = runtimeBridge?.agentMap?.[key];
+      if (!agent) return '';
+      const backing = (agent.backing_profiles || []).join(', ') || 'none';
+      const driftSummary = runtimeBridge?.drift_summary || {};
+      const staleRule = runtimeBridge?.reconciliation?.stale_threshold_hours ?? '?';
+      return `
+        <div class="detail-box">
+          <h4>Runtime Provenance</h4>
+          <ul>
+            <li>source_kind: ${agent.source_kind || 'fixture'}</li>
+            <li>backing_profiles: ${backing}</li>
+            <li>last heartbeat: ${agent.runtime?.last_heartbeat_at ? new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR') : 'no observed runtime evidence'}</li>
+          </ul>
+        </div>
+        <div class="detail-box">
+          <h4>Drift Semantics</h4>
+          <ul>
+            <li>missing_observation: ${(driftSummary.missing_observation || []).length}</li>
+            <li>stale_observation: ${(driftSummary.stale_observation || []).length}</li>
+            <li>stale threshold: &gt;${staleRule}h</li>
+          </ul>
+        </div>
+      `;
+    }
+
+    function applyRuntimeNodeHints() {
+      if (!runtimeBridge?.agentMap) return;
+      nodes.forEach(node => {
+        const agent = runtimeBridge.agentMap[node.dataset.node];
+        if (!agent) return;
+        const foot = node.querySelector('.foot');
+        const mini = foot?.querySelector('.mini');
+        if (mini) {
+          mini.textContent = agent.runtime?.last_heartbeat_at
+            ? `heartbeat ${new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR')}`
+            : `source ${agent.source_kind || 'fixture'}`;
+        }
+      });
+    }
 
     function renderDetail(key) {
       const d = details[key];
@@ -430,6 +472,7 @@
             <ul>${section.items.map(item => `<li>${item}</li>`).join('')}</ul>
           </div>
         `).join('')}
+        ${renderRuntimeBoxes(key)}
       `;
     }
 
@@ -481,7 +524,25 @@
       }
     }
 
+    async function loadRuntimeBridge() {
+      try {
+        const response = await fetch('/data/agent-ops-console-runtime.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`runtime bridge HTTP ${response.status}`);
+        const data = await response.json();
+        runtimeBridge = {
+          ...data,
+          agentMap: Object.fromEntries((data.agents || []).map(agent => [agent.id, agent]))
+        };
+        applyRuntimeNodeHints();
+        const activeNode = document.querySelector('.node.active');
+        if (activeNode) renderDetail(activeNode.dataset.node);
+      } catch (error) {
+        console.warn('Runtime bridge unavailable for ops map detail overlay.', error);
+      }
+    }
+
     loadRuntimeSnapshotMeta();
+    loadRuntimeBridge();
   </script>
 </body>
 </html>
