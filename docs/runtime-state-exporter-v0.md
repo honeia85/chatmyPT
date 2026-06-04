@@ -139,6 +139,7 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - `runtime_state_source_kind`: carries the upstream runtime snapshot kind into the UI payload
 - `runtime_generated_at`: preserves the upstream runtime snapshot timestamp so UI headers do not need a second fetch just to explain recency
 - `runtime_summary`: carries upstream profile/activity totals into bridge-backed surfaces as generated metadata
+- bridge consumers should evaluate per-agent membership in drift arrays by `agent.id` so detail panes can say whether a given node is missing, stale, or doc-drifted instead of only repeating global counts
 - `drift_summary.missing_observation` and `drift_summary.stale_observation`: observation-gap counts that should be presented separately from documentation drift
 - `drift_summary.runtime_without_doc` and `drift_summary.doc_without_runtime`: documentation reconciliation drift that should stay visible instead of being folded into generic "fixture" language
 - `reconciliation.runtime_scope`: tells surfaces whether the exporter reconciled the full Hermes home or only a narrower fallback scope

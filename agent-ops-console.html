@@ -716,8 +716,10 @@
         <div class="tab-panel ${activeTab === 'runtime' ? 'active' : ''}" data-panel="runtime">
           ${kv('Last heartbeat', escapeHtml(formatDate(agent.runtime.last_heartbeat_at)))}
           ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
+          ${kv('Snapshot generated', escapeHtml(formatDate(store.runtime_generated_at || store.generated_at)))}
           ${kv('Runtime source', escapeHtml(store.runtime_state_source || 'fixture-only payload'))}
           ${kv('Bridge source kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'fixture'))}
+          ${kv('Agent drift flags', escapeHtml(describeAgentDrift(agent.id)))}
           ${kv('Drift semantics', escapeHtml(`signals=${countDriftSignals(store.drift_summary || {})} · observation_gaps=${countObservationGaps(store.drift_summary || {})} · doc_drift=${countDocDrift(store.drift_summary || {})} · stale>${store.reconciliation?.stale_threshold_hours ?? '?'}h`))}
           ${kv('Doc drift detail', escapeHtml(`runtime_without_doc=${(store.drift_summary?.runtime_without_doc || []).join(', ') || 'none'} · doc_without_runtime=${(store.drift_summary?.doc_without_runtime || []).join(', ') || 'none'}`))}
           ${kv('Blocked reason', agent.runtime.blocked_reason ? escapeHtml(agent.runtime.blocked_reason) : '<span class="empty">None</span>')}
@@ -814,6 +816,21 @@
 
     function countDocDrift(driftSummary) {
       return (driftSummary.runtime_without_doc || []).length + (driftSummary.doc_without_runtime || []).length;
+    }
+
+    function agentInDrift(agentId, driftKey) {
+      return Boolean((store?.drift_summary?.[driftKey] || []).includes(agentId));
+    }
+
+    function describeAgentDrift(agentId) {
+      const labels = [
+        ['missing_observation', 'missing observation'],
+        ['stale_observation', 'stale observation'],
+        ['configured_observed_model_mismatch', 'configured/observed model mismatch'],
+        ['runtime_without_doc', 'runtime without doc'],
+        ['doc_without_runtime', 'doc without runtime']
+      ].filter(([key]) => agentInDrift(agentId, key)).map(([, label]) => label);
+      return labels.join(' · ') || 'none';
     }
 
     function applyRuntimeSnapshotMeta(runtime, snapshotText) {

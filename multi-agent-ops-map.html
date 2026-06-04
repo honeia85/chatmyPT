@@ -419,30 +419,45 @@
     const runtimeSnapshotAt = document.getElementById('runtimeSnapshotAt');
     let runtimeBridge = null;
 
+    function agentHasDrift(agentId, driftKey) {
+      return Boolean((runtimeBridge?.drift_summary?.[driftKey] || []).includes(agentId));
+    }
+
+    function summarizeAgentDrift(agentId) {
+      return [
+        ['missing_observation', 'missing observation'],
+        ['stale_observation', 'stale observation'],
+        ['configured_observed_model_mismatch', 'configured/observed model mismatch'],
+        ['runtime_without_doc', 'runtime without doc'],
+        ['doc_without_runtime', 'doc without runtime']
+      ].filter(([key]) => agentHasDrift(agentId, key)).map(([, label]) => label).join(', ') || 'none';
+    }
+
     function renderRuntimeBoxes(key) {
       const agent = runtimeBridge?.agentMap?.[key];
       if (!agent) return '';
       const backing = (agent.backing_profiles || []).join(', ') || 'none';
       const driftSummary = runtimeBridge?.drift_summary || {};
       const staleRule = runtimeBridge?.reconciliation?.stale_threshold_hours ?? '?';
-      const runtimeWithoutDoc = (driftSummary.runtime_without_doc || []).join(', ') || 'none';
-      const docWithoutRuntime = (driftSummary.doc_without_runtime || []).join(', ') || 'none';
+      const snapshotGeneratedAt = runtimeBridge?.runtime_generated_at || runtimeBridge?.generated_at;
       return `
         <div class="detail-box">
           <h4>Runtime Provenance</h4>
           <ul>
             <li>source_kind: ${agent.source_kind || 'fixture'}</li>
             <li>backing_profiles: ${backing}</li>
+            <li>snapshot_generated_at: ${snapshotGeneratedAt ? new Date(snapshotGeneratedAt).toLocaleString('ko-KR') : 'unknown'}</li>
             <li>last heartbeat: ${agent.runtime?.last_heartbeat_at ? new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR') : 'no observed runtime evidence'}</li>
           </ul>
         </div>
         <div class="detail-box">
           <h4>Drift Semantics</h4>
           <ul>
-            <li>missing_observation: ${(driftSummary.missing_observation || []).length}</li>
-            <li>stale_observation: ${(driftSummary.stale_observation || []).length}</li>
-            <li>runtime_without_doc: ${runtimeWithoutDoc}</li>
-            <li>doc_without_runtime: ${docWithoutRuntime}</li>
+            <li>agent drift flags: ${summarizeAgentDrift(agent.id)}</li>
+            <li>missing_observation (global count): ${(driftSummary.missing_observation || []).length}</li>
+            <li>stale_observation (global count): ${(driftSummary.stale_observation || []).length}</li>
+            <li>runtime_without_doc (agent): ${agentHasDrift(agent.id, 'runtime_without_doc') ? 'yes' : 'no'}</li>
+            <li>doc_without_runtime (agent): ${agentHasDrift(agent.id, 'doc_without_runtime') ? 'yes' : 'no'}</li>
             <li>stale threshold: &gt;${staleRule}h</li>
           </ul>
         </div>
@@ -461,9 +476,10 @@
         const foot = node.querySelector('.foot');
         const mini = foot?.querySelector('.mini');
         if (mini) {
+          const driftLabel = summarizeAgentDrift(agent.id);
           mini.textContent = agent.runtime?.last_heartbeat_at
-            ? `heartbeat ${new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR')}`
-            : `source ${agent.source_kind || 'fixture'}`;
+            ? `heartbeat ${new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR')} · drift ${driftLabel}`
+            : `source ${agent.source_kind || 'fixture'} · drift ${driftLabel}`;
         }
       });
     }

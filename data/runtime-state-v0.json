@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-04T23:30:51.492189+09:00",
+  "generated_at": "2026-06-05T03:36:44.533656+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
@@ -24,7 +24,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-04T23:30:50+09:00",
+        "last_seen_at": "2026-06-05T03:36:43+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -32,17 +32,17 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-04T23:30:50+09:00",
+          "last_seen_at": "2026-06-05T03:36:43+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-04T23:26:05.916041+09:00",
+          "last_seen_at": "2026-06-05T03:34:02.355549+09:00",
           "source": "state.db",
-          "message_count": 67,
-          "tool_call_count": 43,
-          "api_call_count": 23,
+          "message_count": 0,
+          "tool_call_count": 0,
+          "api_call_count": 16,
           "end_reason": null
         },
         "sources_present": [
