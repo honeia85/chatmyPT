@@ -538,6 +538,15 @@
       }
     }
 
+    async function readJsonResponse(response, url) {
+      if (!response.ok) throw new Error(`${url} HTTP ${response.status}`);
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.toLowerCase().includes('json')) {
+        throw new Error(`${url} returned non-JSON content-type: ${contentType || 'unknown'}`);
+      }
+      return response.json();
+    }
+
     function mapById(items) {
       return Object.fromEntries(items.map(item => [item.id, item]));
     }
@@ -790,23 +799,30 @@
       });
     }
 
+    function countDriftSignals(driftSummary) {
+      return Object.values(driftSummary || {}).reduce((sum, value) => {
+        return sum + (Array.isArray(value) ? value.length : 0);
+      }, 0);
+    }
+
+    function applyRuntimeSnapshotMeta(runtime, snapshotText) {
+      if (!runtime) return;
+      const driftSummary = runtime?.drift_summary || {};
+      const sourceKind = runtime?.source_kind || 'generated-runtime-snapshot';
+      const missingCount = (driftSummary.missing_observation || []).length;
+      const staleCount = (driftSummary.stale_observation || []).length;
+      const staleThreshold = runtime?.reconciliation?.stale_threshold_hours;
+      generatedAt.textContent = formatDate(runtime.generated_at);
+      snapshotLabel.textContent = snapshotText || `${sourceKind} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${staleThreshold ?? '?'}h stale rule`;
+      runtimeDrift.textContent = String(countDriftSignals(driftSummary));
+      runtimeEvidence.textContent = `${missingCount} missing · ${staleCount} stale`;
+    }
+
     async function loadRuntimeSnapshotMeta() {
       try {
         const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error(`runtime snapshot HTTP ${response.status}`);
-        const runtime = await response.json();
-        const driftSummary = runtime?.drift_summary || {};
-        const sourceKind = runtime?.source_kind || 'generated-runtime-snapshot';
-        const missingCount = (driftSummary.missing_observation || []).length;
-        const staleCount = (driftSummary.stale_observation || []).length;
-        const staleThreshold = runtime?.reconciliation?.stale_threshold_hours;
-        const driftCount = Object.values(driftSummary).reduce((sum, value) => {
-          return sum + (Array.isArray(value) ? value.length : 0);
-        }, 0);
-        generatedAt.textContent = formatDate(runtime.generated_at);
-        snapshotLabel.textContent = `${sourceKind} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${staleThreshold ?? '?'}h stale rule`;
-        runtimeDrift.textContent = String(driftCount);
-        runtimeEvidence.textContent = `${missingCount} missing · ${staleCount} stale`;
+        const runtime = await readJsonResponse(response, '/data/runtime-state-v0.json');
+        applyRuntimeSnapshotMeta(runtime);
       } catch {
         runtimeDrift.textContent = 'fixture';
         runtimeEvidence.textContent = 'fixture';
@@ -822,8 +838,7 @@
       for (const url of candidates) {
         try {
           const response = await fetch(url, { cache: 'no-store' });
-          if (!response.ok) throw new Error(`${url} HTTP ${response.status}`);
-          const data = await response.json();
+          const data = await readJsonResponse(response, url);
           return { data, url };
         } catch (error) {
           lastError = error;
@@ -843,17 +858,22 @@
       };
       selectedAgentId = data.agents[0]?.id || null;
       generatedAt.textContent = formatDate(data.generated_at);
-      snapshotLabel.textContent = url.includes('runtime')
-        ? `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`
-        : 'fixture snapshot';
       if (url.includes('runtime')) {
-        const driftSummary = data.drift_summary || {};
-        runtimeEvidence.textContent = `${(driftSummary.missing_observation || []).length} missing · ${(driftSummary.stale_observation || []).length} stale`;
+        applyRuntimeSnapshotMeta({
+          generated_at: data.runtime_generated_at || data.generated_at,
+          source_kind: data.runtime_state_source_kind || 'generated-runtime-snapshot',
+          drift_summary: data.drift_summary || {},
+          reconciliation: data.reconciliation || {}
+        }, `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`);
+      } else {
+        snapshotLabel.textContent = 'fixture snapshot';
       }
       renderFilters();
       bindFilters();
       renderAll();
-      await loadRuntimeSnapshotMeta();
+      if (!url.includes('runtime')) {
+        await loadRuntimeSnapshotMeta();
+      }
     }
 
     init().catch((error) => {

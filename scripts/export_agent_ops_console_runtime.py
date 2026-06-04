@@ -201,6 +201,8 @@ def main() -> None:
     payload["source_kind"] = "generated-bridge-from-runtime-and-fixture"
     payload["runtime_state_source"] = PUBLIC_RUNTIME_SOURCE
     payload["runtime_state_source_kind"] = runtime.get("source_kind")
+    payload["runtime_generated_at"] = runtime.get("generated_at")
+    payload["runtime_summary"] = runtime.get("summary", {})
     payload["drift_summary"] = runtime.get("drift_summary", {})
     payload["reconciliation"] = runtime.get("reconciliation", {})
 

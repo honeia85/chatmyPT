@@ -502,21 +502,37 @@
     toggles.forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
     setMode('global');
 
+    async function readJsonResponse(response, url) {
+      if (!response.ok) throw new Error(`${url} HTTP ${response.status}`);
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.toLowerCase().includes('json')) {
+        throw new Error(`${url} returned non-JSON content-type: ${contentType || 'unknown'}`);
+      }
+      return response.json();
+    }
+
+    function countDriftSignals(driftSummary) {
+      return Object.values(driftSummary || {}).reduce((sum, value) => sum + (Array.isArray(value) ? value.length : 0), 0);
+    }
+
+    function applyRuntimeSnapshotMeta(runtime, snapshotLabelText, snapshotAtText) {
+      if (!runtime) return;
+      const driftSummary = runtime?.drift_summary || {};
+      const missingCount = (driftSummary.missing_observation || []).length;
+      const staleCount = (driftSummary.stale_observation || []).length;
+      runtimeProfiles.textContent = String(runtime?.summary?.total_profiles ?? '-');
+      runtimeActive.textContent = String(runtime?.summary?.active ?? '-');
+      runtimeDrift.textContent = String(countDriftSignals(driftSummary));
+      runtimeEvidenceGaps.textContent = `${missingCount} missing · ${staleCount} stale`;
+      runtimeSnapshotLabel.textContent = snapshotLabelText || `${runtime?.source_kind || 'generated'} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'}`;
+      runtimeSnapshotAt.textContent = snapshotAtText || `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · scope=${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · resolution=${runtime?.reconciliation?.runtime_home_resolution || 'unknown'}`;
+    }
+
     async function loadRuntimeSnapshotMeta() {
       try {
         const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error(`runtime snapshot HTTP ${response.status}`);
-        const runtime = await response.json();
-        const driftSummary = runtime?.drift_summary || {};
-        const missingCount = (driftSummary.missing_observation || []).length;
-        const staleCount = (driftSummary.stale_observation || []).length;
-        const driftCount = Object.values(driftSummary).reduce((sum, value) => sum + (Array.isArray(value) ? value.length : 0), 0);
-        runtimeProfiles.textContent = String(runtime?.summary?.total_profiles ?? '-');
-        runtimeActive.textContent = String(runtime?.summary?.active ?? '-');
-        runtimeDrift.textContent = String(driftCount);
-        runtimeEvidenceGaps.textContent = `${missingCount} missing · ${staleCount} stale`;
-        runtimeSnapshotLabel.textContent = `${runtime?.source_kind || 'generated'} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'}`;
-        runtimeSnapshotAt.textContent = `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · scope=${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · resolution=${runtime?.reconciliation?.runtime_home_resolution || 'unknown'}`;
+        const runtime = await readJsonResponse(response, '/data/runtime-state-v0.json');
+        applyRuntimeSnapshotMeta(runtime);
       } catch (error) {
         runtimeSnapshotLabel.textContent = 'fixture';
         runtimeEvidenceGaps.textContent = 'fixture';
@@ -527,12 +543,20 @@
     async function loadRuntimeBridge() {
       try {
         const response = await fetch('/data/agent-ops-console-runtime.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error(`runtime bridge HTTP ${response.status}`);
-        const data = await response.json();
+        const data = await readJsonResponse(response, '/data/agent-ops-console-runtime.json');
         runtimeBridge = {
           ...data,
           agentMap: Object.fromEntries((data.agents || []).map(agent => [agent.id, agent]))
         };
+        if (data.runtime_summary) {
+          applyRuntimeSnapshotMeta({
+            generated_at: data.runtime_generated_at || data.generated_at,
+            source_kind: data.runtime_state_source_kind || 'generated-runtime-snapshot',
+            summary: data.runtime_summary,
+            drift_summary: data.drift_summary || {},
+            reconciliation: data.reconciliation || {}
+          }, `${data.source_kind || 'generated bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'}`, `generated at ${new Date(data.runtime_generated_at || data.generated_at).toLocaleString('ko-KR')} · source=${data.runtime_state_source || 'data/runtime-state-v0.json'} · stale>${data.reconciliation?.stale_threshold_hours ?? '?'}h · resolution=${data.reconciliation?.runtime_home_resolution || 'unknown'}`);
+        }
         applyRuntimeNodeHints();
         const activeNode = document.querySelector('.node.active');
         if (activeNode) renderDetail(activeNode.dataset.node);
@@ -541,8 +565,12 @@
       }
     }
 
-    loadRuntimeSnapshotMeta();
-    loadRuntimeBridge();
+    loadRuntimeBridge().then(() => {
+      if (!runtimeBridge?.runtime_summary) {
+        return loadRuntimeSnapshotMeta();
+      }
+      return null;
+    });
   </script>
 </body>
 </html>

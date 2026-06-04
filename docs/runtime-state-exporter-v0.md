@@ -137,6 +137,8 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - `source_kind`: declares that the console payload is a generated bridge, not canonical runtime truth
 - `runtime_state_source`: points back to `data/runtime-state-v0.json`
 - `runtime_state_source_kind`: carries the upstream runtime snapshot kind into the UI payload
+- `runtime_generated_at`: preserves the upstream runtime snapshot timestamp so UI headers do not need a second fetch just to explain recency
+- `runtime_summary`: carries upstream profile/activity totals into bridge-backed surfaces as generated metadata
 - `reconciliation.runtime_scope`: tells surfaces whether the exporter reconciled the full Hermes home or only a narrower fallback scope
 - `reconciliation.runtime_home_resolution`: records whether runtime discovery used the root directly or normalized from a profile-scoped `HERMES_HOME`
 - `reconciliation.stale_threshold_hours`: lets surfaces explain stale semantics instead of inventing them
