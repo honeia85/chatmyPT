@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-04T09:27:05.846595+09:00",
+  "generated_at": "2026-06-04T10:33:36.495457+09:00",
   "summary": {
-    "total_agents": 9,
-    "runtime_profiles": 1,
-    "active_agents": 1,
-    "waiting_agents": 0,
+    "total_agents": 13,
+    "runtime_profiles": 11,
+    "active_agents": 2,
+    "waiting_agents": 4,
     "blocked_agents": 0,
     "offline_agents": 0,
     "reports_last_24h": 1
@@ -29,6 +29,21 @@
       "id": "ops",
       "name": "Ops",
       "mission": "System hygiene, deployment, runtime health, and verification."
+    },
+    {
+      "id": "assistant",
+      "name": "Assistant",
+      "mission": "Briefing, summaries, and routine support."
+    },
+    {
+      "id": "dev",
+      "name": "Development",
+      "mission": "Implementation, tests, and repository changes."
+    },
+    {
+      "id": "hybrid",
+      "name": "Hybrid Lane",
+      "mission": "Shared worker lane for triage, build, verification, and archive support."
     }
   ],
   "knowledge_refs": [
@@ -104,8 +119,8 @@
       "team": "executive",
       "type": "runtime_snapshot",
       "title": "Runtime state snapshot v0",
-      "summary": "Profiles=1 · mismatches=0 · missing_observation=0",
-      "created_at": "2026-06-04T09:27:05.846595+09:00",
+      "summary": "Profiles=11 · mismatches=0 · missing_observation=4",
+      "created_at": "2026-06-04T10:33:36.495457+09:00",
       "destination": "local",
       "status": "generated"
     },
@@ -146,10 +161,52 @@
   "activity": [
     {
       "id": "runtime-default",
-      "timestamp": "2026-06-04T07:25:37+09:00",
+      "timestamp": "2026-06-04T10:33:33+09:00",
       "type": "runtime_observation",
       "agent_id": "default",
       "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-ops",
+      "timestamp": "2026-06-04T07:25:37+09:00",
+      "type": "runtime_observation",
+      "agent_id": "ops",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-hybresearch",
+      "timestamp": "2026-06-03T11:58:41+09:00",
+      "type": "runtime_observation",
+      "agent_id": "hybresearch",
+      "summary": "Observed model gpt-5.4 (idle)"
+    },
+    {
+      "id": "runtime-hybbuild",
+      "timestamp": "2026-06-03T11:58:27+09:00",
+      "type": "runtime_observation",
+      "agent_id": "hybbuild",
+      "summary": "Observed model gpt-5.4 (idle)"
+    },
+    {
+      "id": "runtime-dev",
+      "timestamp": "2026-06-03T11:57:32+09:00",
+      "type": "runtime_observation",
+      "agent_id": "dev",
+      "summary": "Observed model gpt-5.4 (idle)"
+    },
+    {
+      "id": "runtime-hybtriage",
+      "timestamp": "2026-06-03T11:55:34+09:00",
+      "type": "runtime_observation",
+      "agent_id": "hybtriage",
+      "summary": "Observed model gpt-5.4 (idle)"
+    },
+    {
+      "id": "runtime-hybverify",
+      "timestamp": "2026-06-03T11:20:21+09:00",
+      "type": "runtime_observation",
+      "agent_id": "hybverify",
+      "summary": "Observed model gpt-5.4 (idle)"
     }
   ],
   "agents": [
@@ -176,8 +233,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-04T07:25:37+09:00",
-        "last_report_at": "2026-06-04T07:25:37+09:00",
+        "last_heartbeat_at": "2026-06-04T10:33:33+09:00",
+        "last_report_at": "2026-06-04T10:33:33+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -199,8 +256,315 @@
       ]
     },
     {
+      "id": "assistant",
+      "display_name": "assistant",
+      "team": "assistant",
+      "type": "worker",
+      "source_kind": "runtime_profile",
+      "backing_profiles": [
+        "assistant"
+      ],
+      "layer": 1,
+      "parent_id": "default",
+      "child_ids": [],
+      "description": "Briefing, summaries, and librarian-style support profile.",
+      "mission": "Support the front desk with structured summaries and maintenance work.",
+      "soul": {
+        "tone": "concise",
+        "decision_posture": "supportive",
+        "risk_appetite": "low",
+        "reporting_style": "digest-first"
+      },
+      "knowledge_refs": [
+        "kb-hermes-automation"
+      ],
+      "rule_refs": [
+        "rule-report-attempted-failed-verified"
+      ],
+      "report_types": [
+        "briefing",
+        "maintenance_digest"
+      ],
+      "runtime": {
+        "status": "waiting",
+        "current_task": "Configured gpt-5.4 / observed unknown",
+        "last_heartbeat_at": null,
+        "last_report_at": null,
+        "blocked_reason": null,
+        "waiting_reason": "No observed runtime evidence yet."
+      }
+    },
+    {
+      "id": "dev",
+      "display_name": "dev",
+      "team": "dev",
+      "type": "worker",
+      "source_kind": "runtime_profile",
+      "backing_profiles": [
+        "dev"
+      ],
+      "layer": 2,
+      "parent_id": "default",
+      "child_ids": [],
+      "description": "Runtime-discovered profile dev.",
+      "mission": "Surface runtime truth inside the ops console.",
+      "soul": {
+        "tone": "direct",
+        "decision_posture": "pragmatic",
+        "risk_appetite": "low",
+        "reporting_style": "observed-first"
+      },
+      "knowledge_refs": [
+        "kb-hermes-automation"
+      ],
+      "rule_refs": [
+        "rule-report-attempted-failed-verified"
+      ],
+      "report_types": [
+        "runtime_snapshot"
+      ],
+      "runtime": {
+        "status": "idle",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-03T11:57:32+09:00",
+        "last_report_at": "2026-06-03T11:57:32+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      }
+    },
+    {
+      "id": "hybarchive",
+      "display_name": "hybarchive",
+      "team": "hybrid",
+      "type": "worker",
+      "source_kind": "runtime_profile",
+      "backing_profiles": [
+        "hybarchive"
+      ],
+      "layer": 2,
+      "parent_id": "default",
+      "child_ids": [],
+      "description": "Archive and record-keeping support worker.",
+      "mission": "Keep artifacts, notes, and handoff records tidy for later retrieval.",
+      "soul": {
+        "tone": "quiet",
+        "decision_posture": "archival",
+        "risk_appetite": "low",
+        "reporting_style": "artifact-log"
+      },
+      "knowledge_refs": [
+        "kb-hermes-automation"
+      ],
+      "rule_refs": [
+        "rule-report-attempted-failed-verified"
+      ],
+      "report_types": [
+        "archive_note"
+      ],
+      "runtime": {
+        "status": "waiting",
+        "current_task": "Configured gpt-5.4 / observed unknown",
+        "last_heartbeat_at": null,
+        "last_report_at": null,
+        "blocked_reason": null,
+        "waiting_reason": "No observed runtime evidence yet."
+      }
+    },
+    {
+      "id": "hybbuild",
+      "display_name": "hybbuild",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Implements code and page changes for trading and operations tooling. Runtime bridge: configured=gpt-5.4 / observed=gpt-5.4 · source=config.yaml.",
+      "mission": "Ship narrow, verifiable implementation slices.",
+      "soul": {
+        "tone": "engineering",
+        "decision_posture": "incremental",
+        "risk_appetite": "medium",
+        "reporting_style": "spec-vs-state"
+      },
+      "runtime": {
+        "status": "idle",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-03T11:58:27+09:00",
+        "last_report_at": "2026-06-03T11:58:27+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": [
+        "kb-hermes-automation"
+      ],
+      "rule_refs": [
+        "rule-report-attempted-failed-verified"
+      ],
+      "report_types": [
+        "build_report"
+      ],
+      "source_kind": "runtime_profile_overlay",
+      "backing_profiles": [
+        "hybbuild"
+      ]
+    },
+    {
+      "id": "hybresearch",
+      "display_name": "hybresearch",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Looks up APIs, references, and implementation constraints for trading automation. Runtime bridge: configured=gpt-5.4 / observed=gpt-5.4 · source=config.yaml.",
+      "mission": "Supply grounded research for engineering and operations decisions.",
+      "soul": {
+        "tone": "evidence-led",
+        "decision_posture": "exploratory",
+        "risk_appetite": "low",
+        "reporting_style": "source-and-implication"
+      },
+      "runtime": {
+        "status": "idle",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-03T11:58:41+09:00",
+        "last_report_at": "2026-06-03T11:58:41+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": [
+        "kb-investment-automation"
+      ],
+      "rule_refs": [
+        "rule-real-money-approval"
+      ],
+      "report_types": [
+        "research_note"
+      ],
+      "source_kind": "runtime_profile_overlay",
+      "backing_profiles": [
+        "hybresearch"
+      ]
+    },
+    {
+      "id": "hybtriage",
+      "display_name": "hybtriage",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Breaks incoming trading work into blockers, opportunities, and next actions. Runtime bridge: configured=gpt-5.4 / observed=gpt-5.4 · source=config.yaml.",
+      "mission": "Produce fast structured triage for trading tasks.",
+      "soul": {
+        "tone": "brief",
+        "decision_posture": "diagnostic",
+        "risk_appetite": "low",
+        "reporting_style": "bullet-summary"
+      },
+      "runtime": {
+        "status": "idle",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-03T11:55:34+09:00",
+        "last_report_at": "2026-06-03T11:55:34+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": [
+        "kb-investment-automation"
+      ],
+      "rule_refs": [
+        "rule-real-money-approval"
+      ],
+      "report_types": [
+        "triage_summary"
+      ],
+      "source_kind": "runtime_profile_overlay",
+      "backing_profiles": [
+        "hybtriage"
+      ]
+    },
+    {
+      "id": "hybverify",
+      "display_name": "hybverify",
+      "team": "trading",
+      "layer": 2,
+      "type": "worker",
+      "parent_id": "tradingorchestrator",
+      "child_ids": [],
+      "description": "Checks that changes, deployments, and assumptions match real state. Runtime bridge: configured=gpt-5.4 / observed=gpt-5.4 · source=config.yaml.",
+      "mission": "Prevent narrative drift with explicit verification.",
+      "soul": {
+        "tone": "skeptical",
+        "decision_posture": "verification-first",
+        "risk_appetite": "low",
+        "reporting_style": "verified-only"
+      },
+      "runtime": {
+        "status": "idle",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-03T11:20:21+09:00",
+        "last_report_at": "2026-06-03T11:20:21+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      },
+      "knowledge_refs": [
+        "kb-hermes-automation"
+      ],
+      "rule_refs": [
+        "rule-report-attempted-failed-verified"
+      ],
+      "report_types": [
+        "verification_report"
+      ],
+      "source_kind": "runtime_profile_overlay",
+      "backing_profiles": [
+        "hybverify"
+      ]
+    },
+    {
+      "id": "ops",
+      "display_name": "ops",
+      "team": "ops",
+      "type": "worker",
+      "source_kind": "runtime_profile",
+      "backing_profiles": [
+        "ops"
+      ],
+      "layer": 1,
+      "parent_id": "default",
+      "child_ids": [],
+      "description": "Operations execution profile for deployment, DNS, and verification tasks.",
+      "mission": "Keep mutable systems verifiable and operationally legible.",
+      "soul": {
+        "tone": "precise",
+        "decision_posture": "verification-first",
+        "risk_appetite": "low",
+        "reporting_style": "requested-attempted-verified"
+      },
+      "knowledge_refs": [
+        "kb-hermes-automation"
+      ],
+      "rule_refs": [
+        "rule-report-attempted-failed-verified",
+        "rule-api-first-cloudflare"
+      ],
+      "report_types": [
+        "ops_report",
+        "verification_report"
+      ],
+      "runtime": {
+        "status": "active",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-04T07:25:37+09:00",
+        "last_report_at": "2026-06-04T07:25:37+09:00",
+        "blocked_reason": null,
+        "waiting_reason": null
+      }
+    },
+    {
       "id": "researchorchestrator",
-      "display_name": "Research Orchestrator",
+      "display_name": "researchorchestrator",
       "team": "research",
       "layer": 1,
       "type": "domain-owner",
@@ -209,7 +573,7 @@
         "paper-scout",
         "source-synthesizer"
       ],
-      "description": "Owns research planning, source review, and structured note synthesis.",
+      "description": "Owns research planning, source review, and structured note synthesis. Runtime bridge: configured=gpt-5.4 / observed=unknown · source=config.yaml.",
       "mission": "Turn incoming research questions into organized evidence and reusable knowledge.",
       "soul": {
         "tone": "analytical",
@@ -218,12 +582,12 @@
         "reporting_style": "source-grounded"
       },
       "runtime": {
-        "status": "active",
-        "current_task": "Maintain knowledge migration quality and research digestion.",
-        "last_heartbeat_at": "2026-06-03T12:57:00+09:00",
-        "last_report_at": "2026-06-03T11:20:00+09:00",
+        "status": "waiting",
+        "current_task": "Configured gpt-5.4 / observed unknown",
+        "last_heartbeat_at": null,
+        "last_report_at": null,
         "blocked_reason": null,
-        "waiting_reason": null
+        "waiting_reason": "No observed runtime evidence yet."
       },
       "knowledge_refs": [
         "kb-medical-ai",
@@ -236,12 +600,14 @@
         "research_digest",
         "source_summary"
       ],
-      "source_kind": "conceptual_fixture",
-      "backing_profiles": []
+      "source_kind": "runtime_profile_overlay",
+      "backing_profiles": [
+        "researchorchestrator"
+      ]
     },
     {
       "id": "tradingorchestrator",
-      "display_name": "Trading Orchestrator",
+      "display_name": "tradingorchestrator",
       "team": "trading",
       "layer": 1,
       "type": "domain-owner",
@@ -253,7 +619,7 @@
         "hybverify",
         "ops"
       ],
-      "description": "Owns trading automation planning, system blockers, and execution governance.",
+      "description": "Owns trading automation planning, system blockers, and execution governance. Runtime bridge: configured=gpt-5.4 / observed=unknown · source=config.yaml.",
       "mission": "Coordinate trading workers without violating approval and risk rules.",
       "soul": {
         "tone": "compact",
@@ -262,12 +628,12 @@
         "reporting_style": "blocker-first"
       },
       "runtime": {
-        "status": "blocked",
-        "current_task": "Complete Cloudflare Pages custom-domain routing for the ops site.",
-        "last_heartbeat_at": "2026-06-03T12:52:00+09:00",
-        "last_report_at": "2026-06-03T12:10:00+09:00",
-        "blocked_reason": "DNS verification pending for honeia-lab.uk",
-        "waiting_reason": null
+        "status": "waiting",
+        "current_task": "Configured gpt-5.4 / observed unknown",
+        "last_heartbeat_at": null,
+        "last_report_at": null,
+        "blocked_reason": null,
+        "waiting_reason": "No observed runtime evidence yet."
       },
       "knowledge_refs": [
         "kb-investment-automation",
@@ -281,8 +647,10 @@
         "blocker_report",
         "execution_status"
       ],
-      "source_kind": "conceptual_fixture",
-      "backing_profiles": []
+      "source_kind": "runtime_profile_overlay",
+      "backing_profiles": [
+        "tradingorchestrator"
+      ]
     },
     {
       "id": "opsorchestrator",
@@ -325,150 +693,6 @@
       "backing_profiles": [
         "ops"
       ]
-    },
-    {
-      "id": "hybtriage",
-      "display_name": "Hybrid Triage Worker",
-      "team": "trading",
-      "layer": 2,
-      "type": "worker",
-      "parent_id": "tradingorchestrator",
-      "child_ids": [],
-      "description": "Breaks incoming trading work into blockers, opportunities, and next actions.",
-      "mission": "Produce fast structured triage for trading tasks.",
-      "soul": {
-        "tone": "brief",
-        "decision_posture": "diagnostic",
-        "risk_appetite": "low",
-        "reporting_style": "bullet-summary"
-      },
-      "runtime": {
-        "status": "idle",
-        "current_task": "No active task",
-        "last_heartbeat_at": "2026-06-03T12:20:00+09:00",
-        "last_report_at": "2026-06-03T11:50:00+09:00",
-        "blocked_reason": null,
-        "waiting_reason": null
-      },
-      "knowledge_refs": [
-        "kb-investment-automation"
-      ],
-      "rule_refs": [
-        "rule-real-money-approval"
-      ],
-      "report_types": [
-        "triage_summary"
-      ],
-      "source_kind": "conceptual_fixture",
-      "backing_profiles": []
-    },
-    {
-      "id": "hybresearch",
-      "display_name": "Hybrid Research Worker",
-      "team": "trading",
-      "layer": 2,
-      "type": "worker",
-      "parent_id": "tradingorchestrator",
-      "child_ids": [],
-      "description": "Looks up APIs, references, and implementation constraints for trading automation.",
-      "mission": "Supply grounded research for engineering and operations decisions.",
-      "soul": {
-        "tone": "evidence-led",
-        "decision_posture": "exploratory",
-        "risk_appetite": "low",
-        "reporting_style": "source-and-implication"
-      },
-      "runtime": {
-        "status": "idle",
-        "current_task": "No active task",
-        "last_heartbeat_at": "2026-06-03T12:15:00+09:00",
-        "last_report_at": "2026-06-03T11:45:00+09:00",
-        "blocked_reason": null,
-        "waiting_reason": null
-      },
-      "knowledge_refs": [
-        "kb-investment-automation"
-      ],
-      "rule_refs": [
-        "rule-real-money-approval"
-      ],
-      "report_types": [
-        "research_note"
-      ],
-      "source_kind": "conceptual_fixture",
-      "backing_profiles": []
-    },
-    {
-      "id": "hybbuild",
-      "display_name": "Hybrid Build Worker",
-      "team": "trading",
-      "layer": 2,
-      "type": "worker",
-      "parent_id": "tradingorchestrator",
-      "child_ids": [],
-      "description": "Implements code and page changes for trading and operations tooling.",
-      "mission": "Ship narrow, verifiable implementation slices.",
-      "soul": {
-        "tone": "engineering",
-        "decision_posture": "incremental",
-        "risk_appetite": "medium",
-        "reporting_style": "spec-vs-state"
-      },
-      "runtime": {
-        "status": "active",
-        "current_task": "Prepare ops map and future console pages inside chatmyPT repo.",
-        "last_heartbeat_at": "2026-06-03T12:59:00+09:00",
-        "last_report_at": "2026-06-03T12:00:00+09:00",
-        "blocked_reason": null,
-        "waiting_reason": null
-      },
-      "knowledge_refs": [
-        "kb-hermes-automation"
-      ],
-      "rule_refs": [
-        "rule-report-attempted-failed-verified"
-      ],
-      "report_types": [
-        "build_report"
-      ],
-      "source_kind": "conceptual_fixture",
-      "backing_profiles": []
-    },
-    {
-      "id": "hybverify",
-      "display_name": "Hybrid Verify Worker",
-      "team": "trading",
-      "layer": 2,
-      "type": "worker",
-      "parent_id": "tradingorchestrator",
-      "child_ids": [],
-      "description": "Checks that changes, deployments, and assumptions match real state.",
-      "mission": "Prevent narrative drift with explicit verification.",
-      "soul": {
-        "tone": "skeptical",
-        "decision_posture": "verification-first",
-        "risk_appetite": "low",
-        "reporting_style": "verified-only"
-      },
-      "runtime": {
-        "status": "idle",
-        "current_task": "No active task",
-        "last_heartbeat_at": "2026-06-03T12:00:00+09:00",
-        "last_report_at": "2026-06-03T11:35:00+09:00",
-        "blocked_reason": null,
-        "waiting_reason": null
-      },
-      "knowledge_refs": [
-        "kb-hermes-automation"
-      ],
-      "rule_refs": [
-        "rule-report-attempted-failed-verified"
-      ],
-      "report_types": [
-        "verification_report"
-      ],
-      "source_kind": "conceptual_fixture",
-      "backing_profiles": []
     },
     {
       "id": "deploy-watchdog",
@@ -515,12 +739,15 @@
   "runtime_state_source_kind": "generated-runtime-snapshot",
   "drift_summary": {
     "configured_observed_model_mismatch": [],
-    "runtime_without_doc": [
-      "default"
-    ],
+    "runtime_without_doc": [],
     "doc_without_runtime": [],
     "stale_observation": [],
-    "missing_observation": []
+    "missing_observation": [
+      "assistant",
+      "hybarchive",
+      "researchorchestrator",
+      "tradingorchestrator"
+    ]
   },
   "reconciliation": {
     "doc_source": "coordination/rules/profile-map.md",
