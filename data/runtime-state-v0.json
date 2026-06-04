@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-04T18:50:31.561341+09:00",
+  "generated_at": "2026-06-04T23:30:51.492189+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
-    "total_profiles": 12,
-    "active": 2,
-    "idle": 2,
+    "total_profiles": 14,
+    "active": 1,
+    "idle": 3,
     "stale": 5,
-    "unknown": 3
+    "unknown": 5
   },
   "profiles": [
     {
@@ -24,7 +24,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-04T18:50:30+09:00",
+        "last_seen_at": "2026-06-04T23:30:50+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -32,17 +32,17 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-04T18:50:30+09:00",
+          "last_seen_at": "2026-06-04T23:30:50+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-04T18:48:17.308041+09:00",
+          "last_seen_at": "2026-06-04T23:26:05.916041+09:00",
           "source": "state.db",
-          "message_count": 0,
-          "tool_call_count": 0,
-          "api_call_count": 12,
+          "message_count": 67,
+          "tool_call_count": 43,
+          "api_call_count": 23,
           "end_reason": null
         },
         "sources_present": [
@@ -155,7 +155,7 @@
         ]
       },
       "status": {
-        "activity": "active",
+        "activity": "idle",
         "taxonomy": "inferred"
       },
       "drift": [
@@ -470,6 +470,38 @@
       "warnings": []
     },
     {
+      "id": "librarianorchestrator",
+      "display_name": "librarianorchestrator",
+      "team": "unknown",
+      "type": "worker",
+      "configured": {
+        "provider": "openai-codex",
+        "model": "gpt-5.4",
+        "context_length": 1000000,
+        "source": "profile-config"
+      },
+      "observed": null,
+      "observed_fallbacks": {
+        "agent_log": null,
+        "state_db": null,
+        "sources_present": []
+      },
+      "status": {
+        "activity": "unknown",
+        "taxonomy": "unknown"
+      },
+      "drift": [
+        "missing_observation",
+        "runtime_without_doc"
+      ],
+      "provenance": {
+        "configured_from": "profile:librarianorchestrator/config.yaml",
+        "log_dir": "profile:librarianorchestrator/logs",
+        "state_db": null
+      },
+      "warnings": []
+    },
+    {
       "id": "ops",
       "display_name": "ops",
       "team": "ops",
@@ -522,6 +554,38 @@
       "warnings": []
     },
     {
+      "id": "personalops",
+      "display_name": "personalops",
+      "team": "unknown",
+      "type": "worker",
+      "configured": {
+        "provider": "openai-codex",
+        "model": "gpt-5.4",
+        "context_length": 1000000,
+        "source": "profile-config"
+      },
+      "observed": null,
+      "observed_fallbacks": {
+        "agent_log": null,
+        "state_db": null,
+        "sources_present": []
+      },
+      "status": {
+        "activity": "unknown",
+        "taxonomy": "unknown"
+      },
+      "drift": [
+        "missing_observation",
+        "runtime_without_doc"
+      ],
+      "provenance": {
+        "configured_from": "profile:personalops/config.yaml",
+        "log_dir": "profile:personalops/logs",
+        "state_db": null
+      },
+      "warnings": []
+    },
+    {
       "id": "researchorchestrator",
       "display_name": "researchorchestrator",
       "team": "research",
@@ -548,9 +612,11 @@
       "provenance": {
         "configured_from": "profile:researchorchestrator/config.yaml",
         "log_dir": "profile:researchorchestrator/logs",
-        "state_db": null
+        "state_db": "profile:researchorchestrator/state.db"
       },
-      "warnings": []
+      "warnings": [
+        "state_db_unreadable:state.db:no such table: sessions"
+      ]
     },
     {
       "id": "tradingorchestrator",
@@ -587,7 +653,9 @@
   "drift_summary": {
     "configured_observed_model_mismatch": [],
     "runtime_without_doc": [
-      "auditor"
+      "auditor",
+      "librarianorchestrator",
+      "personalops"
     ],
     "doc_without_runtime": [],
     "stale_observation": [
@@ -599,6 +667,8 @@
     ],
     "missing_observation": [
       "hybarchive",
+      "librarianorchestrator",
+      "personalops",
       "researchorchestrator",
       "tradingorchestrator"
     ]
@@ -606,9 +676,11 @@
   "reconciliation": {
     "doc_source": "coordination/rules/profile-map.md",
     "runtime_source": "hermes-home",
-    "runtime_home_resolution": "direct-root",
+    "runtime_home_resolution": "normalized-from-profile-dir",
     "runtime_scope": "full-hermes-home",
     "stale_threshold_hours": 24
   },
-  "warnings": []
+  "warnings": [
+    "state_db_unreadable:state.db:no such table: sessions"
+  ]
 }

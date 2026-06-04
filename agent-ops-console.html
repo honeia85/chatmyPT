@@ -414,7 +414,8 @@
         <a class="pill" href="/agent-ops-console.html"><strong>Ops Console</strong> 현재 페이지</a>
         <div class="pill"><strong id="generatedAt">-</strong> <span id="snapshotLabel">fixture snapshot</span></div>
         <div class="pill"><strong id="runtimeDrift">-</strong> runtime drift</div>
-        <div class="pill"><strong id="runtimeEvidence">-</strong> evidence gaps</div>
+        <div class="pill"><strong id="runtimeEvidence">-</strong> observation gaps</div>
+        <div class="pill"><strong id="runtimeDocDrift">-</strong> doc drift</div>
       </div>
     </section>
 
@@ -506,6 +507,7 @@
     const snapshotLabel = document.getElementById('snapshotLabel');
     const runtimeDrift = document.getElementById('runtimeDrift');
     const runtimeEvidence = document.getElementById('runtimeEvidence');
+    const runtimeDocDrift = document.getElementById('runtimeDocDrift');
     const searchInput = document.getElementById('searchInput');
     const teamFilter = document.getElementById('teamFilter');
     const statusFilter = document.getElementById('statusFilter');
@@ -716,7 +718,8 @@
           ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
           ${kv('Runtime source', escapeHtml(store.runtime_state_source || 'fixture-only payload'))}
           ${kv('Bridge source kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'fixture'))}
-          ${kv('Drift semantics', escapeHtml(`missing=${(store.drift_summary?.missing_observation || []).length} · stale=${(store.drift_summary?.stale_observation || []).length} · stale>${store.reconciliation?.stale_threshold_hours ?? '?'}h`))}
+          ${kv('Drift semantics', escapeHtml(`signals=${countDriftSignals(store.drift_summary || {})} · observation_gaps=${countObservationGaps(store.drift_summary || {})} · doc_drift=${countDocDrift(store.drift_summary || {})} · stale>${store.reconciliation?.stale_threshold_hours ?? '?'}h`))}
+          ${kv('Doc drift detail', escapeHtml(`runtime_without_doc=${(store.drift_summary?.runtime_without_doc || []).join(', ') || 'none'} · doc_without_runtime=${(store.drift_summary?.doc_without_runtime || []).join(', ') || 'none'}`))}
           ${kv('Blocked reason', agent.runtime.blocked_reason ? escapeHtml(agent.runtime.blocked_reason) : '<span class="empty">None</span>')}
           ${kv('Waiting reason', agent.runtime.waiting_reason ? escapeHtml(agent.runtime.waiting_reason) : '<span class="empty">None</span>')}
         </div>
@@ -805,17 +808,28 @@
       }, 0);
     }
 
+    function countObservationGaps(driftSummary) {
+      return (driftSummary.missing_observation || []).length + (driftSummary.stale_observation || []).length;
+    }
+
+    function countDocDrift(driftSummary) {
+      return (driftSummary.runtime_without_doc || []).length + (driftSummary.doc_without_runtime || []).length;
+    }
+
     function applyRuntimeSnapshotMeta(runtime, snapshotText) {
       if (!runtime) return;
       const driftSummary = runtime?.drift_summary || {};
       const sourceKind = runtime?.source_kind || 'generated-runtime-snapshot';
       const missingCount = (driftSummary.missing_observation || []).length;
       const staleCount = (driftSummary.stale_observation || []).length;
+      const runtimeWithoutDocCount = (driftSummary.runtime_without_doc || []).length;
+      const docWithoutRuntimeCount = (driftSummary.doc_without_runtime || []).length;
       const staleThreshold = runtime?.reconciliation?.stale_threshold_hours;
       generatedAt.textContent = formatDate(runtime.generated_at);
       snapshotLabel.textContent = snapshotText || `${sourceKind} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${staleThreshold ?? '?'}h stale rule`;
       runtimeDrift.textContent = String(countDriftSignals(driftSummary));
       runtimeEvidence.textContent = `${missingCount} missing · ${staleCount} stale`;
+      runtimeDocDrift.textContent = `${runtimeWithoutDocCount} runtime→doc · ${docWithoutRuntimeCount} doc→runtime`;
     }
 
     async function loadRuntimeSnapshotMeta() {
@@ -826,6 +840,7 @@
       } catch {
         runtimeDrift.textContent = 'fixture';
         runtimeEvidence.textContent = 'fixture';
+        runtimeDocDrift.textContent = 'fixture';
       }
     }
 

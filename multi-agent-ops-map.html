@@ -195,7 +195,7 @@
             <div class="status-card"><span>Observed Active</span><strong id="runtimeActive">-</strong></div>
             <div class="status-card"><span>Drift Signals</span><strong id="runtimeDrift">-</strong></div>
             <div class="status-card"><span>Snapshot</span><strong id="runtimeSnapshotLabel">fixture</strong></div>
-            <div class="status-card"><span>Evidence Gaps</span><strong id="runtimeEvidenceGaps">-</strong></div>
+            <div class="status-card"><span>Observation Gaps</span><strong id="runtimeEvidenceGaps">-</strong></div>
           </div>
           <div class="footer-note" id="runtimeSnapshotAt" style="margin-top:10px;">generated runtime snapshot not loaded yet</div>
         </div>
@@ -425,6 +425,8 @@
       const backing = (agent.backing_profiles || []).join(', ') || 'none';
       const driftSummary = runtimeBridge?.drift_summary || {};
       const staleRule = runtimeBridge?.reconciliation?.stale_threshold_hours ?? '?';
+      const runtimeWithoutDoc = (driftSummary.runtime_without_doc || []).join(', ') || 'none';
+      const docWithoutRuntime = (driftSummary.doc_without_runtime || []).join(', ') || 'none';
       return `
         <div class="detail-box">
           <h4>Runtime Provenance</h4>
@@ -439,10 +441,16 @@
           <ul>
             <li>missing_observation: ${(driftSummary.missing_observation || []).length}</li>
             <li>stale_observation: ${(driftSummary.stale_observation || []).length}</li>
+            <li>runtime_without_doc: ${runtimeWithoutDoc}</li>
+            <li>doc_without_runtime: ${docWithoutRuntime}</li>
             <li>stale threshold: &gt;${staleRule}h</li>
           </ul>
         </div>
       `;
+    }
+
+    function countDocDrift(driftSummary) {
+      return (driftSummary.runtime_without_doc || []).length + (driftSummary.doc_without_runtime || []).length;
     }
 
     function applyRuntimeNodeHints() {
@@ -520,12 +528,13 @@
       const driftSummary = runtime?.drift_summary || {};
       const missingCount = (driftSummary.missing_observation || []).length;
       const staleCount = (driftSummary.stale_observation || []).length;
+      const docDriftCount = countDocDrift(driftSummary);
       runtimeProfiles.textContent = String(runtime?.summary?.total_profiles ?? '-');
       runtimeActive.textContent = String(runtime?.summary?.active ?? '-');
       runtimeDrift.textContent = String(countDriftSignals(driftSummary));
       runtimeEvidenceGaps.textContent = `${missingCount} missing · ${staleCount} stale`;
       runtimeSnapshotLabel.textContent = snapshotLabelText || `${runtime?.source_kind || 'generated'} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'}`;
-      runtimeSnapshotAt.textContent = snapshotAtText || `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · scope=${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · resolution=${runtime?.reconciliation?.runtime_home_resolution || 'unknown'}`;
+      runtimeSnapshotAt.textContent = snapshotAtText || `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · observation_gaps=${missingCount + staleCount} · doc_drift=${docDriftCount} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · scope=${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · resolution=${runtime?.reconciliation?.runtime_home_resolution || 'unknown'}`;
     }
 
     async function loadRuntimeSnapshotMeta() {
@@ -555,7 +564,7 @@
             summary: data.runtime_summary,
             drift_summary: data.drift_summary || {},
             reconciliation: data.reconciliation || {}
-          }, `${data.source_kind || 'generated bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'}`, `generated at ${new Date(data.runtime_generated_at || data.generated_at).toLocaleString('ko-KR')} · source=${data.runtime_state_source || 'data/runtime-state-v0.json'} · stale>${data.reconciliation?.stale_threshold_hours ?? '?'}h · resolution=${data.reconciliation?.runtime_home_resolution || 'unknown'}`);
+          }, `${data.source_kind || 'generated bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'}`, `generated at ${new Date(data.runtime_generated_at || data.generated_at).toLocaleString('ko-KR')} · source=${data.runtime_state_source || 'data/runtime-state-v0.json'} · observation_gaps=${(data.drift_summary?.missing_observation || []).length + (data.drift_summary?.stale_observation || []).length} · doc_drift=${countDocDrift(data.drift_summary || {})} · stale>${data.reconciliation?.stale_threshold_hours ?? '?'}h · resolution=${data.reconciliation?.runtime_home_resolution || 'unknown'}`);
         }
         applyRuntimeNodeHints();
         const activeNode = document.querySelector('.node.active');
