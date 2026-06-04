@@ -1,0 +1,158 @@
+{
+  "generated_at": "2026-06-05T08:57:55.613085+09:00",
+  "generator_version": "0.1.0",
+  "source_kind": "live-hermes-session-export",
+  "session": {
+    "id": "20260604_072855_4c58e5",
+    "title": "토큰 사용 가능 여부 확인",
+    "source": "cli",
+    "started_at": "2026-06-05T08:45:46.048193+09:00",
+    "ended_at": null,
+    "message_count": 8,
+    "tool_call_count": 3,
+    "api_call_count": 49,
+    "messages": [
+      {
+        "id": 19652,
+        "role": "user",
+        "content": "토큰 다되었나?",
+        "timestamp": "2026-06-05T08:45:57.007849+09:00"
+      },
+      {
+        "id": 19653,
+        "role": "assistant",
+        "content": "아니요. 아직 응답 가능해서 토큰이 완전히 다 된 상태는 아닙니다.\n\n다만 직전 작업이 길었다면\n- 컨텍스트 창이 거의 차서\n- 이전 세부 맥락 일부가 잘렸거나\n- 응답이 짧아졌을 가능성은 있습니다.\n\n지금도 계속 진행 가능합니다. 필요하면 내가 바로 현재 상태 기준으로 맥락 재정리해서 이어가겠습니다.",
+        "timestamp": "2026-06-05T08:45:57.039408+09:00"
+      },
+      {
+        "id": 19654,
+        "role": "user",
+        "content": "백그라운드 작업 확인",
+        "timestamp": "2026-06-05T08:47:26.484100+09:00"
+      },
+      {
+        "id": 19659,
+        "role": "assistant",
+        "content": "확인 완료.\n\n현재 상태\n- 실시간 백그라운드 프로세스: 0개\n- 등록된 cron 백그라운드 작업: 41개\n- 지금 당장 “실행 중”으로 확인된 작업은 없고, 전부 scheduled 상태입니다.\n\n핵심 해석\n- 즉시 돌고 있는 terminal 백그라운드 세션은 없습니다.\n- 돌아가는 체계는 cron 중심이며, 최근 실행 이력은 정상(ok)인 작업이 다수입니다.\n- 따라서 지금은 “작업들이 살아 있고 다음 tick을 대기 중”인 상태입니다.\n\n가까운 다음 실행 예정 작업\n- 07:35 multi-agent-coordination-improvement-loop\n- 07:38 ops-orchestrator-website-management\n- 08:00 frontdesk-priority-digest\n- 08:00 researchorchestrator-daily-standup\n- 08:00 librarianorchestrator-daily-standup\n- 08:00 personalops-calendar-candidate-hardening\n- 08:10 ops-harness-hardening-loop\n- 08:25 ai-sns-tech-intake-hourly\n- 08:30 trading-automation-next-3\n- 08:30 kr-trading-standby-preopen\n- 08:30 dev-implementation-standup\n\n최근 정상 실행 확인된 대표 작업\n- ai-sns-tech-intake-hourly: 07:25 실행, ok\n- runtime-state-exporter-v0: 06:56 실행, ok\n- ops-handoff-input: 06:55 실행, ok\n- dev-implementation-ready-ratchet: 06:46 실행, ok\n- research-topic-selection-daily: 06:37 실행, ok\n- ops-console-generated-state-refinement: 06:02 실행, ok\n- ops-verifier-ratchet-rollout: 05:57 실행, ok\n- auditor-agent-health-loop: 05:50 실행, ok\n\n아직 한 번도 실행되지 않은 작업도 있음\n- ops-trading-ops-weekly-hygiene\n- vault-librarian\n- librarian-web-crawl-intake\n- librarian-sns-c…",
+        "timestamp": "2026-06-05T08:47:26.502943+09:00"
+      }
+    ]
+  },
+  "gateway": {
+    "running": true,
+    "raw": "✓ Gateway is running (PID: 24832, 28404)\n  (Running manually, not as a system service)\n\nTo install as a Windows Scheduled Task (auto-start on login):\n  hermes gateway install",
+    "checked_at": "2026-06-05T08:57:59.253088+09:00"
+  },
+  "cron": {
+    "total_jobs": 41,
+    "scheduled_jobs": 41,
+    "ok_jobs": 36,
+    "never_run_jobs": [
+      "ops-trading-ops-weekly-hygiene",
+      "vault-librarian",
+      "librarian-web-crawl-intake",
+      "librarian-sns-crawl-intake",
+      "librarian-zettelkasten-noteify"
+    ],
+    "recent_runs": [
+      {
+        "id": "7961591ac3d2",
+        "name": "ai-sns-tech-intake-hourly",
+        "state": "scheduled",
+        "profile": "researchorchestrator",
+        "deliver": "local",
+        "last_run_at": "2026-06-05T07:25:39.766569+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T09:56:59.207609+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\7961591ac3d2\\2026-06-05_07-25-39.md"
+      },
+      {
+        "id": "5c19755721cd",
+        "name": "runtime-state-exporter-v0",
+        "state": "scheduled",
+        "profile": "ops",
+        "deliver": "local",
+        "last_run_at": "2026-06-05T06:56:27.469914+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T10:56:59.294759+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\5c19755721cd\\2026-06-05_06-56-27.md"
+      },
+      {
+        "id": "3860150f7552",
+        "name": "ops-handoff-input",
+        "state": "scheduled",
+        "profile": null,
+        "deliver": "local",
+        "last_run_at": "2026-06-05T06:55:26.088718+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T10:56:59.251135+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3860150f7552\\2026-06-05_06-55-26.md"
+      },
+      {
+        "id": "3becb00defbb",
+        "name": "dev-implementation-ready-ratchet",
+        "state": "scheduled",
+        "profile": "dev",
+        "deliver": "local",
+        "last_run_at": "2026-06-05T06:46:25.660078+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T12:46:25.660078+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3becb00defbb\\2026-06-05_06-46-25.md"
+      },
+      {
+        "id": "56bf20fe22f4",
+        "name": "research-topic-selection-daily",
+        "state": "scheduled",
+        "profile": "researchorchestrator",
+        "deliver": "local",
+        "last_run_at": "2026-06-05T06:37:34.685735+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T09:30:00+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\56bf20fe22f4\\2026-06-05_06-37-34.md"
+      },
+      {
+        "id": "52c3d911f322",
+        "name": "ops-console-generated-state-refinement",
+        "state": "scheduled",
+        "profile": "ops",
+        "deliver": "local",
+        "last_run_at": "2026-06-05T06:02:16.004266+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T10:02:16.004266+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\52c3d911f322\\2026-06-05_06-02-15.md"
+      },
+      {
+        "id": "d2f8dfa80c02",
+        "name": "ops-verifier-ratchet-rollout",
+        "state": "scheduled",
+        "profile": "ops",
+        "deliver": "local",
+        "last_run_at": "2026-06-05T05:57:20.955823+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T13:57:20.955823+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\d2f8dfa80c02\\2026-06-05_05-57-20.md"
+      },
+      {
+        "id": "acb0e632afcc",
+        "name": "auditor-agent-health-loop",
+        "state": "scheduled",
+        "profile": "auditor",
+        "deliver": "local",
+        "last_run_at": "2026-06-05T05:50:22.019546+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-05T11:56:59.373787+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\acb0e632afcc\\2026-06-05_05-50-22.md"
+      }
+    ]
+  },
+  "links": {
+    "landing": "/index.html",
+    "ops_console": "/agent-ops-console.html",
+    "ops_map": "/multi-agent-ops-map.html"
+  },
+  "notes": [
+    "This page is a read-only mirror of the latest local Hermes CLI session.",
+    "Tool outputs are intentionally omitted; only conversational user/assistant turns are published.",
+    "Freshness depends on the local exporter running and the static site being redeployed."
+  ]
+}

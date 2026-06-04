@@ -412,7 +412,8 @@
         <a class="pill" href="/index.html"><strong>Landing</strong> 돌아가기</a>
         <a class="pill" href="/multi-agent-ops-map.html"><strong>Ops Map</strong> 열기</a>
         <a class="pill" href="/agent-ops-console.html"><strong>Ops Console</strong> 현재 페이지</a>
-        <div class="pill"><strong id="generatedAt">-</strong> <span id="snapshotLabel">fixture snapshot</span></div>
+        <a class="pill" href="/hermes-window.html"><strong>Hermes Window</strong> 열기</a>
+        <div class="pill"><strong id="generatedAt">-</strong> <span id="snapshotLabel">runtime status pending</span></div>
         <div class="pill"><strong id="runtimeDrift">-</strong> runtime drift</div>
         <div class="pill"><strong id="runtimeEvidence">-</strong> observation gaps</div>
         <div class="pill"><strong id="runtimeDocDrift">-</strong> doc drift</div>
@@ -537,6 +538,16 @@
         });
       } catch {
         return iso;
+      }
+    }
+
+    function applyRuntimeUnavailableMeta(reason, fallbackSourceLabel = 'console payload only') {
+      snapshotLabel.textContent = `${fallbackSourceLabel} · runtime overlay unavailable`;
+      runtimeDrift.textContent = 'runtime unavailable';
+      runtimeEvidence.textContent = 'runtime unavailable';
+      runtimeDocDrift.textContent = 'runtime unavailable';
+      if (reason) {
+        generatedAt.textContent = `overlay missing: ${reason}`;
       }
     }
 
@@ -854,10 +865,8 @@
         const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
         const runtime = await readJsonResponse(response, '/data/runtime-state-v0.json');
         applyRuntimeSnapshotMeta(runtime);
-      } catch {
-        runtimeDrift.textContent = 'fixture';
-        runtimeEvidence.textContent = 'fixture';
-        runtimeDocDrift.textContent = 'fixture';
+      } catch (error) {
+        applyRuntimeUnavailableMeta(error?.message, 'console payload only');
       }
     }
 
@@ -898,7 +907,7 @@
           reconciliation: data.reconciliation || {}
         }, `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`);
       } else {
-        snapshotLabel.textContent = 'fixture snapshot';
+        snapshotLabel.textContent = 'fixture payload · runtime overlay pending';
       }
       renderFilters();
       bindFilters();

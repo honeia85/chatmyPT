@@ -5,6 +5,7 @@
 - Supporting pages:
   - `/multi-agent-ops-map.html`
   - `/agent-ops-console.html`
+  - `/hermes-window.html`
 
 ## Delivery model
 - Repository: `honeia85/chatmyPT`

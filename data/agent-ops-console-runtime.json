@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-05T03:36:44.533656+09:00",
+  "generated_at": "2026-06-05T08:55:30.556336+09:00",
   "summary": {
     "total_agents": 16,
     "runtime_profiles": 14,
-    "active_agents": 1,
-    "waiting_agents": 5,
+    "active_agents": 5,
+    "waiting_agents": 2,
     "blocked_agents": 5,
     "offline_agents": 0,
     "reports_last_24h": 1
@@ -119,8 +119,8 @@
       "team": "executive",
       "type": "runtime_snapshot",
       "title": "Runtime state snapshot v0",
-      "summary": "Profiles=14 · mismatches=0 · missing_observation=5",
-      "created_at": "2026-06-05T03:36:44.533656+09:00",
+      "summary": "Profiles=14 · mismatches=0 · missing_observation=2",
+      "created_at": "2026-06-05T08:55:30.556336+09:00",
       "destination": "local",
       "status": "generated"
     },
@@ -161,9 +161,37 @@
   "activity": [
     {
       "id": "runtime-default",
-      "timestamp": "2026-06-05T03:36:43+09:00",
+      "timestamp": "2026-06-05T08:55:25+09:00",
       "type": "runtime_observation",
       "agent_id": "default",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-ops",
+      "timestamp": "2026-06-05T07:13:41+09:00",
+      "type": "runtime_observation",
+      "agent_id": "ops",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-researchorchestrator",
+      "timestamp": "2026-06-05T07:04:24+09:00",
+      "type": "runtime_observation",
+      "agent_id": "researchorchestrator",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-librarianorchestrator",
+      "timestamp": "2026-06-05T06:33:50+09:00",
+      "type": "runtime_observation",
+      "agent_id": "librarianorchestrator",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-personalops",
+      "timestamp": "2026-06-05T06:33:17+09:00",
+      "type": "runtime_observation",
+      "agent_id": "personalops",
       "summary": "Observed model gpt-5.4 (active)"
     },
     {
@@ -181,38 +209,10 @@
       "summary": "Observed model gpt-5.4 (idle)"
     },
     {
-      "id": "runtime-ops",
-      "timestamp": "2026-06-04T07:25:37+09:00",
-      "type": "runtime_observation",
-      "agent_id": "ops",
-      "summary": "Observed model gpt-5.4 (idle)"
-    },
-    {
       "id": "runtime-hybresearch",
       "timestamp": "2026-06-03T11:58:41+09:00",
       "type": "runtime_observation",
       "agent_id": "hybresearch",
-      "summary": "Observed model gpt-5.4 (stale)"
-    },
-    {
-      "id": "runtime-hybbuild",
-      "timestamp": "2026-06-03T11:58:27+09:00",
-      "type": "runtime_observation",
-      "agent_id": "hybbuild",
-      "summary": "Observed model gpt-5.4 (stale)"
-    },
-    {
-      "id": "runtime-dev",
-      "timestamp": "2026-06-03T11:57:32+09:00",
-      "type": "runtime_observation",
-      "agent_id": "dev",
-      "summary": "Observed model gpt-5.4 (stale)"
-    },
-    {
-      "id": "runtime-hybtriage",
-      "timestamp": "2026-06-03T11:55:34+09:00",
-      "type": "runtime_observation",
-      "agent_id": "hybtriage",
       "summary": "Observed model gpt-5.4 (stale)"
     }
   ],
@@ -240,8 +240,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-05T03:36:43+09:00",
-        "last_report_at": "2026-06-05T03:36:43+09:00",
+        "last_heartbeat_at": "2026-06-05T08:55:25+09:00",
+        "last_report_at": "2026-06-05T08:55:25+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -597,12 +597,12 @@
         "runtime_snapshot"
       ],
       "runtime": {
-        "status": "waiting",
-        "current_task": "Configured gpt-5.4 / observed unknown",
-        "last_heartbeat_at": null,
-        "last_report_at": null,
+        "status": "active",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-05T06:33:50+09:00",
+        "last_report_at": "2026-06-05T06:33:50+09:00",
         "blocked_reason": null,
-        "waiting_reason": "No observed runtime evidence yet."
+        "waiting_reason": null
       }
     },
     {
@@ -637,10 +637,10 @@
         "verification_report"
       ],
       "runtime": {
-        "status": "idle",
+        "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-04T07:25:37+09:00",
-        "last_report_at": "2026-06-04T07:25:37+09:00",
+        "last_heartbeat_at": "2026-06-05T07:13:41+09:00",
+        "last_report_at": "2026-06-05T07:13:41+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       }
@@ -675,12 +675,12 @@
         "runtime_snapshot"
       ],
       "runtime": {
-        "status": "waiting",
-        "current_task": "Configured gpt-5.4 / observed unknown",
-        "last_heartbeat_at": null,
-        "last_report_at": null,
+        "status": "active",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-05T06:33:17+09:00",
+        "last_report_at": "2026-06-05T06:33:17+09:00",
         "blocked_reason": null,
-        "waiting_reason": "No observed runtime evidence yet."
+        "waiting_reason": null
       }
     },
     {
@@ -694,7 +694,7 @@
         "paper-scout",
         "source-synthesizer"
       ],
-      "description": "Owns research planning, source review, and structured note synthesis. Runtime bridge: configured=gpt-5.4 / observed=unknown · source=config.yaml.",
+      "description": "Owns research planning, source review, and structured note synthesis. Runtime bridge: configured=gpt-5.4 / observed=gpt-5.4 · source=config.yaml.",
       "mission": "Turn incoming research questions into organized evidence and reusable knowledge.",
       "soul": {
         "tone": "analytical",
@@ -703,12 +703,12 @@
         "reporting_style": "source-grounded"
       },
       "runtime": {
-        "status": "waiting",
-        "current_task": "Configured gpt-5.4 / observed unknown",
-        "last_heartbeat_at": null,
-        "last_report_at": null,
+        "status": "active",
+        "current_task": "Configured gpt-5.4 / observed gpt-5.4",
+        "last_heartbeat_at": "2026-06-05T07:04:24+09:00",
+        "last_report_at": "2026-06-05T07:04:24+09:00",
         "blocked_reason": null,
-        "waiting_reason": "No observed runtime evidence yet."
+        "waiting_reason": null
       },
       "knowledge_refs": [
         "kb-medical-ai",
@@ -858,13 +858,13 @@
   "source_kind": "generated-bridge-from-runtime-and-fixture",
   "runtime_state_source": "data/runtime-state-v0.json",
   "runtime_state_source_kind": "generated-runtime-snapshot",
-  "runtime_generated_at": "2026-06-05T03:36:44.533656+09:00",
+  "runtime_generated_at": "2026-06-05T08:55:30.556336+09:00",
   "runtime_summary": {
     "total_profiles": 14,
-    "active": 1,
-    "idle": 3,
+    "active": 5,
+    "idle": 2,
     "stale": 5,
-    "unknown": 5
+    "unknown": 2
   },
   "drift_summary": {
     "configured_observed_model_mismatch": [],
@@ -883,16 +883,13 @@
     ],
     "missing_observation": [
       "hybarchive",
-      "librarianorchestrator",
-      "personalops",
-      "researchorchestrator",
       "tradingorchestrator"
     ]
   },
   "reconciliation": {
     "doc_source": "coordination/rules/profile-map.md",
     "runtime_source": "hermes-home",
-    "runtime_home_resolution": "normalized-from-profile-dir",
+    "runtime_home_resolution": "direct-root",
     "runtime_scope": "full-hermes-home",
     "stale_threshold_hours": 24
   }
