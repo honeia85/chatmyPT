@@ -12,7 +12,21 @@ from typing import Any
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-HERMES_HOME = Path(os.environ.get("HERMES_HOME", r"C:/Users/Admin/AppData/Local/hermes"))
+
+
+def resolve_hermes_home(raw_home: str) -> tuple[Path, str]:
+    candidate = Path(raw_home)
+    if (candidate / "profiles").exists() or (candidate / "coordination").exists():
+        return candidate, "direct-root"
+    if candidate.name == "profiles" and (candidate.parent / "coordination").exists():
+        return candidate.parent, "normalized-from-profiles-dir"
+    if (candidate / "config.yaml").exists() and candidate.parent.name == "profiles" and (candidate.parent.parent / "coordination").exists():
+        return candidate.parent.parent, "normalized-from-profile-dir"
+    return candidate, "unverified"
+
+
+RAW_HERMES_HOME = os.environ.get("HERMES_HOME", r"C:/Users/Admin/AppData/Local/hermes")
+HERMES_HOME, HERMES_HOME_RESOLUTION = resolve_hermes_home(RAW_HERMES_HOME)
 PROFILES_DIR = HERMES_HOME / "profiles"
 COORD_PROFILE_MAP = HERMES_HOME / "coordination" / "rules" / "profile-map.md"
 OUTPUT_PATH = REPO_ROOT / "data" / "runtime-state-v0.json"
@@ -370,6 +384,8 @@ def main() -> None:
         "reconciliation": {
             "doc_source": "coordination/rules/profile-map.md",
             "runtime_source": "hermes-home",
+            "runtime_home_resolution": HERMES_HOME_RESOLUTION,
+            "runtime_scope": "full-hermes-home" if PROFILES_DIR.exists() else "single-path-fallback",
             "stale_threshold_hours": STALE_HOURS,
         },
         "warnings": [],

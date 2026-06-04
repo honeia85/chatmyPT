@@ -600,7 +600,7 @@
     }
 
     function getFilteredAgents() {
-      const q = searchInput.value.trim().toLowerCase();
+      const q = (searchInput?.value || '').trim().toLowerCase();
       const team = teamFilter.value;
       const status = statusFilter.value;
       const type = typeFilter.value;
@@ -804,7 +804,7 @@
           return sum + (Array.isArray(value) ? value.length : 0);
         }, 0);
         generatedAt.textContent = formatDate(runtime.generated_at);
-        snapshotLabel.textContent = `${sourceKind} · ${staleThreshold ?? '?'}h stale rule`;
+        snapshotLabel.textContent = `${sourceKind} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${staleThreshold ?? '?'}h stale rule`;
         runtimeDrift.textContent = String(driftCount);
         runtimeEvidence.textContent = `${missingCount} missing · ${staleCount} stale`;
       } catch {
@@ -844,7 +844,7 @@
       selectedAgentId = data.agents[0]?.id || null;
       generatedAt.textContent = formatDate(data.generated_at);
       snapshotLabel.textContent = url.includes('runtime')
-        ? `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`
+        ? `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`
         : 'fixture snapshot';
       if (url.includes('runtime')) {
         const driftSummary = data.drift_summary || {};
@@ -857,7 +857,7 @@
     }
 
     init().catch((error) => {
-      detailBody.innerHTML = `<div class="empty">Failed to load fixture: ${escapeHtml(error.message)}</div>`;
+      detailBody.innerHTML = `<div class="empty">Failed to load console data: ${escapeHtml(error.message)}</div>`;
       console.error(error);
     });
   </script>

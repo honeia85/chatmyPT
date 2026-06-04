@@ -515,8 +515,8 @@
         runtimeActive.textContent = String(runtime?.summary?.active ?? '-');
         runtimeDrift.textContent = String(driftCount);
         runtimeEvidenceGaps.textContent = `${missingCount} missing · ${staleCount} stale`;
-        runtimeSnapshotLabel.textContent = runtime?.source_kind || 'generated';
-        runtimeSnapshotAt.textContent = `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · source=${runtime?.source_kind || 'generated'}`;
+        runtimeSnapshotLabel.textContent = `${runtime?.source_kind || 'generated'} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'}`;
+        runtimeSnapshotAt.textContent = `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · scope=${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · resolution=${runtime?.reconciliation?.runtime_home_resolution || 'unknown'}`;
       } catch (error) {
         runtimeSnapshotLabel.textContent = 'fixture';
         runtimeEvidenceGaps.textContent = 'fixture';

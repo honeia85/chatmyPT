@@ -14,6 +14,9 @@ Authoritative runtime-side inputs only:
 - Hermes state DB
 - optional cron job metadata for linked job presence
 
+Exporter environment guardrail:
+- if `HERMES_HOME` points at an active profile directory instead of the Hermes root, normalize back to the root before discovery so the website snapshot does not silently collapse to a single-profile view
+
 ## Non-goals for v0
 - full kanban rendering
 - full vault knowledge graph export
@@ -134,4 +137,6 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - `source_kind`: declares that the console payload is a generated bridge, not canonical runtime truth
 - `runtime_state_source`: points back to `data/runtime-state-v0.json`
 - `runtime_state_source_kind`: carries the upstream runtime snapshot kind into the UI payload
+- `reconciliation.runtime_scope`: tells surfaces whether the exporter reconciled the full Hermes home or only a narrower fallback scope
+- `reconciliation.runtime_home_resolution`: records whether runtime discovery used the root directly or normalized from a profile-scoped `HERMES_HOME`
 - `reconciliation.stale_threshold_hours`: lets surfaces explain stale semantics instead of inventing them
