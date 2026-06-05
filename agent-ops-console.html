@@ -564,6 +564,22 @@
       return Object.fromEntries(items.map(item => [item.id, item]));
     }
 
+    function describeAuthority(agent) {
+      if (!agent) return 'unknown authority';
+      if (agent.source_kind === 'runtime_profile' || agent.source_kind === 'runtime_profile_overlay') {
+        return 'direct runtime profile';
+      }
+      if (agent.source_kind === 'conceptual_fixture') {
+        return 'conceptual shell';
+      }
+      return agent.source_kind || 'unknown authority';
+    }
+
+    function describeBackingProfiles(agent) {
+      const backing = agent?.backing_profiles || [];
+      return backing.length ? backing.join(', ') : 'none';
+    }
+
     function getSelectedAgent() {
       return store.agentMap[selectedAgentId] || store.agents[0] || null;
     }
@@ -604,7 +620,7 @@
                   </div>
                   <div class="node-task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
                   <div class="meta-line">Children: ${escapeHtml((agent.child_ids || []).length)}</div>
-                  <div class="meta-line">Provenance: ${escapeHtml(agent.source_kind || 'fixture')} · backing ${(agent.backing_profiles || []).length}</div>
+                  <div class="meta-line">Authority: ${escapeHtml(describeAuthority(agent))} · backing ${escapeHtml(describeBackingProfiles(agent))}</div>
                 </div>
               `).join('')}
             </div>
@@ -656,7 +672,7 @@
           </div>
           <div class="task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
           <div class="small" style="margin-top:10px;">Subagents: ${escapeHtml((agent.child_ids || []).length)} · Last update: ${escapeHtml(formatDate(agent.runtime.last_heartbeat_at))}</div>
-          <div class="small" style="margin-top:6px;">Source: ${escapeHtml(agent.source_kind || 'fixture')} · Backing: ${escapeHtml((agent.backing_profiles || []).join(', ') || 'none')}</div>
+          <div class="small" style="margin-top:6px;">Authority: ${escapeHtml(describeAuthority(agent))} · Backing: ${escapeHtml(describeBackingProfiles(agent))}</div>
         </div>
       `).join('');
     }
@@ -720,6 +736,7 @@
           ${kv('Agent ID', escapeHtml(agent.id))}
           ${kv('Mission', escapeHtml(agent.mission))}
           ${kv('Layer', escapeHtml(String(agent.layer)))}
+          ${kv('Authority', escapeHtml(describeAuthority(agent)))}
           ${kv('Source kind', escapeHtml(agent.source_kind || 'fixture'))}
           ${kv('Backing profiles', chips(agent.backing_profiles || [], value => value))}
           ${kv('Child agents', chips(agent.child_ids, id => store.agentMap[id]?.display_name || id))}
@@ -728,9 +745,11 @@
         <div class="tab-panel ${activeTab === 'runtime' ? 'active' : ''}" data-panel="runtime">
           ${kv('Last heartbeat', escapeHtml(formatDate(agent.runtime.last_heartbeat_at)))}
           ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
+          ${kv('Bridge payload path', escapeHtml(store.console_data_url || 'unknown'))}
           ${kv('Snapshot generated', escapeHtml(formatDate(store.runtime_generated_at || store.generated_at)))}
           ${kv('Runtime source', escapeHtml(store.runtime_state_source || 'fixture-only payload'))}
           ${kv('Bridge source kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'fixture'))}
+          ${kv('Bridge payload kind', escapeHtml(store.source_kind || 'fixture-only payload'))}
           ${kv('Observed source', escapeHtml(runtimeProvenance.observation_source || runtimeProvenance.note || 'none'))}
           ${kv('Observed source kind', escapeHtml(runtimeProvenance.observation_kind || 'n/a'))}
           ${kv('Evidence sources', chips(runtimeProvenance.evidence_sources || [], value => value))}
@@ -903,6 +922,7 @@
       const { data, url } = await loadConsoleData();
       store = {
         ...data,
+        console_data_url: url,
         teamMap: mapById(data.teams),
         agentMap: mapById(data.agents),
         knowledgeMap: mapById(data.knowledge_refs),

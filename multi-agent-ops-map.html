@@ -433,6 +433,17 @@
       ].filter(([key]) => agentHasDrift(agentId, key)).map(([, label]) => label).join(', ') || 'none';
     }
 
+    function describeAuthority(agent) {
+      if (!agent) return 'unknown authority';
+      if (agent.source_kind === 'runtime_profile' || agent.source_kind === 'runtime_profile_overlay') {
+        return 'direct runtime profile';
+      }
+      if (agent.source_kind === 'conceptual_fixture') {
+        return 'conceptual shell';
+      }
+      return agent.source_kind || 'unknown authority';
+    }
+
     function renderRuntimeBoxes(key) {
       const agent = runtimeBridge?.agentMap?.[key];
       if (!agent) return '';
@@ -447,8 +458,13 @@
         <div class="detail-box">
           <h4>Runtime Provenance</h4>
           <ul>
+            <li>authority: ${describeAuthority(agent)}</li>
             <li>source_kind: ${agent.source_kind || 'fixture'}</li>
             <li>backing_profiles: ${backing}</li>
+            <li>bridge_payload_path: ${runtimeBridge?.bridge_payload_url || 'unknown'}</li>
+            <li>bridge_payload_kind: ${runtimeBridge?.source_kind || 'fixture-only payload'}</li>
+            <li>runtime_snapshot_path: ${runtimeBridge?.runtime_state_source || 'data/runtime-state-v0.json'}</li>
+            <li>runtime_snapshot_kind: ${runtimeBridge?.runtime_state_source_kind || 'generated-runtime-snapshot'}</li>
             <li>snapshot_generated_at: ${snapshotGeneratedAt ? new Date(snapshotGeneratedAt).toLocaleString('ko-KR') : 'unknown'}</li>
             <li>observed_source: ${runtimeProvenance.observation_source || runtimeProvenance.note || 'none'}</li>
             <li>observed_source_kind: ${runtimeProvenance.observation_kind || 'n/a'}</li>
@@ -493,6 +509,7 @@
             ? `heartbeat ${new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR')} · drift ${driftLabel}`
             : `source ${agent.source_kind || 'fixture'} · drift ${driftLabel}`;
         }
+        node.title = `${describeAuthority(agent)} · backing ${(agent.backing_profiles || []).join(', ') || 'none'} · drift ${summarizeAgentDrift(agent.id)}`;
       });
     }
 
@@ -589,6 +606,7 @@
         const data = await readJsonResponse(response, '/data/agent-ops-console-runtime.json');
         runtimeBridge = {
           ...data,
+          bridge_payload_url: '/data/agent-ops-console-runtime.json',
           agentMap: Object.fromEntries((data.agents || []).map(agent => [agent.id, agent]))
         };
         if (data.runtime_summary) {

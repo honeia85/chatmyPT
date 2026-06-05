@@ -30,6 +30,7 @@
 - `Ops Map` opens
 - `Ops Console` opens
 - main navigation still shows expected links
+- runtime-backed surfaces show generated snapshot/provenance metadata rather than generic `fixture` wording when `/data/runtime-state-v0.json` and `/data/agent-ops-console-runtime.json` are present
 - custom domain remains active in Cloudflare Pages
 
 ## Incident shortcuts
