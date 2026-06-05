@@ -413,7 +413,8 @@
         <a class="pill" href="/multi-agent-ops-map.html"><strong>Ops Map</strong> 열기</a>
         <a class="pill" href="/agent-ops-console.html"><strong>Ops Console</strong> 현재 페이지</a>
         <a class="pill" href="/hermes-window.html"><strong>Hermes Window</strong> 열기</a>
-        <div class="pill"><strong id="generatedAt">-</strong> <span id="snapshotLabel">runtime status pending</span></div>
+        <div class="pill"><strong id="bridgeGeneratedAt">-</strong> <span id="bridgeSnapshotLabel">bridge payload pending</span></div>
+        <div class="pill"><strong id="runtimeGeneratedAt">-</strong> <span id="snapshotLabel">runtime snapshot pending</span></div>
         <div class="pill"><strong id="runtimeDrift">-</strong> runtime drift</div>
         <div class="pill"><strong id="runtimeEvidence">-</strong> observation gaps</div>
         <div class="pill"><strong id="runtimeDocDrift">-</strong> doc drift</div>
@@ -504,7 +505,9 @@
     const detailBody = document.getElementById('detailBody');
     const reportList = document.getElementById('reportList');
     const activityList = document.getElementById('activityList');
-    const generatedAt = document.getElementById('generatedAt');
+    const bridgeGeneratedAt = document.getElementById('bridgeGeneratedAt');
+    const bridgeSnapshotLabel = document.getElementById('bridgeSnapshotLabel');
+    const runtimeGeneratedAt = document.getElementById('runtimeGeneratedAt');
     const snapshotLabel = document.getElementById('snapshotLabel');
     const runtimeDrift = document.getElementById('runtimeDrift');
     const runtimeEvidence = document.getElementById('runtimeEvidence');
@@ -541,14 +544,28 @@
       }
     }
 
-    function applyRuntimeUnavailableMeta(reason, fallbackSourceLabel = 'console payload only') {
+    function describeTimestampDelta(laterIso, earlierIso) {
+      if (!laterIso || !earlierIso) return 'n/a';
+      try {
+        const deltaMs = new Date(laterIso).getTime() - new Date(earlierIso).getTime();
+        const sign = deltaMs >= 0 ? '+' : '-';
+        return `${sign}${(Math.abs(deltaMs) / 1000).toFixed(2)}s after runtime snapshot`;
+      } catch {
+        return 'n/a';
+      }
+    }
+
+    function applyBridgePayloadMeta(payload, url, fallbackKind = 'legacy-shell-payload') {
+      bridgeGeneratedAt.textContent = formatDate(payload?.generated_at);
+      bridgeSnapshotLabel.textContent = `${payload?.source_kind || fallbackKind} · ${url || 'unknown payload path'}`;
+    }
+
+    function applyRuntimeUnavailableMeta(reason, fallbackSourceLabel = 'bridge payload only') {
       snapshotLabel.textContent = `${fallbackSourceLabel} · runtime overlay unavailable`;
       runtimeDrift.textContent = 'runtime unavailable';
       runtimeEvidence.textContent = 'runtime unavailable';
       runtimeDocDrift.textContent = 'runtime unavailable';
-      if (reason) {
-        generatedAt.textContent = `overlay missing: ${reason}`;
-      }
+      runtimeGeneratedAt.textContent = reason ? `runtime unavailable: ${reason}` : 'runtime unavailable';
     }
 
     async function readJsonResponse(response, url) {
@@ -748,7 +765,7 @@
           ${kv('Mission', escapeHtml(agent.mission))}
           ${kv('Layer', escapeHtml(String(agent.layer)))}
           ${kv('Authority', escapeHtml(describeAuthority(agent)))}
-          ${kv('Source kind', escapeHtml(agent.source_kind || 'fixture'))}
+          ${kv('Source kind', escapeHtml(agent.source_kind || 'legacy-shell-payload'))}
           ${kv('Backing profiles', chips(agent.backing_profiles || [], value => value))}
           ${kv('Child agents', chips(agent.child_ids, id => store.agentMap[id]?.display_name || id))}
         </div>
@@ -757,10 +774,12 @@
           ${kv('Last heartbeat', escapeHtml(formatDate(agent.runtime.last_heartbeat_at)))}
           ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
           ${kv('Bridge payload path', escapeHtml(store.console_data_url || 'unknown'))}
-          ${kv('Snapshot generated', escapeHtml(formatDate(store.runtime_generated_at || store.generated_at)))}
-          ${kv('Runtime source', escapeHtml(store.runtime_state_source || 'fixture-only payload'))}
-          ${kv('Bridge source kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'fixture'))}
-          ${kv('Bridge payload kind', escapeHtml(store.source_kind || 'fixture-only payload'))}
+          ${kv('Bridge payload generated', escapeHtml(formatDate(store.generated_at)))}
+          ${kv('Bridge payload kind', escapeHtml(store.source_kind || 'legacy-shell-payload'))}
+          ${kv('Runtime snapshot path', escapeHtml(store.runtime_state_source || 'bridge payload only'))}
+          ${kv('Runtime snapshot generated', escapeHtml(formatDate(store.runtime_generated_at || store.generated_at)))}
+          ${kv('Runtime snapshot kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'legacy-shell-payload'))}
+          ${kv('Bridge/runtime lag', escapeHtml(describeTimestampDelta(store.generated_at, store.runtime_generated_at)))}
           ${kv('Observed source', escapeHtml(runtimeProvenance.observation_source || runtimeProvenance.note || 'none'))}
           ${kv('Observed source kind', escapeHtml(runtimeProvenance.observation_kind || 'n/a'))}
           ${kv('Evidence sources', chips(runtimeProvenance.evidence_sources || [], value => value))}
@@ -894,7 +913,7 @@
       const runtimeWithoutDocCount = (driftSummary.runtime_without_doc || []).length;
       const docWithoutRuntimeCount = (driftSummary.doc_without_runtime || []).length;
       const staleThreshold = runtime?.reconciliation?.stale_threshold_hours;
-      generatedAt.textContent = formatDate(runtime.generated_at);
+      runtimeGeneratedAt.textContent = formatDate(runtime.generated_at);
       snapshotLabel.textContent = snapshotText || `${sourceKind} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${staleThreshold ?? '?'}h stale rule`;
       runtimeDrift.textContent = String(countDriftSignals(driftSummary));
       runtimeEvidence.textContent = `${missingCount} missing · ${staleCount} stale`;
@@ -907,7 +926,7 @@
         const runtime = await readJsonResponse(response, '/data/runtime-state-v0.json');
         applyRuntimeSnapshotMeta(runtime);
       } catch (error) {
-        applyRuntimeUnavailableMeta(error?.message, 'console payload only');
+        applyRuntimeUnavailableMeta(error?.message, 'bridge payload only');
       }
     }
 
@@ -940,7 +959,7 @@
         ruleMap: mapById(data.rules)
       };
       selectedAgentId = data.agents[0]?.id || null;
-      generatedAt.textContent = formatDate(data.generated_at);
+      applyBridgePayloadMeta(data, url);
       if (url.includes('runtime')) {
         applyRuntimeSnapshotMeta({
           generated_at: data.runtime_generated_at || data.generated_at,
@@ -949,7 +968,7 @@
           reconciliation: data.reconciliation || {}
         }, `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`);
       } else {
-        snapshotLabel.textContent = 'fixture payload · runtime overlay pending';
+        snapshotLabel.textContent = 'legacy shell payload · runtime overlay pending';
       }
       renderFilters();
       bindFilters();

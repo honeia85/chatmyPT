@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T01:57:45.742819+09:00",
+  "generated_at": "2026-06-06T03:14:01.621867+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
@@ -24,7 +24,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-06T01:57:43+09:00",
+        "last_seen_at": "2026-06-06T03:14:00+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -32,17 +32,17 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-06T01:57:43+09:00",
+          "last_seen_at": "2026-06-06T03:14:00+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-06T01:50:24.563799+09:00",
+          "last_seen_at": "2026-06-06T03:07:12.446530+09:00",
           "source": "state.db",
-          "message_count": 42,
-          "tool_call_count": 27,
-          "api_call_count": 14,
+          "message_count": 0,
+          "tool_call_count": 0,
+          "api_call_count": 24,
           "end_reason": null
         },
         "sources_present": [
@@ -184,7 +184,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-06T01:57:43+09:00",
+        "last_seen_at": "2026-06-06T03:14:00+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -192,7 +192,7 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-06T01:57:43+09:00",
+          "last_seen_at": "2026-06-06T03:14:00+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
@@ -394,7 +394,7 @@
       "observed": {
         "provider": null,
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-06T01:19:25+09:00",
+        "last_seen_at": "2026-06-06T02:34:58+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -402,17 +402,17 @@
         "agent_log": {
           "provider": null,
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-06T01:19:25+09:00",
+          "last_seen_at": "2026-06-06T02:34:58+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-06T01:18:08.319779+09:00",
+          "last_seen_at": "2026-06-06T02:32:32.495499+09:00",
           "source": "state.db",
-          "message_count": 16,
-          "tool_call_count": 9,
-          "api_call_count": 6,
+          "message_count": 28,
+          "tool_call_count": 15,
+          "api_call_count": 12,
           "end_reason": null
         },
         "sources_present": [

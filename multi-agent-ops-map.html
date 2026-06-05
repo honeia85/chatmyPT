@@ -476,6 +476,17 @@
       return items.map(item => `<span class="pill">${escapeHtml(formatter(item))}</span>`).join('');
     }
 
+    function describeTimestampDelta(laterIso, earlierIso) {
+      if (!laterIso || !earlierIso) return 'n/a';
+      try {
+        const deltaMs = new Date(laterIso).getTime() - new Date(earlierIso).getTime();
+        const sign = deltaMs >= 0 ? '+' : '-';
+        return `${sign}${(Math.abs(deltaMs) / 1000).toFixed(2)}s after runtime snapshot`;
+      } catch {
+        return 'n/a';
+      }
+    }
+
     function agentHasDrift(agentId, driftKey) {
       return Boolean((runtimeBridge?.drift_summary?.[driftKey] || []).includes(agentId));
     }
@@ -510,8 +521,11 @@
             <h4>Runtime Reconciliation</h4>
             <ul>
               <li>bridge_status: shell-only node (no agent entry in ${runtimeBridge?.bridge_payload_url || 'unknown bridge payload'})</li>
-              <li>bridge_payload_kind: ${runtimeBridge?.source_kind || 'fixture-only payload'}</li>
+              <li>bridge_payload_kind: ${runtimeBridge?.source_kind || 'legacy-shell-payload'}</li>
+              <li>bridge_generated_at: ${runtimeBridge?.generated_at ? new Date(runtimeBridge.generated_at).toLocaleString('ko-KR') : 'unknown'}</li>
               <li>runtime_snapshot_path: ${runtimeBridge?.runtime_state_source || 'data/runtime-state-v0.json'}</li>
+              <li>runtime_snapshot_generated_at: ${runtimeBridge?.runtime_generated_at ? new Date(runtimeBridge.runtime_generated_at).toLocaleString('ko-KR') : 'unknown'}</li>
+              <li>bridge_runtime_lag: ${describeTimestampDelta(runtimeBridge?.generated_at, runtimeBridge?.runtime_generated_at)}</li>
               <li>runtime_snapshot_kind: ${runtimeBridge?.runtime_state_source_kind || 'generated-runtime-snapshot'}</li>
               <li>interpretation: this card is presentation/context shell, not direct runtime truth</li>
             </ul>
@@ -530,13 +544,15 @@
           <h4>Runtime Provenance</h4>
           <ul>
             <li>authority: ${describeAuthority(agent)}</li>
-            <li>source_kind: ${agent.source_kind || 'fixture'}</li>
+            <li>source_kind: ${agent.source_kind || 'legacy-shell-payload'}</li>
             <li>backing_profiles: ${backing}</li>
             <li>bridge_payload_path: ${runtimeBridge?.bridge_payload_url || 'unknown'}</li>
-            <li>bridge_payload_kind: ${runtimeBridge?.source_kind || 'fixture-only payload'}</li>
+            <li>bridge_payload_kind: ${runtimeBridge?.source_kind || 'legacy-shell-payload'}</li>
+            <li>bridge_generated_at: ${runtimeBridge?.generated_at ? new Date(runtimeBridge.generated_at).toLocaleString('ko-KR') : 'unknown'}</li>
             <li>runtime_snapshot_path: ${runtimeBridge?.runtime_state_source || 'data/runtime-state-v0.json'}</li>
             <li>runtime_snapshot_kind: ${runtimeBridge?.runtime_state_source_kind || 'generated-runtime-snapshot'}</li>
-            <li>snapshot_generated_at: ${snapshotGeneratedAt ? new Date(snapshotGeneratedAt).toLocaleString('ko-KR') : 'unknown'}</li>
+            <li>runtime_snapshot_generated_at: ${snapshotGeneratedAt ? new Date(snapshotGeneratedAt).toLocaleString('ko-KR') : 'unknown'}</li>
+            <li>bridge_runtime_lag: ${describeTimestampDelta(runtimeBridge?.generated_at, runtimeBridge?.runtime_generated_at)}</li>
             <li>observed_source: ${runtimeProvenance.observation_source || runtimeProvenance.note || 'none'}</li>
             <li>observed_source_kind: ${runtimeProvenance.observation_kind || 'n/a'}</li>
             <li>evidence_sources: ${evidenceSources}</li>
@@ -631,7 +647,7 @@
           const driftLabel = summarizeAgentDrift(agent.id);
           mini.textContent = agent.runtime?.last_heartbeat_at
             ? `heartbeat ${new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR')} · drift ${driftLabel}`
-            : `source ${agent.source_kind || 'fixture'} · drift ${driftLabel}`;
+            : `source ${agent.source_kind || 'legacy-shell-payload'} · drift ${driftLabel}`;
         }
         node.title = `${describeAuthority(agent)} · backing ${(agent.backing_profiles || []).join(', ') || 'none'} · drift ${summarizeAgentDrift(agent.id)}`;
       });
@@ -741,7 +757,7 @@
             summary: data.runtime_summary,
             drift_summary: data.drift_summary || {},
             reconciliation: data.reconciliation || {}
-          }, `${data.source_kind || 'generated bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'}`, `generated at ${new Date(data.runtime_generated_at || data.generated_at).toLocaleString('ko-KR')} · source=${data.runtime_state_source || 'data/runtime-state-v0.json'} · observation_gaps=${(data.drift_summary?.missing_observation || []).length + (data.drift_summary?.stale_observation || []).length} · doc_drift=${countDocDrift(data.drift_summary || {})} · stale>${data.reconciliation?.stale_threshold_hours ?? '?'}h · resolution=${data.reconciliation?.runtime_home_resolution || 'unknown'}`);
+          }, `${data.source_kind || 'generated bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'}`, `bridge payload ${new Date(data.generated_at).toLocaleString('ko-KR')} · runtime snapshot ${new Date(data.runtime_generated_at || data.generated_at).toLocaleString('ko-KR')} · lag=${describeTimestampDelta(data.generated_at, data.runtime_generated_at || data.generated_at)} · source=${data.runtime_state_source || 'data/runtime-state-v0.json'} · observation_gaps=${(data.drift_summary?.missing_observation || []).length + (data.drift_summary?.stale_observation || []).length} · doc_drift=${countDocDrift(data.drift_summary || {})} · stale>${data.reconciliation?.stale_threshold_hours ?? '?'}h · resolution=${data.reconciliation?.runtime_home_resolution || 'unknown'}`);
         }
         renderBridgeCoverage();
         applyRuntimeNodeHints();

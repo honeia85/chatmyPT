@@ -136,10 +136,12 @@ This allows the website to prefer generated runtime-backed state without rewriti
 Bridge-specific provenance fields now carried through for UI clarity:
 - `source_kind`: declares that the console payload is a generated bridge, not canonical runtime truth
 - `runtime_state_source`: points back to `data/runtime-state-v0.json`
+- bridge `generated_at`: should reflect when the bridge artifact itself was exported
 - `runtime_state_source_kind`: carries the upstream runtime snapshot kind into the UI payload
-- `runtime_generated_at`: preserves the upstream runtime snapshot timestamp so UI headers do not need a second fetch just to explain recency
+- `runtime_generated_at`: preserves the upstream runtime snapshot timestamp so UI headers can distinguish bridge recency from upstream runtime-snapshot recency
 - `runtime_summary`: carries upstream profile/activity totals into bridge-backed surfaces as generated metadata
 - bridge consumers should surface the loaded bridge payload path so operators can tell whether they are reading `/data/agent-ops-console-runtime.json` or a fallback shell
+- bridge consumers should surface both bridge-payload and upstream runtime-snapshot timestamps when they differ, rather than collapsing them into one ambiguous `generated_at`
 - bridge consumers should translate per-agent `source_kind` into human-readable authority labels such as `direct runtime profile` vs `conceptual shell` instead of collapsing everything into generic `fixture` wording
 - per-agent `runtime_provenance`: preserves runtime-backed evidence fields (`observation_source`, `observation_kind`, `evidence_sources`, redacted config/log/db provenance labels, exporter warnings) so surfaces can explain why a node is shown as active/idle/stale/waiting without falling back to generic `fixture` language
 - bridge consumers should evaluate per-agent membership in drift arrays by `agent.id` so detail panes can say whether a given node is missing, stale, or doc-drifted instead of only repeating global counts

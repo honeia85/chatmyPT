@@ -215,9 +215,10 @@ def add_runtime_activity(payload: dict[str, Any], runtime: dict[str, Any]) -> No
 def main() -> None:
     fixture = load_json(FIXTURE_PATH)
     runtime = load_json(RUNTIME_PATH)
+    bridge_generated_at = datetime.now().astimezone().isoformat()
 
     payload = json.loads(json.dumps(fixture))
-    payload["generated_at"] = runtime.get("generated_at")
+    payload["generated_at"] = bridge_generated_at
     payload["generator_version"] = GENERATOR_VERSION
     payload["source_kind"] = "generated-bridge-from-runtime-and-fixture"
     payload["runtime_state_source"] = PUBLIC_RUNTIME_SOURCE
