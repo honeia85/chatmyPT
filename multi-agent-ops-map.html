@@ -182,9 +182,9 @@
       <h1>멀티에이전트 시스템을 한눈에</h1>
       <p class="sub">현재 HONEIA 운영 구조를 웹 GUI처럼 파악하기 위한 1차 프로토타입입니다. 지금은 구조 시각화와 읽기 중심이지만, 이후에는 보드 상태 연결, lane drill-down, 인터랙션까지 확장할 수 있게 설계했습니다.</p>
       <div class="quick-links" aria-label="Operations navigation">
-        <a class="quick-link" href="/index.html"><strong>Landing</strong> 돌아가기</a>
-        <a class="quick-link" href="/multi-agent-ops-map.html"><strong>Ops Map</strong> 현재 페이지</a>
-        <a class="quick-link" href="/agent-ops-console.html"><strong>Ops Console</strong> 열기</a>
+        <a class="quick-link" href="/"><strong>Landing</strong> 돌아가기</a>
+        <a class="quick-link" href="/multi-agent-ops-map"><strong>Ops Map</strong> 현재 페이지</a>
+        <a class="quick-link" href="/agent-ops-console"><strong>Ops Console</strong> 열기</a>
       </div>
 
       <div class="stack">
@@ -237,8 +237,8 @@
         </div>
 
         <div class="publish">
-          <strong>바로 게시 가능</strong>
-          <p class="sub" style="margin-top:8px">현재 사이트가 정적 Cloudflare Pages이므로, 이 페이지를 repo 루트에 <code>multi-agent-ops-map.html</code> 로 추가하고 index에서 링크만 걸면 바로 게시 가능합니다.</p>
+          <strong>현재 운영 메모</strong>
+          <p class="sub" style="margin-top:8px">이 페이지는 이미 <code>honeia-lab.uk/multi-agent-ops-map</code> 에 게시되어 있습니다. 지금 우선순위는 게시 자체보다 runtime snapshot·bridge freshness와 shell/bridge drift를 함께 검증하는 것입니다.</p>
         </div>
       </div>
     </aside>
@@ -362,11 +362,11 @@
       </div>
 
       <div class="detail-box" style="margin-top: 18px;">
-        <h4>Suggested Publish Plan</h4>
-        <div class="timeline-step"><div class="timeline-dot">1</div><div><h5>정적 페이지 추가</h5><p>repo 루트에 <code>multi-agent-ops-map.html</code> 추가</p></div></div>
-        <div class="timeline-step"><div class="timeline-dot">2</div><div><h5>메인 index에서 링크</h5><p>현재 ChatMyPT 페이지에 “Operations Map” CTA 추가</p></div></div>
-        <div class="timeline-step"><div class="timeline-dot">3</div><div><h5>상태 연결</h5><p>JSON 또는 build-time export로 board summary read-only 연결</p></div></div>
-        <div class="timeline-step"><div class="timeline-dot">4</div><div><h5>인터랙션</h5><p>카드 클릭 → task details / logs / notes drill-down</p></div></div>
+        <h4>Current Operations Checklist</h4>
+        <div class="timeline-step"><div class="timeline-dot">1</div><div><h5>프로덕션 라우트 확인</h5><p><code>/</code>, <code>/multi-agent-ops-map</code>, <code>/agent-ops-console</code> 가 모두 200으로 열리는지 확인</p></div></div>
+        <div class="timeline-step"><div class="timeline-dot">2</div><div><h5>런타임 스냅샷 freshness</h5><p><code>runtime-state-v0.json</code> 의 generated_at, observation gap, stale threshold를 확인</p></div></div>
+        <div class="timeline-step"><div class="timeline-dot">3</div><div><h5>브리지 정합성</h5><p><code>agent-ops-console-runtime.json</code> 의 generated_at, bridge-only / shell-only count, conceptual node semantics를 함께 점검</p></div></div>
+        <div class="timeline-step"><div class="timeline-dot">4</div><div><h5>내비게이션 canonical route 유지</h5><p>정적 링크는 extensionless route를 우선 사용하고 <code>.html</code> redirect 의존을 줄입니다.</p></div></div>
       </div>
 
       <div class="footer-note">이 프로토타입은 현재 운영 구조를 “대시보드처럼 이해”하게 만드는 1차 버전입니다. 나중에는 task summary JSON, kanban export, Notion inventory 결과를 받아 진짜 상태판처럼 만들 수 있습니다.</div>
