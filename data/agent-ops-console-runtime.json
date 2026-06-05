@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-05T15:14:52.432632+09:00",
+  "generated_at": "2026-06-05T21:44:42.757737+09:00",
   "summary": {
     "total_agents": 16,
     "runtime_profiles": 14,
-    "active_agents": 3,
+    "active_agents": 6,
     "waiting_agents": 2,
-    "blocked_agents": 6,
+    "blocked_agents": 2,
     "offline_agents": 0,
     "reports_last_24h": 1
   },
@@ -120,7 +120,7 @@
       "type": "runtime_snapshot",
       "title": "Runtime state snapshot v0",
       "summary": "Profiles=14 · mismatches=0 · missing_observation=2",
-      "created_at": "2026-06-05T15:14:52.432632+09:00",
+      "created_at": "2026-06-05T21:44:42.757737+09:00",
       "destination": "local",
       "status": "generated"
     },
@@ -161,14 +161,42 @@
   "activity": [
     {
       "id": "runtime-default",
-      "timestamp": "2026-06-05T15:13:50.826455+09:00",
+      "timestamp": "2026-06-05T21:44:40+09:00",
       "type": "runtime_observation",
       "agent_id": "default",
       "summary": "Observed model gpt-5.4 (active)"
     },
     {
+      "id": "runtime-dev",
+      "timestamp": "2026-06-05T21:44:40+09:00",
+      "type": "runtime_observation",
+      "agent_id": "dev",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-hybverify",
+      "timestamp": "2026-06-05T20:17:41+09:00",
+      "type": "runtime_observation",
+      "agent_id": "hybverify",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-hybresearch",
+      "timestamp": "2026-06-05T20:15:26+09:00",
+      "type": "runtime_observation",
+      "agent_id": "hybresearch",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-hybtriage",
+      "timestamp": "2026-06-05T20:02:47+09:00",
+      "type": "runtime_observation",
+      "agent_id": "hybtriage",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
       "id": "runtime-ops",
-      "timestamp": "2026-06-05T15:13:50+09:00",
+      "timestamp": "2026-06-05T17:51:35+09:00",
       "type": "runtime_observation",
       "agent_id": "ops",
       "summary": "Observed model gpt-5.4 (active)"
@@ -178,7 +206,7 @@
       "timestamp": "2026-06-05T14:33:32+09:00",
       "type": "runtime_observation",
       "agent_id": "auditor",
-      "summary": "Observed model gpt-5.4 (active)"
+      "summary": "Observed model gpt-5.4 (idle)"
     },
     {
       "id": "runtime-researchorchestrator",
@@ -186,34 +214,6 @@
       "type": "runtime_observation",
       "agent_id": "researchorchestrator",
       "summary": "Observed model gpt-5.4 (idle)"
-    },
-    {
-      "id": "runtime-librarianorchestrator",
-      "timestamp": "2026-06-05T06:33:50+09:00",
-      "type": "runtime_observation",
-      "agent_id": "librarianorchestrator",
-      "summary": "Observed model gpt-5.4 (idle)"
-    },
-    {
-      "id": "runtime-personalops",
-      "timestamp": "2026-06-05T06:33:17+09:00",
-      "type": "runtime_observation",
-      "agent_id": "personalops",
-      "summary": "Observed model gpt-5.4 (idle)"
-    },
-    {
-      "id": "runtime-assistant",
-      "timestamp": "2026-06-04T12:46:15+09:00",
-      "type": "runtime_observation",
-      "agent_id": "assistant",
-      "summary": "Observed model gpt-5.4 (stale)"
-    },
-    {
-      "id": "runtime-hybresearch",
-      "timestamp": "2026-06-03T11:58:41+09:00",
-      "type": "runtime_observation",
-      "agent_id": "hybresearch",
-      "summary": "Observed model gpt-5.4 (stale)"
     }
   ],
   "agents": [
@@ -240,8 +240,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-05T15:13:50.826455+09:00",
-        "last_report_at": "2026-06-05T15:13:50.826455+09:00",
+        "last_heartbeat_at": "2026-06-05T21:44:40+09:00",
+        "last_report_at": "2026-06-05T21:44:40+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -264,9 +264,9 @@
       "runtime_provenance": {
         "configured_model": "gpt-5.4",
         "observed_model": "gpt-5.4",
-        "observation_source": "state.db",
-        "observation_kind": null,
-        "observation_provider": null,
+        "observation_source": "agent.log",
+        "observation_kind": "client_created",
+        "observation_provider": "openai-codex",
         "evidence_sources": [
           "agent.log",
           "state.db"
@@ -361,7 +361,7 @@
         "runtime_snapshot"
       ],
       "runtime": {
-        "status": "active",
+        "status": "idle",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
         "last_heartbeat_at": "2026-06-05T14:33:32+09:00",
         "last_report_at": "2026-06-05T14:33:32+09:00",
@@ -414,18 +414,18 @@
         "runtime_snapshot"
       ],
       "runtime": {
-        "status": "blocked",
+        "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-03T11:57:32+09:00",
-        "last_report_at": "2026-06-03T11:57:32+09:00",
-        "blocked_reason": "Observation is stale and needs fresh runtime evidence.",
+        "last_heartbeat_at": "2026-06-05T21:44:40+09:00",
+        "last_report_at": "2026-06-05T21:44:40+09:00",
+        "blocked_reason": null,
         "waiting_reason": null
       },
       "runtime_provenance": {
         "configured_model": "gpt-5.4",
         "observed_model": "gpt-5.4",
         "observation_source": "agent.log",
-        "observation_kind": "conversation_turn",
+        "observation_kind": "client_created",
         "observation_provider": "openai-codex",
         "evidence_sources": [
           "agent.log",
@@ -483,7 +483,7 @@
         "evidence_sources": [],
         "configured_from": "profile:hybarchive/config.yaml",
         "log_dir": "profile:hybarchive/logs",
-        "state_db": null,
+        "state_db": "profile:hybarchive/state.db",
         "warnings": []
       }
     },
@@ -557,11 +557,11 @@
         "reporting_style": "source-and-implication"
       },
       "runtime": {
-        "status": "blocked",
+        "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-03T11:58:41+09:00",
-        "last_report_at": "2026-06-03T11:58:41+09:00",
-        "blocked_reason": "Observation is stale and needs fresh runtime evidence.",
+        "last_heartbeat_at": "2026-06-05T20:15:26+09:00",
+        "last_report_at": "2026-06-05T20:15:26+09:00",
+        "blocked_reason": null,
         "waiting_reason": null
       },
       "knowledge_refs": [
@@ -610,11 +610,11 @@
         "reporting_style": "bullet-summary"
       },
       "runtime": {
-        "status": "blocked",
+        "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-03T11:55:34+09:00",
-        "last_report_at": "2026-06-03T11:55:34+09:00",
-        "blocked_reason": "Observation is stale and needs fresh runtime evidence.",
+        "last_heartbeat_at": "2026-06-05T20:02:47+09:00",
+        "last_report_at": "2026-06-05T20:02:47+09:00",
+        "blocked_reason": null,
         "waiting_reason": null
       },
       "knowledge_refs": [
@@ -634,7 +634,7 @@
         "configured_model": "gpt-5.4",
         "observed_model": "gpt-5.4",
         "observation_source": "agent.log",
-        "observation_kind": "conversation_turn",
+        "observation_kind": "client_created",
         "observation_provider": "openai-codex",
         "evidence_sources": [
           "agent.log",
@@ -663,11 +663,11 @@
         "reporting_style": "verified-only"
       },
       "runtime": {
-        "status": "blocked",
+        "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-03T11:20:21+09:00",
-        "last_report_at": "2026-06-03T11:20:21+09:00",
-        "blocked_reason": "Observation is stale and needs fresh runtime evidence.",
+        "last_heartbeat_at": "2026-06-05T20:17:41+09:00",
+        "last_report_at": "2026-06-05T20:17:41+09:00",
+        "blocked_reason": null,
         "waiting_reason": null
       },
       "knowledge_refs": [
@@ -786,8 +786,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-05T15:13:50+09:00",
-        "last_report_at": "2026-06-05T15:13:50+09:00",
+        "last_heartbeat_at": "2026-06-05T17:51:35+09:00",
+        "last_report_at": "2026-06-05T17:51:35+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -796,7 +796,7 @@
         "observed_model": "gpt-5.4",
         "observation_source": "agent.log",
         "observation_kind": "client_created",
-        "observation_provider": null,
+        "observation_provider": "openai-codex",
         "evidence_sources": [
           "agent.log",
           "state.db"
@@ -1088,12 +1088,12 @@
   "source_kind": "generated-bridge-from-runtime-and-fixture",
   "runtime_state_source": "data/runtime-state-v0.json",
   "runtime_state_source_kind": "generated-runtime-snapshot",
-  "runtime_generated_at": "2026-06-05T15:14:52.432632+09:00",
+  "runtime_generated_at": "2026-06-05T21:44:42.757737+09:00",
   "runtime_summary": {
     "total_profiles": 14,
-    "active": 3,
-    "idle": 3,
-    "stale": 6,
+    "active": 6,
+    "idle": 4,
+    "stale": 2,
     "unknown": 2
   },
   "drift_summary": {
@@ -1106,11 +1106,7 @@
     "doc_without_runtime": [],
     "stale_observation": [
       "assistant",
-      "dev",
-      "hybbuild",
-      "hybresearch",
-      "hybtriage",
-      "hybverify"
+      "hybbuild"
     ],
     "missing_observation": [
       "hybarchive",
