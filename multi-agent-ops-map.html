@@ -194,10 +194,10 @@
             <div class="status-card"><span>Runtime Profiles</span><strong id="runtimeProfiles">-</strong></div>
             <div class="status-card"><span>Observed Active</span><strong id="runtimeActive">-</strong></div>
             <div class="status-card"><span>Drift Signals</span><strong id="runtimeDrift">-</strong></div>
-            <div class="status-card"><span>Snapshot</span><strong id="runtimeSnapshotLabel">fixture</strong></div>
+            <div class="status-card"><span>Snapshot</span><strong id="runtimeSnapshotLabel">runtime pending</strong></div>
             <div class="status-card"><span>Observation Gaps</span><strong id="runtimeEvidenceGaps">-</strong></div>
           </div>
-          <div class="footer-note" id="runtimeSnapshotAt" style="margin-top:10px;">generated runtime snapshot not loaded yet</div>
+          <div class="footer-note" id="runtimeSnapshotAt" style="margin-top:10px;">generated runtime snapshot pending</div>
         </div>
 
         <div class="publish">
@@ -539,6 +539,14 @@
       return Object.values(driftSummary || {}).reduce((sum, value) => sum + (Array.isArray(value) ? value.length : 0), 0);
     }
 
+    function applyRuntimeUnavailableMeta(reason, fallbackSourceLabel = 'ops map shell only') {
+      runtimeSnapshotLabel.textContent = `${fallbackSourceLabel} · runtime unavailable`;
+      runtimeEvidenceGaps.textContent = 'runtime unavailable';
+      runtimeSnapshotAt.textContent = reason
+        ? `runtime snapshot unavailable: ${reason}`
+        : 'runtime snapshot unavailable';
+    }
+
     function applyRuntimeSnapshotMeta(runtime, snapshotLabelText, snapshotAtText) {
       if (!runtime) return;
       const driftSummary = runtime?.drift_summary || {};
@@ -559,9 +567,7 @@
         const runtime = await readJsonResponse(response, '/data/runtime-state-v0.json');
         applyRuntimeSnapshotMeta(runtime);
       } catch (error) {
-        runtimeSnapshotLabel.textContent = 'fixture';
-        runtimeEvidenceGaps.textContent = 'fixture';
-        runtimeSnapshotAt.textContent = `runtime snapshot unavailable: ${error.message}`;
+        applyRuntimeUnavailableMeta(error.message);
       }
     }
 

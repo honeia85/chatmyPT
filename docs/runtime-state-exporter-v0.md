@@ -145,3 +145,4 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - `reconciliation.runtime_scope`: tells surfaces whether the exporter reconciled the full Hermes home or only a narrower fallback scope
 - `reconciliation.runtime_home_resolution`: records whether runtime discovery used the root directly or normalized from a profile-scoped `HERMES_HOME`
 - `reconciliation.stale_threshold_hours`: lets surfaces explain stale semantics instead of inventing them
+- when generated runtime JSON cannot be loaded, surfaces should say `runtime unavailable` / `runtime overlay unavailable` rather than pretending the currently rendered shell is itself authoritative runtime truth
