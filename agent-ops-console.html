@@ -83,7 +83,7 @@
     .pill strong { color: var(--text); }
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
     }
     .stat {
@@ -580,14 +580,25 @@
       return backing.length ? backing.join(', ') : 'none';
     }
 
+    function countAgentsBySourceKind(sourceKind) {
+      return (store?.agents || []).filter(agent => agent.source_kind === sourceKind).length;
+    }
+
     function getSelectedAgent() {
       return store.agentMap[selectedAgentId] || store.agents[0] || null;
     }
 
     function renderSummary() {
+      const runtimeOnlyCount = countAgentsBySourceKind('runtime_profile');
+      const overlayCount = countAgentsBySourceKind('runtime_profile_overlay');
+      const conceptualCount = countAgentsBySourceKind('conceptual_fixture');
       const stats = [
         ['Console Nodes', store.summary.total_agents],
         ['Runtime Profiles', store.summary.runtime_profiles ?? store.summary.total_agents],
+        ['Runtime-backed', runtimeOnlyCount + overlayCount],
+        ['Runtime-only', runtimeOnlyCount],
+        ['Overlay Nodes', overlayCount],
+        ['Conceptual Shells', conceptualCount],
         ['Active', store.summary.active_agents],
         ['Waiting', store.summary.waiting_agents],
         ['Blocked', store.summary.blocked_agents],

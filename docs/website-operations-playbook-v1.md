@@ -31,6 +31,8 @@
 - `Ops Console` opens
 - main navigation still shows expected links
 - runtime-backed surfaces show generated snapshot/provenance metadata rather than generic `fixture` wording when `/data/runtime-state-v0.json` and `/data/agent-ops-console-runtime.json` are present
+- `Ops Map` shows bridge reconciliation counts plus any `shell-only` / `bridge-only` gaps when the runtime bridge payload is present
+- `Ops Console` summary distinguishes runtime-backed, runtime-only, overlay, and conceptual-shell counts so transitional fixture dependence remains visible
 - custom domain remains active in Cloudflare Pages
 
 ## Incident shortcuts

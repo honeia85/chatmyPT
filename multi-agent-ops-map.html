@@ -107,6 +107,23 @@
     .status-card { padding: 12px; border-radius: 14px; background: rgba(255,255,255,.03); border:1px solid var(--border); }
     .status-card strong { display:block; font-size: 24px; margin-top: 2px; }
     .status-card span { font-size: 12px; color: var(--muted); }
+    .recon-group { margin-top: 12px; }
+    .recon-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+    .recon-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .node.shell-only {
+      border-style: dashed;
+      border-color: rgba(245,158,11,.28);
+    }
 
     .detail-title { font-size: 22px; margin: 10px 0 4px; letter-spacing: -.03em; }
     .detail-sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
@@ -198,6 +215,25 @@
             <div class="status-card"><span>Observation Gaps</span><strong id="runtimeEvidenceGaps">-</strong></div>
           </div>
           <div class="footer-note" id="runtimeSnapshotAt" style="margin-top:10px;">generated runtime snapshot pending</div>
+        </div>
+
+        <div class="legend">
+          <h3>Bridge Reconciliation</h3>
+          <div class="status-grid">
+            <div class="status-card"><span>Mapped Nodes</span><strong id="bridgeMappedCount">-</strong></div>
+            <div class="status-card"><span>Bridge-only Agents</span><strong id="bridgeOnlyCount">-</strong></div>
+            <div class="status-card"><span>Shell-only Nodes</span><strong id="shellOnlyCount">-</strong></div>
+            <div class="status-card"><span>Conceptual Bridge</span><strong id="conceptualBridgeCount">-</strong></div>
+          </div>
+          <div class="footer-note" id="bridgeCoverageSummary" style="margin-top:10px;">bridge reconciliation pending</div>
+          <div class="recon-group">
+            <div class="recon-label">Bridge-only agents</div>
+            <div class="recon-chips" id="bridgeOnlyList"><span class="pill">pending</span></div>
+          </div>
+          <div class="recon-group">
+            <div class="recon-label">Shell-only nodes</div>
+            <div class="recon-chips" id="shellOnlyList"><span class="pill">pending</span></div>
+          </div>
         </div>
 
         <div class="publish">
@@ -417,7 +453,28 @@
     const runtimeSnapshotLabel = document.getElementById('runtimeSnapshotLabel');
     const runtimeEvidenceGaps = document.getElementById('runtimeEvidenceGaps');
     const runtimeSnapshotAt = document.getElementById('runtimeSnapshotAt');
+    const bridgeMappedCount = document.getElementById('bridgeMappedCount');
+    const bridgeOnlyCount = document.getElementById('bridgeOnlyCount');
+    const shellOnlyCount = document.getElementById('shellOnlyCount');
+    const conceptualBridgeCount = document.getElementById('conceptualBridgeCount');
+    const bridgeCoverageSummary = document.getElementById('bridgeCoverageSummary');
+    const bridgeOnlyList = document.getElementById('bridgeOnlyList');
+    const shellOnlyList = document.getElementById('shellOnlyList');
     let runtimeBridge = null;
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderReconChips(items, formatter) {
+      if (!items?.length) return '<span class="pill">none</span>';
+      return items.map(item => `<span class="pill">${escapeHtml(formatter(item))}</span>`).join('');
+    }
 
     function agentHasDrift(agentId, driftKey) {
       return Boolean((runtimeBridge?.drift_summary?.[driftKey] || []).includes(agentId));
@@ -446,7 +503,21 @@
 
     function renderRuntimeBoxes(key) {
       const agent = runtimeBridge?.agentMap?.[key];
-      if (!agent) return '';
+      if (!runtimeBridge) return '';
+      if (!agent) {
+        return `
+          <div class="detail-box">
+            <h4>Runtime Reconciliation</h4>
+            <ul>
+              <li>bridge_status: shell-only node (no agent entry in ${runtimeBridge?.bridge_payload_url || 'unknown bridge payload'})</li>
+              <li>bridge_payload_kind: ${runtimeBridge?.source_kind || 'fixture-only payload'}</li>
+              <li>runtime_snapshot_path: ${runtimeBridge?.runtime_state_source || 'data/runtime-state-v0.json'}</li>
+              <li>runtime_snapshot_kind: ${runtimeBridge?.runtime_state_source_kind || 'generated-runtime-snapshot'}</li>
+              <li>interpretation: this card is presentation/context shell, not direct runtime truth</li>
+            </ul>
+          </div>
+        `;
+      }
       const backing = (agent.backing_profiles || []).join(', ') || 'none';
       const driftSummary = runtimeBridge?.drift_summary || {};
       const staleRule = runtimeBridge?.reconciliation?.stale_threshold_hours ?? '?';
@@ -496,13 +567,66 @@
       return (driftSummary.runtime_without_doc || []).length + (driftSummary.doc_without_runtime || []).length;
     }
 
+    function applyRuntimeCoverageUnavailable(reason = 'runtime bridge unavailable') {
+      bridgeMappedCount.textContent = '-';
+      bridgeOnlyCount.textContent = '-';
+      shellOnlyCount.textContent = '-';
+      conceptualBridgeCount.textContent = '-';
+      bridgeCoverageSummary.textContent = reason;
+      bridgeOnlyList.innerHTML = '<span class="pill">runtime bridge unavailable</span>';
+      shellOnlyList.innerHTML = '<span class="pill">runtime bridge unavailable</span>';
+      nodes.forEach(node => {
+        node.classList.remove('shell-only');
+        const foot = node.querySelector('.foot');
+        const mini = foot?.querySelector('.mini');
+        if (mini && mini.dataset.baseText) {
+          mini.textContent = mini.dataset.baseText;
+        }
+        node.title = '';
+      });
+    }
+
+    function renderBridgeCoverage() {
+      if (!runtimeBridge?.agents) {
+        applyRuntimeCoverageUnavailable();
+        return;
+      }
+      const nodeIds = nodes.map(node => node.dataset.node);
+      const nodeIdSet = new Set(nodeIds);
+      const bridgeAgents = runtimeBridge.agents || [];
+      const bridgeIdSet = new Set(bridgeAgents.map(agent => agent.id));
+      const mappedAgents = bridgeAgents.filter(agent => nodeIdSet.has(agent.id));
+      const bridgeOnlyAgents = bridgeAgents.filter(agent => !nodeIdSet.has(agent.id));
+      const shellOnlyNodes = nodeIds.filter(id => !bridgeIdSet.has(id));
+      const conceptualBridgeAgents = bridgeAgents.filter(agent => agent.source_kind === 'conceptual_fixture');
+
+      bridgeMappedCount.textContent = String(mappedAgents.length);
+      bridgeOnlyCount.textContent = String(bridgeOnlyAgents.length);
+      shellOnlyCount.textContent = String(shellOnlyNodes.length);
+      conceptualBridgeCount.textContent = String(conceptualBridgeAgents.length);
+      bridgeCoverageSummary.textContent = `bridge reconciled ${mappedAgents.length}/${nodeIds.length} shell nodes against ${runtimeBridge?.runtime_summary?.total_profiles ?? runtimeBridge?.summary?.runtime_profiles ?? bridgeAgents.length} runtime profiles and ${runtimeBridge?.summary?.total_agents ?? bridgeAgents.length} console nodes.`;
+      bridgeOnlyList.innerHTML = renderReconChips(bridgeOnlyAgents, agent => `${agent.id} · ${agent.source_kind || 'unknown'}`);
+      shellOnlyList.innerHTML = renderReconChips(shellOnlyNodes, id => `${id} · shell only`);
+    }
+
     function applyRuntimeNodeHints() {
       if (!runtimeBridge?.agentMap) return;
       nodes.forEach(node => {
         const agent = runtimeBridge.agentMap[node.dataset.node];
-        if (!agent) return;
         const foot = node.querySelector('.foot');
         const mini = foot?.querySelector('.mini');
+        if (mini && !mini.dataset.baseText) {
+          mini.dataset.baseText = mini.textContent;
+        }
+        if (!agent) {
+          node.classList.add('shell-only');
+          if (mini) {
+            mini.textContent = `${mini.dataset.baseText || mini.textContent} · shell only`;
+          }
+          node.title = `shell-only node · no agent backing in ${runtimeBridge?.bridge_payload_url || '/data/agent-ops-console-runtime.json'}`;
+          return;
+        }
+        node.classList.remove('shell-only');
         if (mini) {
           const driftLabel = summarizeAgentDrift(agent.id);
           mini.textContent = agent.runtime?.last_heartbeat_at
@@ -574,6 +698,7 @@
       runtimeSnapshotAt.textContent = reason
         ? `runtime snapshot unavailable: ${reason}`
         : 'runtime snapshot unavailable';
+      applyRuntimeCoverageUnavailable(`bridge coverage unavailable: ${reason || 'runtime unavailable'}`);
     }
 
     function applyRuntimeSnapshotMeta(runtime, snapshotLabelText, snapshotAtText) {
@@ -618,10 +743,12 @@
             reconciliation: data.reconciliation || {}
           }, `${data.source_kind || 'generated bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'}`, `generated at ${new Date(data.runtime_generated_at || data.generated_at).toLocaleString('ko-KR')} · source=${data.runtime_state_source || 'data/runtime-state-v0.json'} · observation_gaps=${(data.drift_summary?.missing_observation || []).length + (data.drift_summary?.stale_observation || []).length} · doc_drift=${countDocDrift(data.drift_summary || {})} · stale>${data.reconciliation?.stale_threshold_hours ?? '?'}h · resolution=${data.reconciliation?.runtime_home_resolution || 'unknown'}`);
         }
+        renderBridgeCoverage();
         applyRuntimeNodeHints();
         const activeNode = document.querySelector('.node.active');
         if (activeNode) renderDetail(activeNode.dataset.node);
       } catch (error) {
+        applyRuntimeCoverageUnavailable(`bridge coverage unavailable: ${error.message}`);
         console.warn('Runtime bridge unavailable for ops map detail overlay.', error);
       }
     }

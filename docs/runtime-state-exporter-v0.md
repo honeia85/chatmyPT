@@ -148,4 +148,7 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - `reconciliation.runtime_scope`: tells surfaces whether the exporter reconciled the full Hermes home or only a narrower fallback scope
 - `reconciliation.runtime_home_resolution`: records whether runtime discovery used the root directly or normalized from a profile-scoped `HERMES_HOME`
 - `reconciliation.stale_threshold_hours`: lets surfaces explain stale semantics instead of inventing them
+- ops console summary cards should distinguish runtime-backed totals, runtime-only nodes, overlay nodes, and conceptual shells so operators can see how much of the surface is still transitional shell
+- ops map consumers should compute bridge reconciliation counts (`mapped nodes`, `bridge-only agents`, `shell-only nodes`, `conceptual bridge nodes`) from the loaded bridge payload instead of implying the static shell fully matches runtime inventory
+- selected ops map nodes without bridge backing should explicitly say they are presentation/context shells, not direct runtime truth
 - when generated runtime JSON cannot be loaded, surfaces should say `runtime unavailable` / `runtime overlay unavailable` rather than pretending the currently rendered shell is itself authoritative runtime truth
