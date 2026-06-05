@@ -440,6 +440,9 @@
       const driftSummary = runtimeBridge?.drift_summary || {};
       const staleRule = runtimeBridge?.reconciliation?.stale_threshold_hours ?? '?';
       const snapshotGeneratedAt = runtimeBridge?.runtime_generated_at || runtimeBridge?.generated_at;
+      const runtimeProvenance = agent.runtime_provenance || {};
+      const evidenceSources = (runtimeProvenance.evidence_sources || []).join(', ') || 'none';
+      const warnings = (runtimeProvenance.warnings || []).join(', ') || 'none';
       return `
         <div class="detail-box">
           <h4>Runtime Provenance</h4>
@@ -447,6 +450,13 @@
             <li>source_kind: ${agent.source_kind || 'fixture'}</li>
             <li>backing_profiles: ${backing}</li>
             <li>snapshot_generated_at: ${snapshotGeneratedAt ? new Date(snapshotGeneratedAt).toLocaleString('ko-KR') : 'unknown'}</li>
+            <li>observed_source: ${runtimeProvenance.observation_source || runtimeProvenance.note || 'none'}</li>
+            <li>observed_source_kind: ${runtimeProvenance.observation_kind || 'n/a'}</li>
+            <li>evidence_sources: ${evidenceSources}</li>
+            <li>configured_model: ${runtimeProvenance.configured_model || 'unknown'}</li>
+            <li>observed_model: ${runtimeProvenance.observed_model || 'unknown'}</li>
+            <li>configured_from: ${runtimeProvenance.configured_from || 'n/a'}</li>
+            <li>state_db_evidence: ${runtimeProvenance.state_db || 'n/a'}</li>
             <li>last heartbeat: ${agent.runtime?.last_heartbeat_at ? new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR') : 'no observed runtime evidence'}</li>
           </ul>
         </div>
@@ -459,6 +469,8 @@
             <li>runtime_without_doc (agent): ${agentHasDrift(agent.id, 'runtime_without_doc') ? 'yes' : 'no'}</li>
             <li>doc_without_runtime (agent): ${agentHasDrift(agent.id, 'doc_without_runtime') ? 'yes' : 'no'}</li>
             <li>stale threshold: &gt;${staleRule}h</li>
+            <li>runtime home resolution: ${runtimeBridge?.reconciliation?.runtime_home_resolution || 'unknown'}</li>
+            <li>exporter warnings: ${warnings}</li>
           </ul>
         </div>
       `;

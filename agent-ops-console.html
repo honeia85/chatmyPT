@@ -682,6 +682,7 @@
       const knowledgeRefs = (agent.knowledge_refs || []).map(id => store.knowledgeMap[id]).filter(Boolean);
       const ruleRefs = (agent.rule_refs || []).map(id => store.ruleMap[id]).filter(Boolean);
       const parent = agent.parent_id ? store.agentMap[agent.parent_id] : null;
+      const runtimeProvenance = agent.runtime_provenance || {};
 
       const tabs = [
         ['identity', 'Identity'],
@@ -730,9 +731,19 @@
           ${kv('Snapshot generated', escapeHtml(formatDate(store.runtime_generated_at || store.generated_at)))}
           ${kv('Runtime source', escapeHtml(store.runtime_state_source || 'fixture-only payload'))}
           ${kv('Bridge source kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'fixture'))}
+          ${kv('Observed source', escapeHtml(runtimeProvenance.observation_source || runtimeProvenance.note || 'none'))}
+          ${kv('Observed source kind', escapeHtml(runtimeProvenance.observation_kind || 'n/a'))}
+          ${kv('Evidence sources', chips(runtimeProvenance.evidence_sources || [], value => value))}
+          ${kv('Configured model', escapeHtml(runtimeProvenance.configured_model || 'unknown'))}
+          ${kv('Observed model', escapeHtml(runtimeProvenance.observed_model || 'unknown'))}
+          ${kv('Configured from', escapeHtml(runtimeProvenance.configured_from || 'n/a'))}
+          ${kv('Log evidence dir', escapeHtml(runtimeProvenance.log_dir || 'n/a'))}
+          ${kv('State DB evidence', escapeHtml(runtimeProvenance.state_db || 'n/a'))}
+          ${kv('Runtime home resolution', escapeHtml(store.reconciliation?.runtime_home_resolution || 'unknown'))}
           ${kv('Agent drift flags', escapeHtml(describeAgentDrift(agent.id)))}
           ${kv('Drift semantics', escapeHtml(`signals=${countDriftSignals(store.drift_summary || {})} · observation_gaps=${countObservationGaps(store.drift_summary || {})} · doc_drift=${countDocDrift(store.drift_summary || {})} · stale>${store.reconciliation?.stale_threshold_hours ?? '?'}h`))}
           ${kv('Doc drift detail', escapeHtml(`runtime_without_doc=${(store.drift_summary?.runtime_without_doc || []).join(', ') || 'none'} · doc_without_runtime=${(store.drift_summary?.doc_without_runtime || []).join(', ') || 'none'}`))}
+          ${kv('Exporter warnings', runtimeProvenance.warnings?.length ? chips(runtimeProvenance.warnings, value => value) : '<span class="empty">None</span>')}
           ${kv('Blocked reason', agent.runtime.blocked_reason ? escapeHtml(agent.runtime.blocked_reason) : '<span class="empty">None</span>')}
           ${kv('Waiting reason', agent.runtime.waiting_reason ? escapeHtml(agent.runtime.waiting_reason) : '<span class="empty">None</span>')}
         </div>

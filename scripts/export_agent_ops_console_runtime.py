@@ -98,6 +98,25 @@ def fmt_profile_runtime(profile: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def fmt_runtime_provenance(profile: dict[str, Any]) -> dict[str, Any]:
+    observed = profile.get("observed") or {}
+    configured = profile.get("configured") or {}
+    provenance = profile.get("provenance") or {}
+    observed_fallbacks = profile.get("observed_fallbacks") or {}
+    return {
+        "configured_model": configured.get("model"),
+        "observed_model": observed.get("model"),
+        "observation_source": observed.get("source"),
+        "observation_kind": observed.get("raw_kind"),
+        "observation_provider": observed.get("provider"),
+        "evidence_sources": observed_fallbacks.get("sources_present") or [],
+        "configured_from": provenance.get("configured_from"),
+        "log_dir": provenance.get("log_dir"),
+        "state_db": provenance.get("state_db"),
+        "warnings": profile.get("warnings") or [],
+    }
+
+
 def merge_agent(existing: dict[str, Any], profile: dict[str, Any]) -> dict[str, Any]:
     agent = json.loads(json.dumps(existing))
     agent["display_name"] = profile.get("display_name") or agent.get("display_name")
@@ -111,6 +130,7 @@ def merge_agent(existing: dict[str, Any], profile: dict[str, Any]) -> dict[str, 
     if provenance.get("configured_from"):
         source_line += f" · source={Path(provenance['configured_from']).name}"
     agent["description"] = f"{agent.get('description', '').rstrip()} Runtime bridge: {source_line}.".strip()
+    agent["runtime_provenance"] = fmt_runtime_provenance(profile)
     return agent
 
 
@@ -136,6 +156,7 @@ def make_new_agent(profile: dict[str, Any]) -> dict[str, Any]:
         "backing_profiles": [profile["id"]],
         **base,
         "runtime": fmt_profile_runtime(profile),
+        "runtime_provenance": fmt_runtime_provenance(profile),
     }
 
 
@@ -221,6 +242,22 @@ def main() -> None:
         if agent["id"] not in seen:
             agent.setdefault("source_kind", "conceptual_fixture")
             agent.setdefault("backing_profiles", CONCEPTUAL_BACKING.get(agent["id"], []))
+            agent.setdefault(
+                "runtime_provenance",
+                {
+                    "configured_model": None,
+                    "observed_model": None,
+                    "observation_source": None,
+                    "observation_kind": None,
+                    "observation_provider": None,
+                    "evidence_sources": [],
+                    "configured_from": None,
+                    "log_dir": None,
+                    "state_db": None,
+                    "warnings": [],
+                    "note": "conceptual node without direct runtime profile backing",
+                },
+            )
             merged_agents.append(agent)
 
     payload["agents"] = merged_agents

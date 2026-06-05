@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-06-05T08:57:55.591341+09:00",
+  "generated_at": "2026-06-05T13:07:28.940868+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
     "total_profiles": 14,
-    "active": 5,
-    "idle": 2,
-    "stale": 5,
+    "active": 2,
+    "idle": 3,
+    "stale": 7,
     "unknown": 2
   },
   "profiles": [
@@ -24,7 +24,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-05T08:57:54+09:00",
+        "last_seen_at": "2026-06-05T13:07:25+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -32,17 +32,17 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-05T08:57:54+09:00",
+          "last_seen_at": "2026-06-05T13:07:25+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-05T08:57:04.359071+09:00",
+          "last_seen_at": "2026-06-05T13:06:08.692275+09:00",
           "source": "state.db",
-          "message_count": 0,
-          "tool_call_count": 0,
-          "api_call_count": 2,
+          "message_count": 15,
+          "tool_call_count": 8,
+          "api_call_count": 6,
           "end_reason": null
         },
         "sources_present": [
@@ -103,10 +103,12 @@
         ]
       },
       "status": {
-        "activity": "idle",
-        "taxonomy": "inferred"
+        "activity": "stale",
+        "taxonomy": "stale"
       },
-      "drift": [],
+      "drift": [
+        "stale_observation"
+      ],
       "provenance": {
         "configured_from": "profile:assistant/config.yaml",
         "log_dir": "profile:assistant/logs",
@@ -155,11 +157,12 @@
         ]
       },
       "status": {
-        "activity": "idle",
-        "taxonomy": "inferred"
+        "activity": "stale",
+        "taxonomy": "stale"
       },
       "drift": [
-        "runtime_without_doc"
+        "runtime_without_doc",
+        "stale_observation"
       ],
       "provenance": {
         "configured_from": "profile:auditor/config.yaml",
@@ -510,7 +513,7 @@
         ]
       },
       "status": {
-        "activity": "active",
+        "activity": "idle",
         "taxonomy": "inferred"
       },
       "drift": [
@@ -537,7 +540,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-05T08:57:28+09:00",
+        "last_seen_at": "2026-06-05T13:07:25+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -545,7 +548,7 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-05T08:57:28+09:00",
+          "last_seen_at": "2026-06-05T13:07:25+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
@@ -616,7 +619,7 @@
         ]
       },
       "status": {
-        "activity": "active",
+        "activity": "idle",
         "taxonomy": "inferred"
       },
       "drift": [
@@ -670,7 +673,7 @@
         ]
       },
       "status": {
-        "activity": "active",
+        "activity": "idle",
         "taxonomy": "inferred"
       },
       "drift": [],
@@ -722,6 +725,8 @@
     ],
     "doc_without_runtime": [],
     "stale_observation": [
+      "assistant",
+      "auditor",
       "dev",
       "hybbuild",
       "hybresearch",
@@ -736,7 +741,7 @@
   "reconciliation": {
     "doc_source": "coordination/rules/profile-map.md",
     "runtime_source": "hermes-home",
-    "runtime_home_resolution": "direct-root",
+    "runtime_home_resolution": "normalized-from-profile-dir",
     "runtime_scope": "full-hermes-home",
     "stale_threshold_hours": 24
   },
