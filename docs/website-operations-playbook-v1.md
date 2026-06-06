@@ -59,6 +59,7 @@ Check:
 ## GitHub operating notes
 - Git remote push is configured and working
 - branch pushes are possible
-- `gh` CLI is not installed on this machine right now
-- therefore, code fix + branch push is available now
-- PR creation is possible later via GitHub web UI or a dedicated API path, but not via `gh` out of the box
+- `gh` CLI is installed on this machine (`gh version 2.93.0` verified 2026-06-06)
+- `gh auth status` is currently healthy for account `honeia85`
+- therefore code fix + branch push + draft PR creation/update are all available from this host when needed
+- still treat production as unchanged until custom-domain verification passes after merge/deploy
