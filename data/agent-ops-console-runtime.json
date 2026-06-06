@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-06T19:47:01.632848+09:00",
+  "generated_at": "2026-06-06T23:15:27.692555+09:00",
   "summary": {
     "total_agents": 16,
     "runtime_profiles": 14,
-    "active_agents": 7,
+    "active_agents": 6,
     "waiting_agents": 0,
-    "blocked_agents": 4,
+    "blocked_agents": 5,
     "offline_agents": 0,
     "reports_last_24h": 1
   },
@@ -36,14 +36,14 @@
       "mission": "Briefing, summaries, and routine support."
     },
     {
-      "id": "hybrid",
-      "name": "Hybrid Lane",
-      "mission": "Shared worker lane for triage, build, verification, and archive support."
-    },
-    {
       "id": "dev",
       "name": "Development",
       "mission": "Implementation, tests, and repository changes."
+    },
+    {
+      "id": "hybrid",
+      "name": "Hybrid Lane",
+      "mission": "Shared worker lane for triage, build, verification, and archive support."
     }
   ],
   "knowledge_refs": [
@@ -120,7 +120,7 @@
       "type": "runtime_snapshot",
       "title": "Runtime state snapshot v0",
       "summary": "Profiles=14 · mismatches=0 · missing_observation=0",
-      "created_at": "2026-06-06T19:47:01.483696+09:00",
+      "created_at": "2026-06-06T23:15:27.535310+09:00",
       "destination": "local",
       "status": "generated"
     },
@@ -161,9 +161,16 @@
   "activity": [
     {
       "id": "runtime-researchorchestrator",
-      "timestamp": "2026-06-06T19:47:01+09:00",
+      "timestamp": "2026-06-06T23:15:26+09:00",
       "type": "runtime_observation",
       "agent_id": "researchorchestrator",
+      "summary": "Observed model gpt-5.4 (active)"
+    },
+    {
+      "id": "runtime-default",
+      "timestamp": "2026-06-06T23:03:40.068265+09:00",
+      "type": "runtime_observation",
+      "agent_id": "default",
       "summary": "Observed model gpt-5.4 (active)"
     },
     {
@@ -171,13 +178,6 @@
       "timestamp": "2026-06-06T19:44:09+09:00",
       "type": "runtime_observation",
       "agent_id": "dev",
-      "summary": "Observed model gpt-5.4 (active)"
-    },
-    {
-      "id": "runtime-default",
-      "timestamp": "2026-06-06T19:37:03.666037+09:00",
-      "type": "runtime_observation",
-      "agent_id": "default",
       "summary": "Observed model gpt-5.4 (active)"
     },
     {
@@ -206,7 +206,7 @@
       "timestamp": "2026-06-06T14:12:26+09:00",
       "type": "runtime_observation",
       "agent_id": "tradingorchestrator",
-      "summary": "Observed model gpt-5.4 (active)"
+      "summary": "Observed model gpt-5.4 (idle)"
     },
     {
       "id": "runtime-auditor",
@@ -240,8 +240,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-06T19:37:03.666037+09:00",
-        "last_report_at": "2026-06-06T19:37:03.666037+09:00",
+        "last_heartbeat_at": "2026-06-06T23:03:40.068265+09:00",
+        "last_report_at": "2026-06-06T23:03:40.068265+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -334,22 +334,22 @@
     {
       "id": "auditor",
       "display_name": "auditor",
-      "team": "hybrid",
+      "team": "ops",
       "type": "worker",
       "source_kind": "runtime_profile",
       "backing_profiles": [
         "auditor"
       ],
-      "layer": 2,
+      "layer": 1,
       "parent_id": "default",
       "child_ids": [],
-      "description": "Runtime-discovered profile auditor.",
-      "mission": "Surface runtime truth inside the ops console.",
+      "description": "Cross-agent audit profile for health, drift, and publishable progress digests.",
+      "mission": "Audit system health and progress without taking over remediation ownership.",
       "soul": {
-        "tone": "direct",
-        "decision_posture": "pragmatic",
+        "tone": "skeptical",
+        "decision_posture": "evidence-first",
         "risk_appetite": "low",
-        "reporting_style": "observed-first"
+        "reporting_style": "audit-log"
       },
       "knowledge_refs": [
         "kb-hermes-automation"
@@ -358,7 +358,8 @@
         "rule-report-attempted-failed-verified"
       ],
       "report_types": [
-        "runtime_snapshot"
+        "audit_report",
+        "progress_digest"
       ],
       "runtime": {
         "status": "idle",
@@ -467,11 +468,11 @@
         "archive_note"
       ],
       "runtime": {
-        "status": "idle",
+        "status": "blocked",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
         "last_heartbeat_at": "2026-06-05T22:02:40+09:00",
         "last_report_at": "2026-06-05T22:02:40+09:00",
-        "blocked_reason": null,
+        "blocked_reason": "Observation is stale and needs fresh runtime evidence.",
         "waiting_reason": null
       },
       "runtime_provenance": {
@@ -705,22 +706,22 @@
     {
       "id": "librarianorchestrator",
       "display_name": "librarianorchestrator",
-      "team": "hybrid",
-      "type": "worker",
+      "team": "research",
+      "type": "domain-owner",
       "source_kind": "runtime_profile",
       "backing_profiles": [
         "librarianorchestrator"
       ],
-      "layer": 2,
+      "layer": 1,
       "parent_id": "default",
       "child_ids": [],
-      "description": "Runtime-discovered profile librarianorchestrator.",
-      "mission": "Surface runtime truth inside the ops console.",
+      "description": "Domain owner for canonical HONEIA Brain notes, source intake, and knowledge governance.",
+      "mission": "Keep canonical notes, intake rules, and promotion paths coherent across the knowledge system.",
       "soul": {
-        "tone": "direct",
-        "decision_posture": "pragmatic",
+        "tone": "methodical",
+        "decision_posture": "governance-first",
         "risk_appetite": "low",
-        "reporting_style": "observed-first"
+        "reporting_style": "handoff-note"
       },
       "knowledge_refs": [
         "kb-hermes-automation"
@@ -729,7 +730,8 @@
         "rule-report-attempted-failed-verified"
       ],
       "report_types": [
-        "runtime_snapshot"
+        "governance_note",
+        "knowledge_digest"
       ],
       "runtime": {
         "status": "blocked",
@@ -813,22 +815,22 @@
     {
       "id": "personalops",
       "display_name": "personalops",
-      "team": "hybrid",
-      "type": "worker",
+      "team": "research",
+      "type": "domain-owner",
       "source_kind": "runtime_profile",
       "backing_profiles": [
         "personalops"
       ],
-      "layer": 2,
+      "layer": 1,
       "parent_id": "default",
       "child_ids": [],
-      "description": "Runtime-discovered profile personalops.",
-      "mission": "Surface runtime truth inside the ops console.",
+      "description": "Domain owner for personal consumer-service workflows, playbooks, and Gmail/calendar hardening.",
+      "mission": "Harden personal service operations into repeatable human-in-the-loop playbooks.",
       "soul": {
-        "tone": "direct",
-        "decision_posture": "pragmatic",
+        "tone": "practical",
+        "decision_posture": "operator-first",
         "risk_appetite": "low",
-        "reporting_style": "observed-first"
+        "reporting_style": "playbook-log"
       },
       "knowledge_refs": [
         "kb-hermes-automation"
@@ -837,7 +839,8 @@
         "rule-report-attempted-failed-verified"
       ],
       "report_types": [
-        "runtime_snapshot"
+        "ops_report",
+        "playbook_update"
       ],
       "runtime": {
         "status": "blocked",
@@ -885,8 +888,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-06T19:47:01+09:00",
-        "last_report_at": "2026-06-06T19:47:01+09:00",
+        "last_heartbeat_at": "2026-06-06T23:15:26+09:00",
+        "last_report_at": "2026-06-06T23:15:26+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -944,7 +947,7 @@
         "reporting_style": "blocker-first"
       },
       "runtime": {
-        "status": "active",
+        "status": "idle",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
         "last_heartbeat_at": "2026-06-06T14:12:26+09:00",
         "last_report_at": "2026-06-06T14:12:26+09:00",
@@ -1094,12 +1097,12 @@
   "source_kind": "generated-bridge-from-runtime-and-fixture",
   "runtime_state_source": "data/runtime-state-v0.json",
   "runtime_state_source_kind": "generated-runtime-snapshot",
-  "runtime_generated_at": "2026-06-06T19:47:01.483696+09:00",
+  "runtime_generated_at": "2026-06-06T23:15:27.535310+09:00",
   "runtime_summary": {
     "total_profiles": 14,
-    "active": 7,
+    "active": 6,
     "idle": 3,
-    "stale": 4,
+    "stale": 5,
     "unknown": 0
   },
   "drift_summary": {
@@ -1108,6 +1111,7 @@
     "doc_without_runtime": [],
     "stale_observation": [
       "assistant",
+      "hybarchive",
       "hybbuild",
       "librarianorchestrator",
       "personalops"
@@ -1117,7 +1121,7 @@
   "reconciliation": {
     "doc_source": "coordination/rules/profile-map.md",
     "runtime_source": "hermes-home",
-    "runtime_home_resolution": "normalized-from-profile-dir",
+    "runtime_home_resolution": "direct-root",
     "runtime_scope": "full-hermes-home",
     "stale_threshold_hours": 24
   }
