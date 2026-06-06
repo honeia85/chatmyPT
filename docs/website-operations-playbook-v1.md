@@ -32,6 +32,7 @@
 - main navigation still shows expected links
 - runtime-backed surfaces show generated snapshot/provenance metadata rather than generic `fixture` wording when `/data/runtime-state-v0.json` and `/data/agent-ops-console-runtime.json` are present
 - runtime-backed surfaces distinguish bridge payload generation time from upstream runtime snapshot time when `/data/agent-ops-console-runtime.json` is present
+- when `/data/runtime-state-v0.json` is newer than the bridge payload's embedded runtime timestamp, top-level runtime pills prefer the fresher standalone snapshot and explicitly show that the bridge view may lag until the next bridge export
 - `Ops Map` shows bridge reconciliation counts plus any `shell-only` / `bridge-only` gaps when the runtime bridge payload is present
 - `Ops Console` summary distinguishes runtime-backed, runtime-only, overlay, and conceptual-shell counts so transitional fixture dependence remains visible
 - custom domain remains active in Cloudflare Pages

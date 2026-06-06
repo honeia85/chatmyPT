@@ -142,6 +142,7 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - `runtime_summary`: carries upstream profile/activity totals into bridge-backed surfaces as generated metadata
 - bridge consumers should surface the loaded bridge payload path so operators can tell whether they are reading `/data/agent-ops-console-runtime.json` or a fallback shell
 - bridge consumers should surface both bridge-payload and upstream runtime-snapshot timestamps when they differ, rather than collapsing them into one ambiguous `generated_at`
+- bridge consumers should re-check standalone `/data/runtime-state-v0.json` after loading a bridge payload and prefer the fresher standalone runtime snapshot for top-level freshness/drift pills when the embedded bridge copy lags
 - bridge consumers should translate per-agent `source_kind` into human-readable authority labels such as `direct runtime profile` vs `conceptual shell` instead of collapsing everything into generic `fixture` wording
 - per-agent `runtime_provenance`: preserves runtime-backed evidence fields (`observation_source`, `observation_kind`, `evidence_sources`, redacted config/log/db provenance labels, exporter warnings) so surfaces can explain why a node is shown as active/idle/stale/waiting without falling back to generic `fixture` language
 - bridge consumers should evaluate per-agent membership in drift arrays by `agent.id` so detail panes can say whether a given node is missing, stale, or doc-drifted instead of only repeating global counts

@@ -476,6 +476,26 @@
       return items.map(item => `<span class="pill">${escapeHtml(formatter(item))}</span>`).join('');
     }
 
+    function parseTimestampMs(iso) {
+      if (!iso) return null;
+      const parsed = new Date(iso).getTime();
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function describeFreshnessGap(newerIso, olderIso, newerLabel = 'runtime-state-v0.json', olderLabel = 'bridge runtime copy') {
+      const newerMs = parseTimestampMs(newerIso);
+      const olderMs = parseTimestampMs(olderIso);
+      if (newerMs == null || olderMs == null || newerMs <= olderMs) return null;
+      const deltaSeconds = (newerMs - olderMs) / 1000;
+      if (deltaSeconds >= 3600) {
+        return `${newerLabel} newer than ${olderLabel} by ${(deltaSeconds / 3600).toFixed(2)}h`;
+      }
+      if (deltaSeconds >= 60) {
+        return `${newerLabel} newer than ${olderLabel} by ${(deltaSeconds / 60).toFixed(1)}m`;
+      }
+      return `${newerLabel} newer than ${olderLabel} by ${deltaSeconds.toFixed(1)}s`;
+    }
+
     function describeTimestampDelta(laterIso, earlierIso) {
       if (!laterIso || !earlierIso) return 'n/a';
       try {
@@ -731,13 +751,44 @@
       runtimeSnapshotAt.textContent = snapshotAtText || `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · observation_gaps=${missingCount + staleCount} · doc_drift=${docDriftCount} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · scope=${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · resolution=${runtime?.reconciliation?.runtime_home_resolution || 'unknown'}`;
     }
 
+    async function fetchRuntimeSnapshot() {
+      const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
+      return readJsonResponse(response, '/data/runtime-state-v0.json');
+    }
+
     async function loadRuntimeSnapshotMeta() {
       try {
-        const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
-        const runtime = await readJsonResponse(response, '/data/runtime-state-v0.json');
+        const runtime = await fetchRuntimeSnapshot();
         applyRuntimeSnapshotMeta(runtime);
+        return runtime;
       } catch (error) {
         applyRuntimeUnavailableMeta(error.message);
+        return null;
+      }
+    }
+
+    async function preferStandaloneRuntimeSnapshotMeta(bridgeData) {
+      try {
+        const runtime = await fetchRuntimeSnapshot();
+        const runtimeGeneratedMs = parseTimestampMs(runtime?.generated_at);
+        const bridgeRuntimeGeneratedMs = parseTimestampMs(bridgeData?.runtime_generated_at || bridgeData?.generated_at);
+        if (runtimeGeneratedMs == null || (bridgeRuntimeGeneratedMs != null && runtimeGeneratedMs <= bridgeRuntimeGeneratedMs)) {
+          return runtime;
+        }
+        const freshnessNote = describeFreshnessGap(runtime?.generated_at, bridgeData?.runtime_generated_at || bridgeData?.generated_at)
+          || 'runtime-state-v0.json newer than bridge runtime copy';
+        const driftSummary = runtime?.drift_summary || {};
+        const observationGapCount = (driftSummary.missing_observation || []).length + (driftSummary.stale_observation || []).length;
+        const docDriftCount = countDocDrift(driftSummary);
+        applyRuntimeSnapshotMeta(
+          runtime,
+          `${runtime?.source_kind || 'generated-runtime-snapshot'} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${freshnessNote}`,
+          `generated at ${new Date(runtime.generated_at).toLocaleString('ko-KR')} · ${freshnessNote} · bridge detail cards may lag until next bridge export · observation_gaps=${observationGapCount} · doc_drift=${docDriftCount} · stale>${runtime?.reconciliation?.stale_threshold_hours ?? '?'}h · resolution=${runtime?.reconciliation?.runtime_home_resolution || 'unknown'}`
+        );
+        return runtime;
+      } catch (error) {
+        console.warn('Standalone runtime snapshot refresh unavailable for ops map provenance.', error);
+        return null;
       }
     }
 
@@ -763,6 +814,7 @@
         applyRuntimeNodeHints();
         const activeNode = document.querySelector('.node.active');
         if (activeNode) renderDetail(activeNode.dataset.node);
+        await preferStandaloneRuntimeSnapshotMeta(data);
       } catch (error) {
         applyRuntimeCoverageUnavailable(`bridge coverage unavailable: ${error.message}`);
         console.warn('Runtime bridge unavailable for ops map detail overlay.', error);
