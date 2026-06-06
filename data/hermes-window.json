@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-07T03:26:05.471970+09:00",
+  "generated_at": "2026-06-07T07:35:49.784082+09:00",
   "generator_version": "0.1.0",
   "source_kind": "live-hermes-session-export",
   "session": {
@@ -47,35 +47,35 @@
   "gateway": {
     "running": false,
     "raw": "✗ Gateway is not running\n\nTo start:\n  hermes gateway run      # Run in foreground\n  hermes gateway install  # Install as Windows Scheduled Task (auto-start on login)\n\nOther profiles:\n  ✓ default          — PID 11372",
-    "checked_at": "2026-06-07T03:26:15.251801+09:00"
+    "checked_at": "2026-06-07T07:35:55.293156+09:00"
   },
   "cron": {
     "total_jobs": 46,
     "scheduled_jobs": 46,
-    "ok_jobs": 45,
+    "ok_jobs": 44,
     "never_run_jobs": [],
     "recent_runs": [
-      {
-        "id": "1e4a8711bdc6",
-        "name": "public-webui-origin-watchdog",
-        "state": "scheduled",
-        "profile": "default",
-        "deliver": "origin",
-        "last_run_at": "2026-06-07T03:16:19.695055+09:00",
-        "last_status": "ok",
-        "next_run_at": "2026-06-07T03:27:19.563025+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\1e4a8711bdc6\\2026-06-07_03-16-19.md"
-      },
       {
         "id": "a293c42176cc",
         "name": "public-runtime-freshness-watchdog",
         "state": "scheduled",
         "profile": "default",
         "deliver": "origin",
-        "last_run_at": "2026-06-07T03:10:22.958800+09:00",
+        "last_run_at": "2026-06-07T07:29:31.714568+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-07T03:25:22.958800+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\a293c42176cc\\2026-06-07_03-10-21.md"
+        "next_run_at": "2026-06-07T07:44:31.714568+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\a293c42176cc\\2026-06-07_07-29-30.md"
+      },
+      {
+        "id": "1e4a8711bdc6",
+        "name": "public-webui-origin-watchdog",
+        "state": "scheduled",
+        "profile": "default",
+        "deliver": "origin",
+        "last_run_at": "2026-06-07T07:24:28.213352+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-07T07:40:28.254041+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\1e4a8711bdc6\\2026-06-07_07-24-28.md"
       },
       {
         "id": "7961591ac3d2",
@@ -83,43 +83,32 @@
         "state": "scheduled",
         "profile": "researchorchestrator",
         "deliver": "local",
-        "last_run_at": "2026-06-07T02:52:57.818434+09:00",
+        "last_run_at": "2026-06-07T07:04:07.203138+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-07T03:52:57.818434+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\7961591ac3d2\\2026-06-07_02-52-57.md"
+        "next_run_at": "2026-06-07T08:04:07.203138+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\7961591ac3d2\\2026-06-07_07-04-07.md"
       },
       {
-        "id": "f49539b74537",
-        "name": "ops-workflow-smoothness-ratchet",
+        "id": "127c5800a679",
+        "name": "computer-use-orchestrator-drills",
         "state": "scheduled",
         "profile": "ops",
         "deliver": "local",
-        "last_run_at": "2026-06-07T02:34:58.577487+09:00",
+        "last_run_at": "2026-06-07T06:54:49.947445+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-07T05:34:58.577487+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\f49539b74537\\2026-06-07_02-34-58.md"
+        "next_run_at": "2026-06-07T14:54:49.947445+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\127c5800a679\\2026-06-07_06-54-49.md"
       },
       {
-        "id": "acb0e632afcc",
-        "name": "auditor-agent-health-loop",
+        "id": "d2f8dfa80c02",
+        "name": "ops-verifier-ratchet-rollout",
         "state": "scheduled",
-        "profile": "auditor",
+        "profile": "ops",
         "deliver": "local",
-        "last_run_at": "2026-06-07T02:32:10.503593+09:00",
+        "last_run_at": "2026-06-07T06:36:39.560583+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-07T08:32:10.503593+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\acb0e632afcc\\2026-06-07_02-32-10.md"
-      },
-      {
-        "id": "3becb00defbb",
-        "name": "dev-implementation-ready-ratchet",
-        "state": "scheduled",
-        "profile": "dev",
-        "deliver": "local",
-        "last_run_at": "2026-06-07T02:07:09.062633+09:00",
-        "last_status": "ok",
-        "next_run_at": "2026-06-07T08:07:09.062633+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3becb00defbb\\2026-06-07_02-07-09.md"
+        "next_run_at": "2026-06-07T14:36:39.560583+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\d2f8dfa80c02\\2026-06-07_06-36-39.md"
       },
       {
         "id": "3860150f7552",
@@ -127,21 +116,32 @@
         "state": "scheduled",
         "profile": "default",
         "deliver": "local",
-        "last_run_at": "2026-06-07T01:48:36.709187+09:00",
+        "last_run_at": "2026-06-07T05:53:44.784720+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-07T03:48:36.709187+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3860150f7552\\2026-06-07_01-48-36.md"
+        "next_run_at": "2026-06-07T07:53:44.784720+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3860150f7552\\2026-06-07_05-53-44.md"
       },
       {
-        "id": "e7b24d831a53",
-        "name": "dev-module-blueprint-ratchet",
+        "id": "7f9bb47b0550",
+        "name": "kis-execution-refinement-loop",
         "state": "scheduled",
-        "profile": "dev",
+        "profile": "tradingorchestrator",
         "deliver": "local",
-        "last_run_at": "2026-06-07T01:48:36.411397+09:00",
+        "last_run_at": "2026-06-07T05:53:40.922224+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-07T13:48:36.411397+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\e7b24d831a53\\2026-06-07_01-48-36.md"
+        "next_run_at": "2026-06-07T11:53:40.922224+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\7f9bb47b0550\\2026-06-07_05-53-40.md"
+      },
+      {
+        "id": "f49539b74537",
+        "name": "ops-workflow-smoothness-ratchet",
+        "state": "scheduled",
+        "profile": "ops",
+        "deliver": "local",
+        "last_run_at": "2026-06-07T05:43:24.184629+09:00",
+        "last_status": "error",
+        "next_run_at": "2026-06-07T08:43:24.184629+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\f49539b74537\\2026-06-07_05-43-24.md"
       }
     ]
   },
