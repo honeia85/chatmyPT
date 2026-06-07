@@ -374,75 +374,103 @@
   </div>
 
   <script>
-    const details = {
-      default: {
-        title: 'default',
-        subtitle: '사용자 대화 전면 창구',
-        sections: [
-          { title: '주요 책임', items: ['사용자와 직접 대화', '필요한 경우 research / trading 총괄에게 위임', '보드/보고서/로그를 읽고 다시 브리핑'] },
-          { title: '의미', items: ['사용자는 계속 default와만 이야기해도 된다', '백그라운드 루프가 대화창을 점유하지 않게 유지한다'] }
-        ]
-      },
-      researchorchestrator: {
-        title: 'researchorchestrator', subtitle: '연구 운영 총괄', sections: [
-          { title: '다루는 것', items: ['vault 정비', 'SOP 확장', 'Notion → Source → Knowledge 승격', 'research-ops 보드 운영'] },
-          { title: '현재 분위기', items: ['이미 한 바퀴 완료된 done 8 상태', '정리형/문서형 백그라운드 루프에 강함'] }
-        ]
-      },
-      tradingorchestrator: {
-        title: 'tradingorchestrator', subtitle: '트레이딩 운영 총괄', sections: [
-          { title: '다루는 것', items: ['KIS endpoint 검증', 'spec → scaffold → verify 루프', 'trading-ops 보드 운영'] },
-          { title: '현재 분위기', items: ['트레이딩 팀을 문서에서 실제 운영 체계로 승격하는 중', '현재 5개 lane이 동시 진행되는 구조'] }
-        ]
-      },
-      hybtriage: {
-        title: 'hybtriage', subtitle: '백로그 정리 lane', sections: [
-          { title: '최근 역할', items: ['트레이딩 backlog에서 implementation-critical blocker top-5 추출 완료', '다음 스프린트 우선순위를 좁히는 역할'] }
-        ]
-      },
-      hybresearch: {
-        title: 'hybresearch', subtitle: '공식 소스 검증 lane', sections: [
-          { title: '현재 하고 있는 일', items: ['KIS GitHub 예제와 공식 문서 파싱', 'TR ID / body keys / continuation keys / session uncertainty 정리'] },
-          { title: '핵심 가치', items: ['"문서에 있다"를 "구현해도 된다" 수준으로 끌어올림'] }
-        ]
-      },
-      hybbuild: {
-        title: 'hybbuild', subtitle: '지식 구조화 lane', sections: [
-          { title: '현재 하고 있는 일', items: ['Investment Automation 허브와 프로젝트 링크 정리', 'source of truth 구조 보강'] }
-        ]
-      },
-      dev: {
-        title: 'dev', subtitle: '코드 스캐폴드 / 구현 준비 lane', sections: [
-          { title: '현재 산출물', items: ['Desktop/trading-bot scaffold 생성', 'normalize 모델/테스트 생성', 'pytest 통과'] },
-          { title: '왜 blocked 인가', items: ['실패가 아니라 review-required 상태', '다음 단계는 scaffold 승인 후 execution loop 쪽으로 연결'] }
-        ]
-      },
-      hybverify: {
-        title: 'hybverify', subtitle: '게이트 / 리뷰 lane', sections: [
-          { title: '다음 역할', items: ['research/build/dev 결과를 모아 spec stack coherence 점검', 'verified-ready / unresolved blockers / unsafe assumptions 분리'] }
-        ]
-      },
-      ops: {
-        title: 'ops', subtitle: '운영 hygiene lane', sections: [
-          { title: '현재 역할', items: ['주간 보드 점검', 'stale / blocked / duplicate 카드 감시', '작은 follow-up card 생성 여부 판단'] }
-        ]
-      },
+    const legacyDetails = {
       notion: {
-        title: 'Notion / HONEIA Brain', subtitle: '지식 기반', sections: [
-          { title: '현재 상태', items: ['Notion live 연결 복구 완료', 'HONEIA RESEARCH LAB / Personal Home root inventory 가능', 'Obsidian은 SOP/knowledge 허브로 사용'] }
+        title: 'Notion / HONEIA Brain',
+        subtitle: '지식 기반',
+        sections: [
+          {
+            title: '현재 상태',
+            items: [
+              'Notion live 연결 복구 완료',
+              'HONEIA RESEARCH LAB / Personal Home root inventory 가능',
+              'Obsidian은 SOP/knowledge 허브로 사용'
+            ]
+          }
         ]
       },
       tradingbot: {
-        title: 'trading-bot scaffold', subtitle: '실구현 시작점', sections: [
-          { title: '현재 의미', items: ['문서상 계획을 실제 파일 구조로 옮기는 첫 단추', 'normalize → precheck → intents → execution adapter로 확장 예정'] }
+        title: 'trading-bot scaffold',
+        subtitle: '실구현 시작점',
+        sections: [
+          {
+            title: '현재 의미',
+            items: [
+              '문서상 계획을 실제 파일 구조로 옮기는 첫 단추',
+              'normalize → precheck → intents → execution adapter로 확장 예정'
+            ]
+          }
         ]
       },
       future: {
-        title: 'Future Interactive Layer', subtitle: '나중에 붙일 인터랙션', sections: [
-          { title: '다음 단계 후보', items: ['board summary JSON 연동', 'node 클릭 시 task drawer 열기', 'lane별 카드 필터링', '상태 타임라인 / 로그 미리보기', '승인 버튼/드릴다운 추가'] }
+        title: 'Future Interactive Layer',
+        subtitle: '나중에 붙일 인터랙션',
+        sections: [
+          {
+            title: '다음 단계 후보',
+            items: [
+              'board summary JSON 연동',
+              'node 클릭 시 task drawer 열기',
+              'lane별 카드 필터링',
+              '상태 타임라인 / 로그 미리보기',
+              '승인 버튼/드릴다운 추가'
+            ]
+          }
         ]
       }
     };
+
+    function getAgentDetails(agentId) {
+      const agent = runtimeBridge?.agentMap?.[agentId];
+      if (!agent) {
+        const legacy = legacyDetails[agentId];
+        if (legacy) {
+          return legacy;
+        }
+        return {
+          title: agentId,
+          subtitle: 'Shell-only node or runtime data unavailable',
+          sections: [
+            { title: 'Status', items: ['No runtime agent found for this node.'] }
+          ]
+        };
+      }
+
+      const sections = [];
+
+      sections.push({ title: 'Mission', items: [agent.mission || 'No mission defined.'] });
+      sections.push({ title: 'Description', items: [agent.description || 'No description provided.'] });
+
+      if (agent.runtime?.current_task) {
+        sections.push({ title: 'Current Task', items: [agent.runtime.current_task] });
+      }
+
+      if (agent.soul) {
+        sections.push({
+          title: 'Soul (Personality)',
+          items: [
+            `Tone: ${agent.soul.tone || 'N/A'}`,
+            `Decision Posture: ${agent.soul.decision_posture || 'N/A'}`,
+            `Risk Appetite: ${agent.soul.risk_appetite || 'N/A'}`,
+            `Reporting Style: ${agent.soul.reporting_style || 'N/A'}`
+          ]
+        });
+      }
+
+      if (agent.knowledge_refs && agent.knowledge_refs.length > 0) {
+        sections.push({ title: 'Knowledge References', items: agent.knowledge_refs });
+      }
+
+      if (agent.rule_refs && agent.rule_refs.length > 0) {
+        sections.push({ title: 'Rule References', items: agent.rule_refs });
+      }
+
+      return {
+        title: agent.display_name || agent.id,
+        subtitle: `${agent.team} team · ${agent.type} · Layer ${agent.layer}`,
+        sections: sections
+      };
+    }
 
     const root = document.getElementById('detailRoot');
     const nodes = [...document.querySelectorAll('.node')];
@@ -674,7 +702,7 @@
     }
 
     function renderDetail(key) {
-      const d = details[key];
+      const d = getAgentDetails(key);
       if (!d) return;
       root.innerHTML = `
         <div class="detail-title">${d.title}</div>
@@ -682,7 +710,7 @@
         ${d.sections.map(section => `
           <div class="detail-box">
             <h4>${section.title}</h4>
-            <ul>${section.items.map(item => `<li>${item}</li>`).join('')}</ul>
+            <ul>${section.items.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
           </div>
         `).join('')}
         ${renderRuntimeBoxes(key)}

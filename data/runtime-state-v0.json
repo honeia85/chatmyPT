@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-07T07:35:49.471226+09:00",
+  "generated_at": "2026-06-07T11:48:34.252046+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
     "total_profiles": 14,
-    "active": 4,
-    "idle": 5,
+    "active": 2,
+    "idle": 7,
     "stale": 5,
     "unknown": 0
   },
@@ -23,11 +23,11 @@
       },
       "observed": {
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-07T07:30:29.759732+09:00",
+        "last_seen_at": "2026-06-07T11:42:54.971263+09:00",
         "source": "state.db",
-        "message_count": 0,
-        "tool_call_count": 0,
-        "api_call_count": 17,
+        "message_count": 34,
+        "tool_call_count": 17,
+        "api_call_count": 16,
         "end_reason": null
       },
       "observed_fallbacks": {
@@ -40,11 +40,11 @@
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T07:30:29.759732+09:00",
+          "last_seen_at": "2026-06-07T11:42:54.971263+09:00",
           "source": "state.db",
-          "message_count": 0,
-          "tool_call_count": 0,
-          "api_call_count": 17,
+          "message_count": 34,
+          "tool_call_count": 17,
+          "api_call_count": 16,
           "end_reason": null
         },
         "sources_present": [
@@ -211,7 +211,7 @@
         ]
       },
       "status": {
-        "activity": "active",
+        "activity": "idle",
         "taxonomy": "inferred"
       },
       "drift": [],
@@ -475,7 +475,7 @@
         ]
       },
       "status": {
-        "activity": "active",
+        "activity": "idle",
         "taxonomy": "inferred"
       },
       "drift": [],
@@ -660,7 +660,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-07T07:35:47+09:00",
+        "last_seen_at": "2026-06-07T11:48:32+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -668,17 +668,17 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T07:35:47+09:00",
+          "last_seen_at": "2026-06-07T11:48:32+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T07:33:21.113586+09:00",
+          "last_seen_at": "2026-06-07T11:44:46.141076+09:00",
           "source": "state.db",
           "message_count": 0,
           "tool_call_count": 0,
-          "api_call_count": 10,
+          "api_call_count": 13,
           "end_reason": null
         },
         "sources_present": [
