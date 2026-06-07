@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-06-07T14:02:29.288449+09:00",
+  "generated_at": "2026-06-07T18:12:08.820524+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
     "total_profiles": 14,
-    "active": 3,
-    "idle": 4,
-    "stale": 7,
+    "active": 4,
+    "idle": 2,
+    "stale": 8,
     "unknown": 0
   },
   "profiles": [
@@ -23,11 +23,11 @@
       },
       "observed": {
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-07T14:02:25.108626+09:00",
+        "last_seen_at": "2026-06-07T18:12:06.701932+09:00",
         "source": "state.db",
-        "message_count": 97,
-        "tool_call_count": 65,
-        "api_call_count": 31,
+        "message_count": 71,
+        "tool_call_count": 45,
+        "api_call_count": 25,
         "end_reason": "cron_complete"
       },
       "observed_fallbacks": {
@@ -40,11 +40,11 @@
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T14:02:25.108626+09:00",
+          "last_seen_at": "2026-06-07T18:12:06.701932+09:00",
           "source": "state.db",
-          "message_count": 97,
-          "tool_call_count": 65,
-          "api_call_count": 31,
+          "message_count": 71,
+          "tool_call_count": 45,
+          "api_call_count": 25,
           "end_reason": "cron_complete"
         },
         "sources_present": [
@@ -186,7 +186,7 @@
       "observed": {
         "provider": null,
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-07T02:41:39+09:00",
+        "last_seen_at": "2026-06-07T16:05:42+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -194,17 +194,17 @@
         "agent_log": {
           "provider": null,
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T02:41:39+09:00",
+          "last_seen_at": "2026-06-07T16:05:42+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T02:37:16.886435+09:00",
+          "last_seen_at": "2026-06-07T15:56:16.594520+09:00",
           "source": "state.db",
-          "message_count": 28,
-          "tool_call_count": 18,
-          "api_call_count": 9,
+          "message_count": 22,
+          "tool_call_count": 11,
+          "api_call_count": 10,
           "end_reason": null
         },
         "sources_present": [
@@ -213,7 +213,7 @@
         ]
       },
       "status": {
-        "activity": "idle",
+        "activity": "active",
         "taxonomy": "inferred"
       },
       "drift": [],
@@ -450,27 +450,27 @@
         "source": "profile-config"
       },
       "observed": {
-        "provider": null,
+        "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-07T12:19:55+09:00",
+        "last_seen_at": "2026-06-07T16:10:38+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
       "observed_fallbacks": {
         "agent_log": {
-          "provider": null,
+          "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T12:19:55+09:00",
+          "last_seen_at": "2026-06-07T16:10:38+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T12:16:31.916198+09:00",
+          "last_seen_at": "2026-06-07T16:04:59.714663+09:00",
           "source": "state.db",
-          "message_count": 38,
-          "tool_call_count": 23,
-          "api_call_count": 14,
+          "message_count": 54,
+          "tool_call_count": 28,
+          "api_call_count": 25,
           "end_reason": null
         },
         "sources_present": [
@@ -664,7 +664,7 @@
       "observed": {
         "provider": null,
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-07T14:02:25+09:00",
+        "last_seen_at": "2026-06-07T18:12:06+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -672,17 +672,17 @@
         "agent_log": {
           "provider": null,
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T14:02:25+09:00",
+          "last_seen_at": "2026-06-07T18:12:06+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-07T14:00:49.313948+09:00",
+          "last_seen_at": "2026-06-07T18:07:01.551510+09:00",
           "source": "state.db",
           "message_count": 0,
           "tool_call_count": 0,
-          "api_call_count": 6,
+          "api_call_count": 15,
           "end_reason": null
         },
         "sources_present": [
@@ -743,10 +743,12 @@
         ]
       },
       "status": {
-        "activity": "idle",
-        "taxonomy": "inferred"
+        "activity": "stale",
+        "taxonomy": "stale"
       },
-      "drift": [],
+      "drift": [
+        "stale_observation"
+      ],
       "provenance": {
         "configured_from": "profile:tradingorchestrator/config.yaml",
         "log_dir": "profile:tradingorchestrator/logs",
@@ -766,7 +768,8 @@
       "hybbuild",
       "hybtriage",
       "librarianorchestrator",
-      "personalops"
+      "personalops",
+      "tradingorchestrator"
     ],
     "missing_observation": []
   },
