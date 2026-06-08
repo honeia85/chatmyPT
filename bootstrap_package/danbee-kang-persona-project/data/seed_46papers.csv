@@ -1,0 +1,47 @@
+﻿PMID,Year,Journal,Title,Design,Domain,DOI
+41490113,2026,JAMA Netw Open,Racial/ethnic disparities in persistent chemotherapy-induced alopecia,Multinational prospective cohort,Breast cancer / Alopecia / PCIA,10.1001/jamanetworkopen.2025.49146
+41572547,2025,Int J Surg,Autologous vs implant breast reconstruction and mental disorder risk,Target trial emulation (NHIS),Breast cancer / Reconstruction / Mental,10.1097/JS9.0000000000003537
+41432961,2025,Qual Life Res,5-year QoL trajectory in salivary gland cancer,"Prospective cohort, GBTM",Salivary gland cancer / QoL,10.1007/s11136-025-04125-4
+41383953,2025,Hum Reprod Open,Maternal ASCVD and offspring neurodevelopment,Nationwide mother-child paired cohort,Maternal-fetal / CV / Neuro,10.1093/hropen/hoaf074
+40516881,2025,J Am Acad Dermatol,Scalp cooling for PCIA in anthracycline patients,Single-arm trial,Breast cancer / Alopecia,10.1016/j.jaad.2025.06.023
+40930618,2025,J Am Coll Cardiol,Statins in T1D: target trial emulation (editorial),Editorial / Methodology,Cardiovascular / Methodology,10.1016/j.jacc.2025.07.021
+40863442,2025,J Pers Med,Low-dose olanzapine real-world evidence,Cohort (registry),Psychiatry / Pharmaco-epi,10.3390/jpm15080380
+40627066,2025,Eur J Epidemiol,BIG-S breast cancer survivorship cohort profile,Prospective cohort profile,Breast cancer / PRO / Survivorship,10.1007/s10654-025-01262-5
+40131016,2025,Eur Heart J,Less harmful alternative: e-cigarettes and CV (response),Editorial / Comment,Smoking / Cardiovascular,10.1093/eurheartj/ehaf153
+40294950,2025,CMAJ,LDL-C percent reduction and attained levels after PCI,Nationwide cohort (NHIS),Cardiovascular / Lipids,10.1503/cmaj.241713
+40096290,2025,Circulation,Cancer risk in newborns with CHD and their mothers,Nationwide cohort (letter),Maternal-fetal / Cardio / Cancer,10.1161/CIRCULATIONAHA.124.071811
+39775792,2025,Eur Heart J,Combustible cigarette smoking harms every organ,Editorial,Smoking / CV,10.1093/eurheartj/ehae896
+40008373,2025,Patient Prefer Adher,FINE-GL: glabellar line distress scale development/validation,Instrument validation,PRO instrument,10.2147/PPA.S497415
+39962947,2025,EuroIntervention,PPI + DAPT: GI bleeding and CV outcomes in AMI,"Observational (NHIS, PS-matched)",Cardiovascular / Pharmaco-epi,10.4244/EIJ-D-24-00673
+39429032,2025,Eur Heart J,Switching to e-cigarettes after PCI: prognosis,Observational (NHIS),Cardiovascular / Smoking,10.1093/eurheartj/ehae705
+38843479,2024,J Clin Oncol,Scalp cooling for PCIA: RCT,RCT,Breast cancer / Alopecia,10.1200/JCO.23.02374
+39126264,2024,Cancer Med,MRI-DS: breast MRI distress scale,Instrument validation,Breast cancer / PRO,10.1002/cam4.70089
+38484885,2024,J Affect Disord,Routine supportive care for distressed cancer patients,Emulated target trial,Cancer / Psychosocial,10.1016/j.jad.2024.03.024
+38472736,2024,Breast Cancer (Tokyo),CHARM young breast cancer cohort profile,Prospective cohort profile,Breast cancer / YBC,10.1007/s12282-024-01559-5
+37669709,2023,Cancer Res Treat,Social support changes and RFS in YBC,Prospective cohort,Breast cancer / Social,10.4143/crt.2023.673
+37309655,2023,JMIR Public Health Surveill,ML model for QoL prediction in breast cancer,ML model (XGBoost / SHAP),Breast cancer / ML,10.2196/45212
+37547446,2023,Ther Adv Med Oncol,Pretreatment endocrine symptoms and RFS in YBC,Prospective cohort,Breast cancer / PRO / YBC,10.1177/17588359231189421
+36512301,2022,Qual Life Res,Pretreatment QoL: salivary gland vs head/neck cancer,Prospective registry,Head/Neck / QoL,10.1007/s11136-022-03323-8
+36397237,2022,Cancer Res Treat,START: return-to-work RCT,Multicenter RCT,Cancer / RTW,10.4143/crt.2022.939
+36884274,2023,JMIR Public Health Surveill,PRO-CTCAE symptom surveillance across cancers,Cross-sectional,Cancer / PRO-CTCAE,10.2196/44105
+35209702,2022,Cancer Res Treat,CaSUN-K Korean validation in NSCLC survivors,Instrument validation,NSCLC / Unmet needs,10.4143/crt.2021.1583
+36942579,2022,Palliat Support Care,Divorce after breast cancer and QoL impact,Cross-sectional,Breast cancer / Social,10.1017/S1478951521001711
+34728262,2021,J Am Acad Dermatol,Tailored moisturizer for chemo-induced skin dryness,RCT,Breast cancer / Skin,10.1016/j.jaad.2021.10.047
+36008854,2022,BMC Cancer,Working status changes after cancer diagnosis,Cross-sectional,Cancer / RTW / Psychosocial,10.1186/s12885-022-10013-8
+35174421,2022,Support Care Cancer,Financial toxicity (OFB+SFD) and spiritual well-being,Multicenter cross-sectional,Cancer / Financial toxicity,10.1007/s00520-022-06906-w
+35361864,2022,Sci Rep,Temporal patterns of chronic disease after breast cancer,Nationwide cohort,Breast cancer / Chronic disease,10.1038/s41598-022-09542-w
+34368886,2021,Support Care Cancer,Mind-body education for YBC: RCT,RCT,Breast cancer / Psychosocial,10.1007/s00520-021-06459-4
+33848414,2021,Cancer Res Treat,K-PROMIS-29 v2.1 validation in cancer survivors,Instrument validation,Cancer / PRO,10.4143/crt.2020.1200
+34907177,2021,Blood Cancer J,Risk of non-Hodgkin lymphoma in breast cancer survivors,Nationwide cohort,Breast cancer / NHL,10.1038/s41408-021-00595-0
+34507971,2021,Cancer Prev Res,Breast density change during menopause and BC risk,Longitudinal cohort,Breast cancer / Imaging,10.1158/1940-6207.CAPR-20-0542
+34795924,2021,J Thorac Dis,K-PROMIS-29 validation in chronic pulmonary disease,Instrument validation,Pulmonary / PRO,10.21037/jtd-21-591
+33241506,2020,Support Care Cancer,Body image dissatisfaction in HSCT and QoL/depression,Cross-sectional,HSCT / Body image,10.1007/s00520-020-05884-1
+33299030,2020,Sci Rep,Perceived stress and NAFLD (Author Correction),Erratum,NAFLD / Stress,10.1038/s41598-020-78911-0
+32410403,2020,Korean J Radiol,HRQoL in HCC: systematic review 2009-2018,Systematic review,HCC / QoL,10.3348/kjr.2019.0808
+31338640,2019,Support Care Cancer,CG428 topical lotion for permanent CIA: pilot RCT,Pilot RCT,Breast cancer / Alopecia,10.1007/s00520-019-04982-z
+31913326,,(미확인),(미확인),(미확인),(미확인),(미확인)
+30120165,,(미확인),(미확인),(미확인),(미확인),(미확인)
+29121713,,(미확인),(미확인),(미확인),(미확인),(미확인)
+28262081,,(미확인),(미확인),(미확인),(미확인),(미확인)
+28233366,,(미확인),(미확인),(미확인),(미확인),(미확인)
+26198993,,(미확인),(미확인),(미확인),(미확인),(미확인)

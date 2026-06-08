@@ -1,0 +1,116 @@
+{
+  "method": "LLM-based semantic clustering over framing_pattern + key_finding + gap_statement across 46 facets; no external embedding API. Each facet assigned to the single best-fitting cluster based on a joint judgment of (domain, methodology, ideation_type, study population). Borderline cases resolved by the dominant framing rather than topical keyword overlap.",
+  "n_facets": 46,
+  "clusters": [
+    {
+      "cluster_id": "C1",
+      "label": "PCIA-항암유발 외모변화 (RCT/cohort/도구)",
+      "description": "Persistent chemotherapy-induced alopecia and broader chemotherapy-induced appearance change (hair, skin, glabellar lines) in breast cancer patients. Uses an interlocking program of Folliscope-based objective measurement, prospective cohorts, single-arm and randomized trials of preventive/therapeutic interventions (scalp cooling, topical lotions, moisturizers), and condition-specific PROMs of altered-appearance distress.",
+      "pmids": ["41490113", "40516881", "40008373", "38843479", "34728262", "31338640", "30120165", "28262081", "26198993"],
+      "n": 9,
+      "dominant_designs": ["Prospective cohort", "RCT", "Validation study"],
+      "dominant_ideation": ["extension", "validation", "combination"],
+      "year_span": [2015, 2026],
+      "exemplar_pmid": "38843479",
+      "exemplar_reason": "Scalp Cooling RCT (JAMA Oncol 2024) is the most representative node: it converts the group's PCIA observational program (30120165, 41490113) into a randomized preventive trial using objective Folliscope endpoints and CADS distress, the same instruments and population that anchor the entire cluster."
+    },
+    {
+      "cluster_id": "C2",
+      "label": "유방암 생존자 코호트·심리사회·삶의 질",
+      "description": "Breast cancer survivorship outcomes in single- or multi-center prospective/cross-sectional cohorts: body image after treatment, divorce, return-to-work, working-status change, financial toxicity, happiness/spirituality, mind-body education, and ML-based long-term QoL prediction. Anchored in BIG-S and the post-treatment Korean survivor population rather than nationwide claims.",
+      "pmids": ["40627066", "37309655", "36942579", "36397237", "36008854", "35174421", "34368886", "34507971", "28233366"],
+      "n": 9,
+      "dominant_designs": ["Cross-sectional", "Prospective cohort", "RCT"],
+      "dominant_ideation": ["extension", "combination", "profile", "methodology-import"],
+      "year_span": [2021, 2025],
+      "exemplar_pmid": "40627066",
+      "exemplar_reason": "The BIG-S cohort profile paper is the backbone for this cluster's data infrastructure: integrating PROs, EMR, body composition, and healthcare utilization in an Asian survivor cohort, which is the methodological frame that the cross-sectional/RCT survivorship papers around it operationalize."
+    },
+    {
+      "cluster_id": "C3",
+      "label": "NHIS 만성질환·이차암 종단 코호트",
+      "description": "Population-scale K-NHIS nationwide claims studies linking breast cancer (or maternal cardiovascular disease) to long-term incidence of chronic disease and second malignancy, using matched comparator cohorts, screening-linked baseline risk factors, and time-varying exposures. Hard-outcome survivorship epidemiology rather than PRO-driven survivorship.",
+      "pmids": ["41383953", "40096290", "35361864", "34907177"],
+      "n": 4,
+      "dominant_designs": ["Retrospective cohort"],
+      "dominant_ideation": ["combination", "extension"],
+      "year_span": [2021, 2025],
+      "exemplar_pmid": "35361864",
+      "exemplar_reason": "The temporal-patterns-of-chronic-disease-after-breast-cancer paper most cleanly exemplifies the cluster: 84,969 K-NHIS breast cancer cases vs 1M+ matched controls with screening-linked baseline risks and time-varying exposures, the exact template reused for NHL risk (34907177) and extended to maternal ASCVD (41383953)."
+    },
+    {
+      "cluster_id": "C4",
+      "label": "NHIS 심혈관·약물 target trial emulation",
+      "description": "Korean NHIS-based real-world cardiovascular and psychopharmacology causal-inference studies (post-PCI LDL targets, DAPT + PPI, autologous vs implant breast reconstruction and mental disorders, low-dose olanzapine real-world dosing). Framed as resolving guideline inconsistencies or RCT-evidence gaps via target trial emulation or PS-matched nationwide cohorts.",
+      "pmids": ["41572547", "40930618", "40863442", "40294950", "39962947"],
+      "n": 5,
+      "dominant_designs": ["Target trial emulation", "Retrospective cohort", "Editorial"],
+      "dominant_ideation": ["contradiction", "methodology-import", "editorial", "extension"],
+      "year_span": [2025, 2025],
+      "exemplar_pmid": "41572547",
+      "exemplar_reason": "The AR-vs-IBR target trial emulation paper is the clearest archetype: explicit target trial emulation on K-NHIS to settle inconsistent prior evidence, identical framing pattern to the LDL post-PCI (40294950) and PPI+DAPT (39962947) NHIS papers."
+    },
+    {
+      "cluster_id": "C5",
+      "label": "흡연·전자담배 contrarian editorials/cohort",
+      "description": "European Heart Journal editorials and one nationwide cohort on combustible cigarettes, e-cigarette switching after PCI, and the 'less harmful alternative' debate. Editorials explicitly contest harm-reduction framing; the empirical paper provides post-PCI MACE evidence on switching trajectories.",
+      "pmids": ["40131016", "39775792", "39429032"],
+      "n": 3,
+      "dominant_designs": ["Editorial", "Retrospective cohort"],
+      "dominant_ideation": ["contradiction", "editorial"],
+      "year_span": [2025, 2025],
+      "exemplar_pmid": "40131016",
+      "exemplar_reason": "The 'addressing concerns on the observational study of electronic cigarettes' editorial captures the cluster's contrarian framing most directly: it methodologically defends e-cigarette observational evidence and contests the 'less harmful alternative' narrative, the same tension underlying the smoking editorial (39775792) and the post-PCI switching cohort (39429032)."
+    },
+    {
+      "cluster_id": "C6",
+      "label": "Young Breast Cancer (CHARM/SMC YBC) 시리즈",
+      "description": "Young (<=40) breast cancer cohort series built around the CHARM/SMC YBC registry: cohort profile and serial analyses of pretreatment endocrine symptoms and social-support change as predictors of recurrence-free survival. Repeated use of FACT-G/FACT-ES at diagnosis and during treatment with Cox modeling.",
+      "pmids": ["38472736", "37669709", "37547446"],
+      "n": 3,
+      "dominant_designs": ["Prospective cohort"],
+      "dominant_ideation": ["extension", "profile"],
+      "year_span": [2023, 2024],
+      "exemplar_pmid": "38472736",
+      "exemplar_reason": "The CHARM cohort profile paper defines the data platform (n=1,868, multi-omics, mobile PROs, 15-year follow-up) on which both downstream RFS papers (37547446, 37669709) directly draw, making it the most representative anchor."
+    },
+    {
+      "cluster_id": "C7",
+      "label": "PRO 도구 자가제작/검증 (COSMIN 파이프라인)",
+      "description": "Self-developed and translated patient-reported outcome instruments validated through a COSMIN-style pipeline (qualitative + cognitive interviews + EFA/CFA + convergent/known-group validity): MRI-DS, CaSUN-K, K-PROMIS-29 in cancer and CPD. Same methodological template applied across diseases.",
+      "pmids": ["39126264", "35209702", "34795924", "33848414"],
+      "n": 4,
+      "dominant_designs": ["Validation study"],
+      "dominant_ideation": ["validation"],
+      "year_span": [2021, 2024],
+      "exemplar_pmid": "33848414",
+      "exemplar_reason": "The K-PROMIS-29 V2.1 in mixed cancer outpatients is the prototypical execution of the template (Cronbach's alpha, EFA/CFA, EORTC convergent validity) that is then ported almost identically to CPD (34795924), NSCLC (35209702), and MRI-related distress (39126264)."
+    },
+    {
+      "cluster_id": "C8",
+      "label": "PRO 기반 supportive care·증상 감시·심리사회",
+      "description": "PRO-driven symptom surveillance, distress screening, supportive care effectiveness, salivary gland and HCC HRQoL, NHL survivorship, body image after HSCT, perceived stress and NAFLD. Span cross-sectional symptom mapping (PRO-CTCAE), HRQoL trajectory analysis, target trial emulation of distress screening, and a systematic review. Unified by use of routinely collected PROs to characterize symptom and psychosocial burden across heterogeneous diseases beyond the breast-cancer survivor core.",
+      "pmids": ["41432961", "38484885", "36884274", "36512301", "33241506", "32410403", "31913326", "29121713"],
+      "n": 8,
+      "dominant_designs": ["Cross-sectional", "Prospective cohort", "Systematic review", "Target trial emulation"],
+      "dominant_ideation": ["extension", "profile", "combination", "methodology-import"],
+      "year_span": [2017, 2025],
+      "exemplar_pmid": "36884274",
+      "exemplar_reason": "The PRO-CTCAE real-world symptom surveillance paper (1,352 outpatients, 10 cancer-specific subsets, linked to EORTC QLQ-C30 HRQoL) most directly typifies the cluster's logic of using PROs to profile symptom burden across diverse cancer types and translate it into supportive-care implications."
+    },
+    {
+      "cluster_id": "C9",
+      "label": "Erratum / 기타",
+      "description": "Non-substantive author correction notice without new methods or data; retained for completeness.",
+      "pmids": ["33299030"],
+      "n": 1,
+      "dominant_designs": ["Other"],
+      "dominant_ideation": ["extension"],
+      "year_span": [2020, 2020],
+      "exemplar_pmid": "33299030",
+      "exemplar_reason": "Only member of the cluster; the erratum corrects swapped figure legends in the NAFLD-perceived stress paper (31913326), so it is meta-content of C8 rather than substantive research."
+    }
+  ],
+  "unclustered": [],
+  "notes": "All 46 facets assigned to exactly one cluster (sum of n = 46, unclustered = 0). Edge cases: (1) 38484885 (distress-screening target trial emulation) is methodologically aligned with C4 (target trial emulation) but its supportive-care/PRO substantive focus and Seoul cancer-center data source place it in C8. (2) 40294950 and 39962947 sit at the C3/C4 boundary; both use K-NHIS but are foregrounded as guideline-resolution causal-inference studies, hence C4. (3) 34507971 (breast density trajectory) and 35174421 (financial toxicity) sit at the C2/C3 boundary; both use single/multi-center cohorts rather than NHIS, so C2. (4) 41383953 (maternal ASCVD K-NHIS mother-child paired cohort) is C3 because its framing is population-scale linked claims, not target trial emulation. (5) C5 is small (n=3) but coherent and intentionally separated from C4 because of its contrarian editorial voice and harm-reduction policy framing distinct from causal-inference cardiovascular work."
+}

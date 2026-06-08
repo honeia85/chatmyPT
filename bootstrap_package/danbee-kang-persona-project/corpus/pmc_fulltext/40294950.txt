@@ -1,0 +1,766 @@
+# PMID: 40294950 | PMC: PMC12040332 | DOI: 10.1503/cmaj.241713
+The use of 3-hydroxy-3-methylglutaryl–coenzyme A reductase inhibitors (statins) reduces both low-density lipoprotein cholesterol (LDL-C) levels and the risk of future cardiovascular events in patients with, or at risk of, atherosclerotic cardiovascular disease.–In particular, the Cholesterol Treatment Trialists’ (CTT) Collaboration showed that a reduction in LDL-C of 1 mmol/L (39 mg/dL) leads to a 22% reduction in major vascular events;therefore, the concept that lower LDL-C is better is widespread, especially for secondary prevention.Aligned with this evidence, the American College of Cardiology/American Heart Association (ACC/AHA) and European Society of Cardiology/European Atherosclerosis Society (ESC/EAS) guidelines for the management of blood cholesterol recommend maximally tolerable high-intensity statin therapy for LDL-C reduction of 50% or greater, as a class I indication, in high-risk patients with established coronary artery disease after percutaneous coronary intervention (PCI).,
+
+However, discrepancies exist between the American and European guidelines regarding thresholds for treatment intensification (≥ 1.8 mmol/L in the United States) versus treatment goals (< 1.4 mmol/L in Europe).The 2021 Canadian Cardiovascular Society guideline recommends the use of nonstatin lipid-lowering therapy for all patients with atherosclerotic cardiovascular disease in whom LDL-C levels are 1.8 mmol/L or greater while receiving the maximally tolerated statin dose.This difference often causes confusion for clinicians as to whether the additional intervention is necessary, particularly in patients with coronary artery disease who achieved a 50%- or-greater reduction of LDL-C levels using high-intensity statins, with LDL-C levels below the American or Canadian threshold for treatment intensification but still above the European target goal after PCI. The recent emergence of various nonstatin LDL-C reduction therapies that have shown clinical benefits for secondary prevention,–presents a renewed opportunity to further reduce LDL-C levels in patients with atherosclerotic cardiovascular disease, even among those who have achieved reduction of 50% or greater with high-intensity statins. However, it is important to determine the optimal attained LDL-C levels to reduce cardiovascular events, without unnecessary treatment costs.–In this study, we aimed to evaluate the clinical outcomes according to the LDL-C percentage reduction in the overall population and the attained LDL-C levels in patients who achieved an LDL-C reduction of 50% or greater after PCI to address the discrepancies between guidelines and to provide clarity regarding the benefit of additional interventions in these patients.
+
+Methods
+
+Study setting
+
+We used claims data provided by the Korean National Health Insurance Service (K-NHIS) database. Data can be accessed only by visiting the K-NHIS data centre. The K-NHIS is a single insurer in Korea that covers the entire South Korean population except active-duty military personnel and short-term foreign visitors.However, these groups collectively account for 1%–2% of the population, making any potential bias minimal.
+
+The K-NHIS provides routine biennial health examinations for Korean adults. Clinical and biochemical measurements and questionnaire-based lifestyle information are collected.Further details of the K-NHIS database and health examinations have been described previously.
+
+Study sample
+
+We included all adults aged 20 years and older who underwent PCI between Jan. 1, 2010, and Dec. 31, 2020, and underwent health screening 3 years before PCI. Since the purpose of our research was to evaluate the effect of LDL-C change and LDL-C level achieved after PCI on clinical outcomes, we selected participants who underwent additional health screening within 3 years after PCI. A period of 3 years was chosen based on previous literature, as well as the anticipated sample size and follow-up duration.The study index date was defined as the date of the health screening visit within 3 years after PCI (, available at). We excluded patients with a history of statin use before PCI, those with a diagnosis of liver cirrhosis, and those with a diagnosis of cancer before the study index date. In addition, patients were excluded if they did not receive a prescription for statins between the PCI and the study index date, as they might not be amenable to statin treatment. Patients with LDL-C levels that were less than 1.4 mmol/L before PCI or missing (< 1%) were also excluded.
+
+Levels of LDL-C before and after PCI
+
+We calculated the percentage change in LDL-C, using LDL-C levels at the last examination within 3 years before PCI (exam 1) and the first examination within 3 years after PCI (exam 2).
+
+We divided participants into groups with an LDL-C reduction of less than 50% and of 50% or greater, according to the current guideline recommendation. We further stratified the group with an LDL-C reduction of 50% or greater into 3 categories using LDL-C levels after PCI in exam 2: less than 1.4 mmol/L, 1.4 to less than 1.8 mmol/L, and 1.8 mmol/L or greater.
+
+Outcomes
+
+The primary end point was major adverse cardiac and cerebrovascular events (MACCE), defined as a composite of cardiovascular death, spontaneous myocardial infarction (MI), repeat revascularization, and ischemic stroke. Vital status and cause of death were obtained from death certificates collected by Statistics Korea.Cardiovascular death was defined as the presence of a cardiovascular disease code ([ICD-10] codes I00–I78) with death. Spontaneous MI was defined as the presence of diagnostic codes for spontaneous MI (ICD-10 codes I21–I22) in the primary position during a hospital stay with revascularization procedures. In a validation study, the accuracy of MI diagnosis using K-NHIS data was 93%.Repeat revascularization was defined as the presence of procedure codes for PCI or coronary artery bypass grafting after the study index date. Ischemic stroke was defined as the presence of diagnostic codes for ischemic stroke (ICD-10 codes I63–I64) in the primary position during a hospital stay with imaging procedures. Participants were followed up from the study index date until the occurrence of an outcome event, death, or Dec. 31, 2022, whichever occurred first.
+
+Covariables
+
+Information about clinical presentation, comorbidities, use of lipid-lowering medications, and other medications at discharge was collected from the claims data. The Charlson Comorbidity Index score was calculated using insurance claims data during a 1-year look-back period from the study index date.In terms of adverse effects for the statin therapy, we included rhabdomyolysis (ICD-10 code M62.84), cholecystitis or other diseases of the gallbladder (ICD-10 codes K81, K82), and new-onset diabetes between exam 1 and exam 2.The use of lipid-lowering medications was defined as any prescription for statins, ezetimibe, and proprotein convertase subtilisin/kexin type 9 (PCSK9) inhibitors at discharge after the PCI. We divided the lipid-lowering medication by intensity using the ACC/AHA guidelines ().Concomitant medications included angiotensin-converting enzyme (ACE) inhibitors, angiotensin II receptor blockers (ARB), β-blockers, acetylsalicylic acid (ASA), and P2Yinhibitors (clopidogrel, ticagrelor, and prasugrel), and their use was defined as prescription of the aforementioned drugs at discharge.
+
+Health behaviours and laboratory test results were obtained from the National Health Screening Examination database. Body mass index and smoking status data were collected using self-administered questionnaires in exam 2. The proportion of missing values was less than 1%, and we considered them missing completely at random. Therefore, we created “unknown” categories to avoid unnecessary case-wise deletion during multi-variable adjustment. Data on LDL-C, high-density lipoprotein cholesterol (HDL-C), total cholesterol, and triglyceride levels were collected for exam 1 and exam 2.
+
+Statistical analysis
+
+We calculated the 7-year cumulative incidence of MACCE using the Kaplan–Meier method. We calculated hazard ratios (HRs) and the corresponding 95% confidence intervals (CIs) of the outcomes using Cox proportional hazards models. Models were adjusted for clinical presentation, ASA, P2Yinhibitor, ACE inhibitor or ARB, β-blocker at discharge, LDL-C level before PCI (exam 1), age, sex, residential area (metropolitan v. rural), body mass index category, diabetes mellitus, hypertension, and chronic kidney disease requiring dialysis (exam 2). We considered variables with a standard mean difference greater than 0.1 clinically important. The proportionality of hazards was confirmed via visual inspection of log-minus-log plots and Schoenfeld residuals. We performed subgroup analysis by age, sex, clinical presentation, diabetes mellitus, and LDL-C levels before PCI (< 4.1, 4.1 to < 4.9, and ≥ 4.9 mmol/L). In a sensitivity analysis, we performed Cox proportional hazards models to evaluate the risk of MACCE by categorizing LDL-C reductions in 10% increments. We also modelled the changes in LDL-C levels and post-PCI LDL-C levels as continuous variables using restricted cubic splines with knots at the 5th, 35th, 65th, and 95th percentiles of our sample distributions.We performed tests for trend to examine the association between percentage reduction in LDL-C as a continuous variable and the risk of MACCE. All statistical analyses were performed using SAS version 9.4 (SAS Institute Inc.) and R version 4.0.3 (R Foundation for Statistical Computing).
+
+Ethics approval
+
+The study protocol was approved by the Institutional Review Board of Samsung Medical Center, Seoul, South Korea (SMC-2024–02–035). Written informed consent was waived because this was a retrospective study using anonymized administrative data.
+
+Results
+
+Among the participants who underwent an additional health screening within 3 years after PCI (= 198 950), 63 073 were excluded, resulting in a final sample size of 135 877 (). Of the study population (mean age 64.1 yr, 75.4% male), 54 551 (40.1%) achieved a reduction in LDL-C levels of 50% or greater between the 2 measurements. The groups with LDL-C reductions of 50% or greater and reductions of less than 50% had similar Charlson Comorbidity Index scores, and most patients initiated dual antiplatelet therapy (DAPT) at the time of discharge. The median duration of DAPT was 205 (interquartile range [IQR] 60–320) days for the group with LDL-C reductions of 50% or greater and 214 (IQR 58–328) days for the group with LDL-C reductions of less than 50%. The mean baseline LDL-C levels were 3.7 and 3.0 mmol/L, respectively (). In exam 2, the mean LDL-C level after PCI was 1.4 mmol/L (mean percentage reduction −61.0%) for the group with an LDL-C reduction of 50% or greater, and 2.2 mmol/L (mean percentage reduction −23.7%) for the group with an LDL-C reduction of less than 50%. However, the HDL-C and triglyceride levels were similar before and after PCI in both groups (). The group with an LDL-C reduction of 50% or greater was more likely to use high-intensity statins (e.g., atorvastatin 80 mg, atorvastatin 40 mg, or rosuvastatin 20 mg) than the group with an LDL-C reduction of less than 50% ().
+
+Among patients who achieved an LDL-C reduction of 50% or greater after PCI (= 54 551), those with an LDL-C level of less than 1.4 mmol/L after PCI were more likely to be male than those in the other 2 groups (). The mean LDL-C levels before PCI among patients with a post-PCI LDL-C level of less than 1.4 mmol/L, of 1.4 to less than 1.8 mmol/L, and of 1.8 mmol/L or greater were 3.2 mmol/L, 3.9 mmol/L, and 4.7 mmol/L, respectively. After PCI, the mean LDL-C levels in these 3 groups were 1.1 mmol/L (mean percentage reduction −64.8%), 1.6 mmol/L (mean percentage reduction −58.1%), and 2.1 mmol/L (mean percentage reduction −55.7%), respectively (). Patients in the group with LDL-C levels after PCI of less than 1.4 mmol/L were more likely to use high-intensity statins, ezetimibe, and PCSK9 inhibitors than those in the other 2 groups (). There was no significant difference in the adherence rate of statin therapy during follow-up between the 2 groups (LDL-C reduction of ≥ 50% v. LDL-C reduction of < 50%; 78.6% v. 79.0%; standardized mean difference = 0.01). The annualized incidence rates of statin-associated adverse events were 0.002% and 0.004% per year for rhabdomyolysis, 0.63% and 0.66% per year for cholecystitis or other disease of the gallbladder, and 4.0% and 4.3% per year for new-onset diabetes in the groups with LDL-C reductions of less than 50% and 50% or greater between exam 1 and 2, respectively.
+
+Figure 1:
+
+Study flow chart. As participants could meet multiple exclusion criteria, the total number of excluded participants (= 63 073) is less than the sum of individual exclusion counts. Note: K-NHIS = Korean National Health Insurance Service, LDL-C = low-density lipoprotein cholesterol, PCI = percutaneous coronary intervention. See Related Content tab for accessible version.
+
+Table 1:
+
+Baseline characteristics of study participants who underwent health screening before and after percutaneous coronary intervention,= 135 877
+
+Characteristic
+
+No. (%) of participants
+
+Standardized mean difference
+
+LDL-C reduction < 50%= 81 326
+
+LDL-C reduction ≥ 50%= 54 551
+
+Age, yr, mean ± SD
+
+65.8 ± 10.3
+
+64.1 ± 10.5
+
+−0.16
+
+Sex, male
+
+60 000 (73.8)
+
+42 422 (77.8)
+
+0.09
+
+Residential area
+
+−0.01
+
+Metropolitan
+
+47 810 (58.8)
+
+31 973 (58.6)
+
+Rural
+
+33 516 (41.2)
+
+22 578 (41.4)
+
+Clinical presentation
+
+0.16
+
+Acute myocardial infarction
+
+28 974 (35.6)
+
+23 816 (43.7)
+
+Unstable angina
+
+24 744 (30.4)
+
+14 794 (27.1)
+
+Stable angina
+
+27 608 (34.0)
+
+15 941 (29.2)
+
+BMI
+
+Underweight (< 18.5)
+
+1090 (1.3)
+
+538 (1.0)
+
+−0.03
+
+Normal (18.5 to < 23)
+
+20 477 (25.2)
+
+13 306 (24.4)
+
+−0.01
+
+Overweight (23 to < 25)
+
+22 400 (27.5)
+
+15 172 (27.8)
+
+< 0.01
+
+Obese (≥ 25)
+
+37 329 (45.9)
+
+25 518 (46.8)
+
+0.01
+
+Unknown
+
+30 (0.0)
+
+17 (0.0)
+
+−0.01
+
+Smoking status
+
+0.03
+
+Never or past smoker
+
+68 746 (84.5)
+
+45 503 (83.4)
+
+Current smoker
+
+12 558 (15.4)
+
+9032 (16.6)
+
+Unknown
+
+22 (0.0)
+
+16 (0.0)
+
+Comorbidity
+
+Charlson Comorbidity Index score, mean ± SD
+
+2.8 ± 1.9
+
+2.8 ± 1.8
+
+−0.03
+
+Congestive heart failure
+
+19 669 (24.2)
+
+14 479 (26.5)
+
+0.05
+
+Diabetes mellitus
+
+36 485 (44.9)
+
+24 978 (45.8)
+
+0.02
+
+Hypertension
+
+70 323 (86.5)
+
+46 555 (85.3)
+
+0.03
+
+Chronic kidney disease with dialysis
+
+36 (0.0)
+
+38 (0.1)
+
+0.01
+
+Lipid-lowering medications at discharge
+
+High-intensity statin
+
+30 551 (37.6)
+
+28 166 (51.6)
+
+0.29
+
+Moderate-intensity statin
+
+48 991 (60.2)
+
+25 798 (47.3)
+
+−0.26
+
+Low-intensity statin
+
+1784 (2.2)
+
+587 (1.1)
+
+−0.09
+
+Ezetimibe
+
+9375 (11.5)
+
+8622 (15.8)
+
+0.12
+
+PCSK9 inhibitor
+
+5 (0.0)
+
+30 (0.1)
+
+0.03
+
+Other medications at discharge
+
+ASA
+
+77 699 (95.5)
+
+52 725 (96.7)
+
+0.06
+
+P2Yinhibitor
+
+75 181 (92.4)
+
+51 055 (93.6)
+
+0.05
+
+Clopidogrel
+
+59 047 (78.5)
+
+35 054 (68.7)
+
+0.15
+
+Ticagrelor
+
+12 768 (17.0)
+
+12 914 (25.3)
+
+0.21
+
+Prasugrel
+
+3366 (4.5)
+
+3087 (6.0)
+
+0.07
+
+DAPT
+
+72 436 (89.1)
+
+49 762 (91.2)
+
+0.08
+
+Duration of DAPT, d, median (IQR)
+
+205 (60–320)
+
+214 (58–328)
+
+0.02
+
+ACE inhibitor
+
+24 848 (30.6)
+
+17 941 (32.9)
+
+0.05
+
+ARB
+
+28 438 (35.0)
+
+17 729 (32.5)
+
+0.05
+
+β-blocker
+
+52 448 (64.5)
+
+36 052 (66.1)
+
+0.03
+
+LDL-C, mean ± SD
+
+Before PCI, mmol/L
+
+3.0 ± 0.9
+
+3.7 ± 0.9
+
+0.79
+
+After PCI, mmol/L
+
+2.2 ± 0.7
+
+1.4 ± 0.4
+
+−0.99
+
+Percentage change
+
+−23.7 ± 25.2
+
+−61.0 ± 8.2
+
+−1.99
+
+HDL-C, mean ± SD
+
+Before PCI, mmol/L
+
+1.3 ± 0.5
+
+1.3 ± 0.4
+
+−0.04
+
+After PCI, mmol/L
+
+1.3 ± 0.4
+
+1.2 ± 0.3
+
+−0.04
+
+Total cholesterol, mean ± SD
+
+Before PCI, mmol/L
+
+5.1 ± 1.0
+
+5.7 ± 1.0
+
+0.67
+
+After PCI, mmol/L
+
+4.1 ± 0.9
+
+3.3 ± 0.6
+
+−0.99
+
+Triglyceride, mean ± SD
+
+Before PCI, mmol/L
+
+1.8 ± 1.3
+
+1.8 ± 1.1
+
+0.01
+
+After PCI, mmol/L
+
+1.4 ± 0.8
+
+1.4 ± 0.9
+
+−0.01
+
+Note: ACE = angiotensin-converting enzyme, ARB = angiotensin II receptor blocker, ASA = acetylsalicylic acid, BMI = body mass index, DAPT = dual antiplatelet therapy, HDL-C = high-density lipoprotein cholesterol, IQR = interquartile range, LDL-C = low-density lipoprotein cholesterol, PCI = percutaneous coronary intervention, PCSK9 = pro-protein convertase subtilisin-kexin type 9, SD = standard deviation.
+
+*
+
+Unless stated otherwise.
+
+Comparison of outcomes according to the percentage reduction of LDL-C before and after PCI
+
+The median follow-up duration was 7.4 years. The 7-year cumulative incidence of MACCE was lower in the group with an LDL-C reduction of 50% or greater (= 7812/54 551, 7-year Kaplan–Meier estimates, 18.3%) than in the group with an LDL-C reduction of less than 50% (= 15 777/81 326, 7-year Kaplan–Meier estimates, 23.4%) (). The multivariable-adjusted HRs for MACCE of the group with an LDL-C reduction of 50% or greater were 0.78 (95% CI 0.76–0.80) (). In the subgroup analysis, a risk reduction in the group with an LDL-C reduction of 50% or greater compared with the group with a reduction of less than 50% was consistently observed in all various subgroups, including baseline LDL-C levels (). When the LDL-C level was reduced by more than 50%, the risk of MACCE remained stable, without significant changes according to the LDL-C percentage reduction (). In an additional sensitivity analysis, in which LDL-C reduction was categorized in 10% increments, the degree of further risk reduction progressively diminished beyond the 50% reduction threshold and was not significant (). However, the risk of MACCE decreased when the absolute changes of LDL-C were higher (-for-linearity < 0.01,).
+
+During follow-up, the group with an LDL-C reduction of 50% or greater showed significantly lower cumulative incidences of cardiovascular death (3.5% v. 2.4%; adjusted HR 0.76, 95% CI 0.71–0.82), spontaneous MI (3.9% v. 3.0%; adjusted HR 0.69, 95% CI 0.65–0.74), repeat revascularization (17.6% v. 13.8%; adjusted HR 0.76, 95% CI 0.73–0.78), and ischemic stroke (5.1% v. 3.7%; adjusted HR 0.81, 95% CI 0.76–0.87) than the group with an LDL-C reduction of less than 50% ().
+
+Figure 2:
+
+Cumulative incidence of MACCE according to LDL-C change after PCI (A) in total study population and according to attained post-PCI LDL-C levels and (B) in patients who achieved LDL-C reduction of ≥ 50%. (A) The blue dashed line denotes the group with an LDL-C reduction of ≥ 50% and the red dotted line denotes the group with an LDL-C reduction < 50%. (B) The blue dashed line denotes the group with an LDL-C level after PCI of < 1.4 mmol/L, the orange solid line denotes the group with a level after PCI of 1.4 to less than 1.8 mmol/L, and the red dotted line denotes the group with an LDL-C level after PCI of ≥ 1.8 mmol/L. LDL-C = low-density lipoprotein cholesterol, MACCE = major adverse cardiac and cerebrovascular events, PCI = percutaneous coronary intervention.
+
+Figure 3:
+
+Association between the risk of MACCE and percentage changes in LDL-C levels after PCI. The curves represent adjusted hazard ratios (solid line) and their 95% confidence intervals (dashed lines) for MACCE based on restricted cubic splines for percentage changes in LDL-C levels with knots at the 5th, 35th, 65th, and 95th percentiles of their sample distributions. The reference value (diamond dot) is set at 0% LDL-C percentage change. The model is adjusted for clinical presentation, ASA, P2Yinhibitor, ACE inhibitor or ARB, β-blocker use at discharge, LDL-C level before PCI, age, sex, residential area, body mass index, diabetes mellitus, hypertension, and chronic kidney disease requiring dialysis. ACE = angiotensin-converting enzyme, ARB = angiotensin II receptor blocker, ASA = acetylsalicylic acid, LDL-C = low-density lipoprotein cholesterol, MACCE = major adverse cardiac and cerebrovascular events, PCI = percutaneous coronary intervention.
+
+Table 2:
+
+Comparison of clinical outcomes according to percentage reduction of low-density lipoprotein cholesterol levels before and after percutaneous coronary intervention
+
+Outcome
+
+Incidence rate per 1000 person-years
+
+7-year cumulative incidence, no. (%)
+
+Adjusted HR(95% CI)
+
+MACCE
+
+LDL-C reduction of < 50%
+
+38.8
+
+15 777 (23.4)
+
+Ref.
+
+LDL-C reduction of ≥ 50%
+
+29.8
+
+7812 (18.3)
+
+0.77 (0.75–0.79)
+
+Cardiovascular death
+
+LDL-C reduction of < 50%
+
+5.4
+
+2217 (3.5)
+
+Ref.
+
+LDL-C reduction of ≥ 50%
+
+3.7
+
+933 (2.4)
+
+0.76 (0.71–0.82)
+
+Spontaneous myocardial infarction
+
+LDL-C reduction of < 50%
+
+5.8
+
+2508 (3.9)
+
+Ref.
+
+LDL-C reduction of ≥ 50%
+
+4.5
+
+1241 (3.0)
+
+0.69 (0.65–0.74)
+
+Repeat revascularization
+
+LDL-C reduction of < 50%
+
+28.3
+
+11 730 (17.6)
+
+Ref.
+
+LDL-C reduction of ≥ 50%
+
+22.2
+
+5935 (13.8)
+
+0.76 (0.73–0.78)
+
+Ischemic stroke
+
+LDL-C reduction of < 50%
+
+6.9
+
+3344 (5.1)
+
+Ref.
+
+LDL-C reduction of ≥ 50%
+
+5.1
+
+1522 (3.7)
+
+0.81 (0.76–0.87)
+
+Note: ACE = angiotensin-converting enzyme, ARB = angiotensin II receptor blocker, ASA = acetylsalicylic acid, CI = confidence interval, HR = hazard ratio, LDL-C = low-density lipoprotein cholesterol, MACCE = major adverse cardiac and cerebrovascular events, PCI = percutaneous coronary intervention, Ref. = reference category.
+
+*
+
+Incidence rate per 1000 person-years was calculated as (no. of events/total person-years) × 1000.
+
+†
+
+Cumulative incidence (%) calculated using Kaplan–Meier estimates over 7 years.
+
+‡
+
+Adjusted for clinical presentation, ASA, P2Yinhibitor, ACE inhibitor or ARB, β-blocker at discharge, and LDL-C before PCI at exam 1, and age, sex, residential area, body mass index, diabetes mellitus, hypertension, and chronic kidney disease on dialysis at exam 2.
+
+§
+
+MACCE was defined as a composite of cardiovascular death, spontaneous myocardial infarction, ischemic stroke, or repeat revascularization.
+
+Comparison of outcomes according to attained LDL-C level in the group with a reduction of 50% or greater
+
+Even if patients achieved an LDL-C reduction of 50% or greater after PCI, the 7-year cumulative incidence of MACCE was higher among those who attained a post-PCI LDL-C level of 1.8 mmol/L or greater (18.9%) and 1.4 to less than 1.8 mmol/L (18.5%) than among those who attained levels less than 1.4 mmol/L (17.9%) (). When we set the group with post-PCI LDL-C levels less than 1.4 mmol/L as a reference, the multivariable-adjusted HRs for MACCE were 1.07 (95% CI 1.02–1.13) for the group with levels of 1.4 to less than 1.8 mmol/L and 1.12 (95% CI 1.04–1.21) for the group with levels of 1.8 mmol/L or greater (). In subgroup analysis, these trends were consistently observed in all subgroups (). The risk of MACCE decreased when post-PCI LDL-C levels were lower (-for-linearity < 0.01,).
+
+The group with an LDL-C level after PCI of 1.8 mmol/L or greater exhibited a higher risk of spontaneous MI (adjusted HR 1.36, 95% CI 1.14–1.62) and repeat revascularization (adjusted HR 1.16, 95% CI 1.06–1.26) than the group with an LDL-C reduction after PCI of less than 1.4 mmol/L (). Although there were no differences in cardiovascular death, spontaneous MI, or ischemic stroke, the risk of repeat revascularization (adjusted HR 1.10, 95% CI 1.03–1.16) was higher in the group with levels of 1.4 to less than 1.8 mmol/L than in the group with an LDL-C level after PCI of less than 1.4 mmol/L (). In an additional analysis stratified by LDL-C percentage reduction (< 50% or ≥ 50%) and attained LDL-C level (< 1.4, 1.4 to less than 1.8, or ≥ 1.8 mmol/L), higher absolute post-PCI LDL-C levels were consistently associated with an increased risk of MACCE, even in patients who did not achieve the 50% LDL-C reduction target (7-yr cumulative incidence of MACCE for LDL-C < 1.4 mmol/L v. 1.4 to < 1.8 mmol/L v. LDL-C ≥ 1.8 mmol/L, 20.9% v. 21.1% v. 24.5%;< 0.01) (). Compared with patients with an LDL-C reduction of 50% or greater and absolute LDL-C level less than 1.4 mmol/L, those with a greater than 50% LDL-C reduction and absolute LDL-C level less than 1.4 mmol/L showed a significantly higher risk of MACCE after PCI (20.9% v. 17.9%; adjusted HR 1.15, 95% CI 1.08–1.22).
+
+Table 3:
+
+Comparison of clinical outcomes according to attained LDL-C level among patients with an LDL-C reduction of 50% or greater after PCI
+
+Outcome
+
+Incidence rate per 1000 person-years
+
+7-year cumulative incidence, no. (%)
+
+Adjusted HR(95% CI)
+
+MACCE
+
+LDL-C after PCI < 1.4 mmol/L
+
+29.5
+
+3751 (17.9)
+
+Ref.
+
+LDL-C after PCI of 1.4 to < 1.8 mmol/L
+
+30.1
+
+2480 (18.5)
+
+1.07 (1.02–1.13)
+
+LDL-C after PCI ≥ 1.8 mmol/L
+
+30.2
+
+1581 (18.9)
+
+1.12 (1.04–1.21)
+
+Cardiovascular death
+
+LDL-C after PCI < 1.4 mmol/L
+
+4
+
+492 (2.6)
+
+Ref.
+
+LDL-C after PCI of 1.4 to < 1.8 mmol/L
+
+3.5
+
+279 (2.3)
+
+0.92 (0.80–1.06)
+
+LDL-C after PCI ≥ 1.8 mmol/L
+
+3.3
+
+162 (2.1)
+
+0.92 (0.75–1.13)
+
+Spontaneous myocardial infarction
+
+LDL-C after PCI < 1.4 mmol/L
+
+4.2
+
+571 (2.9)
+
+Ref.
+
+LDL-C after PCI of 1.4 to < 1.8 mmol/L
+
+4.4
+
+388 (3.0)
+
+1.09 (0.96–1.24)
+
+LDL-C after PCI ≥ 1.8 mmol/L
+
+5.3
+
+282 (3.6)
+
+1.36 (1.14–1.62)
+
+Repeat revascularization
+
+LDL-C after PCI < 1.4 mmol/L
+
+21.6
+
+2807 (13.2)
+
+Ref.
+
+LDL-C after PCI of 1.4 to < 1.8 mmol/L
+
+22.6
+
+1899 (14.1)
+
+1.10 (1.03–1.16)
+
+LDL-C after PCI ≥ 1.8 mmol/L
+
+23.1
+
+1229 (14.6)
+
+1.16 (1.06–1.26)
+
+Ischemic stroke
+
+LDL-C after PCI < 1.4 mmol/L
+
+5.3
+
+739 (3.7)
+
+Ref.
+
+LDL-C after PCI of 1.4 to < 1.8 mmol/L
+
+5.2
+
+488 (3.7)
+
+1.05 (0.93–1.19)
+
+LDL-C after PCI ≥ 1.8 mmol/L
+
+4.8
+
+295 (3.6)
+
+1.06 (0.89–1.27)
+
+Note: ACE = angiotensin-converting enzyme, ARB = angiotensin II receptor blocker, ASA = acetylsalicylic acid, CI = confidence interval, HR = hazard ratio, LDL-C = low-density lipoprotein cholesterol, MACCE = major adverse cardiac and cerebrovascular events, PCI = percutaneous coronary intervention, Ref. = reference category.
+
+*
+
+Incidence rate per 1000 person-years was calculated as (no. of events/total person-years) × 1000.
+
+†
+
+Cumulative incidence (%) calculated using Kaplan–Meier estimates over 7 years.
+
+‡
+
+Adjusted for clinical presentation, ASA, P2Yinhibitor, ACE inhibitor or ARB, β-blocker at discharge, LDL-C before PCI at exam 1, and age, sex, residential area, body mass index, diabetes mellitus, hypertension, and chronic kidney disease on dialysis at exam 2.
+
+§
+
+MACCE was defined as a composite of cardiovascular death, spontaneous myocardial infarction, ischemic stroke, or repeat revascularization.
+
+Figure 4:
+
+Association between the risk of MACCE and attained LDL-C levels after PCI. The curves represent adjusted hazard ratios (solid line) and their 95% confidence intervals (dashed lines) for MACCE based on restricted cubic splines for LDL-C levels with knots at the 5th, 35th, 65th, and 95th percentiles of their sample distributions. The reference value (diamond dot) for attained LDL-C levels is set at 1.8 mmol/L. The model is adjusted for clinical presentation, ASA, P2Yinhibitor, ACE inhibitor or ARB, β-blocker at discharge, LDL-C level before PCI, age, sex, residential area (metropolitan v. rural), body mass index, diabetes mellitus, hypertension, and chronic kidney disease requiring dialysis. ACE = angiotensin-converting enzyme, ARB = angiotensin II receptor blocker, ASA = acetylsalicylic acid, LDL-C = low-density lipoprotein cholesterol, MACCE = major adverse cardiac and cerebrovascular events, PCI = percutaneous coronary intervention.
+
+Interpretation
+
+This nationwide cohort study from Korea compared the clinical outcomes in patients who received a PCI according to the LDL-C reduction in the overall study population and evaluated the clinical outcomes associated with the attained LDL-C levels in patients who achieved an LDL-C reduction of 50% or greater after PCI. The principle findings were as follows. First, only 40.1% of patients achieved an LDL-C reduction of 50% or greater after PCI, and those patients had a significantly lower risk of cardiovascular death and MACCE at 7 years than patients who did not achieve an LDL-C reduction of 50% or greater, regardless of the baseline LDL-C level. Second, among patients who achieved an LDL-C reduction of 50% or greater after PCI, the risks of MACCE, spontaneous MI, and repeat revascularization at 7 years were significantly higher in patients who attained an LDL-C level of 1.8 mmol/L or greater than in those who attained an LDL-C level of less than 1.4 mmol/L. Third, among patients who achieved an LDL-C reduction of 50% or greater, those who attained a post-PCI LDL-C level of 1.4 to less than 1.8 mmol/L showed similar risks of cardiovascular death, spontaneous MI, and stroke as those who attained a post-PCI LDL-C level of less than 1.4 mmol/L. However, the slightly higher risk of MACCE in patients with a post-PCI LDL-C level of 1.4 to less than 1.8 mmol/L compared with those with a post-PCI LDL-C level of less than 1.4 mmol/L was primarily driven by the higher rate of repeat revascularization.
+
+Landmark randomized trials have consistently shown the efficacy of high-intensity statin therapy in reducing the risk of cardiovascular events in both acute and chronic coronary syndrome populations.–Since high-intensity statin therapy has the potential to reduce LDL-C levels by more than 50%, both ACC/ AHA and ESC/EAS guidelines recommend maximally tolerable high-intensity statin therapy to achieve more than 50% reduction of LDL-C should be used in high-risk patients with established coronary artery disease after PCI.,Consistent with the guideline recommendations, the current study found that patients who achieved an LDL-C reduction of 50% or greater after PCI had a significantly lower risk of hard outcomes, including cardiovascular death and MI, as well as MACCE, than those who did not achieve an LDL-C reduction of 50% or greater, regardless of the baseline LDL-C levels. In particular, the group that did not achieve an LDL-C reduction of 50% or greater had a poorer prognosis despite having lower baseline LDL-C levels, suggesting that lipid-lowering therapy is being performed inadequately in patients with already low LDL-C at the time of PCI in real-world practice. Given that patients with an LDL-C reduction of 50% or greater after PCI showed a better prognosis than those who achieved the same post-PCI LDL-C levels but with a reduction of less than 50%, this suggests that the relative reduction of LDL-C is a stronger protective factor for future cardiovascular events than the absolute LDL-C level attained. We also found that there was a linear negative association between absolute reduction of LDL-C levels and MACCE (), in agreement with the previous meta-analysis by the CTT Collaboration.Given that only half of patients with an LDL-C reduction of 50% or greater in the current study were taking high-intensity statin therapy, our results suggest that the percentage reduction of LDL-C is more important than the intensity of the statin therapy itself, although several studies identified that the pleotropic effects of statins are more potent in high-intensity statins than in non–high-intensity statins.,This concept was also evaluated by the randomized trial comparing the efficacy and safety of lipid lowering with statin monotherapy versus statin–ezetimibe combination for high-risk cardiovascular disease.Our study showed that LDL percentage reduction after PCI is still suboptimal in real-world practice, despite the consistent recommendations in the current guidelines.,This trend was also commonly observed in other countries, including the US and Europe, in patients with atherosclerotic cardiovascular disease.–In a population-based study from Alberta, Canada, patients with MI, ischemic stroke, or peripheral artery disease who did not achieve LDL-C levels below 1.8 mmol/L remained at high risk for recurrent cardiovascular events, underscoring the need for more intensive lipid-lowering strategies in routine clinical practice.Taken together, physicians should be aware that failure to achieve an LDL-C reduction of 50% or greater is clearly associated with poorer prognosis and increased risk of cardiovascular mortality, and should make maximal efforts to achieve LDL-C reduction by more than 50% of baseline LDL-C after PCI.
+
+Regarding lipid management after PCI, the medical decision in some cases, specifically in patients who received high-intensity statin therapy and achieved an LDL-C reduction of greater than 50% but attained an LDL-C level of 1.4 to less than 1.8 mmol/L, can differ according to the recommendations of the American and Canadian (treatment threshold ≥ 1.8 mmol/L) or European and Korean guidelines (goal < 1.4 mmol/L).,,,In South Korea, nonstatin lipid-lowering therapy, such as PCSK9 inhibitors, might be underused because of insurance coverage. This discrepancy might be due to a difference in the interpretation of previous results of trials evaluating the outcomes of non-statin add-on therapy. The IMPROVE-IT trial showed that ezetimibe added to simvastatin resulted in an incremental lowering of LDL-C levels and slightly improved cardiovascular outcomes in patients with acute coronary syndrome.The FOURIER and ODYSSEY trials also showed that the use of a PCSK9 inhibitor in addition to statins was associated with markedly reduced LDL-C levels and recurrent ischemic cardiovascular events.,Nevertheless, none of these trials showed the cost-effectiveness of nonstatin add-on therapy for secondary prevention. Therefore, determining the optimal LDL-C level to minimize the risk of recurrent cardiovascular events after PCI is crucial in real-world practice. In the current study, significantly higher risks of spontaneous MI and MACCE were observed in patients with attained LDL-C of 1.8 mmol/L or greater than in those with levels less than 1.4 mmol/L, among all patients who achieved an LDL-C reduction of 50% or greater after PCI. These findings support the recommendations of both ACC/AHA and ESC/EAS guidelines, highlighting the need for additional lipid-lowering treatment in patients with attained LDL-C of 1.8 mmol/L or greater after PCI. However, when comparing the outcomes between the attained LDL-C of less than 1.4 mmol/L, which is target goal of the European and Korean guidelines, and LDL-C of 1.4 to less than 1.8 mmol/L, which requires no further action according to American and Canadian guidelines, we found that the latter had a 7% increase in long-term MACCE, but this was mostly due to repeat revascularization with no difference in hard end points. These findings promote the concept of lower LDL-C is better.
+
+Nevertheless, careful considerations need to be made regarding routine administration of expensive nonstatin add-on therapies to achieve small reductions in repeat revascularization in the population receiving statin therapy who maintain LDL-C levels at 1.4 to less than 1.8 mmol/L after PCI. Shared decisionmaking through a patient-centred approach may be necessary in such scenarios. Furthermore, identifying the most appropriate and effective strategies to achieve these targets will be necessary in future research.
+
+Limitations
+
+A limitation of this study is the use of retrospective data, which introduces potential bias due to unmeasured confounding, such as detailed PCI procedure information, inflammatory biomarkers, or coronary plaque burden. To quantify the potential effect of unmeasured confounding, we calculated the E-value for our primary outcome, which was 1.92, indicating that an unmeasured confounder would need a stronger association than most known cardiovascular risk factors to fully explain our findings. However, our analysis already accounts for factors that capture a significant portion of potential confounding by disease severity.
+
+The used rate of ezetimibe or PCSK9 inhibitors was relatively low because of the long registration period.
+
+The reasons for treatment decisions and adherence, such as adverse effects (e.g., muscle symptoms and gastrointestinal discomfort), patient characteristics, and physician prescribing preferences, could not be assessed in this study due to the nature of claims data. Although these factors likely influenced the choice and intensity of statin therapy, the primary objective of this study was to highlight the clinical importance of achieving appropriate LDL-C targets.
+
+The current study compared the outcomes according to the dichotomized percentage change of LDL-C variable (50% reduction), and this might oversimplify the continuous nature of the relation between LDL-C reduction and cardiovascular events and should be interpreted with caution.
+
+Many potential participants were lost to follow-up or did not complete a second screening within 3 years of PCI. A relatively long accrual period (10 yr) is a contributing factor to the variation in follow-up duration for each participant, and a large number of recently enrolled patients could not receive a second screening. This is unlikely to have introduced significant selection bias, as loss to follow-up is expected to be random rather than systematically related to study outcomes. Nevertheless, our findings are valid only in patients who underwent an additional health screening after PCI.
+
+Conclusion
+
+Among patients with coronary artery disease who underwent PCI, achieving an LDL-C reduction of 50% or greater reduced the risks of cardiovascular death, MI, and MACCE, regardless of baseline LDL-C levels. Even among patients with LDL-C reductions of more than 50%, those with attained LDL-C of 1.8 mmol/L or greater had an increased risk of MI and MACCE, compared with those with attained LDL-C of less than 1.4 mmol/L. However, patients who achieved an LDL-C reduction of 50% or greater and attained post-PCI LDL-C of 1.4 to less than 1.8 mmol/L showed similar risks of cardiovascular death, spontaneous MI, and stroke, but a slightly higher risk of MACCE, primarily owing to an increased risk of repeat revascularization, compared with those with attained post-PCI LDL-C levels of less than 1.4 mmol/L. Our findings suggest that while achieving an LDL-C reduction of 50% or greater remains a critical therapeutic goal, targeting LDL-C levels of less than 1.4 mmol/L post-PCI may provide additional clinical benefit.
+
+Supplementary Information
