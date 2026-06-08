@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T23:52:13.671981+09:00",
+  "generated_at": "2026-06-09T06:14:12.369796+09:00",
   "summary": {
     "total_agents": 16,
     "runtime_profiles": 14,
@@ -120,7 +120,7 @@
       "type": "runtime_snapshot",
       "title": "Runtime state snapshot v0",
       "summary": "Profiles=14 · mismatches=0 · missing_observation=0",
-      "created_at": "2026-06-08T23:52:13.656945+09:00",
+      "created_at": "2026-06-09T06:14:12.207898+09:00",
       "destination": "local",
       "status": "generated"
     },
@@ -161,14 +161,14 @@
   "activity": [
     {
       "id": "runtime-researchorchestrator",
-      "timestamp": "2026-06-08T23:51:31+09:00",
+      "timestamp": "2026-06-09T06:14:10+09:00",
       "type": "runtime_observation",
       "agent_id": "researchorchestrator",
       "summary": "Observed model gpt-5.4 (active)"
     },
     {
       "id": "runtime-default",
-      "timestamp": "2026-06-08T23:33:24.510710+09:00",
+      "timestamp": "2026-06-09T06:07:38.188424+09:00",
       "type": "runtime_observation",
       "agent_id": "default",
       "summary": "Observed model gpt-5.4 (active)"
@@ -240,8 +240,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-08T23:33:24.510710+09:00",
-        "last_report_at": "2026-06-08T23:33:24.510710+09:00",
+        "last_heartbeat_at": "2026-06-09T06:07:38.188424+09:00",
+        "last_report_at": "2026-06-09T06:07:38.188424+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -888,8 +888,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-08T23:51:31+09:00",
-        "last_report_at": "2026-06-08T23:51:31+09:00",
+        "last_heartbeat_at": "2026-06-09T06:14:10+09:00",
+        "last_report_at": "2026-06-09T06:14:10+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -1097,7 +1097,7 @@
   "source_kind": "generated-bridge-from-runtime-and-fixture",
   "runtime_state_source": "data/runtime-state-v0.json",
   "runtime_state_source_kind": "generated-runtime-snapshot",
-  "runtime_generated_at": "2026-06-08T23:52:13.656945+09:00",
+  "runtime_generated_at": "2026-06-09T06:14:12.207898+09:00",
   "runtime_summary": {
     "total_profiles": 14,
     "active": 2,

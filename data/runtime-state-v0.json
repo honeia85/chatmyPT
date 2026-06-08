@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T23:52:13.656945+09:00",
+  "generated_at": "2026-06-09T06:14:12.207898+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
@@ -23,12 +23,12 @@
       },
       "observed": {
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-08T23:33:24.510710+09:00",
+        "last_seen_at": "2026-06-09T06:07:38.188424+09:00",
         "source": "state.db",
-        "message_count": 38,
-        "tool_call_count": 22,
-        "api_call_count": 15,
-        "end_reason": "cron_complete"
+        "message_count": 9,
+        "tool_call_count": 4,
+        "api_call_count": 4,
+        "end_reason": null
       },
       "observed_fallbacks": {
         "agent_log": {
@@ -40,12 +40,12 @@
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-08T23:33:24.510710+09:00",
+          "last_seen_at": "2026-06-09T06:07:38.188424+09:00",
           "source": "state.db",
-          "message_count": 38,
-          "tool_call_count": 22,
-          "api_call_count": 15,
-          "end_reason": "cron_complete"
+          "message_count": 9,
+          "tool_call_count": 4,
+          "api_call_count": 4,
+          "end_reason": null
         },
         "sources_present": [
           "agent.log",
@@ -668,7 +668,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-08T23:51:31+09:00",
+        "last_seen_at": "2026-06-09T06:14:10+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -676,17 +676,17 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-08T23:51:31+09:00",
+          "last_seen_at": "2026-06-09T06:14:10+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-08T23:49:30.088253+09:00",
+          "last_seen_at": "2026-06-09T06:10:54.274986+09:00",
           "source": "state.db",
           "message_count": 0,
           "tool_call_count": 0,
-          "api_call_count": 8,
+          "api_call_count": 11,
           "end_reason": null
         },
         "sources_present": [
