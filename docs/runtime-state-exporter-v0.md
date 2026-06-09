@@ -143,7 +143,7 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - bridge consumers should surface the loaded bridge payload path so operators can tell whether they are reading `/data/agent-ops-console-runtime.json` or a fallback shell
 - bridge consumers should surface both bridge-payload and upstream runtime-snapshot timestamps when they differ, rather than collapsing them into one ambiguous `generated_at`
 - bridge consumers should re-check standalone `/data/runtime-state-v0.json` after loading a bridge payload and prefer the fresher standalone runtime snapshot for top-level freshness/drift pills when the embedded bridge copy lags
-- bridge consumers should translate per-agent `source_kind` into human-readable authority labels such as `direct runtime profile` vs `conceptual shell` instead of collapsing everything into generic `fixture` wording
+- bridge consumers should translate per-agent `source_kind` into human-readable authority labels such as `direct runtime profile`, `runtime-backed shell overlay`, and `conceptual shell` instead of collapsing everything into generic `fixture` wording
 - per-agent `runtime_provenance`: preserves runtime-backed evidence fields (`observation_source`, `observation_kind`, `evidence_sources`, redacted config/log/db provenance labels, exporter warnings) so surfaces can explain why a node is shown as active/idle/stale/waiting without falling back to generic `fixture` language
 - bridge consumers should evaluate per-agent membership in drift arrays by `agent.id` so detail panes can say whether a given node is missing, stale, or doc-drifted instead of only repeating global counts
 - `drift_summary.missing_observation` and `drift_summary.stale_observation`: observation-gap counts that should be presented separately from documentation drift
@@ -153,5 +153,6 @@ Bridge-specific provenance fields now carried through for UI clarity:
 - `reconciliation.stale_threshold_hours`: lets surfaces explain stale semantics instead of inventing them
 - ops console summary cards should distinguish runtime-backed totals, runtime-only nodes, overlay nodes, and conceptual shells so operators can see how much of the surface is still transitional shell
 - ops map consumers should compute bridge reconciliation counts (`mapped nodes`, `bridge-only agents`, `shell-only nodes`, `conceptual bridge nodes`) from the loaded bridge payload instead of implying the static shell fully matches runtime inventory
+- ops map consumers should surface standalone runtime-profile team/type classification next to bridge-shell classification when the bridge overlay still carries older shell taxonomy, so operators can see fixture drift without silently redefining the topology
 - selected ops map nodes without bridge backing should explicitly say they are presentation/context shells, not direct runtime truth
 - when generated runtime JSON cannot be loaded, surfaces should say `runtime unavailable` / `runtime overlay unavailable` rather than pretending the currently rendered shell is itself authoritative runtime truth

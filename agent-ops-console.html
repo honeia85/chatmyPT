@@ -603,8 +603,11 @@
 
     function describeAuthority(agent) {
       if (!agent) return 'unknown authority';
-      if (agent.source_kind === 'runtime_profile' || agent.source_kind === 'runtime_profile_overlay') {
+      if (agent.source_kind === 'runtime_profile') {
         return 'direct runtime profile';
+      }
+      if (agent.source_kind === 'runtime_profile_overlay') {
+        return 'runtime-backed shell overlay';
       }
       if (agent.source_kind === 'conceptual_fixture') {
         return 'conceptual shell';
@@ -984,6 +987,7 @@
         '/data/agent-ops-console-v1.json'
       ];
       let lastError = null;
+
       for (const url of candidates) {
         try {
           const response = await fetch(url, { cache: 'no-store' });

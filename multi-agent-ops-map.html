@@ -95,8 +95,10 @@
     .node .type { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
     .node .name { font-size: 18px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 6px; }
     .node .desc { font-size: 12px; line-height: 1.5; color: #c8d8f4; }
+    .node .provenance { margin-top: 10px; font-size: 11px; line-height: 1.45; color: #b4c8ea; }
     .node .foot { display:flex; justify-content:space-between; align-items:center; margin-top: 12px; gap:8px; }
     .mini { font-size: 11px; color: var(--muted); }
+
     .line {
       position:absolute; height:2px; transform-origin:left center; background: linear-gradient(90deg, rgba(96,165,250,.7), rgba(167,139,250,.45)); opacity:.85;
     }
@@ -465,9 +467,14 @@
         sections.push({ title: 'Rule References', items: agent.rule_refs });
       }
 
+      const runtimeProfile = getRuntimeProfile(agentId);
+      const subtitle = runtimeProfile
+        ? `runtime ${displayTeamLabel(runtimeProfile.team)} · ${displayTypeLabel(runtimeProfile.type)}${describeClassificationDrift(agent, runtimeProfile) !== 'bridge shell classification aligned with runtime profile' ? ` · shell ${displayTeamLabel(agent.team)} · ${displayTypeLabel(agent.type)}` : ''} · Layer ${agent.layer}`
+        : `${agent.team} team · ${agent.type} · Layer ${agent.layer}`;
+
       return {
         title: agent.display_name || agent.id,
-        subtitle: `${agent.team} team · ${agent.type} · Layer ${agent.layer}`,
+        subtitle,
         sections: sections
       };
     }
@@ -489,6 +496,7 @@
     const bridgeOnlyList = document.getElementById('bridgeOnlyList');
     const shellOnlyList = document.getElementById('shellOnlyList');
     let runtimeBridge = null;
+    let runtimeSnapshot = null;
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -549,10 +557,39 @@
       ].filter(([key]) => agentHasDrift(agentId, key)).map(([, label]) => label).join(', ') || 'none';
     }
 
+    function humanizeToken(value) {
+      return String(value || 'unknown').replace(/[-_]/g, ' ');
+    }
+
+    function displayTeamLabel(teamId) {
+      const labels = {
+        'front-desk': 'front desk',
+        executive: 'executive shell',
+        assistant: 'assistant',
+        dev: 'development',
+        ops: 'operations',
+        research: 'research',
+        trading: 'trading',
+        hybrid: 'hybrid lane'
+      };
+      return labels[teamId] || humanizeToken(teamId);
+    }
+
+    function displayTypeLabel(typeId) {
+      return humanizeToken(typeId);
+    }
+
+    function getRuntimeProfile(agentId) {
+      return runtimeSnapshot?.profileMap?.[agentId] || null;
+    }
+
     function describeAuthority(agent) {
       if (!agent) return 'unknown authority';
-      if (agent.source_kind === 'runtime_profile' || agent.source_kind === 'runtime_profile_overlay') {
+      if (agent.source_kind === 'runtime_profile') {
         return 'direct runtime profile';
+      }
+      if (agent.source_kind === 'runtime_profile_overlay') {
+        return 'runtime-backed shell overlay';
       }
       if (agent.source_kind === 'conceptual_fixture') {
         return 'conceptual shell';
@@ -560,8 +597,63 @@
       return agent.source_kind || 'unknown authority';
     }
 
+    function describeClassificationDrift(agent, runtimeProfile) {
+      if (!runtimeProfile) return 'runtime profile unavailable';
+      if (!agent) return `runtime ${displayTeamLabel(runtimeProfile.team)} · ${displayTypeLabel(runtimeProfile.type)} without bridge shell node`;
+      const mismatches = [];
+      if ((agent.team || 'unknown') !== (runtimeProfile.team || 'unknown')) {
+        mismatches.push(`bridge team ${agent.team || 'unknown'} ≠ runtime team ${runtimeProfile.team || 'unknown'}`);
+      }
+      if ((agent.type || 'unknown') !== (runtimeProfile.type || 'unknown')) {
+        mismatches.push(`bridge type ${agent.type || 'unknown'} ≠ runtime type ${runtimeProfile.type || 'unknown'}`);
+      }
+      return mismatches.join(' · ') || 'bridge shell classification aligned with runtime profile';
+    }
+
+    function describeNodeProvenance(agent, runtimeProfile) {
+      if (!agent) return 'shell-only presentation node · no bridge agent backing';
+      const backing = (agent.backing_profiles || []).join(', ') || 'none';
+      const parts = [describeAuthority(agent)];
+      if (runtimeProfile) {
+        parts.push(`runtime ${displayTeamLabel(runtimeProfile.team)} · ${displayTypeLabel(runtimeProfile.type)}`);
+        if (describeClassificationDrift(agent, runtimeProfile) !== 'bridge shell classification aligned with runtime profile') {
+          parts.push(`shell ${displayTeamLabel(agent.team)} · ${displayTypeLabel(agent.type)}`);
+        }
+      } else {
+        parts.push(`bridge ${displayTeamLabel(agent.team)} · ${displayTypeLabel(agent.type)}`);
+      }
+      parts.push(`backing ${backing}`);
+      return parts.join(' · ');
+    }
+
+    function ensureNodeProvenance(node) {
+      let provenance = node.querySelector('.provenance');
+      if (!provenance) {
+        provenance = document.createElement('div');
+        provenance.className = 'provenance';
+        const foot = node.querySelector('.foot');
+        node.insertBefore(provenance, foot || null);
+      }
+      return provenance;
+    }
+
+    function rememberRuntimeSnapshot(runtime) {
+      runtimeSnapshot = runtime
+        ? {
+            ...runtime,
+            profileMap: Object.fromEntries((runtime.profiles || []).map(profile => [profile.id, profile]))
+          }
+        : null;
+      if (runtimeBridge?.agentMap) {
+        applyRuntimeNodeHints();
+        const activeNode = document.querySelector('.node.active');
+        if (activeNode) renderDetail(activeNode.dataset.node);
+      }
+    }
+
     function renderRuntimeBoxes(key) {
       const agent = runtimeBridge?.agentMap?.[key];
+      const runtimeProfile = getRuntimeProfile(key);
       if (!runtimeBridge) return '';
       if (!agent) {
         return `
@@ -575,6 +667,7 @@
               <li>runtime_snapshot_generated_at: ${runtimeBridge?.runtime_generated_at ? new Date(runtimeBridge.runtime_generated_at).toLocaleString('ko-KR') : 'unknown'}</li>
               <li>bridge_runtime_lag: ${describeTimestampDelta(runtimeBridge?.generated_at, runtimeBridge?.runtime_generated_at)}</li>
               <li>runtime_snapshot_kind: ${runtimeBridge?.runtime_state_source_kind || 'generated-runtime-snapshot'}</li>
+              <li>runtime_profile_classification: ${runtimeProfile ? `${displayTeamLabel(runtimeProfile.team)} · ${displayTypeLabel(runtimeProfile.type)}` : 'not loaded for this node'}</li>
               <li>interpretation: this card is presentation/context shell, not direct runtime truth</li>
             </ul>
           </div>
@@ -601,6 +694,11 @@
             <li>runtime_snapshot_kind: ${runtimeBridge?.runtime_state_source_kind || 'generated-runtime-snapshot'}</li>
             <li>runtime_snapshot_generated_at: ${snapshotGeneratedAt ? new Date(snapshotGeneratedAt).toLocaleString('ko-KR') : 'unknown'}</li>
             <li>bridge_runtime_lag: ${describeTimestampDelta(runtimeBridge?.generated_at, runtimeBridge?.runtime_generated_at)}</li>
+            <li>runtime_profile_team: ${runtimeProfile ? displayTeamLabel(runtimeProfile.team) : 'runtime profile unavailable'}</li>
+            <li>runtime_profile_type: ${runtimeProfile ? displayTypeLabel(runtimeProfile.type) : 'runtime profile unavailable'}</li>
+            <li>bridge_shell_team: ${displayTeamLabel(agent.team)}</li>
+            <li>bridge_shell_type: ${displayTypeLabel(agent.type)}</li>
+            <li>classification_drift: ${describeClassificationDrift(agent, runtimeProfile)}</li>
             <li>observed_source: ${runtimeProvenance.observation_source || runtimeProvenance.note || 'none'}</li>
             <li>observed_source_kind: ${runtimeProvenance.observation_kind || 'n/a'}</li>
             <li>evidence_sources: ${evidenceSources}</li>
@@ -643,8 +741,12 @@
         node.classList.remove('shell-only');
         const foot = node.querySelector('.foot');
         const mini = foot?.querySelector('.mini');
+        const provenance = node.querySelector('.provenance');
         if (mini && mini.dataset.baseText) {
           mini.textContent = mini.dataset.baseText;
+        }
+        if (provenance) {
+          provenance.remove();
         }
         node.title = '';
       });
@@ -677,13 +779,16 @@
       if (!runtimeBridge?.agentMap) return;
       nodes.forEach(node => {
         const agent = runtimeBridge.agentMap[node.dataset.node];
+        const runtimeProfile = getRuntimeProfile(node.dataset.node);
         const foot = node.querySelector('.foot');
         const mini = foot?.querySelector('.mini');
+        const provenance = ensureNodeProvenance(node);
         if (mini && !mini.dataset.baseText) {
           mini.dataset.baseText = mini.textContent;
         }
         if (!agent) {
           node.classList.add('shell-only');
+          provenance.textContent = describeNodeProvenance(null, runtimeProfile);
           if (mini) {
             mini.textContent = `${mini.dataset.baseText || mini.textContent} · shell only`;
           }
@@ -691,13 +796,14 @@
           return;
         }
         node.classList.remove('shell-only');
+        provenance.textContent = describeNodeProvenance(agent, runtimeProfile);
         if (mini) {
           const driftLabel = summarizeAgentDrift(agent.id);
           mini.textContent = agent.runtime?.last_heartbeat_at
             ? `heartbeat ${new Date(agent.runtime.last_heartbeat_at).toLocaleString('ko-KR')} · drift ${driftLabel}`
             : `source ${agent.source_kind || 'legacy-shell-payload'} · drift ${driftLabel}`;
         }
-        node.title = `${describeAuthority(agent)} · backing ${(agent.backing_profiles || []).join(', ') || 'none'} · drift ${summarizeAgentDrift(agent.id)}`;
+        node.title = `${describeNodeProvenance(agent, runtimeProfile)} · ${describeClassificationDrift(agent, runtimeProfile)} · drift ${summarizeAgentDrift(agent.id)}`;
       });
     }
 
@@ -787,6 +893,7 @@
     async function loadRuntimeSnapshotMeta() {
       try {
         const runtime = await fetchRuntimeSnapshot();
+        rememberRuntimeSnapshot(runtime);
         applyRuntimeSnapshotMeta(runtime);
         return runtime;
       } catch (error) {
@@ -798,6 +905,7 @@
     async function preferStandaloneRuntimeSnapshotMeta(bridgeData) {
       try {
         const runtime = await fetchRuntimeSnapshot();
+        rememberRuntimeSnapshot(runtime);
         const runtimeGeneratedMs = parseTimestampMs(runtime?.generated_at);
         const bridgeRuntimeGeneratedMs = parseTimestampMs(bridgeData?.runtime_generated_at || bridgeData?.generated_at);
         if (runtimeGeneratedMs == null || (bridgeRuntimeGeneratedMs != null && runtimeGeneratedMs <= bridgeRuntimeGeneratedMs)) {
