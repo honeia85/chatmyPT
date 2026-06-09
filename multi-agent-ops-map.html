@@ -226,6 +226,7 @@
             <div class="status-card"><span>Bridge-only Agents</span><strong id="bridgeOnlyCount">-</strong></div>
             <div class="status-card"><span>Shell-only Nodes</span><strong id="shellOnlyCount">-</strong></div>
             <div class="status-card"><span>Conceptual Bridge</span><strong id="conceptualBridgeCount">-</strong></div>
+            <div class="status-card"><span>Class Drift</span><strong id="classificationDriftCount">-</strong></div>
           </div>
           <div class="footer-note" id="bridgeCoverageSummary" style="margin-top:10px;">bridge reconciliation pending</div>
           <div class="recon-group">
@@ -235,6 +236,10 @@
           <div class="recon-group">
             <div class="recon-label">Shell-only nodes</div>
             <div class="recon-chips" id="shellOnlyList"><span class="pill">pending</span></div>
+          </div>
+          <div class="recon-group">
+            <div class="recon-label">Shell-classification drift</div>
+            <div class="recon-chips" id="classificationDriftList"><span class="pill">pending</span></div>
           </div>
         </div>
 
@@ -492,9 +497,11 @@
     const bridgeOnlyCount = document.getElementById('bridgeOnlyCount');
     const shellOnlyCount = document.getElementById('shellOnlyCount');
     const conceptualBridgeCount = document.getElementById('conceptualBridgeCount');
+    const classificationDriftCount = document.getElementById('classificationDriftCount');
     const bridgeCoverageSummary = document.getElementById('bridgeCoverageSummary');
     const bridgeOnlyList = document.getElementById('bridgeOnlyList');
     const shellOnlyList = document.getElementById('shellOnlyList');
+    const classificationDriftList = document.getElementById('classificationDriftList');
     let runtimeBridge = null;
     let runtimeSnapshot = null;
 
@@ -612,6 +619,17 @@
       return mismatches.join(' · ') || 'bridge shell classification aligned with runtime profile';
     }
 
+    function hasClassificationDrift(agent) {
+      const runtimeProfile = getRuntimeProfile(agent?.id);
+      if (!agent || !runtimeProfile) return false;
+      return describeClassificationDrift(agent, runtimeProfile) !== 'bridge shell classification aligned with runtime profile';
+    }
+
+    function listClassificationDrift(agents) {
+      if (!runtimeSnapshot) return null;
+      return (agents || []).filter(agent => hasClassificationDrift(agent));
+    }
+
     function describeNodeProvenance(agent, runtimeProfile) {
       if (!agent) return 'shell-only presentation node · no bridge agent backing';
       const backing = (agent.backing_profiles || []).join(', ') || 'none';
@@ -647,6 +665,7 @@
           }
         : null;
       if (runtimeBridge?.agentMap) {
+        renderBridgeCoverage();
         applyRuntimeNodeHints();
         const activeNode = document.querySelector('.node.active');
         if (activeNode) renderDetail(activeNode.dataset.node);
@@ -736,9 +755,11 @@
       bridgeOnlyCount.textContent = '-';
       shellOnlyCount.textContent = '-';
       conceptualBridgeCount.textContent = '-';
+      classificationDriftCount.textContent = '-';
       bridgeCoverageSummary.textContent = reason;
       bridgeOnlyList.innerHTML = '<span class="pill">runtime bridge unavailable</span>';
       shellOnlyList.innerHTML = '<span class="pill">runtime bridge unavailable</span>';
+      classificationDriftList.innerHTML = '<span class="pill">runtime snapshot unavailable</span>';
       nodes.forEach(node => {
         node.classList.remove('shell-only');
         const foot = node.querySelector('.foot');
@@ -767,14 +788,22 @@
       const bridgeOnlyAgents = bridgeAgents.filter(agent => !nodeIdSet.has(agent.id));
       const shellOnlyNodes = nodeIds.filter(id => !bridgeIdSet.has(id));
       const conceptualBridgeAgents = bridgeAgents.filter(agent => agent.source_kind === 'conceptual_fixture');
+      const classificationDriftAgents = listClassificationDrift(bridgeAgents);
+      const classificationDriftSummary = classificationDriftAgents
+        ? `${classificationDriftAgents.length}`
+        : 'pending standalone runtime snapshot';
 
       bridgeMappedCount.textContent = String(mappedAgents.length);
       bridgeOnlyCount.textContent = String(bridgeOnlyAgents.length);
       shellOnlyCount.textContent = String(shellOnlyNodes.length);
       conceptualBridgeCount.textContent = String(conceptualBridgeAgents.length);
-      bridgeCoverageSummary.textContent = `bridge reconciled ${mappedAgents.length}/${nodeIds.length} shell nodes against ${runtimeBridge?.runtime_summary?.total_profiles ?? runtimeBridge?.summary?.runtime_profiles ?? bridgeAgents.length} runtime profiles and ${runtimeBridge?.summary?.total_agents ?? bridgeAgents.length} console nodes.`;
+      classificationDriftCount.textContent = classificationDriftAgents ? String(classificationDriftAgents.length) : '-';
+      bridgeCoverageSummary.textContent = `bridge reconciled ${mappedAgents.length}/${nodeIds.length} shell nodes against ${runtimeBridge?.runtime_summary?.total_profiles ?? runtimeBridge?.summary?.runtime_profiles ?? bridgeAgents.length} runtime profiles and ${runtimeBridge?.summary?.total_agents ?? bridgeAgents.length} console nodes · shell-classification drift ${classificationDriftSummary}.`;
       bridgeOnlyList.innerHTML = renderReconChips(bridgeOnlyAgents, agent => `${agent.id} · ${agent.source_kind || 'unknown'}`);
       shellOnlyList.innerHTML = renderReconChips(shellOnlyNodes, id => `${id} · shell only`);
+      classificationDriftList.innerHTML = classificationDriftAgents
+        ? renderReconChips(classificationDriftAgents, agent => `${agent.id} · ${describeClassificationDrift(agent, getRuntimeProfile(agent.id))}`)
+        : '<span class="pill">pending standalone runtime snapshot</span>';
     }
 
     function applyRuntimeNodeHints() {
