@@ -200,6 +200,7 @@ Suggested team groups:
 - Research
 - Trading
 - Ops
+- Personal Ops
 - Knowledge Base
 - Future shared infra teams
 

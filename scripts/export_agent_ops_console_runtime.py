@@ -17,6 +17,8 @@ TEAM_DISPLAY = {
     "assistant": {"id": "assistant", "name": "Assistant", "mission": "Briefing, summaries, and routine support."},
     "dev": {"id": "dev", "name": "Development", "mission": "Implementation, tests, and repository changes."},
     "ops": {"id": "ops", "name": "Operations", "mission": "Deployment, runtime verification, and infrastructure hygiene."},
+    "knowledge": {"id": "knowledge", "name": "Knowledge Base", "mission": "Canonical note governance, source intake, and knowledge-system coherence."},
+    "personal": {"id": "personal", "name": "Personal Ops", "mission": "Human-in-the-loop consumer-service workflows, playbooks, and personal operations hardening."},
     "research": {"id": "research", "name": "Research", "mission": "Research planning and knowledge migration."},
     "trading": {"id": "trading", "name": "Trading", "mission": "Trading automation governance and execution readiness."},
     "hybrid": {"id": "hybrid", "name": "Hybrid Lane", "mission": "Shared worker lane for triage, build, verification, and archive support."},
