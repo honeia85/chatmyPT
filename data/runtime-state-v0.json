@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-09T20:14:14.021265+09:00",
+  "generated_at": "2026-06-09T22:13:33.829275+09:00",
   "generator_version": "0.1.0",
   "source_kind": "generated-runtime-snapshot",
   "summary": {
     "total_profiles": 14,
-    "active": 3,
-    "idle": 3,
+    "active": 2,
+    "idle": 4,
     "stale": 8,
     "unknown": 0
   },
@@ -23,11 +23,11 @@
       },
       "observed": {
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-09T20:03:02.371530+09:00",
+        "last_seen_at": "2026-06-09T21:58:18.730449+09:00",
         "source": "state.db",
-        "message_count": 73,
-        "tool_call_count": 50,
-        "api_call_count": 22,
+        "message_count": 0,
+        "tool_call_count": 0,
+        "api_call_count": 65,
         "end_reason": null
       },
       "observed_fallbacks": {
@@ -40,11 +40,11 @@
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-09T20:03:02.371530+09:00",
+          "last_seen_at": "2026-06-09T21:58:18.730449+09:00",
           "source": "state.db",
-          "message_count": 73,
-          "tool_call_count": 50,
-          "api_call_count": 22,
+          "message_count": 0,
+          "tool_call_count": 0,
+          "api_call_count": 65,
           "end_reason": null
         },
         "sources_present": [
@@ -668,7 +668,7 @@
       "observed": {
         "provider": "openai-codex",
         "model": "gpt-5.4",
-        "last_seen_at": "2026-06-09T20:14:12+09:00",
+        "last_seen_at": "2026-06-09T22:13:32+09:00",
         "source": "agent.log",
         "raw_kind": "client_created"
       },
@@ -676,17 +676,17 @@
         "agent_log": {
           "provider": "openai-codex",
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-09T20:14:12+09:00",
+          "last_seen_at": "2026-06-09T22:13:32+09:00",
           "source": "agent.log",
           "raw_kind": "client_created"
         },
         "state_db": {
           "model": "gpt-5.4",
-          "last_seen_at": "2026-06-09T20:05:20.209187+09:00",
+          "last_seen_at": "2026-06-09T22:02:27.827981+09:00",
           "source": "state.db",
           "message_count": 0,
           "tool_call_count": 0,
-          "api_call_count": 19,
+          "api_call_count": 20,
           "end_reason": null
         },
         "sources_present": [
@@ -747,7 +747,7 @@
         ]
       },
       "status": {
-        "activity": "active",
+        "activity": "idle",
         "taxonomy": "inferred"
       },
       "drift": [],

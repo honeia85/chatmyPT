@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-09T20:14:14.174958+09:00",
+  "generated_at": "2026-06-09T22:13:33.983681+09:00",
   "summary": {
     "total_agents": 16,
     "runtime_profiles": 14,
-    "active_agents": 3,
+    "active_agents": 2,
     "waiting_agents": 0,
     "blocked_agents": 8,
     "offline_agents": 0,
@@ -130,7 +130,7 @@
       "type": "runtime_snapshot",
       "title": "Runtime state snapshot v0",
       "summary": "Profiles=14 · mismatches=0 · missing_observation=0",
-      "created_at": "2026-06-09T20:14:14.021265+09:00",
+      "created_at": "2026-06-09T22:13:33.829275+09:00",
       "destination": "local",
       "status": "generated"
     },
@@ -171,14 +171,14 @@
   "activity": [
     {
       "id": "runtime-researchorchestrator",
-      "timestamp": "2026-06-09T20:14:12+09:00",
+      "timestamp": "2026-06-09T22:13:32+09:00",
       "type": "runtime_observation",
       "agent_id": "researchorchestrator",
       "summary": "Observed model gpt-5.4 (active)"
     },
     {
       "id": "runtime-default",
-      "timestamp": "2026-06-09T20:03:02.371530+09:00",
+      "timestamp": "2026-06-09T21:58:18.730449+09:00",
       "type": "runtime_observation",
       "agent_id": "default",
       "summary": "Observed model gpt-5.4 (active)"
@@ -188,7 +188,7 @@
       "timestamp": "2026-06-09T15:07:58+09:00",
       "type": "runtime_observation",
       "agent_id": "tradingorchestrator",
-      "summary": "Observed model gpt-5.4 (active)"
+      "summary": "Observed model gpt-5.4 (idle)"
     },
     {
       "id": "runtime-hybverify",
@@ -250,8 +250,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-09T20:03:02.371530+09:00",
-        "last_report_at": "2026-06-09T20:03:02.371530+09:00",
+        "last_heartbeat_at": "2026-06-09T21:58:18.730449+09:00",
+        "last_report_at": "2026-06-09T21:58:18.730449+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -898,8 +898,8 @@
       "runtime": {
         "status": "active",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
-        "last_heartbeat_at": "2026-06-09T20:14:12+09:00",
-        "last_report_at": "2026-06-09T20:14:12+09:00",
+        "last_heartbeat_at": "2026-06-09T22:13:32+09:00",
+        "last_report_at": "2026-06-09T22:13:32+09:00",
         "blocked_reason": null,
         "waiting_reason": null
       },
@@ -957,7 +957,7 @@
         "reporting_style": "blocker-first"
       },
       "runtime": {
-        "status": "active",
+        "status": "idle",
         "current_task": "Configured gpt-5.4 / observed gpt-5.4",
         "last_heartbeat_at": "2026-06-09T15:07:58+09:00",
         "last_report_at": "2026-06-09T15:07:58+09:00",
@@ -1107,11 +1107,11 @@
   "source_kind": "generated-bridge-from-runtime-and-fixture",
   "runtime_state_source": "data/runtime-state-v0.json",
   "runtime_state_source_kind": "generated-runtime-snapshot",
-  "runtime_generated_at": "2026-06-09T20:14:14.021265+09:00",
+  "runtime_generated_at": "2026-06-09T22:13:33.829275+09:00",
   "runtime_summary": {
     "total_profiles": 14,
-    "active": 3,
-    "idle": 3,
+    "active": 2,
+    "idle": 4,
     "stale": 8,
     "unknown": 0
   },

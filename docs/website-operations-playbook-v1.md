@@ -35,6 +35,7 @@
 - when `/data/runtime-state-v0.json` is newer than the bridge payload's embedded runtime timestamp, top-level runtime pills prefer the fresher standalone snapshot and explicitly show that the bridge view may lag until the next bridge export
 - `Ops Map` shows bridge reconciliation counts plus any `shell-only` / `bridge-only` gaps when the runtime bridge payload is present
 - `Ops Console` summary distinguishes runtime-backed, runtime-only, overlay, and conceptual-shell counts so transitional fixture dependence remains visible
+- `Ops Console` detail/runtime panes surface bridge-shell vs standalone runtime-profile classification plus any shell-classification drift when `/data/runtime-state-v0.json` is present
 - custom domain remains active in Cloudflare Pages
 
 ## Incident shortcuts

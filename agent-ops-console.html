@@ -496,6 +496,7 @@
     };
 
     let store = null;
+    let runtimeSnapshot = null;
     let selectedAgentId = null;
     let activeTab = 'identity';
 
@@ -575,6 +576,37 @@
       }
     }
 
+    function humanizeToken(value) {
+      return String(value || 'unknown')
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, char => char.toUpperCase());
+    }
+
+    function displayTeamLabel(teamId) {
+      const labels = {
+        'front-desk': 'Front Desk',
+        executive: 'Executive',
+        assistant: 'Assistant',
+        dev: 'Development',
+        ops: 'Ops',
+        knowledge: 'Knowledge Base',
+        personal: 'Personal Ops',
+        research: 'Research',
+        trading: 'Trading',
+        hybrid: 'Hybrid Lane'
+      };
+      return store?.teamMap?.[teamId]?.name || labels[teamId] || humanizeToken(teamId);
+    }
+
+    function displayTypeLabel(typeId) {
+      const labels = {
+        orchestrator: 'Orchestrator',
+        worker: 'Worker',
+        'domain-owner': 'Domain Owner'
+      };
+      return labels[typeId] || humanizeToken(typeId);
+    }
+
     function applyBridgePayloadMeta(payload, url, fallbackKind = 'legacy-shell-payload') {
       bridgeGeneratedAt.textContent = formatDate(payload?.generated_at);
       bridgeSnapshotLabel.textContent = `${payload?.source_kind || fallbackKind} · ${url || 'unknown payload path'}`;
@@ -620,6 +652,51 @@
       return backing.length ? backing.join(', ') : 'none';
     }
 
+    function rememberRuntimeSnapshot(runtime) {
+      runtimeSnapshot = runtime
+        ? {
+            ...runtime,
+            profileMap: Object.fromEntries((runtime.profiles || []).map(profile => [profile.id, profile]))
+          }
+        : null;
+      if (store?.agents?.length) {
+        renderAll();
+      }
+    }
+
+    function getRuntimeProfile(agentId) {
+      return runtimeSnapshot?.profileMap?.[agentId] || null;
+    }
+
+    function hasClassificationDrift(agent) {
+      const runtimeProfile = getRuntimeProfile(agent?.id);
+      if (!agent || !runtimeProfile) return false;
+      return (agent.team || 'unknown') !== (runtimeProfile.team || 'unknown')
+        || (agent.type || 'unknown') !== (runtimeProfile.type || 'unknown');
+    }
+
+    function describeClassificationDrift(agent, runtimeProfile = getRuntimeProfile(agent?.id)) {
+      if (!runtimeSnapshot) {
+        return 'standalone runtime snapshot not loaded';
+      }
+      if (!runtimeProfile) {
+        return 'no standalone runtime profile backing this shell node';
+      }
+      const mismatches = [];
+      if ((agent?.team || 'unknown') !== (runtimeProfile.team || 'unknown')) {
+        mismatches.push(`bridge team ${displayTeamLabel(agent?.team)} ≠ runtime team ${displayTeamLabel(runtimeProfile.team)}`);
+      }
+      if ((agent?.type || 'unknown') !== (runtimeProfile.type || 'unknown')) {
+        mismatches.push(`bridge type ${displayTypeLabel(agent?.type)} ≠ runtime type ${displayTypeLabel(runtimeProfile.type)}`);
+      }
+      return mismatches.join(' · ') || 'bridge shell classification aligned with runtime profile';
+    }
+
+    function countClassificationDrift() {
+      if (!runtimeSnapshot) return 'n/a';
+      return (store?.agents || []).filter(agent => hasClassificationDrift(agent)).length;
+    }
+
     function countAgentsBySourceKind(sourceKind) {
       return (store?.agents || []).filter(agent => agent.source_kind === sourceKind).length;
     }
@@ -639,6 +716,7 @@
         ['Runtime-only', runtimeOnlyCount],
         ['Overlay Nodes', overlayCount],
         ['Conceptual Shells', conceptualCount],
+        ['Class Drift', countClassificationDrift()],
         ['Active', store.summary.active_agents],
         ['Waiting', store.summary.waiting_agents],
         ['Blocked', store.summary.blocked_agents],
@@ -694,6 +772,7 @@
       const status = statusFilter.value;
       const type = typeFilter.value;
       return store.agents.filter(agent => {
+        const runtimeProfile = getRuntimeProfile(agent.id);
         if (team !== 'all' && agent.team !== team) return false;
         if (status !== 'all' && agent.runtime.status !== status) return false;
         if (type !== 'all' && agent.type !== type) return false;
@@ -704,7 +783,13 @@
           agent.mission,
           agent.runtime.current_task,
           agent.team,
-          agent.type
+          agent.type,
+          displayTeamLabel(agent.team),
+          displayTypeLabel(agent.type),
+          runtimeProfile?.team,
+          runtimeProfile?.type,
+          displayTeamLabel(runtimeProfile?.team),
+          displayTypeLabel(runtimeProfile?.type)
         ].join(' ').toLowerCase();
         return hay.includes(q);
       });
@@ -750,6 +835,7 @@
       const ruleRefs = (agent.rule_refs || []).map(id => store.ruleMap[id]).filter(Boolean);
       const parent = agent.parent_id ? store.agentMap[agent.parent_id] : null;
       const runtimeProvenance = agent.runtime_provenance || {};
+      const runtimeProfile = getRuntimeProfile(agent.id);
 
       const tabs = [
         ['identity', 'Identity'],
@@ -796,6 +882,11 @@
         <div class="tab-panel ${activeTab === 'runtime' ? 'active' : ''}" data-panel="runtime">
           ${kv('Last heartbeat', escapeHtml(formatDate(agent.runtime.last_heartbeat_at)))}
           ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
+          ${kv('Bridge shell team', escapeHtml(displayTeamLabel(agent.team)))}
+          ${kv('Bridge shell type', escapeHtml(displayTypeLabel(agent.type)))}
+          ${kv('Runtime profile team', escapeHtml(runtimeProfile ? displayTeamLabel(runtimeProfile.team) : 'none'))}
+          ${kv('Runtime profile type', escapeHtml(runtimeProfile ? displayTypeLabel(runtimeProfile.type) : 'none'))}
+          ${kv('Classification drift', escapeHtml(describeClassificationDrift(agent, runtimeProfile)))}
           ${kv('Bridge payload path', escapeHtml(store.console_data_url || 'unknown'))}
           ${kv('Bridge payload generated', escapeHtml(formatDate(store.generated_at)))}
           ${kv('Bridge payload kind', escapeHtml(store.source_kind || 'legacy-shell-payload'))}
@@ -951,6 +1042,7 @@
     async function loadRuntimeSnapshotMeta(fallbackSourceLabel = 'bridge payload only') {
       try {
         const runtime = await fetchRuntimeSnapshot();
+        rememberRuntimeSnapshot(runtime);
         applyRuntimeSnapshotMeta(runtime);
         return runtime;
       } catch (error) {
@@ -962,6 +1054,7 @@
     async function preferStandaloneRuntimeSnapshotMeta(bridgeData) {
       try {
         const runtime = await fetchRuntimeSnapshot();
+        rememberRuntimeSnapshot(runtime);
         const runtimeGeneratedMs = parseTimestampMs(runtime?.generated_at);
         const bridgeRuntimeGeneratedMs = parseTimestampMs(bridgeData?.runtime_generated_at || bridgeData?.generated_at);
         if (runtimeGeneratedMs == null || (bridgeRuntimeGeneratedMs != null && runtimeGeneratedMs <= bridgeRuntimeGeneratedMs)) {
