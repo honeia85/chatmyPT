@@ -17,6 +17,8 @@ TEAM_DISPLAY = {
     "assistant": {"id": "assistant", "name": "Assistant", "mission": "Briefing, summaries, and routine support."},
     "dev": {"id": "dev", "name": "Development", "mission": "Implementation, tests, and repository changes."},
     "ops": {"id": "ops", "name": "Operations", "mission": "Deployment, runtime verification, and infrastructure hygiene."},
+    "knowledge": {"id": "knowledge", "name": "Knowledge Base", "mission": "Canonical note governance, source intake, and knowledge-system coherence."},
+    "personal": {"id": "personal", "name": "Personal Ops", "mission": "Human-in-the-loop consumer-service workflows, playbooks, and personal operations hardening."},
     "research": {"id": "research", "name": "Research", "mission": "Research planning and knowledge migration."},
     "trading": {"id": "trading", "name": "Trading", "mission": "Trading automation governance and execution readiness."},
     "hybrid": {"id": "hybrid", "name": "Hybrid Lane", "mission": "Shared worker lane for triage, build, verification, and archive support."},
@@ -45,6 +47,17 @@ EXTRA_AGENT_DEFAULTS: dict[str, dict[str, Any]] = {
         "rule_refs": ["rule-report-attempted-failed-verified", "rule-api-first-cloudflare"],
         "report_types": ["ops_report", "verification_report"],
     },
+    "auditor": {
+        "layer": 1,
+        "parent_id": "default",
+        "child_ids": [],
+        "description": "Cross-agent audit profile for health, drift, and publishable progress digests.",
+        "mission": "Audit system health and progress without taking over remediation ownership.",
+        "soul": {"tone": "skeptical", "decision_posture": "evidence-first", "risk_appetite": "low", "reporting_style": "audit-log"},
+        "knowledge_refs": ["kb-hermes-automation"],
+        "rule_refs": ["rule-report-attempted-failed-verified"],
+        "report_types": ["audit_report", "progress_digest"],
+    },
     "hybarchive": {
         "layer": 2,
         "parent_id": "default",
@@ -55,6 +68,28 @@ EXTRA_AGENT_DEFAULTS: dict[str, dict[str, Any]] = {
         "knowledge_refs": ["kb-hermes-automation"],
         "rule_refs": ["rule-report-attempted-failed-verified"],
         "report_types": ["archive_note"],
+    },
+    "librarianorchestrator": {
+        "layer": 1,
+        "parent_id": "default",
+        "child_ids": [],
+        "description": "Domain owner for canonical HONEIA Brain notes, source intake, and knowledge governance.",
+        "mission": "Keep canonical notes, intake rules, and promotion paths coherent across the knowledge system.",
+        "soul": {"tone": "methodical", "decision_posture": "governance-first", "risk_appetite": "low", "reporting_style": "handoff-note"},
+        "knowledge_refs": ["kb-hermes-automation"],
+        "rule_refs": ["rule-report-attempted-failed-verified"],
+        "report_types": ["governance_note", "knowledge_digest"],
+    },
+    "personalops": {
+        "layer": 1,
+        "parent_id": "default",
+        "child_ids": [],
+        "description": "Domain owner for personal consumer-service workflows, playbooks, and Gmail/calendar hardening.",
+        "mission": "Harden personal service operations into repeatable human-in-the-loop playbooks.",
+        "soul": {"tone": "practical", "decision_posture": "operator-first", "risk_appetite": "low", "reporting_style": "playbook-log"},
+        "knowledge_refs": ["kb-hermes-automation"],
+        "rule_refs": ["rule-report-attempted-failed-verified"],
+        "report_types": ["ops_report", "playbook_update"],
     },
 }
 
@@ -98,6 +133,25 @@ def fmt_profile_runtime(profile: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def fmt_runtime_provenance(profile: dict[str, Any]) -> dict[str, Any]:
+    observed = profile.get("observed") or {}
+    configured = profile.get("configured") or {}
+    provenance = profile.get("provenance") or {}
+    observed_fallbacks = profile.get("observed_fallbacks") or {}
+    return {
+        "configured_model": configured.get("model"),
+        "observed_model": observed.get("model"),
+        "observation_source": observed.get("source"),
+        "observation_kind": observed.get("raw_kind"),
+        "observation_provider": observed.get("provider"),
+        "evidence_sources": observed_fallbacks.get("sources_present") or [],
+        "configured_from": provenance.get("configured_from"),
+        "log_dir": provenance.get("log_dir"),
+        "state_db": provenance.get("state_db"),
+        "warnings": profile.get("warnings") or [],
+    }
+
+
 def merge_agent(existing: dict[str, Any], profile: dict[str, Any]) -> dict[str, Any]:
     agent = json.loads(json.dumps(existing))
     agent["display_name"] = profile.get("display_name") or agent.get("display_name")
@@ -111,6 +165,7 @@ def merge_agent(existing: dict[str, Any], profile: dict[str, Any]) -> dict[str, 
     if provenance.get("configured_from"):
         source_line += f" · source={Path(provenance['configured_from']).name}"
     agent["description"] = f"{agent.get('description', '').rstrip()} Runtime bridge: {source_line}.".strip()
+    agent["runtime_provenance"] = fmt_runtime_provenance(profile)
     return agent
 
 
@@ -136,6 +191,7 @@ def make_new_agent(profile: dict[str, Any]) -> dict[str, Any]:
         "backing_profiles": [profile["id"]],
         **base,
         "runtime": fmt_profile_runtime(profile),
+        "runtime_provenance": fmt_runtime_provenance(profile),
     }
 
 
@@ -194,9 +250,10 @@ def add_runtime_activity(payload: dict[str, Any], runtime: dict[str, Any]) -> No
 def main() -> None:
     fixture = load_json(FIXTURE_PATH)
     runtime = load_json(RUNTIME_PATH)
+    bridge_generated_at = datetime.now().astimezone().isoformat()
 
     payload = json.loads(json.dumps(fixture))
-    payload["generated_at"] = runtime.get("generated_at")
+    payload["generated_at"] = bridge_generated_at
     payload["generator_version"] = GENERATOR_VERSION
     payload["source_kind"] = "generated-bridge-from-runtime-and-fixture"
     payload["runtime_state_source"] = PUBLIC_RUNTIME_SOURCE
@@ -221,6 +278,22 @@ def main() -> None:
         if agent["id"] not in seen:
             agent.setdefault("source_kind", "conceptual_fixture")
             agent.setdefault("backing_profiles", CONCEPTUAL_BACKING.get(agent["id"], []))
+            agent.setdefault(
+                "runtime_provenance",
+                {
+                    "configured_model": None,
+                    "observed_model": None,
+                    "observation_source": None,
+                    "observation_kind": None,
+                    "observation_provider": None,
+                    "evidence_sources": [],
+                    "configured_from": None,
+                    "log_dir": None,
+                    "state_db": None,
+                    "warnings": [],
+                    "note": "conceptual node without direct runtime profile backing",
+                },
+            )
             merged_agents.append(agent)
 
     payload["agents"] = merged_agents

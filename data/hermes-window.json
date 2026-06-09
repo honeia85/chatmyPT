@@ -1,136 +1,90 @@
 {
-  "generated_at": "2026-06-05T08:57:55.613085+09:00",
+  "generated_at": "2026-06-08T04:45:13.552228+09:00",
   "generator_version": "0.1.0",
   "source_kind": "live-hermes-session-export",
   "session": {
-    "id": "20260604_072855_4c58e5",
-    "title": "토큰 사용 가능 여부 확인",
-    "source": "cli",
-    "started_at": "2026-06-05T08:45:46.048193+09:00",
+    "id": "20260607_104132_16e1e2e1",
+    "title": "크론잡 텔레그램 알림 스팸 방지",
+    "source": "telegram",
+    "started_at": "2026-06-07T10:41:32.167559+09:00",
     "ended_at": null,
-    "message_count": 8,
-    "tool_call_count": 3,
-    "api_call_count": 49,
+    "message_count": 203,
+    "tool_call_count": 115,
+    "api_call_count": 83,
     "messages": [
       {
-        "id": 19652,
-        "role": "user",
-        "content": "토큰 다되었나?",
-        "timestamp": "2026-06-05T08:45:57.007849+09:00"
-      },
-      {
-        "id": 19653,
+        "id": 37952,
         "role": "assistant",
-        "content": "아니요. 아직 응답 가능해서 토큰이 완전히 다 된 상태는 아닙니다.\n\n다만 직전 작업이 길었다면\n- 컨텍스트 창이 거의 차서\n- 이전 세부 맥락 일부가 잘렸거나\n- 응답이 짧아졌을 가능성은 있습니다.\n\n지금도 계속 진행 가능합니다. 필요하면 내가 바로 현재 상태 기준으로 맥락 재정리해서 이어가겠습니다.",
-        "timestamp": "2026-06-05T08:45:57.039408+09:00"
-      },
-      {
-        "id": 19654,
-        "role": "user",
-        "content": "백그라운드 작업 확인",
-        "timestamp": "2026-06-05T08:47:26.484100+09:00"
-      },
-      {
-        "id": 19659,
-        "role": "assistant",
-        "content": "확인 완료.\n\n현재 상태\n- 실시간 백그라운드 프로세스: 0개\n- 등록된 cron 백그라운드 작업: 41개\n- 지금 당장 “실행 중”으로 확인된 작업은 없고, 전부 scheduled 상태입니다.\n\n핵심 해석\n- 즉시 돌고 있는 terminal 백그라운드 세션은 없습니다.\n- 돌아가는 체계는 cron 중심이며, 최근 실행 이력은 정상(ok)인 작업이 다수입니다.\n- 따라서 지금은 “작업들이 살아 있고 다음 tick을 대기 중”인 상태입니다.\n\n가까운 다음 실행 예정 작업\n- 07:35 multi-agent-coordination-improvement-loop\n- 07:38 ops-orchestrator-website-management\n- 08:00 frontdesk-priority-digest\n- 08:00 researchorchestrator-daily-standup\n- 08:00 librarianorchestrator-daily-standup\n- 08:00 personalops-calendar-candidate-hardening\n- 08:10 ops-harness-hardening-loop\n- 08:25 ai-sns-tech-intake-hourly\n- 08:30 trading-automation-next-3\n- 08:30 kr-trading-standby-preopen\n- 08:30 dev-implementation-standup\n\n최근 정상 실행 확인된 대표 작업\n- ai-sns-tech-intake-hourly: 07:25 실행, ok\n- runtime-state-exporter-v0: 06:56 실행, ok\n- ops-handoff-input: 06:55 실행, ok\n- dev-implementation-ready-ratchet: 06:46 실행, ok\n- research-topic-selection-daily: 06:37 실행, ok\n- ops-console-generated-state-refinement: 06:02 실행, ok\n- ops-verifier-ratchet-rollout: 05:57 실행, ok\n- auditor-agent-health-loop: 05:50 실행, ok\n\n아직 한 번도 실행되지 않은 작업도 있음\n- ops-trading-ops-weekly-hygiene\n- vault-librarian\n- librarian-web-crawl-intake\n- librarian-sns-c…",
-        "timestamp": "2026-06-05T08:47:26.502943+09:00"
+        "content": "## 확인 결과\n\n### 지금 *직접 확인된 사실*\n현재 로그인된 Google 계정의 **Google 대시보드**에서 다음이 보였다.\n\n- **Android 백업**\n- **기기 백업 2개**\n- 기기명:\n  - `SM-F956N`\n  - `Lenovo TB-J606F`\n- 각 기기 아래:\n  - `(백업된 앱 80개)`\n  - `(백업된 앱 24개)`\n- 또 같은 화면에\n  - **“모든 데이터 삭제”**\n  - **모든 Android 기기 및 WhatsApp 데이터가 완전히 삭제됩니다**\n  라는 안내가 있었다.\n\n즉, **이 계정에는 현재 Google 쪽 Android 백업 데이터가 실제로 존재한다**는 점은 확인됐다.\n\n---\n\n### 아직 *직접 보이지 않은 것*\n대시보드 화면에서 **통화기록 / 연락처 / SMS/MMS**가 항목별로 따로 노출되지는 않았다.\n\n즉:\n- **백업 자체는 확인됨**\n- 하지만 **“통화기록이 몇 건 들어 있다”** 같은 식의 세부 내용은 웹 대시보드에서 직접 보이지 않음\n\n---\n\n### 이걸 어떻게 해석해야 하나\nGoogle 공식 Android 백업 문서 기준으로, 표준 Android Google 백업에는 보통 다음이 포함된다.\n\n- 앱 및 앱 데이터\n- **통화기록**\n- 연락처\n- 기기 설정\n- **SMS / MMS**\n\n그래서 이번 확인을 합치면 결론은 이렇다:\n\n## 결론\n- **네 Google 계정에는 현재 Android 백업이 남아 있다.**\n- 그리고 **그 백업이 일반적인 Google Android 백업이라면 통화기록이 포함됐을 가능성이 높다.**\n- 따라서 **휴대폰에서 통화내역을 삭제했더라도, Google 백업 쪽에는 남아 있을 수 있다.**\n\n---\n\n### 정확히 말해 구분하면\n- **검증 완료**\n  - Google 계정에 Android 백업 2개 존재\n- **높은 개연성**\n  - 그 백업 안에 통화기록이 포함되어 있을 가능성 큼\n- **이번 화면만으로는 미확인**\n  - 통화기록 개별 항목/건수 자체를 웹에서 직접 열람 가능하다는 점\n\n---\n\n### 이번에 하지 않은 것\n- **백업 삭제는 하지 않았다.**\n- **휴대폰 쪽 설정 변경도 하지 않았다.**\n\n삭제 같은 비가역 조치는 지시가 있어야만 진행한다.",
+        "timestamp": "2026-06-07T13:31:01.817272+09:00"
       }
     ]
   },
   "gateway": {
-    "running": true,
-    "raw": "✓ Gateway is running (PID: 24832, 28404)\n  (Running manually, not as a system service)\n\nTo install as a Windows Scheduled Task (auto-start on login):\n  hermes gateway install",
-    "checked_at": "2026-06-05T08:57:59.253088+09:00"
+    "running": false,
+    "raw": "✗ Gateway is not running\n\nTo start:\n  hermes gateway run      # Run in foreground\n  hermes gateway install  # Install as Windows Scheduled Task (auto-start on login)\n\nOther profiles:\n  ✓ default          — PID 11372",
+    "checked_at": "2026-06-08T04:45:22.490704+09:00"
   },
   "cron": {
-    "total_jobs": 41,
-    "scheduled_jobs": 41,
-    "ok_jobs": 36,
-    "never_run_jobs": [
-      "ops-trading-ops-weekly-hygiene",
-      "vault-librarian",
-      "librarian-web-crawl-intake",
-      "librarian-sns-crawl-intake",
-      "librarian-zettelkasten-noteify"
-    ],
+    "total_jobs": 47,
+    "scheduled_jobs": 47,
+    "ok_jobs": 47,
+    "never_run_jobs": [],
     "recent_runs": [
+      {
+        "id": "1e4a8711bdc6",
+        "name": "public-webui-origin-watchdog",
+        "state": "scheduled",
+        "profile": "default",
+        "deliver": "origin",
+        "last_run_at": "2026-06-08T04:31:33.678831+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-08T04:47:33.745933+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\1e4a8711bdc6\\2026-06-08_04-31-33.md"
+      },
+      {
+        "id": "a293c42176cc",
+        "name": "public-runtime-freshness-watchdog",
+        "state": "scheduled",
+        "profile": "default",
+        "deliver": "origin",
+        "last_run_at": "2026-06-08T04:25:35.588593+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-08T04:56:33.692882+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\a293c42176cc\\2026-06-08_04-25-35.md"
+      },
       {
         "id": "7961591ac3d2",
         "name": "ai-sns-tech-intake-hourly",
         "state": "scheduled",
         "profile": "researchorchestrator",
         "deliver": "local",
-        "last_run_at": "2026-06-05T07:25:39.766569+09:00",
+        "last_run_at": "2026-06-08T04:18:05.744380+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-05T09:56:59.207609+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\7961591ac3d2\\2026-06-05_07-25-39.md"
+        "next_run_at": "2026-06-08T05:18:05.744380+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\7961591ac3d2\\2026-06-08_04-18-05.md"
       },
       {
-        "id": "5c19755721cd",
-        "name": "runtime-state-exporter-v0",
+        "id": "f49539b74537",
+        "name": "ops-workflow-smoothness-ratchet",
         "state": "scheduled",
         "profile": "ops",
         "deliver": "local",
-        "last_run_at": "2026-06-05T06:56:27.469914+09:00",
+        "last_run_at": "2026-06-08T03:40:20.902811+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-05T10:56:59.294759+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\5c19755721cd\\2026-06-05_06-56-27.md"
+        "next_run_at": "2026-06-08T06:40:20.902811+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\f49539b74537\\2026-06-08_03-40-20.md"
       },
       {
-        "id": "3860150f7552",
-        "name": "ops-handoff-input",
+        "id": "2563eca4db7e",
+        "name": "cron-output-retention",
         "state": "scheduled",
-        "profile": null,
+        "profile": "default",
         "deliver": "local",
-        "last_run_at": "2026-06-05T06:55:26.088718+09:00",
+        "last_run_at": "2026-06-08T03:17:36.530732+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-05T10:56:59.251135+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3860150f7552\\2026-06-05_06-55-26.md"
-      },
-      {
-        "id": "3becb00defbb",
-        "name": "dev-implementation-ready-ratchet",
-        "state": "scheduled",
-        "profile": "dev",
-        "deliver": "local",
-        "last_run_at": "2026-06-05T06:46:25.660078+09:00",
-        "last_status": "ok",
-        "next_run_at": "2026-06-05T12:46:25.660078+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3becb00defbb\\2026-06-05_06-46-25.md"
-      },
-      {
-        "id": "56bf20fe22f4",
-        "name": "research-topic-selection-daily",
-        "state": "scheduled",
-        "profile": "researchorchestrator",
-        "deliver": "local",
-        "last_run_at": "2026-06-05T06:37:34.685735+09:00",
-        "last_status": "ok",
-        "next_run_at": "2026-06-05T09:30:00+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\56bf20fe22f4\\2026-06-05_06-37-34.md"
-      },
-      {
-        "id": "52c3d911f322",
-        "name": "ops-console-generated-state-refinement",
-        "state": "scheduled",
-        "profile": "ops",
-        "deliver": "local",
-        "last_run_at": "2026-06-05T06:02:16.004266+09:00",
-        "last_status": "ok",
-        "next_run_at": "2026-06-05T10:02:16.004266+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\52c3d911f322\\2026-06-05_06-02-15.md"
-      },
-      {
-        "id": "d2f8dfa80c02",
-        "name": "ops-verifier-ratchet-rollout",
-        "state": "scheduled",
-        "profile": "ops",
-        "deliver": "local",
-        "last_run_at": "2026-06-05T05:57:20.955823+09:00",
-        "last_status": "ok",
-        "next_run_at": "2026-06-05T13:57:20.955823+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\d2f8dfa80c02\\2026-06-05_05-57-20.md"
+        "next_run_at": "2026-06-09T03:17:00+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\2563eca4db7e\\2026-06-08_03-17-36.md"
       },
       {
         "id": "acb0e632afcc",
@@ -138,10 +92,32 @@
         "state": "scheduled",
         "profile": "auditor",
         "deliver": "local",
-        "last_run_at": "2026-06-05T05:50:22.019546+09:00",
+        "last_run_at": "2026-06-08T03:11:21.612341+09:00",
         "last_status": "ok",
-        "next_run_at": "2026-06-05T11:56:59.373787+09:00",
-        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\acb0e632afcc\\2026-06-05_05-50-22.md"
+        "next_run_at": "2026-06-08T09:11:21.612341+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\acb0e632afcc\\2026-06-08_03-11-21.md"
+      },
+      {
+        "id": "3becb00defbb",
+        "name": "dev-implementation-ready-ratchet",
+        "state": "scheduled",
+        "profile": "dev",
+        "deliver": "local",
+        "last_run_at": "2026-06-08T02:50:01.381205+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-08T08:50:01.381205+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\3becb00defbb\\2026-06-08_02-50-01.md"
+      },
+      {
+        "id": "5c19755721cd",
+        "name": "runtime-state-exporter-v0",
+        "state": "scheduled",
+        "profile": "ops",
+        "deliver": "local",
+        "last_run_at": "2026-06-08T02:35:30.731617+09:00",
+        "last_status": "ok",
+        "next_run_at": "2026-06-08T06:35:33.442314+09:00",
+        "latest_output": "C:\\Users\\Admin\\AppData\\Local\\hermes\\cron\\output\\5c19755721cd\\2026-06-08_02-35-30.md"
       }
     ]
   },
