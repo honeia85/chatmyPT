@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "extraKnownMarketplaces": {
+    "dryforge": {
+      "source": {
+        "source": "github",
+        "repo": "fn-opt/dryforge"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "dryforge@dryforge": true
+  }
+}
