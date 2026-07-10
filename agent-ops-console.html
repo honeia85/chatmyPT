@@ -83,7 +83,7 @@
     .pill strong { color: var(--text); }
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
     }
     .stat {
@@ -409,11 +409,12 @@
         </p>
       </div>
       <div class="actions">
-        <a class="pill" href="/index.html"><strong>Landing</strong> 돌아가기</a>
-        <a class="pill" href="/multi-agent-ops-map.html"><strong>Ops Map</strong> 열기</a>
-        <a class="pill" href="/agent-ops-console.html"><strong>Ops Console</strong> 현재 페이지</a>
-        <a class="pill" href="/hermes-window.html"><strong>Hermes Window</strong> 열기</a>
-        <div class="pill"><strong id="generatedAt">-</strong> <span id="snapshotLabel">runtime status pending</span></div>
+        <a class="pill" href="/"><strong>Landing</strong> 돌아가기</a>
+        <a class="pill" href="/multi-agent-ops-map"><strong>Ops Map</strong> 열기</a>
+        <a class="pill" href="/agent-ops-console"><strong>Ops Console</strong> 현재 페이지</a>
+        <a class="pill" href="/hermes-window"><strong>Hermes Window</strong> 열기</a>
+        <div class="pill"><strong id="bridgeGeneratedAt">-</strong> <span id="bridgeSnapshotLabel">bridge payload pending</span></div>
+        <div class="pill"><strong id="runtimeGeneratedAt">-</strong> <span id="snapshotLabel">runtime snapshot pending</span></div>
         <div class="pill"><strong id="runtimeDrift">-</strong> runtime drift</div>
         <div class="pill"><strong id="runtimeEvidence">-</strong> observation gaps</div>
         <div class="pill"><strong id="runtimeDocDrift">-</strong> doc drift</div>
@@ -495,6 +496,7 @@
     };
 
     let store = null;
+    let runtimeSnapshot = null;
     let selectedAgentId = null;
     let activeTab = 'identity';
 
@@ -504,7 +506,9 @@
     const detailBody = document.getElementById('detailBody');
     const reportList = document.getElementById('reportList');
     const activityList = document.getElementById('activityList');
-    const generatedAt = document.getElementById('generatedAt');
+    const bridgeGeneratedAt = document.getElementById('bridgeGeneratedAt');
+    const bridgeSnapshotLabel = document.getElementById('bridgeSnapshotLabel');
+    const runtimeGeneratedAt = document.getElementById('runtimeGeneratedAt');
     const snapshotLabel = document.getElementById('snapshotLabel');
     const runtimeDrift = document.getElementById('runtimeDrift');
     const runtimeEvidence = document.getElementById('runtimeEvidence');
@@ -541,14 +545,79 @@
       }
     }
 
-    function applyRuntimeUnavailableMeta(reason, fallbackSourceLabel = 'console payload only') {
+    function parseTimestampMs(iso) {
+      if (!iso) return null;
+      const parsed = new Date(iso).getTime();
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function describeFreshnessGap(newerIso, olderIso, newerLabel = 'runtime-state-v0.json', olderLabel = 'bridge runtime copy') {
+      const newerMs = parseTimestampMs(newerIso);
+      const olderMs = parseTimestampMs(olderIso);
+      if (newerMs == null || olderMs == null || newerMs <= olderMs) return null;
+      const deltaSeconds = (newerMs - olderMs) / 1000;
+      if (deltaSeconds >= 3600) {
+        return `${newerLabel} newer than ${olderLabel} by ${(deltaSeconds / 3600).toFixed(2)}h`;
+      }
+      if (deltaSeconds >= 60) {
+        return `${newerLabel} newer than ${olderLabel} by ${(deltaSeconds / 60).toFixed(1)}m`;
+      }
+      return `${newerLabel} newer than ${olderLabel} by ${deltaSeconds.toFixed(1)}s`;
+    }
+
+    function describeTimestampDelta(laterIso, earlierIso) {
+      if (!laterIso || !earlierIso) return 'n/a';
+      try {
+        const deltaMs = new Date(laterIso).getTime() - new Date(earlierIso).getTime();
+        const sign = deltaMs >= 0 ? '+' : '-';
+        return `${sign}${(Math.abs(deltaMs) / 1000).toFixed(2)}s after runtime snapshot`;
+      } catch {
+        return 'n/a';
+      }
+    }
+
+    function humanizeToken(value) {
+      return String(value || 'unknown')
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, char => char.toUpperCase());
+    }
+
+    function displayTeamLabel(teamId) {
+      const labels = {
+        'front-desk': 'Front Desk',
+        executive: 'Executive',
+        assistant: 'Assistant',
+        dev: 'Development',
+        ops: 'Ops',
+        knowledge: 'Knowledge Base',
+        personal: 'Personal Ops',
+        research: 'Research',
+        trading: 'Trading',
+        hybrid: 'Hybrid Lane'
+      };
+      return store?.teamMap?.[teamId]?.name || labels[teamId] || humanizeToken(teamId);
+    }
+
+    function displayTypeLabel(typeId) {
+      const labels = {
+        orchestrator: 'Orchestrator',
+        worker: 'Worker',
+        'domain-owner': 'Domain Owner'
+      };
+      return labels[typeId] || humanizeToken(typeId);
+    }
+
+    function applyBridgePayloadMeta(payload, url, fallbackKind = 'legacy-shell-payload') {
+      bridgeGeneratedAt.textContent = formatDate(payload?.generated_at);
+      bridgeSnapshotLabel.textContent = `${payload?.source_kind || fallbackKind} · ${url || 'unknown payload path'}`;
+    }
+
+    function applyRuntimeUnavailableMeta(reason, fallbackSourceLabel = 'bridge payload only') {
       snapshotLabel.textContent = `${fallbackSourceLabel} · runtime overlay unavailable`;
       runtimeDrift.textContent = 'runtime unavailable';
       runtimeEvidence.textContent = 'runtime unavailable';
       runtimeDocDrift.textContent = 'runtime unavailable';
-      if (reason) {
-        generatedAt.textContent = `overlay missing: ${reason}`;
-      }
+      runtimeGeneratedAt.textContent = reason ? `runtime unavailable: ${reason}` : 'runtime unavailable';
     }
 
     async function readJsonResponse(response, url) {
@@ -564,14 +633,90 @@
       return Object.fromEntries(items.map(item => [item.id, item]));
     }
 
+    function describeAuthority(agent) {
+      if (!agent) return 'unknown authority';
+      if (agent.source_kind === 'runtime_profile') {
+        return 'direct runtime profile';
+      }
+      if (agent.source_kind === 'runtime_profile_overlay') {
+        return 'runtime-backed shell overlay';
+      }
+      if (agent.source_kind === 'conceptual_fixture') {
+        return 'conceptual shell';
+      }
+      return agent.source_kind || 'unknown authority';
+    }
+
+    function describeBackingProfiles(agent) {
+      const backing = agent?.backing_profiles || [];
+      return backing.length ? backing.join(', ') : 'none';
+    }
+
+    function rememberRuntimeSnapshot(runtime) {
+      runtimeSnapshot = runtime
+        ? {
+            ...runtime,
+            profileMap: Object.fromEntries((runtime.profiles || []).map(profile => [profile.id, profile]))
+          }
+        : null;
+      if (store?.agents?.length) {
+        renderAll();
+      }
+    }
+
+    function getRuntimeProfile(agentId) {
+      return runtimeSnapshot?.profileMap?.[agentId] || null;
+    }
+
+    function hasClassificationDrift(agent) {
+      const runtimeProfile = getRuntimeProfile(agent?.id);
+      if (!agent || !runtimeProfile) return false;
+      return (agent.team || 'unknown') !== (runtimeProfile.team || 'unknown')
+        || (agent.type || 'unknown') !== (runtimeProfile.type || 'unknown');
+    }
+
+    function describeClassificationDrift(agent, runtimeProfile = getRuntimeProfile(agent?.id)) {
+      if (!runtimeSnapshot) {
+        return 'standalone runtime snapshot not loaded';
+      }
+      if (!runtimeProfile) {
+        return 'no standalone runtime profile backing this shell node';
+      }
+      const mismatches = [];
+      if ((agent?.team || 'unknown') !== (runtimeProfile.team || 'unknown')) {
+        mismatches.push(`bridge team ${displayTeamLabel(agent?.team)} ≠ runtime team ${displayTeamLabel(runtimeProfile.team)}`);
+      }
+      if ((agent?.type || 'unknown') !== (runtimeProfile.type || 'unknown')) {
+        mismatches.push(`bridge type ${displayTypeLabel(agent?.type)} ≠ runtime type ${displayTypeLabel(runtimeProfile.type)}`);
+      }
+      return mismatches.join(' · ') || 'bridge shell classification aligned with runtime profile';
+    }
+
+    function countClassificationDrift() {
+      if (!runtimeSnapshot) return 'n/a';
+      return (store?.agents || []).filter(agent => hasClassificationDrift(agent)).length;
+    }
+
+    function countAgentsBySourceKind(sourceKind) {
+      return (store?.agents || []).filter(agent => agent.source_kind === sourceKind).length;
+    }
+
     function getSelectedAgent() {
       return store.agentMap[selectedAgentId] || store.agents[0] || null;
     }
 
     function renderSummary() {
+      const runtimeOnlyCount = countAgentsBySourceKind('runtime_profile');
+      const overlayCount = countAgentsBySourceKind('runtime_profile_overlay');
+      const conceptualCount = countAgentsBySourceKind('conceptual_fixture');
       const stats = [
         ['Console Nodes', store.summary.total_agents],
         ['Runtime Profiles', store.summary.runtime_profiles ?? store.summary.total_agents],
+        ['Runtime-backed', runtimeOnlyCount + overlayCount],
+        ['Runtime-only', runtimeOnlyCount],
+        ['Overlay Nodes', overlayCount],
+        ['Conceptual Shells', conceptualCount],
+        ['Class Drift', countClassificationDrift()],
         ['Active', store.summary.active_agents],
         ['Waiting', store.summary.waiting_agents],
         ['Blocked', store.summary.blocked_agents],
@@ -604,7 +749,7 @@
                   </div>
                   <div class="node-task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
                   <div class="meta-line">Children: ${escapeHtml((agent.child_ids || []).length)}</div>
-                  <div class="meta-line">Provenance: ${escapeHtml(agent.source_kind || 'fixture')} · backing ${(agent.backing_profiles || []).length}</div>
+                  <div class="meta-line">Authority: ${escapeHtml(describeAuthority(agent))} · backing ${escapeHtml(describeBackingProfiles(agent))}</div>
                 </div>
               `).join('')}
             </div>
@@ -627,6 +772,7 @@
       const status = statusFilter.value;
       const type = typeFilter.value;
       return store.agents.filter(agent => {
+        const runtimeProfile = getRuntimeProfile(agent.id);
         if (team !== 'all' && agent.team !== team) return false;
         if (status !== 'all' && agent.runtime.status !== status) return false;
         if (type !== 'all' && agent.type !== type) return false;
@@ -637,7 +783,13 @@
           agent.mission,
           agent.runtime.current_task,
           agent.team,
-          agent.type
+          agent.type,
+          displayTeamLabel(agent.team),
+          displayTypeLabel(agent.type),
+          runtimeProfile?.team,
+          runtimeProfile?.type,
+          displayTeamLabel(runtimeProfile?.team),
+          displayTypeLabel(runtimeProfile?.type)
         ].join(' ').toLowerCase();
         return hay.includes(q);
       });
@@ -656,7 +808,7 @@
           </div>
           <div class="task">${escapeHtml(agent.runtime.current_task || 'No active task')}</div>
           <div class="small" style="margin-top:10px;">Subagents: ${escapeHtml((agent.child_ids || []).length)} · Last update: ${escapeHtml(formatDate(agent.runtime.last_heartbeat_at))}</div>
-          <div class="small" style="margin-top:6px;">Source: ${escapeHtml(agent.source_kind || 'fixture')} · Backing: ${escapeHtml((agent.backing_profiles || []).join(', ') || 'none')}</div>
+          <div class="small" style="margin-top:6px;">Authority: ${escapeHtml(describeAuthority(agent))} · Backing: ${escapeHtml(describeBackingProfiles(agent))}</div>
         </div>
       `).join('');
     }
@@ -682,6 +834,8 @@
       const knowledgeRefs = (agent.knowledge_refs || []).map(id => store.knowledgeMap[id]).filter(Boolean);
       const ruleRefs = (agent.rule_refs || []).map(id => store.ruleMap[id]).filter(Boolean);
       const parent = agent.parent_id ? store.agentMap[agent.parent_id] : null;
+      const runtimeProvenance = agent.runtime_provenance || {};
+      const runtimeProfile = getRuntimeProfile(agent.id);
 
       const tabs = [
         ['identity', 'Identity'],
@@ -719,7 +873,8 @@
           ${kv('Agent ID', escapeHtml(agent.id))}
           ${kv('Mission', escapeHtml(agent.mission))}
           ${kv('Layer', escapeHtml(String(agent.layer)))}
-          ${kv('Source kind', escapeHtml(agent.source_kind || 'fixture'))}
+          ${kv('Authority', escapeHtml(describeAuthority(agent)))}
+          ${kv('Source kind', escapeHtml(agent.source_kind || 'legacy-shell-payload'))}
           ${kv('Backing profiles', chips(agent.backing_profiles || [], value => value))}
           ${kv('Child agents', chips(agent.child_ids, id => store.agentMap[id]?.display_name || id))}
         </div>
@@ -727,12 +882,31 @@
         <div class="tab-panel ${activeTab === 'runtime' ? 'active' : ''}" data-panel="runtime">
           ${kv('Last heartbeat', escapeHtml(formatDate(agent.runtime.last_heartbeat_at)))}
           ${kv('Last report', escapeHtml(formatDate(agent.runtime.last_report_at)))}
-          ${kv('Snapshot generated', escapeHtml(formatDate(store.runtime_generated_at || store.generated_at)))}
-          ${kv('Runtime source', escapeHtml(store.runtime_state_source || 'fixture-only payload'))}
-          ${kv('Bridge source kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'fixture'))}
+          ${kv('Bridge shell team', escapeHtml(displayTeamLabel(agent.team)))}
+          ${kv('Bridge shell type', escapeHtml(displayTypeLabel(agent.type)))}
+          ${kv('Runtime profile team', escapeHtml(runtimeProfile ? displayTeamLabel(runtimeProfile.team) : 'none'))}
+          ${kv('Runtime profile type', escapeHtml(runtimeProfile ? displayTypeLabel(runtimeProfile.type) : 'none'))}
+          ${kv('Classification drift', escapeHtml(describeClassificationDrift(agent, runtimeProfile)))}
+          ${kv('Bridge payload path', escapeHtml(store.console_data_url || 'unknown'))}
+          ${kv('Bridge payload generated', escapeHtml(formatDate(store.generated_at)))}
+          ${kv('Bridge payload kind', escapeHtml(store.source_kind || 'legacy-shell-payload'))}
+          ${kv('Runtime snapshot path', escapeHtml(store.runtime_state_source || 'bridge payload only'))}
+          ${kv('Runtime snapshot generated', escapeHtml(formatDate(store.runtime_generated_at || store.generated_at)))}
+          ${kv('Runtime snapshot kind', escapeHtml(store.runtime_state_source_kind || store.source_kind || 'legacy-shell-payload'))}
+          ${kv('Bridge/runtime lag', escapeHtml(describeTimestampDelta(store.generated_at, store.runtime_generated_at)))}
+          ${kv('Observed source', escapeHtml(runtimeProvenance.observation_source || runtimeProvenance.note || 'none'))}
+          ${kv('Observed source kind', escapeHtml(runtimeProvenance.observation_kind || 'n/a'))}
+          ${kv('Evidence sources', chips(runtimeProvenance.evidence_sources || [], value => value))}
+          ${kv('Configured model', escapeHtml(runtimeProvenance.configured_model || 'unknown'))}
+          ${kv('Observed model', escapeHtml(runtimeProvenance.observed_model || 'unknown'))}
+          ${kv('Configured from', escapeHtml(runtimeProvenance.configured_from || 'n/a'))}
+          ${kv('Log evidence dir', escapeHtml(runtimeProvenance.log_dir || 'n/a'))}
+          ${kv('State DB evidence', escapeHtml(runtimeProvenance.state_db || 'n/a'))}
+          ${kv('Runtime home resolution', escapeHtml(store.reconciliation?.runtime_home_resolution || 'unknown'))}
           ${kv('Agent drift flags', escapeHtml(describeAgentDrift(agent.id)))}
           ${kv('Drift semantics', escapeHtml(`signals=${countDriftSignals(store.drift_summary || {})} · observation_gaps=${countObservationGaps(store.drift_summary || {})} · doc_drift=${countDocDrift(store.drift_summary || {})} · stale>${store.reconciliation?.stale_threshold_hours ?? '?'}h`))}
           ${kv('Doc drift detail', escapeHtml(`runtime_without_doc=${(store.drift_summary?.runtime_without_doc || []).join(', ') || 'none'} · doc_without_runtime=${(store.drift_summary?.doc_without_runtime || []).join(', ') || 'none'}`))}
+          ${kv('Exporter warnings', runtimeProvenance.warnings?.length ? chips(runtimeProvenance.warnings, value => value) : '<span class="empty">None</span>')}
           ${kv('Blocked reason', agent.runtime.blocked_reason ? escapeHtml(agent.runtime.blocked_reason) : '<span class="empty">None</span>')}
           ${kv('Waiting reason', agent.runtime.waiting_reason ? escapeHtml(agent.runtime.waiting_reason) : '<span class="empty">None</span>')}
         </div>
@@ -853,20 +1027,50 @@
       const runtimeWithoutDocCount = (driftSummary.runtime_without_doc || []).length;
       const docWithoutRuntimeCount = (driftSummary.doc_without_runtime || []).length;
       const staleThreshold = runtime?.reconciliation?.stale_threshold_hours;
-      generatedAt.textContent = formatDate(runtime.generated_at);
+      runtimeGeneratedAt.textContent = formatDate(runtime.generated_at);
       snapshotLabel.textContent = snapshotText || `${sourceKind} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${staleThreshold ?? '?'}h stale rule`;
       runtimeDrift.textContent = String(countDriftSignals(driftSummary));
       runtimeEvidence.textContent = `${missingCount} missing · ${staleCount} stale`;
       runtimeDocDrift.textContent = `${runtimeWithoutDocCount} runtime→doc · ${docWithoutRuntimeCount} doc→runtime`;
     }
 
-    async function loadRuntimeSnapshotMeta() {
+    async function fetchRuntimeSnapshot() {
+      const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
+      return readJsonResponse(response, '/data/runtime-state-v0.json');
+    }
+
+    async function loadRuntimeSnapshotMeta(fallbackSourceLabel = 'bridge payload only') {
       try {
-        const response = await fetch('/data/runtime-state-v0.json', { cache: 'no-store' });
-        const runtime = await readJsonResponse(response, '/data/runtime-state-v0.json');
+        const runtime = await fetchRuntimeSnapshot();
+        rememberRuntimeSnapshot(runtime);
         applyRuntimeSnapshotMeta(runtime);
+        return runtime;
       } catch (error) {
-        applyRuntimeUnavailableMeta(error?.message, 'console payload only');
+        applyRuntimeUnavailableMeta(error?.message, fallbackSourceLabel);
+        return null;
+      }
+    }
+
+    async function preferStandaloneRuntimeSnapshotMeta(bridgeData) {
+      try {
+        const runtime = await fetchRuntimeSnapshot();
+        rememberRuntimeSnapshot(runtime);
+        const runtimeGeneratedMs = parseTimestampMs(runtime?.generated_at);
+        const bridgeRuntimeGeneratedMs = parseTimestampMs(bridgeData?.runtime_generated_at || bridgeData?.generated_at);
+        if (runtimeGeneratedMs == null || (bridgeRuntimeGeneratedMs != null && runtimeGeneratedMs <= bridgeRuntimeGeneratedMs)) {
+          return runtime;
+        }
+        const freshnessNote = describeFreshnessGap(runtime?.generated_at, bridgeData?.runtime_generated_at || bridgeData?.generated_at)
+          || 'runtime-state-v0.json newer than bridge runtime copy';
+        const staleThreshold = runtime?.reconciliation?.stale_threshold_hours;
+        applyRuntimeSnapshotMeta(
+          runtime,
+          `${runtime?.source_kind || 'generated-runtime-snapshot'} · ${runtime?.reconciliation?.runtime_scope || 'runtime-scope?'} · ${staleThreshold ?? '?'}h stale rule · ${freshnessNote}`
+        );
+        return runtime;
+      } catch (error) {
+        console.warn('Standalone runtime snapshot refresh unavailable for console provenance.', error);
+        return null;
       }
     }
 
@@ -876,6 +1080,7 @@
         '/data/agent-ops-console-v1.json'
       ];
       let lastError = null;
+
       for (const url of candidates) {
         try {
           const response = await fetch(url, { cache: 'no-store' });
@@ -892,13 +1097,14 @@
       const { data, url } = await loadConsoleData();
       store = {
         ...data,
+        console_data_url: url,
         teamMap: mapById(data.teams),
         agentMap: mapById(data.agents),
         knowledgeMap: mapById(data.knowledge_refs),
         ruleMap: mapById(data.rules)
       };
       selectedAgentId = data.agents[0]?.id || null;
-      generatedAt.textContent = formatDate(data.generated_at);
+      applyBridgePayloadMeta(data, url);
       if (url.includes('runtime')) {
         applyRuntimeSnapshotMeta({
           generated_at: data.runtime_generated_at || data.generated_at,
@@ -907,12 +1113,14 @@
           reconciliation: data.reconciliation || {}
         }, `${data.source_kind || 'generated runtime bridge'} · ${data.runtime_state_source_kind || 'runtime-state-v0'} · ${data.reconciliation?.runtime_scope || 'runtime-scope?'} · ${data.runtime_state_source || 'data/runtime-state-v0.json'}`);
       } else {
-        snapshotLabel.textContent = 'fixture payload · runtime overlay pending';
+        snapshotLabel.textContent = 'legacy shell payload · runtime overlay pending';
       }
       renderFilters();
       bindFilters();
       renderAll();
-      if (!url.includes('runtime')) {
+      if (url.includes('runtime')) {
+        await preferStandaloneRuntimeSnapshotMeta(data);
+      } else {
         await loadRuntimeSnapshotMeta();
       }
     }

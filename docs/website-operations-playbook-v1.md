@@ -30,6 +30,12 @@
 - `Ops Map` opens
 - `Ops Console` opens
 - main navigation still shows expected links
+- runtime-backed surfaces show generated snapshot/provenance metadata rather than generic `fixture` wording when `/data/runtime-state-v0.json` and `/data/agent-ops-console-runtime.json` are present
+- runtime-backed surfaces distinguish bridge payload generation time from upstream runtime snapshot time when `/data/agent-ops-console-runtime.json` is present
+- when `/data/runtime-state-v0.json` is newer than the bridge payload's embedded runtime timestamp, top-level runtime pills prefer the fresher standalone snapshot and explicitly show that the bridge view may lag until the next bridge export
+- `Ops Map` shows bridge reconciliation counts plus any `shell-only` / `bridge-only` gaps when the runtime bridge payload is present
+- `Ops Console` summary distinguishes runtime-backed, runtime-only, overlay, and conceptual-shell counts so transitional fixture dependence remains visible
+- `Ops Console` detail/runtime panes surface bridge-shell vs standalone runtime-profile classification plus any shell-classification drift when `/data/runtime-state-v0.json` is present
 - custom domain remains active in Cloudflare Pages
 
 ## Incident shortcuts
@@ -54,6 +60,7 @@ Check:
 ## GitHub operating notes
 - Git remote push is configured and working
 - branch pushes are possible
-- `gh` CLI is not installed on this machine right now
-- therefore, code fix + branch push is available now
-- PR creation is possible later via GitHub web UI or a dedicated API path, but not via `gh` out of the box
+- `gh` CLI is installed on this machine (`gh version 2.93.0` verified 2026-06-06)
+- `gh auth status` is currently healthy for account `honeia85`
+- therefore code fix + branch push + draft PR creation/update are all available from this host when needed
+- still treat production as unchanged until custom-domain verification passes after merge/deploy
