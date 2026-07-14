@@ -32,6 +32,28 @@ python3 -m http.server 8080
 
 제공되는 스킬: `ready`(의도 정제 → 3-doc), `go`(병렬 실행 오케스트레이션), `migration`.
 
+## NotebookLM Claude Code 스킬
+
+이 저장소에는 [teng-lin/notebooklm-py](https://github.com/teng-lin/notebooklm-py)
+기반의 Google NotebookLM 자동화를 Claude Code 에이전트 스킬로 설치할 수 있도록
+`SKILL.md` 가 함께 포함되어 있습니다.
+
+- 위치: `.claude/skills/notebooklm/SKILL.md`
+- 자세한 설명: `.claude/skills/notebooklm/README.md`
+
+설치 방법 (최초 1회):
+
+```bash
+# 기본 설치
+bash scripts/install-notebooklm-skill.sh
+
+# 브라우저 로그인(Playwright) 포함 설치
+WITH_BROWSER=1 bash scripts/install-notebooklm-skill.sh
+```
+
+설치 후 Claude Code 세션을 새로 시작하면 `/notebooklm` 또는 "팟캐스트 만들어 줘",
+"퀴즈 생성해 줘" 같은 의도 기반 프롬프트로 스킬이 자동 발동됩니다.
+
 ## 라이선스
 
 MIT
