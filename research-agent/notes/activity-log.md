@@ -8,3 +8,5 @@
 - 2026-07-18 23:10 [EXPERIMENT] experiments/round-1/round_summary.md
 - 2026-07-18 23:10 [EXPERIMENT] experiments/round-1/round_summary.md
 - 2026-07-18 23:10 [EXPERIMENT] experiments/round-1/round_summary.md
+- 2026-07-18 23:33 [EXPERIMENT] experiments/round-2/plan.md
+- 2026-07-18 23:35 [EXPERIMENT] experiments/round-2/experiment.py

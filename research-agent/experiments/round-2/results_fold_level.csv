@@ -1,0 +1,91 @@
+regime,model,seed,fold,pr_auc
+Clean (physics-only),Logistic Regression,0,0,0.6480535846329611
+Clean (physics-only),Logistic Regression,0,1,0.6634857180590393
+Clean (physics-only),Logistic Regression,0,2,0.6678159052522282
+Clean (physics-only),Logistic Regression,0,3,0.6799149818220466
+Clean (physics-only),Logistic Regression,0,4,0.7000078239760069
+Clean (physics-only),Logistic Regression,1,0,0.6823078444170005
+Clean (physics-only),Logistic Regression,1,1,0.6468934011884133
+Clean (physics-only),Logistic Regression,1,2,0.6698167898336205
+Clean (physics-only),Logistic Regression,1,3,0.6878038990619249
+Clean (physics-only),Logistic Regression,1,4,0.6702273509043613
+Clean (physics-only),Logistic Regression,2,0,0.6517554300610593
+Clean (physics-only),Logistic Regression,2,1,0.6863140586875283
+Clean (physics-only),Logistic Regression,2,2,0.6664340503440539
+Clean (physics-only),Logistic Regression,2,3,0.6732023399520977
+Clean (physics-only),Logistic Regression,2,4,0.6746180541021598
+Clean (physics-only),Random Forest,0,0,0.6482090807947801
+Clean (physics-only),Random Forest,0,1,0.6453840430821176
+Clean (physics-only),Random Forest,0,2,0.6562588811832801
+Clean (physics-only),Random Forest,0,3,0.6687272576619406
+Clean (physics-only),Random Forest,0,4,0.6833098875522597
+Clean (physics-only),Random Forest,1,0,0.6584194569674879
+Clean (physics-only),Random Forest,1,1,0.6546984555099232
+Clean (physics-only),Random Forest,1,2,0.673423088726246
+Clean (physics-only),Random Forest,1,3,0.6762650961196904
+Clean (physics-only),Random Forest,1,4,0.6451486592493275
+Clean (physics-only),Random Forest,2,0,0.64486988865353
+Clean (physics-only),Random Forest,2,1,0.65715456291576
+Clean (physics-only),Random Forest,2,2,0.6416629224093814
+Clean (physics-only),Random Forest,2,3,0.6682256775372811
+Clean (physics-only),Random Forest,2,4,0.6780093719045233
+Suspect-added,Logistic Regression,0,0,0.9989388687999667
+Suspect-added,Logistic Regression,0,1,0.9993086779025441
+Suspect-added,Logistic Regression,0,2,0.9993565931586055
+Suspect-added,Logistic Regression,0,3,0.9988328115555667
+Suspect-added,Logistic Regression,0,4,0.9974580495370831
+Suspect-added,Logistic Regression,1,0,0.9991753838251406
+Suspect-added,Logistic Regression,1,1,0.9989825403706858
+Suspect-added,Logistic Regression,1,2,0.9989993241150138
+Suspect-added,Logistic Regression,1,3,0.9981332551681966
+Suspect-added,Logistic Regression,1,4,0.9987420930515083
+Suspect-added,Logistic Regression,2,0,0.9986898640796671
+Suspect-added,Logistic Regression,2,1,0.9991274334010529
+Suspect-added,Logistic Regression,2,2,0.9992115914941385
+Suspect-added,Logistic Regression,2,3,0.998601505588843
+Suspect-added,Logistic Regression,2,4,0.9984823885309266
+Suspect-added,Random Forest,0,0,0.9969061430788371
+Suspect-added,Random Forest,0,1,0.9989952427726562
+Suspect-added,Random Forest,0,2,0.9975947914387506
+Suspect-added,Random Forest,0,3,0.9964868359768366
+Suspect-added,Random Forest,0,4,0.9957725287030257
+Suspect-added,Random Forest,1,0,0.9989078977971042
+Suspect-added,Random Forest,1,1,0.9974991518688681
+Suspect-added,Random Forest,1,2,0.9977960654515983
+Suspect-added,Random Forest,1,3,0.996409704974108
+Suspect-added,Random Forest,1,4,0.9976592298562399
+Suspect-added,Random Forest,2,0,0.9983963893791539
+Suspect-added,Random Forest,2,1,0.9989289419527112
+Suspect-added,Random Forest,2,2,0.996892327566378
+Suspect-added,Random Forest,2,3,0.9958153355043273
+Suspect-added,Random Forest,2,4,0.995540342063522
+Leaked (leakage-inclusive),Logistic Regression,0,0,0.9999903188186906
+Leaked (leakage-inclusive),Logistic Regression,0,1,0.9999682914580492
+Leaked (leakage-inclusive),Logistic Regression,0,2,0.9999903576525562
+Leaked (leakage-inclusive),Logistic Regression,0,3,0.9999872156510413
+Leaked (leakage-inclusive),Logistic Regression,0,4,0.9999838644930614
+Leaked (leakage-inclusive),Logistic Regression,1,0,0.9999822907968994
+Leaked (leakage-inclusive),Logistic Regression,1,1,0.9999951686412609
+Leaked (leakage-inclusive),Logistic Regression,1,2,0.9999041803126059
+Leaked (leakage-inclusive),Logistic Regression,1,3,0.9999951869701658
+Leaked (leakage-inclusive),Logistic Regression,1,4,0.9999607871410086
+Leaked (leakage-inclusive),Logistic Regression,2,0,0.9999855728131251
+Leaked (leakage-inclusive),Logistic Regression,2,1,1.0
+Leaked (leakage-inclusive),Logistic Regression,2,2,0.999988726779407
+Leaked (leakage-inclusive),Logistic Regression,2,3,0.9999757935824409
+Leaked (leakage-inclusive),Logistic Regression,2,4,0.9999540045302435
+Leaked (leakage-inclusive),Random Forest,0,0,0.9999805632137526
+Leaked (leakage-inclusive),Random Forest,0,1,0.9999903677809467
+Leaked (leakage-inclusive),Random Forest,0,2,0.9999855911885566
+Leaked (leakage-inclusive),Random Forest,0,3,0.9999007602961281
+Leaked (leakage-inclusive),Random Forest,0,4,0.9999291880840322
+Leaked (leakage-inclusive),Random Forest,1,0,0.9999627760900628
+Leaked (leakage-inclusive),Random Forest,1,1,0.9999903188186905
+Leaked (leakage-inclusive),Random Forest,1,2,0.9999903880637404
+Leaked (leakage-inclusive),Random Forest,1,3,1.0
+Leaked (leakage-inclusive),Random Forest,1,4,0.9999030801057901
+Leaked (leakage-inclusive),Random Forest,2,0,0.9999935643031306
+Leaked (leakage-inclusive),Random Forest,2,1,1.0
+Leaked (leakage-inclusive),Random Forest,2,2,0.9999855242526874
+Leaked (leakage-inclusive),Random Forest,2,3,0.9999529020989092
+Leaked (leakage-inclusive),Random Forest,2,4,0.999874095524411
