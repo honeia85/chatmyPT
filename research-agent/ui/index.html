@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Agent Workspace</title>
+<style>
+  :root {
+    --bg: #0f172a; --panel: #1e293b; --border: #334155;
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8; --ok: #4ade80; --warn: #fbbf24;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+         background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; }
+  header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+           display: flex; align-items: center; gap: 12px; }
+  header h1 { font-size: 15px; margin: 0; }
+  header .badge { font-size: 11px; color: var(--muted); }
+  main { flex: 1; display: grid; grid-template-columns: 220px 1fr 1fr; min-height: 0; }
+  section { border-right: 1px solid var(--border); display: flex; flex-direction: column; min-width: 0; }
+  section:last-child { border-right: none; }
+  .panel-title { padding: 8px 12px; font-size: 12px; letter-spacing: .05em;
+                 color: var(--muted); border-bottom: 1px solid var(--border); text-transform: uppercase; }
+  .scroll { flex: 1; overflow-y: auto; padding: 12px; }
+  /* rounds */
+  .round { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;
+           margin-bottom: 8px; font-size: 13px; }
+  .round .v-APPROVE { color: var(--ok); }
+  .round .v-REVISE { color: var(--warn); }
+  /* console */
+  #console { font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.55;
+             white-space: pre-wrap; word-break: break-word; }
+  .ev-tool { color: var(--accent); }
+  .ev-think { color: var(--muted); font-style: italic; }
+  .ev-meta { color: var(--warn); }
+  .ev-err { color: #f87171; }
+  /* artifact */
+  #artifact { font-size: 13.5px; line-height: 1.65; }
+  #artifact h1, #artifact h2, #artifact h3 { border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+  #artifact table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+  #artifact th, #artifact td { border: 1px solid var(--border); padding: 4px 8px; font-size: 12.5px; }
+  #artifact code { background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+  /* prompt bar */
+  footer { display: flex; gap: 8px; padding: 10px 16px; border-top: 1px solid var(--border); }
+  footer input { flex: 1; background: var(--panel); border: 1px solid var(--border);
+                 color: var(--text); border-radius: 8px; padding: 10px 12px; font-size: 14px; }
+  footer button { background: var(--accent); color: #082f49; border: none; border-radius: 8px;
+                  padding: 10px 18px; font-weight: 700; cursor: pointer; }
+  footer button:disabled { opacity: .4; cursor: default; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔬 Research Agent Workspace</h1>
+  <span class="badge">CLAUDE.md · Wiki · Skills · Subagents · Hooks · Loop</span>
+</header>
+<main>
+  <section>
+    <div class="panel-title">Rounds</div>
+    <div class="scroll" id="rounds"></div>
+  </section>
+  <section>
+    <div class="panel-title">Live Run Console</div>
+    <div class="scroll"><div id="console">지시를 입력하고 Run을 누르면 에이전트 실행 과정이 여기에 스트리밍됩니다.</div></div>
+  </section>
+  <section>
+    <div class="panel-title">Latest Artifact — round_summary.md</div>
+    <div class="scroll" id="artifact"></div>
+  </section>
+</main>
+<footer>
+  <input id="instruction" placeholder="에이전트의 질문에 답하거나 다음 라운드 지시를 입력하세요"
+         onkeydown="if(event.key==='Enter')runRound()">
+  <button id="runBtn" onclick="runRound()">Run ▶</button>
+</footer>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+function mdToHtml(md) {
+  // 최소 마크다운 렌더러 (헤딩/표/코드/굵게/리스트)
+  const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = esc(md).split('\n');
+  let html = '', inTable = false;
+  for (const line of lines) {
+    if (/^\|/.test(line)) {
+      if (/^\|[\s:-]+\|/.test(line.replace(/\|/g,'|'))) { continue; }
+      const cells = line.split('|').slice(1, -1).map(c => c.trim());
+      if (!inTable) { html += '<table>'; inTable = true; }
+      html += '<tr>' + cells.map(c => `<td>${inline(c)}</td>`).join('') + '</tr>';
+      continue;
+    } else if (inTable) { html += '</table>'; inTable = false; }
+    if (/^### /.test(line)) html += `<h3>${inline(line.slice(4))}</h3>`;
+    else if (/^## /.test(line)) html += `<h2>${inline(line.slice(3))}</h2>`;
+    else if (/^# /.test(line)) html += `<h1>${inline(line.slice(2))}</h1>`;
+    else if (/^- /.test(line)) html += `<div>• ${inline(line.slice(2))}</div>`;
+    else if (line.trim() === '') html += '<br>';
+    else html += `<div>${inline(line)}</div>`;
+  }
+  if (inTable) html += '</table>';
+  return html;
+  function inline(s) {
+    return s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+  }
+}
+
+async function refreshRounds() {
+  const rounds = await (await fetch('/api/rounds')).json();
+  $('rounds').innerHTML = rounds.length
+    ? rounds.map(r => `<div class="round"><b>Round ${r.round}</b><br>
+        ${r.has_plan ? '📋 plan' : ''} ${r.has_summary ? '📄 summary' : ''}
+        ${r.verdict ? `<span class="v-${r.verdict}">● ${r.verdict}</span>` : ''}</div>`).join('')
+    : '<span style="color:var(--muted);font-size:12px">아직 라운드가 없습니다</span>';
+}
+
+async function refreshArtifact() {
+  const data = await (await fetch('/api/artifact/latest')).json();
+  $('artifact').innerHTML = mdToHtml(data.markdown || '');
+}
+
+function appendConsole(html, cls) {
+  const el = document.createElement('div');
+  if (cls) el.className = cls;
+  el.innerHTML = html;
+  $('console').appendChild(el);
+  el.scrollIntoView({ block: 'end' });
+}
+
+function runRound() {
+  const instruction = $('instruction').value.trim();
+  if (!instruction) return;
+  $('instruction').value = '';
+  $('runBtn').disabled = true;
+  $('console').innerHTML = '';
+
+  const es = new EventSource('/api/run?instruction=' + encodeURIComponent(instruction));
+  es.onmessage = (e) => {
+    const ev = JSON.parse(e.data);
+    if (ev.type === 'text') appendConsole(ev.text.replace(/\n/g, '<br>'));
+    else if (ev.type === 'thinking') appendConsole('💭 ' + ev.text.slice(0, 200), 'ev-think');
+    else if (ev.type === 'tool_use') appendConsole('⚙ ' + ev.name + ' ' + JSON.stringify(ev.input).slice(0, 120), 'ev-tool');
+    else if (ev.type === 'round_start') appendConsole(`=== Round ${ev.round} 시작 ===`, 'ev-meta');
+    else if (ev.type === 'round_end') appendConsole(`=== Round ${ev.round} 종료 ===`, 'ev-meta');
+    else if (ev.type === 'error') appendConsole('오류: ' + ev.message, 'ev-err');
+  };
+  es.addEventListener('done', () => {
+    es.close();
+    $('runBtn').disabled = false;
+    refreshRounds();
+    refreshArtifact();
+  });
+  es.onerror = () => { es.close(); $('runBtn').disabled = false; };
+}
+
+refreshRounds();
+refreshArtifact();
+</script>
+</body>
+</html>
