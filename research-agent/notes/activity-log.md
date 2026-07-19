@@ -29,3 +29,6 @@
 - 2026-07-19 00:30 [EXPERIMENT] experiments/round-4/round_summary.md
 - 2026-07-19 00:30 [WIKI] wiki/koi-vetting-2024-critical.md
 - 2026-07-19 00:35 [EXPERIMENT] experiments/round-4/review.md
+- 2026-07-19 00:45 [EXPERIMENT] experiments/round-5/review.md
+- 2026-07-19 00:48 [EXPERIMENT] experiments/round-5/review.md
+- 2026-07-19 00:49 [EXPERIMENT] experiments/round-5/round_summary.md

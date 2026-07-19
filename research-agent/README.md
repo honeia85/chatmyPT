@@ -73,3 +73,34 @@ uvicorn server:app --port 8787
 - Claude Code 설치 및 로그인 (Agent SDK가 이를 통해 실행됨)
 - Python 3.10+
 - `CLAUDE.md` 상단의 연구 분야 항목을 자기 분야로 채울 것
+
+## 실전 검증 기록 (2026-07-18~19, Claude Code 원격 세션에서 실행)
+
+전 파이프라인을 원격 세션 안에서 실제로 돌려 검증했다. 결과물이 이 레포에 그대로 있다.
+
+| 단계 | 결과 | 증거 |
+|------|------|------|
+| SDK 실행 + 논문→위키 (Ch.3~4, 7) | ✅ | `experiments/round-1/`, `wiki/koi-vetting-2024*.md` |
+| 연구 Loop 3사이클 (Ch.6) | ✅ REVISE→REVISE→**APPROVE** | `experiments/round-2~4/` (round-4에서 종료) |
+| 합성 데이터 미니 실험 | ✅ 논문의 누수 효과 재현 (Clean ~0.73 → Leaked ~0.9999 PR-AUC) | `experiments/round-2~4/results_*.csv` |
+| Subagents 협업 (Ch.5) | ✅ planner가 plan.md, reviewer가 review.md 생성 | 각 라운드 `plan.md`/`review.md` |
+| Hooks (Ch.6) | ✅ rm -rf 차단, 활동 자동 기록 | `notes/activity-log.md` |
+| MCP 연결 (Ch.6 P3) | ✅ filesystem MCP를 `--scope local`로 등록, 에이전트가 실제 호출 | — |
+| UI 백엔드 (Ch.7) | ✅ 3개 엔드포인트 정상 | `runner/server.py` |
+| 논문 워크플로우 연결 (Ch.8) | ✅ Related Work·연구 제안서 생성 (APPROVE) | `outputs/` |
+
+**주목할 만한 관찰**: writing-reviewer가 모든 수치를 원자료 CSV와 재대조해 "검증 설계 순환성"
+(파라미터 탐색과 최종 평가가 같은 데이터 실현 공유)을 잡아냈고, round-4는 이를 해소하기 위해
+파라미터를 상수로 고정하고 독립 데이터 실현 3개(seed 43/44/45)에서 재평가하는 설계를 스스로
+제안·실행해 APPROVE에 도달했다. 샘플 논문의 "가상 논문" 고지는 위키 → 실험 → 최종 산출물까지
+전 단계에서 유지됐다.
+
+### 원격 세션 환경에서 안 되는 것
+
+1. **외부 연구 데이터 다운로드** — 허용 목록 밖 호스트(NASA Exoplanet Archive 등)는 네트워크
+   정책이 차단. 실험은 합성 데이터로만 가능 (pypi/npm 패키지 설치는 허용).
+2. **UI 브라우저 접근** — 서버는 뜨지만 공개 포트가 없어 화면은 로컬에서만 볼 수 있음.
+3. **프로젝트 스코프 MCP(`.mcp.json`)** — 대화형 승인이 필요해 헤드리스에서 보류 상태로 남음.
+   `claude mcp add --scope local`로 등록하면 승인 없이 동작 (권장 우회).
+4. **장시간 백그라운드 실행** — 컨테이너 재시작 시 실행 중인 프로세스가 끊길 수 있음
+   (파일은 보존되므로 라운드 단위로 재개 가능).
