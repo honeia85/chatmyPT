@@ -1,0 +1,340 @@
+======================================================================
+Round 4 실험: 독립 데이터 실현 재검증 (calibration-evaluation circularity 해소)
+고정 파라미터 (재탐색 없음): GAMMA1_STAR=3.4, GAMMA0_STAR=-0.9697265625, ALPHA_STAR=0.85, SIGMA_STAR=0.25
+독립 DATA_SEEDS=[43, 44, 45] (Round 3의 DATA_SEED=42와 완전히 무관)
+======================================================================
+
+--- DATA_SEED=43: 데이터셋 생성 (round-4-synth-seed43) ---
+총 행 수: 9902 (시스템 수: 6000, 기대 시스템 수: 6000)
+양성 비율(y=1): 0.3939 (목표 0.40)
+--- DATA_SEED=43: 3개 레짐 x 2개 모델 x 3 seed x 5 fold 평가 ---
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=0 PR-AUC=0.7600
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=1 PR-AUC=0.7347
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=2 PR-AUC=0.7310
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=3 PR-AUC=0.7472
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=4 PR-AUC=0.7515
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=0 PR-AUC=0.7314
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=1 PR-AUC=0.7710
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=2 PR-AUC=0.7332
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=3 PR-AUC=0.7420
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=4 PR-AUC=0.7417
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=0 PR-AUC=0.7611
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=1 PR-AUC=0.7390
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=2 PR-AUC=0.7446
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=3 PR-AUC=0.7442
+[eval] data_seed=43 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=4 PR-AUC=0.7332
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=0 fold=0 PR-AUC=0.7467
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=0 fold=1 PR-AUC=0.7262
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=0 fold=2 PR-AUC=0.7213
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=0 fold=3 PR-AUC=0.7435
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=0 fold=4 PR-AUC=0.7359
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=1 fold=0 PR-AUC=0.7217
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=1 fold=1 PR-AUC=0.7672
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=1 fold=2 PR-AUC=0.7354
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=1 fold=3 PR-AUC=0.7329
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=1 fold=4 PR-AUC=0.7291
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=2 fold=0 PR-AUC=0.7373
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=2 fold=1 PR-AUC=0.7410
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=2 fold=2 PR-AUC=0.7354
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=2 fold=3 PR-AUC=0.7423
+[eval] data_seed=43 regime='Clean (physics-only)' model=Random Forest seed=2 fold=4 PR-AUC=0.7282
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=0 fold=0 PR-AUC=0.8762
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=0 fold=1 PR-AUC=0.8661
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=0 fold=2 PR-AUC=0.8604
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=0 fold=3 PR-AUC=0.8849
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=0 fold=4 PR-AUC=0.8607
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=1 fold=0 PR-AUC=0.8610
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=1 fold=1 PR-AUC=0.8760
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=1 fold=2 PR-AUC=0.8677
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=1 fold=3 PR-AUC=0.8712
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=1 fold=4 PR-AUC=0.8660
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=2 fold=0 PR-AUC=0.8692
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=2 fold=1 PR-AUC=0.8654
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=2 fold=2 PR-AUC=0.8875
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=2 fold=3 PR-AUC=0.8713
+[eval] data_seed=43 regime='Suspect-added' model=Logistic Regression seed=2 fold=4 PR-AUC=0.8550
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=0 fold=0 PR-AUC=0.8674
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=0 fold=1 PR-AUC=0.8601
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=0 fold=2 PR-AUC=0.8518
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=0 fold=3 PR-AUC=0.8774
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=0 fold=4 PR-AUC=0.8541
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=1 fold=0 PR-AUC=0.8491
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=1 fold=1 PR-AUC=0.8754
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=1 fold=2 PR-AUC=0.8542
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=1 fold=3 PR-AUC=0.8615
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=1 fold=4 PR-AUC=0.8553
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=2 fold=0 PR-AUC=0.8537
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=2 fold=1 PR-AUC=0.8605
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=2 fold=2 PR-AUC=0.8716
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=2 fold=3 PR-AUC=0.8592
+[eval] data_seed=43 regime='Suspect-added' model=Random Forest seed=2 fold=4 PR-AUC=0.8510
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=0 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=1 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=2 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=3 PR-AUC=0.9999
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=4 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=0 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=1 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=2 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=3 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=4 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=0 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=1 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=2 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=3 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=4 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=0 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=1 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=2 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=3 PR-AUC=0.9999
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=4 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=0 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=1 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=2 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=3 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=4 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=0 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=1 PR-AUC=0.9999
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=2 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=3 PR-AUC=1.0000
+[eval] data_seed=43 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=4 PR-AUC=1.0000
+
+--- DATA_SEED=44: 데이터셋 생성 (round-4-synth-seed44) ---
+총 행 수: 9934 (시스템 수: 6000, 기대 시스템 수: 6000)
+양성 비율(y=1): 0.3949 (목표 0.40)
+--- DATA_SEED=44: 3개 레짐 x 2개 모델 x 3 seed x 5 fold 평가 ---
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=0 PR-AUC=0.7216
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=1 PR-AUC=0.7149
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=2 PR-AUC=0.7424
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=3 PR-AUC=0.7421
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=4 PR-AUC=0.7052
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=0 PR-AUC=0.7199
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=1 PR-AUC=0.7149
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=2 PR-AUC=0.7273
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=3 PR-AUC=0.7294
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=4 PR-AUC=0.7313
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=0 PR-AUC=0.7200
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=1 PR-AUC=0.7256
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=2 PR-AUC=0.7334
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=3 PR-AUC=0.7171
+[eval] data_seed=44 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=4 PR-AUC=0.7283
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=0 fold=0 PR-AUC=0.7130
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=0 fold=1 PR-AUC=0.7038
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=0 fold=2 PR-AUC=0.7261
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=0 fold=3 PR-AUC=0.7307
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=0 fold=4 PR-AUC=0.7019
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=1 fold=0 PR-AUC=0.7080
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=1 fold=1 PR-AUC=0.7106
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=1 fold=2 PR-AUC=0.7033
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=1 fold=3 PR-AUC=0.7274
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=1 fold=4 PR-AUC=0.7308
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=2 fold=0 PR-AUC=0.7070
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=2 fold=1 PR-AUC=0.7145
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=2 fold=2 PR-AUC=0.7141
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=2 fold=3 PR-AUC=0.7080
+[eval] data_seed=44 regime='Clean (physics-only)' model=Random Forest seed=2 fold=4 PR-AUC=0.7205
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=0 fold=0 PR-AUC=0.8417
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=0 fold=1 PR-AUC=0.8698
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=0 fold=2 PR-AUC=0.8670
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=0 fold=3 PR-AUC=0.8783
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=0 fold=4 PR-AUC=0.8416
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=1 fold=0 PR-AUC=0.8609
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=1 fold=1 PR-AUC=0.8578
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=1 fold=2 PR-AUC=0.8579
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=1 fold=3 PR-AUC=0.8534
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=1 fold=4 PR-AUC=0.8627
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=2 fold=0 PR-AUC=0.8616
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=2 fold=1 PR-AUC=0.8561
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=2 fold=2 PR-AUC=0.8503
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=2 fold=3 PR-AUC=0.8683
+[eval] data_seed=44 regime='Suspect-added' model=Logistic Regression seed=2 fold=4 PR-AUC=0.8604
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=0 fold=0 PR-AUC=0.8277
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=0 fold=1 PR-AUC=0.8494
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=0 fold=2 PR-AUC=0.8479
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=0 fold=3 PR-AUC=0.8712
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=0 fold=4 PR-AUC=0.8247
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=1 fold=0 PR-AUC=0.8449
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=1 fold=1 PR-AUC=0.8514
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=1 fold=2 PR-AUC=0.8392
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=1 fold=3 PR-AUC=0.8359
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=1 fold=4 PR-AUC=0.8500
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=2 fold=0 PR-AUC=0.8346
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=2 fold=1 PR-AUC=0.8292
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=2 fold=2 PR-AUC=0.8394
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=2 fold=3 PR-AUC=0.8609
+[eval] data_seed=44 regime='Suspect-added' model=Random Forest seed=2 fold=4 PR-AUC=0.8507
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=0 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=1 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=2 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=3 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=4 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=0 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=1 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=2 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=3 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=4 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=0 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=1 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=2 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=3 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=4 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=0 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=1 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=2 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=3 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=4 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=0 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=1 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=2 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=3 PR-AUC=0.9999
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=4 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=0 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=1 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=2 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=3 PR-AUC=1.0000
+[eval] data_seed=44 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=4 PR-AUC=1.0000
+
+--- DATA_SEED=45: 데이터셋 생성 (round-4-synth-seed45) ---
+총 행 수: 9874 (시스템 수: 6000, 기대 시스템 수: 6000)
+양성 비율(y=1): 0.3983 (목표 0.40)
+--- DATA_SEED=45: 3개 레짐 x 2개 모델 x 3 seed x 5 fold 평가 ---
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=0 PR-AUC=0.7428
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=1 PR-AUC=0.7290
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=2 PR-AUC=0.7245
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=3 PR-AUC=0.7286
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=0 fold=4 PR-AUC=0.7250
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=0 PR-AUC=0.7313
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=1 PR-AUC=0.7381
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=2 PR-AUC=0.7118
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=3 PR-AUC=0.7217
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=1 fold=4 PR-AUC=0.7451
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=0 PR-AUC=0.7238
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=1 PR-AUC=0.7295
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=2 PR-AUC=0.7390
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=3 PR-AUC=0.7135
+[eval] data_seed=45 regime='Clean (physics-only)' model=Logistic Regression seed=2 fold=4 PR-AUC=0.7428
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=0 fold=0 PR-AUC=0.7257
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=0 fold=1 PR-AUC=0.6939
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=0 fold=2 PR-AUC=0.7180
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=0 fold=3 PR-AUC=0.7221
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=0 fold=4 PR-AUC=0.7182
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=1 fold=0 PR-AUC=0.7271
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=1 fold=1 PR-AUC=0.7162
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=1 fold=2 PR-AUC=0.6967
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=1 fold=3 PR-AUC=0.7105
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=1 fold=4 PR-AUC=0.7261
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=2 fold=0 PR-AUC=0.7020
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=2 fold=1 PR-AUC=0.7112
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=2 fold=2 PR-AUC=0.7249
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=2 fold=3 PR-AUC=0.7127
+[eval] data_seed=45 regime='Clean (physics-only)' model=Random Forest seed=2 fold=4 PR-AUC=0.7339
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=0 fold=0 PR-AUC=0.8580
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=0 fold=1 PR-AUC=0.8600
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=0 fold=2 PR-AUC=0.8605
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=0 fold=3 PR-AUC=0.8552
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=0 fold=4 PR-AUC=0.8705
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=1 fold=0 PR-AUC=0.8640
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=1 fold=1 PR-AUC=0.8745
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=1 fold=2 PR-AUC=0.8533
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=1 fold=3 PR-AUC=0.8555
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=1 fold=4 PR-AUC=0.8567
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=2 fold=0 PR-AUC=0.8456
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=2 fold=1 PR-AUC=0.8670
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=2 fold=2 PR-AUC=0.8766
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=2 fold=3 PR-AUC=0.8541
+[eval] data_seed=45 regime='Suspect-added' model=Logistic Regression seed=2 fold=4 PR-AUC=0.8612
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=0 fold=0 PR-AUC=0.8480
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=0 fold=1 PR-AUC=0.8482
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=0 fold=2 PR-AUC=0.8621
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=0 fold=3 PR-AUC=0.8360
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=0 fold=4 PR-AUC=0.8710
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=1 fold=0 PR-AUC=0.8551
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=1 fold=1 PR-AUC=0.8683
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=1 fold=2 PR-AUC=0.8426
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=1 fold=3 PR-AUC=0.8512
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=1 fold=4 PR-AUC=0.8430
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=2 fold=0 PR-AUC=0.8408
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=2 fold=1 PR-AUC=0.8593
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=2 fold=2 PR-AUC=0.8633
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=2 fold=3 PR-AUC=0.8482
+[eval] data_seed=45 regime='Suspect-added' model=Random Forest seed=2 fold=4 PR-AUC=0.8439
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=0 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=1 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=2 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=3 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=0 fold=4 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=0 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=1 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=2 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=3 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=1 fold=4 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=0 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=1 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=2 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=3 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Logistic Regression seed=2 fold=4 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=0 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=1 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=2 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=3 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=0 fold=4 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=0 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=1 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=2 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=3 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=1 fold=4 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=0 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=1 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=2 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=3 PR-AUC=1.0000
+[eval] data_seed=45 regime='Leaked (leakage-inclusive)' model=Random Forest seed=2 fold=4 PR-AUC=1.0000
+
+--- 결과 집계 (data_seed별) ---
+ data_seed                     regime               model  pr_auc_mean_3seed  pr_auc_std_3seed  delta_vs_clean  delta_leaked_vs_suspect
+        43       Clean (physics-only) Logistic Regression           0.744377      5.068024e-04             NaN                      NaN
+        43       Clean (physics-only)       Random Forest           0.736279      1.362295e-03             NaN                      NaN
+        43 Leaked (leakage-inclusive) Logistic Regression           0.999982      7.813570e-07        0.255605                 0.130734
+        43 Leaked (leakage-inclusive)       Random Forest           0.999974      2.027635e-06        0.263695                 0.139834
+        43              Suspect-added Logistic Regression           0.869248      7.674102e-04        0.124871                      NaN
+        43              Suspect-added       Random Forest           0.860140      1.758266e-03        0.123861                      NaN
+        44       Clean (physics-only) Logistic Regression           0.724895      3.568927e-04             NaN                      NaN
+        44       Clean (physics-only)       Random Forest           0.714647      1.639085e-03             NaN                      NaN
+        44 Leaked (leakage-inclusive) Logistic Regression           0.999992      3.740934e-06        0.275096                 0.140808
+        44 Leaked (leakage-inclusive)       Random Forest           0.999988      6.449713e-06        0.285341                 0.156194
+        44              Suspect-added Logistic Regression           0.859183      5.847779e-04        0.134288                      NaN
+        44              Suspect-added       Random Forest           0.843795      7.390848e-04        0.129148                      NaN
+        45       Clean (physics-only) Logistic Regression           0.729765      1.814226e-04             NaN                      NaN
+        45       Clean (physics-only)       Random Forest           0.715959      8.731544e-04             NaN                      NaN
+        45 Leaked (leakage-inclusive) Logistic Regression           0.999986      5.705544e-07        0.270220                 0.139129
+        45 Leaked (leakage-inclusive)       Random Forest           0.999989      1.158196e-06        0.284030                 0.147930
+        45              Suspect-added Logistic Regression           0.860857      5.412811e-05        0.131092                      NaN
+        45              Suspect-added       Random Forest           0.852060      9.753078e-04        0.136101                      NaN
+
+--- 개별 DATA_SEED 판정 (plan.md 8.1절) ---
+[DATA_SEED=43] Logistic Regression: Clean=0.7444(target_in=False, acceptable_in=True) Suspect=0.8692(target_in=True, acceptable_in=True) Leaked=1.0000 primary_delta=+0.2556(success=True) ordered=True secondary_gap=+0.1307(success=True)
+[DATA_SEED=43] Random Forest: Clean=0.7363(target_in=True, acceptable_in=True) Suspect=0.8601(target_in=True, acceptable_in=True) Leaked=1.0000 primary_delta=+0.2637(success=True) ordered=True secondary_gap=+0.1398(success=True)
+[DATA_SEED=44] Logistic Regression: Clean=0.7249(target_in=True, acceptable_in=True) Suspect=0.8592(target_in=True, acceptable_in=True) Leaked=1.0000 primary_delta=+0.2751(success=True) ordered=True secondary_gap=+0.1408(success=True)
+[DATA_SEED=44] Random Forest: Clean=0.7146(target_in=True, acceptable_in=True) Suspect=0.8438(target_in=True, acceptable_in=True) Leaked=1.0000 primary_delta=+0.2853(success=True) ordered=True secondary_gap=+0.1562(success=True)
+[DATA_SEED=45] Logistic Regression: Clean=0.7298(target_in=True, acceptable_in=True) Suspect=0.8609(target_in=True, acceptable_in=True) Leaked=1.0000 primary_delta=+0.2702(success=True) ordered=True secondary_gap=+0.1391(success=True)
+[DATA_SEED=45] Random Forest: Clean=0.7160(target_in=True, acceptable_in=True) Suspect=0.8521(target_in=True, acceptable_in=True) Leaked=1.0000 primary_delta=+0.2840(success=True) ordered=True secondary_gap=+0.1479(success=True)
+
+--- DATA_SEED=42(Round 3) 대비 비교표 (plan.md 7절) ---
+Logistic Regression / Clean (physics-only): seed42(Round3)=0.7318 vs seed43=0.7444 seed44=0.7249 seed45=0.7298 (new range=[0.7249,0.7444], seed42_within_range=True)
+Logistic Regression / Suspect-added: seed42(Round3)=0.8696 vs seed43=0.8692 seed44=0.8592 seed45=0.8609 (new range=[0.8592,0.8692], seed42_within_range=False)
+Logistic Regression / Leaked (leakage-inclusive): seed42(Round3)=1.0000 vs seed43=1.0000 seed44=1.0000 seed45=1.0000 (new range=[1.0000,1.0000], seed42_within_range=False)
+Random Forest / Clean (physics-only): seed42(Round3)=0.7231 vs seed43=0.7363 seed44=0.7146 seed45=0.7160 (new range=[0.7146,0.7363], seed42_within_range=True)
+Random Forest / Suspect-added: seed42(Round3)=0.8565 vs seed43=0.8601 seed44=0.8438 seed45=0.8521 (new range=[0.8438,0.8601], seed42_within_range=True)
+Random Forest / Leaked (leakage-inclusive): seed42(Round3)=1.0000 vs seed43=1.0000 seed44=1.0000 seed45=1.0000 (new range=[1.0000,1.0000], seed42_within_range=True)
+
+--- 3개 실현 전체에 걸친 '안정적 성질' 최종 판정 (plan.md 8.2절) ---
+[DATA_SEED=43] clean_ok=True suspect_target_ok=True primary_ok(RF+LR)=True secondary_ok(>=1 model)=True => seed_pass=True
+[DATA_SEED=44] clean_ok=True suspect_target_ok=True primary_ok(RF+LR)=True secondary_ok(>=1 model)=True => seed_pass=True
+[DATA_SEED=45] clean_ok=True suspect_target_ok=True primary_ok(RF+LR)=True secondary_ok(>=1 model)=True => seed_pass=True
+
+[최종 판정 8.2] 강한 성공 (파라미터가 안정적 성질) — 3개 실현 모두 전 기준 충족
+
+완료. 산출물:
+  - experiments/round-4/synthetic_dataset_seed43.csv / seed44.csv / seed45.csv
+  - experiments/round-4/results_fold_level.csv
+  - experiments/round-4/results_summary.csv
+  - experiments/round-4/results_comparison_with_seed42.csv

@@ -106,3 +106,61 @@
   전달).
 - 재설계(플래그 가중치 축소)와 실제 데이터 검증은 `experiments/round-2/round_summary.md`
   Next 항목으로 다음 라운드에 이월됨.
+
+### Round 3 실험 갱신 (2026-07-19, `koi_score` 재설계 + gamma1 그리드 확장)
+
+> 출처: `experiments/round-3/round_summary.md`, `experiments/round-3/plan.md`. 아래 내용도
+> Round 2와 마찬가지로 우리가 직접 만든 합성 데이터 실험 결과이며, 실제 KOI 데이터나 이
+> 가상 논문의 실측 결과가 아니다.
+
+- **`koi_score` 재설계 성공**: Round 2가 남긴 방법론적 교훈("판정 플래그 평균을 그대로
+  블렌딩하면 쉽게 포화된다")에 따라, 합성 공식 `raw = alpha*sigmoid(2*s_std) +
+  (1-alpha)*mean(1-fpflag) + N(0,sigma^2)`에서 플래그 가중치 `1-alpha`를 0.5→0.15로 낮추고
+  노이즈 표준편차 `sigma`를 0.05→0.25로 확대했더니(그리드 탐색으로 확정, exploration
+  seed=99, `n_estimators=300`), Suspect-added PR-AUC가 목표대역 [0.80,0.90] 안(RF 0.8565,
+  LR 0.8696)에 안착하고 Leaked와의 격차(Δ(Leaked-Suspect))가 RF +0.1435, LR +0.1304로
+  Round 2의 +0.001~0.003과 뚜렷이 구별되었다. 즉 "`koi_score`가 `koi_fpflag_*`보다 약한
+  중간 정도의 부분적 누수를 담아야 한다"는 설계 의도가 이번에는 형식(순서)뿐 아니라
+  **실질(정량 간격 ≥0.04 신설 기준)**로도 재현되었다.
+- **gamma1 그리드 확장으로 Clean 기준선 보정**: `gamma1` 그리드를 `[0.8,2.0]`에서
+  `[2.0,4.0]`으로 확장(exploration seed=99로 최종 보고 seed{0,1,2}와 명시적 분리)한 결과
+  `gamma1*=3.4`에서 physics-only PR-AUC가 0.7106~0.7350(목표 [0.70,0.74]) 안에 정확히
+  들어왔다 — Round 2는 그리드 상한(2.0)에서도 0.659에 그쳐 Clean 기준선이 목표보다 낮게
+  잡혔었다.
+- **검증 설계 관행 확립**: 탐색 전용 seed(99)와 최종 보고 seed({0,1,2})를 처음부터 분리하고,
+  탐색·최종 평가 모두 동일한 모델 설정(`n_estimators=300`)을 쓰는 관행이 이번 라운드에서
+  확립되었다 — Round 2 리뷰가 지적한 "탐색-최종 설정 불일치", "탐색 seed 이중사용" 문제를
+  사후 정량화가 아니라 사전 설계로 원천 차단하는 방식. 향후 실제 데이터 검증 라운드에도 이
+  관행을 그대로 적용할 것을 권장한다(`experiments/round-3/round_summary.md` Next #1).
+- 다음 라운드 최우선 과제: 실제 KOI cumulative table로 `koi_fpflag_*`(Tier 0)와
+  `koi_score`(Tier 1)의 개별 기여도를 실측 검증(Round 1 Next #1 → Round 2 Next #3 → Round 3
+  Next #1로 계속 이월).
+
+### Round 4 실험 갱신 (2026-07-19, 독립 데이터 실현 재검증 — Round 3 REVISE 사유 해소)
+
+> 출처: `experiments/round-4/round_summary.md`, `experiments/round-4/plan.md`. 아래 내용도
+> Round 2/3와 마찬가지로 우리가 직접 만든 합성 데이터 실험 결과이며, 실제 KOI 데이터나 이
+> 가상 논문의 실측 결과가 아니다.
+
+- **Round 3 리뷰(VERDICT: REVISE)의 핵심 지적 해소**: Round 3는 `koi_score`/`gamma1` 파라미터
+  그리드 탐색과 최종 confirmatory 평가가 동일한 `DATA_SEED=42` 단일 데이터 실현을 공유하는
+  "검증 설계 순환성" 문제로 REVISE 판정을 받았다. Round 4는 그리드 탐색 단계 자체를 없애고
+  Round 3 확정값(`gamma1*=3.4`, `gamma0*=-0.9697`, `alpha*=0.85`, `sigma*=0.25`)을 상수로
+  고정한 뒤, `DATA_SEED=42`와 무관한 3개의 독립 데이터 실현(`DATA_SEED∈{43,44,45}`)에서
+  동일한 3레짐×2모델×3seed×5fold 평가를 반복했다.
+- **결과 — "강한 성공" (파라미터가 안정적 성질)**: 3개 독립 실현 모두에서 보정 사전조건
+  (Clean PR-AUC∈[0.65,0.78]), 1차 성공기준(Δ(Leaked-Clean)≥0.15, RF+LR 모두), 2차
+  성공기준(Δ(Leaked-Suspect)≥0.04, 적어도 한 모델)이 동시에 충족되었다. `DATA_SEED=42`
+  (Round 3) 값과 비교해도 6개 셀(3레짐×2모델) 중 4개는 신규 3-seed 범위 안에 정확히
+  들어왔고, 나머지 2개(LR Suspect-added, LR Leaked)도 이탈 폭이 0.0004/0.00002 수준의
+  근소한 차이였다.
+- **방법론적 결론**: `koi_score`/`gamma1` 합성 파라미터는 `DATA_SEED=42`라는 단일 실현에
+  우연히 맞아떨어진 것이 아니라, 서로 다른 데이터 실현에 걸쳐 안정적으로 목표 대역을
+  유지하는 성질임이 확인되었다. 단, 이는 "3개의 독립 표본에서 안정적"이라는 근거이지
+  "무한히 많은 실현에서 항상 안정적"이라는 증명은 아니며(확인 필요), 파라미터 자체가
+  애초에 최선의 선택이었는지(다른 alpha/sigma/gamma1 후보와의 비교)는 이번 라운드에서
+  다루지 않았다(별도 과제로 유지).
+- 다음 라운드 최우선 과제는 변함없이 실제 KOI cumulative table 검증이다(Round 1 Next #1 →
+  Round 2 Next #3 → Round 3 Next #1 → Round 4 Next #1로 계속 이월) — 합성 데이터 파이프라인의
+  파라미터 강건성이 이번 라운드로 추가 확인되었으므로, 더 이상 합성 데이터 설계가 병목이
+  아니다.

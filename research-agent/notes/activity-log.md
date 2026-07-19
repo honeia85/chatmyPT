@@ -19,3 +19,13 @@
 - 2026-07-18 23:46 [EXPERIMENT] experiments/round-2/review.md
 - 2026-07-18 23:46 [EXPERIMENT] experiments/round-2/review.md
 - 2026-07-18 23:52 [EXPERIMENT] experiments/round-2/review.md
+- 2026-07-19 00:02 [EXPERIMENT] experiments/round-3/plan.md
+- 2026-07-19 00:04 [EXPERIMENT] experiments/round-3/experiment.py
+- 2026-07-19 00:11 [EXPERIMENT] experiments/round-3/round_summary.md
+- 2026-07-19 00:12 [WIKI] wiki/koi-vetting-2024-critical.md
+- 2026-07-19 00:18 [EXPERIMENT] experiments/round-3/review.md
+- 2026-07-19 00:22 [EXPERIMENT] experiments/round-4/plan.md
+- 2026-07-19 00:24 [EXPERIMENT] experiments/round-4/experiment.py
+- 2026-07-19 00:30 [EXPERIMENT] experiments/round-4/round_summary.md
+- 2026-07-19 00:30 [WIKI] wiki/koi-vetting-2024-critical.md
+- 2026-07-19 00:35 [EXPERIMENT] experiments/round-4/review.md
