@@ -1,0 +1,756 @@
+# PMID: 41490113 | PMC: PMC12771251 | DOI: 10.1001/jamanetworkopen.2025.49146
+Introduction
+
+Chemotherapy-induced alopecia (CIA) is a common adverse event among patients receiving chemotherapy.Although CIA is often considered temporary,a subset of patients experience incomplete or absent regrowth of scalp hair that persists for months or years, a condition referred to as persistent CIA (PCIA).In a prospective study, 42.3% of patients with breast cancer had incomplete hair regrowth 3 years after chemotherapy.However, the study was conducted in Asia.
+
+The hair shaft, regardless of an individual’s race and ethnicity, comprises 3 main layers, including the cuticle, cortex, and medulla.The outermost cuticle layer is composed of keratin in β-sheet conformation and functions to protect the cortex beneath.Hair structure, however, varies substantially by racial and ethnic background.Asian women tend to have thicker individual hair shafts but lower follicular density, whereas Black women often have tightly coiled hair with curved follicles.Non-Hispanic White (hereinafter, White) women tend to have intermediate follicular density and thinner, less pigmented hair. These inherent biological differences may contribute to interindividual variation in follicular vulnerability and regrowth following chemotherapy.
+
+Despite these structural differences, existing studies on PCIA have been conducted within racially and ethnically homogeneous populations, limiting generalizability. Additionally, the psychological distress associated with PCIA has rarely been compared across racial and ethnic groups using harmonized measures. Hence, we conducted a prospective multinational cohort study of patients with nonmetastatic breast cancer who were receiving cytotoxic chemotherapy. Using standardized scalp imaging and a validated distress scale, we compared PCIA incidence and alopecia-related psychological distress among Asian, Black, Hispanic or Latino, and White women.
+
+Methods
+
+For this cohort study, all procedures were approved by the institutional review boards of Memorial Sloan Kettering Cancer Center in New York, New York, and Samsung Medical Center in Seoul, Republic of Korea. All participants provided written informed consent. The study followed the Strengthening the Reporting of Observational Studies in Epidemiology () reporting guideline.
+
+Study Design and Participants
+
+We used data from 2 cohorts: the CHANCE(Chemotherapy-Induced Hair Changes and Alopecia, Skin Aging and Nail Changes in Women With Non-Metastatic Breast Cancer) prospective cohort study (ClinicalTrials.gov identifier) conducted in the US and the CHANCE Korea twin cohort study performed in South Korea. The CHANCE study was conducted at a major US academic cancer center (Memorial Sloan Kettering Cancer Center) to quantify PCIA incidence in women (aged ≥18 years) with breast cancer receiving cytotoxic chemotherapy and endocrine therapy. Patients were eligible if they had a diagnosis of breast cancer (stage I-III), had no sign of metastasis, and were expected to receive cytotoxic chemotherapy, endocrine therapy, or both. The CHANCE study enrolled 100 patients in each of the 5 treatment cohorts. The enrollment target was 600 participants across 3 treatment groups: 300 planned to receive chemotherapy, 200 planned to receive endocrine therapy only, and 100 planned to receive no adjuvant therapy. The CHANCE cohort enrolled patients between August 19, 2015, and December 31, 2021, with the last follow-up completed in 2021.
+
+The CHANCE Korea study was conducted at a major academic cancer center (Samsung Medical Center) in South Korea to quantify PCIA incidence and alopecia in women (aged ≥18 years) with breast cancer receiving cytotoxic chemotherapy and endocrine therapy. Patients were eligible if they had a diagnosis of breast cancer (stage I-III), had no sign of metastasis, and were expected to receive cytotoxic chemotherapy, endocrine therapy, or both. The study enrolled 50 patients in each of the 5 treatment cohorts and 50 patients without any treatment. The CHANCE Korea investigators aimed to recruit 300 patients, with a target of 150 participants planned to receive chemotherapy sessions, 100 planned to receive endocrine therapy only, and 50 planned to receive no adjuvant therapy. The CHANCE Korea cohort enrolled patients between December 20, 2018, and April 27, 2022, with the last follow-up completed in 2022.
+
+In both cohorts, patients who received only endocrine therapy or no systemic therapy were excluded from the present analysis because PCIA was defined by cytotoxic exposure. Furthermore, both cohorts excluded patients with other causes of alopecia. Thus, the final analytic sample included only patients without any prior hair problems who received chemotherapy and completed the 12-month follow-up assessments.
+
+Measurement
+
+Persistent Chemotherapy-Induced Alopecia
+
+In prior studies, PCIA is defined as incomplete or absent regrowth of scalp hair 6 months after completion of chemotherapy, and our analysis assessed whether recovery had still not occurred at 12 months. Thus, the primary outcome was PCIA evaluated 12 months after chemotherapy completion, with assessments performed within a permitted window of 10 to 14 months after treatment. PCIA was defined as hair thickness or density less than 2 SD compared with the baseline mean (before chemotherapy).Hair parameters were measured at least 3 times at baseline to allow calculation of intraindividual SDs. This within-person definition was chosen to minimize potential misclassification due to interindividual, interracial, and interethnic differences in baseline hair structure. In the CHANCE cohort, trichoscopy was performed from the frontal scalp at the midline, 12 cm superior to the glabella, using the Folliscope 2.8 system (×20 magnification; Anagen Corp); this yielded the follicle and shaft count (0.3 cm) as well as the shaft diameter (mean number of 5 shafts for diameter). In the CHANCE Korea cohort, a similar trichoscopy technique was used: Hair thickness (×60 lens) and hair density (×15 lens) were measured with the Folliscope 5.0 system (Lead M) at the midline of the vertex. To ensure the comparability of the trichoscopic images during follow-up, we used a plastic headband connected to a tapeline by a snap mechanism using 4 reference points for reproducibility. To evaluate hair thickness, we measured the thickness of hairs from the vertex site in the images, excluded outliers, and calculated the mean hair thickness (in micrometers). The total number of hairs at the vertex site was counted to calculate the hair density (in hairs per centimeter squared).
+
+CIA-Related Distress
+
+The secondary end points were hair density, hair thickness, and CIA-related distress during and after chemotherapy completion. CIA distress was assessed using the Chemotherapy-Induced Alopecia Distress Scale (CADS),a psychometric scale used to assess distress due to CIA experienced by patients with breast cancer. The CADS consists of 17 items in 4 domains: physical (2 questions), emotional (6 questions), daily activity (6 questions), and relationships (3 questions). The responses were based on a 4-point Likert scale (0, not at all; 1, a little; 2, quite a bit; and 3, very much). The total CADS score was calculated as the sum of the scores of the responses to all items and ranged from 0 to 51. Higher scores indicated higher distress levels. Patients were asked to report on their current distress due to CIA, specifically referencing their experiences during the past week, at 2 time points: prior to chemotherapy initiation and at 12 months after chemotherapy completion.
+
+Other Characteristics
+
+Sociodemographic and behavioral information was collected at baseline using a questionnaire. Participants self-reported race and ethnicity as Asian, Black, Hispanic or Latino, or White. Clinical information was obtained from electronic medical records.
+
+Statistical Analysis
+
+For the primary outcome, we used logistic regression to estimate the marginally adjusted proportions of PCIA at the 12-month postchemotherapy visits in each racial and ethnic group, and we then calculated their ratio as a measure of the efficacy of scalp cooling on PCIA. In this study, White women were considered the reference group.
+
+For the secondary outcomes (hair thickness and hair density, assessed at baseline and 12 months after chemotherapy completion), we used mixed-effects linear models including main effects for visit (indicator variables for each time point) and visit–by–race and ethnicity interaction terms (visit × racial and ethnic group) to evaluate racial and ethnic differences in outcome trajectories, with comparisons made relative to White women. Random intercepts and random slopes were included to allow for variations in outcomes across study participants at baseline. In addition, we included study site (US vs South Korea) as a random effect in a secondary model to account for potential heterogeneity in clinical practice or measurement context. All models were adjusted for confounding factors including age, stage, chemotherapy regimen, endocrine therapy, scalp cooling, and hair preservation medication. We also performed a sensitivity analysis excluding participants who received scalp cooling during chemotherapy.
+
+To assess the robustness of our PCIA definition, we conducted sensitivity analyses using alternative thresholds of within-individual hair decline (≥1.5 SD and ≥2.5 SD from each participant’s own baseline), rather than 2.0 SD or greater. Furthermore, to assess potential bias due to loss to follow-up, we conducted a sensitivity analysis using inverse probability of censoring weighting. A logistic regression model was used to estimate the probability of completing the 12-month follow-up based on age, stage, chemotherapy regimen, endocrine therapy, scalp cooling, and hair preservation medication, and the inverse values of these probabilities were used as weights in logistic regression models for PCIA.
+
+Statistical analyses were performed using R, version 4.2.2 (R Project for Statistical Computing).Two-sided< .05 was considered significant. Data analysis was conducted from June 30 to July 15, 2025.
+
+Results
+
+In the CHANCE cohort, 226 patients who received chemotherapy were enrolled and underwent baseline hair assessment. Of these, 175 patients (77.4%) completed the 12-month follow-up period and were included in the primary analysis (30 [17.1%] were Asian, 20 [11.4%] were Black, 17 [9.7%] were Hispanic or Latino, and 108 [61.7%] were White). In the CHANCE Korea cohort, 146 Asian patients received chemotherapy and completed baseline assessment; of these, 129 (88.4%) completed the 12-month follow-up. Both CHANCE cohorts were combined, and the 304 patients (mean [SD] age, 50.3 [10.6] years) who received chemotherapy and had complete 12-month follow-up data were included in the primary analyses. The final analysis included 159 Asian women (52.3%), 20 Black women (6.6%), 17 Hispanic or Latino women (5.6%), and 108 White women (35.5%).
+
+The distribution of disease stage, chemotherapy regimen, and adjuvant endocrine therapy did not differ significantly across racial and ethnic groups. In terms of baseline hair condition, Asian women had the greatest mean (SD) hair thickness (83.2 [13.4] µm), which was significantly higher than that of Black (72.8 [9.0] µm), Hispanic or Latino (74.6 [9.6] µm), and White (70.4 [10.5] µm) women (< .001). By contrast, Asian women had the lowest mean (SD) hair density (136.2 [27.6] hairs/34.34 mmat ×50 magnification), whereas White women had the highest (190.1 [43.0] hairs/34.34 mm), followed by Hispanic or Latino (174.4 [50.8] hairs/34.34 mm) and Black (130.1 [50.9] hairs/34.34 mm) women (< .001) ().
+
+Baseline CIA distress scores measured using the CADS scale were comparable across the groups, with no significant differences (= .58). For example, Asian women had the lowest levels of mean (SD) baseline distress (3.3 [5.9]), whereas Hispanic or Latino women had the highest (5.1 [5.7]).
+
+Regarding the use of scalp cooling or hair preservation medication, Asian women had the lowest proportion (2 [1.3%]). White women had the highest use (9 [8.3%]), followed by Black (1 [5.0%]) and Hispanic or Latino (1 [5.9%]) women ().
+
+Table 1.
+
+Patient Characteristics and Baseline Measurements
+
+Characteristic
+
+Racial and ethnic group (N = 304)
+
+value
+
+Asian (n = 159)
+
+Black (n = 20)
+
+Hispanic or Latino (n = 17)
+
+White (n = 108)
+
+Age, mean (SD), y
+
+49.1 (9.7)
+
+50.2 (8.8)
+
+50.9 (12.0)
+
+51.9 (11.7)
+
+.24
+
+Breast cancer stage at diagnosis
+
+DCIS
+
+2 (1.3)
+
+0
+
+0
+
+1 (0.9)
+
+.23
+
+I
+
+61 (38.4)
+
+10 (50.0)
+
+7 (41.2)
+
+58 (53.7)
+
+II
+
+73 (45.9)
+
+9 (45.0)
+
+10 (58.8)
+
+41 (38.0)
+
+III
+
+23 (14.5)
+
+1 (5.0)
+
+0
+
+8 (7.4)
+
+Chemotherapy regimen
+
+AC or CMF
+
+58 (36.5)
+
+4 (20.0)
+
+7 (41.2)
+
+41 (38.0)
+
+.06
+
+TC or taxane with newer combination
+
+47 (29.6)
+
+4 (20.0)
+
+1 (5.9)
+
+20 (18.5)
+
+AC followed by T/ddAC-T
+
+54 (34.0)
+
+12 (60.0)
+
+9 (52.9)
+
+47 (43.5)
+
+Endocrine therapy
+
+92 (57.9)
+
+11 (55.0)
+
+11 (64.7)
+
+69 (63.9)
+
+.72
+
+Hair condition before treatment, mean (SD)
+
+Hair thickness, µm
+
+83.2 (13.4)
+
+72.8 (9.0)
+
+74.6 (9.6)
+
+70.4 (10.5)
+
+<.001
+
+Hair density, No. of hairs/34.34 mmat ×50 magnification
+
+136.2 (27.6)
+
+130.1 (50.9)
+
+174.4 (50.8)
+
+190.1 (43.0)
+
+<.001
+
+Scalp cooling use
+
+2 (1.3)
+
+1 (5.0)
+
+1 (5.9)
+
+9 (8.3)
+
+.05
+
+Hair growth stimulant use after chemotherapy, mean (SD)
+
+14 (8.8)
+
+4 (20.0)
+
+1 (5.9)
+
+18 (16.7)
+
+.14
+
+CIA distress, mean (SD)
+
+3.3 (5.9)
+
+4.6 (5.1)
+
+5.1 (5.7)
+
+3.9 (6.0)
+
+.58
+
+Abbreviations: AC, doxorubicin-cyclophosphamide; CIA, chemotherapy-induced alopecia; CMF, cyclophosphamide-methotrexate-fluorouracil; DCIS, ductal carcinoma in situ; ddAC-T, dose-dense doxorubicin-cyclophosphamide followed by paclitaxel; T, cyclophosphamide; TC, docetaxel-cyclophosphamide.
+
+a
+
+Unless indicated otherwise, values are presented as the No. (%) of patients.
+
+b
+
+Measured with the Chemotherapy-Induced Alopecia Distress Scale.
+
+Hair Parameter Changes Between Baseline and 12 Months After Chemotherapy Completion
+
+In the chemotherapy-treated group, the greatest reduction in hair thickness between baseline and 12 months was observed in Asian women (mean change, −8.04 µm [95% CI, −9.69 to −6.38 µm]), followed by White (−3.57 µm [95% CI, −5.66 to −1.49 µm]), Black (−3.22 µm [95% CI, −8.41 to 1.97 µm]), and Hispanic or Latino (−1.10 µm [95% CI, −7.15 to 4.95 µm]) women (, A). Compared with White women, Asian women had a significantly greater decline in thickness (adjusted difference, −4.15 µm [95% CI, −6.88 to −1.42 µm];= .003) (). By contrast, smaller between-group differences were observed for change in hair density (, B).
+
+Figure.
+
+Changes in Hair Thickness, Hair Density, and Distress Due to Chemotherapy-Induced Alopecia (CIA) Among Women With Breast Cancer From Baseline to 12 Months After Chemotherapy Completion
+
+Models were adjusted for age and stage. Error bars indicate 95% CIs. CADS indicates Chemotherapy-Induced Alopecia Distress Scale.
+
+Table 2.
+
+Change in Hair Density and Thickness From Baseline to 12 Months After Chemotherapy Completion
+
+Characteristic
+
+Racial and ethnic group
+
+Asian
+
+Black
+
+Hispanic or Latino
+
+White
+
+Hair thickness, µm
+
+Change from baseline
+
+−8.04 (−9.69 to −6.38)
+
+−3.22 (−8.41 to 1.97)
+
+−1.10 (−7.15 to 4.95)
+
+−3.57 (−5.66 to −1.49)
+
+Change difference
+
+Crude
+
+−4.46 (−7.13 to −1.80)
+
+0.35 (−5.24 to 5.94)
+
+2.47 (−3.92 to 8.87)
+
+Reference
+
+Model 1
+
+−4.15 (−6.88 to −1.42)
+
+0.52 (−5.15 to 6.18)
+
+2.57 (−3.88 to 9.02)
+
+Reference
+
+Model 2
+
+−3.96 (−6.78 to −1.42)
+
+1.00 (−4.73 to 6.73)
+
+1.82 (−5.01 to 8.64)
+
+Reference
+
+Hair density, No. of hairs/34.34 mmat ×50 magnification
+
+Change from baseline
+
+2.66 (−1.7 to 7.01)
+
+5.15 (−8.62 to 18.92)
+
+−1.07 (−17.21 to 15.07)
+
+−3.31 (−8.81 to 2.19)
+
+Change difference
+
+Crude
+
+5.96 (−1.05 to 12.98)
+
+8.45 (−6.37 to 23.28)
+
+2.24 (−14.82 to 19.29)
+
+Reference
+
+Model 1
+
+6.73 (−0.38 to 13.85)
+
+7.64 (−7.20 to 22.46)
+
+2.15 (−14.84 to 19.14)
+
+Reference
+
+Model 2
+
+6.44 (−0.88 to 13.75)
+
+9.31 (−6.04 to 24.66)
+
+0.32 (−17.47 to 18.11)
+
+Reference
+
+a
+
+Values are presented as means (95% CIs).
+
+b
+
+Model 1 was adjusted for age, stage, chemotherapy regimen, endocrine therapy, scalp cooling, and hair preservation medication.
+
+c
+
+Model 2 (n = 291) excluded 13 patients who used scalp cooling and was adjusted for age, stage, chemotherapy regimen, endocrine therapy, and hair preservation medication.
+
+PCIA Incidence
+
+Among chemotherapy-treated patients, the marginal predicted probability of PCIA incidence was highest in Asian women (n = 59 [42.1%]; 0.42 [95% CI, 0.34-0.50]), followed by White (n = 24 [22.2%]; 0.22 [95% CI, 0.14-0.30]), Black (n = 2 [10.0%]; 0.10 [95% CI, −0.03 to 0.23]), and Hispanic or Latino (n = 1 [5.1%]; 0.06 [95% CI, −0.05 to 0.17]) women. Compared with White women, Asian women had a significantly increased risk of PCIA (adjusted risk ratio, 2.29 [95% CI, 1.07-4.88];= .03), whereas Black (0.30 [95% CI, 0.06-1.42]) and Hispanic or Latino (0.17 [95% CI, 0.02-1.43]) women had lower but nonsignificant risk (, model 1). Sensitivity analyses using alternative cutoffs for defining PCIA (1.5 and 2.5 SD decline from baseline) yielded consistent patterns of racial and ethnic disparity. Asian women remained at the highest risk of PCIA across all thresholds, reinforcing the robustness of the observed associations (eTable 1 in). In a sensitivity analysis using hair growth stimulant to adjust for potential selection bias due to loss to follow-up, the racial and ethnic disparity in PCIA risk also remained consistent (eTable 2 in).
+
+Table 3.
+
+Risk of PCIA Incidence or Hair Decline–Induced Alopecia Among Patients Receiving Chemotherapy
+
+Characteristic
+
+Racial and ethnic group (N = 304)
+
+Asian (n = 159)
+
+Black (n = 20)
+
+Hispanic or Latino (n = 17)
+
+White (n = 108)
+
+Patients with PCIA, No. (%)
+
+59 (42.1)
+
+2 (10.0)
+
+1 (5.1)
+
+24 (22.2)
+
+Risk of PCIA incidence (95% CI)
+
+Crude
+
+Marginal predicted probabilities
+
+0.42 (0.34-0.50)
+
+0.10 (−0.03 to 0.23)
+
+0.06 (−0.05 to 0.17)
+
+0.22 (0.14-0.30)
+
+Risk ratio
+
+2.55 (1.45-4.48)
+
+0.39 (0.08-1.80)
+
+0.22 (0.03-1.73)
+
+Reference
+
+Model 1
+
+Marginal predicted probabilities
+
+0.44 (0.36-0.52)
+
+0.09 (−0.02 to 0.21)
+
+0.06 (−0.05 to 0.16)
+
+0.24 (0.16-0.32)
+
+Risk ratio
+
+2.29 (1.07-4.88)
+
+0.30 (0.06-1.42)
+
+0.17 (0.02-1.43)
+
+Reference
+
+Model 2
+
+Marginal predicted probabilities
+
+0.44 (0.36-0.52)
+
+0.09 (−0.02 to 0.21)
+
+0.06 (−0.05 to 0.16)
+
+0.24 (0.16-0.32)
+
+Risk ratio
+
+2.29 (1.07-4.88)
+
+0.30 (0.06-1.42)
+
+0.17 (0.02-1.43)
+
+Reference
+
+Abbreviation: PCIA, persistent chemotherapy-induced alopecia.
+
+a
+
+Model 1 was adjusted for age, stage, chemotherapy regimen, endocrine therapy, scalp cooling, and hair preservation medication.
+
+b
+
+Model 2 (n = 291) excluded 13 patients who used scalp cooling and was adjusted for age, stage, chemotherapy regimen, endocrine therapy, and hair preservation medication.
+
+CIA-Related Distress
+
+CIA-related distress, measured by CADS scores, increased most from baseline to 12 months among Asian women (mean change, 3.98 [95% CI, 2.65-5.32]), whereas it remained stable or decreased in other groups. Compared with White women, Asian women had a significantly greater increase in distress (adjusted mean difference, 4.11 [95% CI, 2.05-6.17];= .001) (, C). Domain-specific increases were most notable in the CADS emotional (adjusted mean difference, 1.88 [95% CI, 0.92-2.95]) and activity (1.55 [95% CI, 0.58-2.52]) domains ().
+
+Table 4.
+
+Change in CIA Distress From Baseline to 12 Months After Chemotherapy Completion Among Patients Receiving Chemotherapy
+
+CADS domain
+
+Racial and ethnic group
+
+Asian
+
+Black
+
+Hispanic or Latino
+
+White
+
+Total CADS score
+
+Change from baseline
+
+3.98 (2.65-5.32)
+
+−0.15 (−3.77 to 3.47)
+
+−2.29 (−6.22 to 1.63)
+
+−0.13 (−1.69 to 1.43)
+
+Change difference
+
+Crude
+
+4.11 (2.06-6.16)
+
+−0.02 (−3.96 to 3.92)
+
+−2.16 (−6.38 to 2.05)
+
+Reference
+
+Model 1
+
+4.11 (2.05-6.17)
+
+0.22 (−3.76 to 4.20)
+
+−2.07 (−6.25 to 2.1)
+
+Reference
+
+Model 2
+
+3.99 (1.87-6.12)
+
+0 (−4.10 to 4.10)
+
+−2.44 (−6.75 to 1.88)
+
+Reference
+
+Physical domain
+
+Change from baseline
+
+0.31 (0.15-0.47)
+
+0.25 (−0.18 to 0.68)
+
+−0.65 (−1.11 to −0.18)
+
+−0.05 (−0.23 to 0.14)
+
+Change difference
+
+Crude
+
+0.36 (0.12-0.60)
+
+0.30 (−0.17 to 0.76)
+
+−0.60 (−1.1 to −0.1)
+
+Reference
+
+Model 1
+
+0.38 (0.14-0.62)
+
+0.34 (−0.12 to 0.8)
+
+−0.57 (−1.06 to −0.08)
+
+Reference
+
+Model 2
+
+0.36 (0.11-0.61)
+
+0.32 (−0.16 to 0.8)
+
+−0.65 (−1.15 to −0.14)
+
+Reference
+
+Emotional domain
+
+Change from baseline
+
+1.76 (1.14-2.39)
+
+−0.05 (−1.74 to 1.64)
+
+−0.71 (−2.54 to 1.13)
+
+−0.19 (−0.92 to 0.53)
+
+Change difference
+
+Crude
+
+1.96 (1.00-2.92)
+
+0.14 (−1.70 to 1.99)
+
+−0.51 (−2.49 to 1.46)
+
+Reference
+
+Model 1
+
+1.88 (0.92-2.85)
+
+0.11 (−1.76 to 1.98)
+
+−0.54 (−2.50 to 1.42)
+
+Reference
+
+Model 2
+
+1.91 (0.93-2.90)
+
+0.08 (−1.83 to 1.99)
+
+−0.61 (−2.62 to 1.40)
+
+Reference
+
+Activity domain
+
+Change from baseline
+
+1.66 (1.03-2.30)
+
+0.05 (−1.67 to 1.77)
+
+−0.53 (−2.39 to 1.33)
+
+0.19 (−0.55 to 0.92)
+
+Change difference
+
+Crude
+
+1.48 (0.50-2.45)
+
+−0.14 (−2.01 to 1.74)
+
+−0.71 (−2.72 to 1.29)
+
+Reference
+
+Model 1
+
+1.55 (0.58-2.52)
+
+0.10 (−1.78 to 1.99)
+
+−0.64 (−2.61 to 1.34)
+
+Reference
+
+Model 2
+
+1.42 (0.40-2.45)
+
+−0.03 (−2.02 to 1.95)
+
+−0.82 (−2.90 to 1.27)
+
+Reference
+
+Relationship domain
+
+Change from baseline
+
+0.25 (−0.02 to 0.51)
+
+−0.40 (−1.11 to 0.31)
+
+−0.41 (−1.19 to 0.36)
+
+−0.07 (−0.38 to 0.23)
+
+Change difference
+
+Crude
+
+0.32 (−0.08 to 0.73)
+
+−0.33 (−1.10 to 0.45)
+
+−0.34 (−1.17 to 0.5)
+
+Reference
+
+Model 1
+
+0.33 (−0.08 to 0.74)
+
+−0.33 (−1.13 to 0.46)
+
+−0.33 (−1.16 to 0.51)
+
+Reference
+
+Model 2
+
+0.32 (−0.11 to 0.75)
+
+−0.37 (−1.20 to 0.46)
+
+−0.36 (−1.23 to 0.51)
+
+Reference
+
+Abbreviation: CADS, Chemotherapy-Induced Alopecia Distress Scale.
+
+a
+
+Values are presented as means (95% CIs).
+
+b
+
+Model 1 was adjusted for age, stage, chemotherapy regimen, endocrine therapy, scalp cooling, and hair preservation medication.
+
+c
+
+Model 2 (n = 291) excluded 13 patients who used scalp cooling and was adjusted for age, stage, chemotherapy regimen, endocrine therapy, and hair preservation medication.
+
+Discussion
+
+In this multinational cohort study of women receiving chemotherapy for breast cancer, 3 key findings were identified. First, baseline hair characteristics differed significantly according to race and ethnicity. Second, the degree of hair change after chemotherapy and incidence of PCIA varied significantly across racial and ethnic groups. Finally, Asian women experienced the most pronounced CIA-related psychological distress, particularly in the CADS emotional and activity-related domains.
+
+Consistent with previous dermatologic literature,Asian women in this study had the thickest hair shafts but the lowest follicular density before chemotherapy. This phenotype is linked to the enhanced ectodysplasin-A receptor gene variant rs3827760 (p.Val370Ala), which has undergone strong positive selection in East Asian populations.This variant is associated with larger and fewer follicles.In this study, Black women had tightly coiled hair with low density and elliptical follicles. Hispanic or Latino women had intermediate shaft thickness and relatively fragile hair. By contrast, White women had high follicular density and straight-to-wavy hair morphology. These differences in hair structure, including shaft diameter, follicular density, curl pattern, and melanin content, may influence both the extent of chemotherapy-induced follicular injury and the visual perception of hair loss.
+
+In this study, Asian women had the highest PCIA incidence (n = 59 [42.1%]), followed by White (n = 24 [22.2%]), Black (n = 2 [10.0%]), and Hispanic or Latino (n = 1 [5.1%]) women. PCIA is a multifactorial phenomenon shaped by structural hair traits, genetic susceptibility, pharmacogenetic variations, and sociocultural context. In our cohort, use of scalp cooling and hair preservation medications was relatively low among Asian women. This lower utility may reflect multiple barriers, including limited availability of scalp cooling devices in routine oncology practice, lack of reimbursement, and lower awareness or cultural prioritization of cosmetic side effects in certain Asian health care systems.These structural barriers may partly explain the disproportionately high incidence of PCIA in Asian women. Although White women had relatively better access to scalp cooling, PCIA incidence remained considerable in this study. This finding suggests that biological susceptibility may play a greater role than access alone. From a structural hair trait perspective, Asian women may be particularly susceptible to visible hair thinning because of their sparse follicular density and the visual prominence of thick, straight hair when lost.Conversely, White women’s intermediate follicular density and finer shafts may predispose to diffuse miniaturization without overt loss, still sufficient to meet PCIA criteria.These findings underscore that PCIA risk is not confined to those with structurally weaker hair types. This structural configuration may lead to a threshold effect in which even limited follicular dropout causes a disproportionate cosmetic impact. From a genetic perspective, thers1202179 variant, which is more common in East Asian individuals, has been associated with a 4-fold increased risk of PCIA. Thers1202179 variant was reported to be associated with reduced P-glycoprotein expression and enhanced drug accumulation in the hair follicles.Variants of CYP3A4 and CYP2D6, enzymes involved in chemotherapy metabolism, may similarly modulate cumulative follicular toxicity.These findings support the potential utility of pharmacogenetic screening for risk stratification and prevention of PCIA. Genetic screening forand cytochrome P450 polymorphisms or hair structure screening may further refine risk predictions as an adjunct to supportive interventions such as scalp cooling, enabling personalization of preventive strategies.
+
+Black and Hispanic or Latino women in this study had relatively lower incidences of PCIA. This finding may reflect the protective effects of tightly curled hair, which offers greater visual scalp coverage, despite its low density. Curl patterns and shaft morphologies may also create microenvironments that modulate drug exposure or reduce direct follicular toxicity.Melanin, which has previously been implicated in increased chemotherapeutic toxicity, may also exert antioxidant effects that protect follicular stem cells from oxidative stress.Additionally, interindividual, interracial, and interethnic differences in follicular immune privilege, modulated by regulatory T cells and transcription factors (eg,), may influence follicular regenerative capacity. However, these hypotheses require further mechanistic validation.Our findings highlight the need for personalized PCIA counseling that incorporates both hair biology and cultural expectations. Current educational materials and decision aids rarely account for racial and ethnic differences in hair structure, pharmacogenetic susceptibility, or cultural norms surrounding appearance. Tailored interventions such as race and ethnicity–specific informational leaflets, culturally sensitive counseling, and access to supportive care strategies should be developed and implemented to ensure equitable survivorship care.
+
+In addition to the biological risk, the emotional impact of PCIA varies across groups. Asian women exhibited the most pronounced increase in CADS scores despite anticipating hair loss, especially in the emotional and activity-related domains.Asian women have reported the most pronounced increases in alopecia-related distress, particularly in the CADS emotional and functional domains. This finding may reflect collectivist cultural norms in East Asia. In collectivist cultures, visible hair loss can cause social stigma and affect identity, career, and interpersonal relationships.Norms around grooming, femininity, and an acceptable appearance may amplify distress, even when hair loss is moderate.
+
+Although the incidence of PCIA was relatively low among Black women in our cohort (2 of 20 [10.0%]), their mean CIA-related distress score was numerically higher than that of Asian and White participants (mean [SD] CADS score, 4.6 [5.1] vs 3.3 [5.9]-3.9 [6.0]). In a 2023 study, alopecia was cited by Black women with breast cancer as one of the most emotionally and socially impactful adverse effects, influencing identity, self-esteem, and interpersonal relationships.This finding suggests that although fewer Black women develop long-term alopecia, those who do may experience considerable psychological burden. CIA is a public sign of illness and can be a source of emotional distress and stigma related to social activities.Thus, PCIA could affect the return to normal life in patients after chemotherapy, and it is associated with lower quality of lifeand adverse psychosocial consequences. In discrete choice experiments, some patients with breast cancer reported willingness to trade modest survival gains to avoid severe or long-lasting alopecia, underscoring that hair loss is not perceived solely as a cosmetic issue but as a determinant of quality of life and treatment acceptability.These findings reinforce the importance of incorporating patient preferences into counseling and shared decision-making, particularly across racially and culturally diverse populations in which the psychosocial meaning of hair loss may differ. However, current educational materials and decision aids rarely account for racial and ethnic differences in hair structure, pharmacogenetic susceptibility, or cultural norms surrounding appearance. Tailored interventions, culturally sensitive counseling, and access to supportive care strategies should be developed and implemented to ensure equitable survivorship care.
+
+Limitations
+
+This study has some limitations. First, participants were enrolled from different countries. However, the study protocol, eligibility criteria, and measurement tools were carefully harmonized to ensure comparability. Standardized hair measurement equipment and imaging locations were used across sites, with consistent definitions of hair density and thickness.Thus, minor differences in image resolution or operator techniques may have introduced measurement variability. Second, because participation required a willingness to undergo detailed hair assessment and complete repeated surveys, the cohort may have included individuals who were more concerned with their appearance or were more responsive to alopecia-related distress. Third, the sample sizes for Black and Hispanic or Latino participants were relatively small, limiting the precision of PCIA risk estimates for these groups. Although adjusted marginal probabilities and 95% CIs are reported, these results should be interpreted cautiously and considered exploratory. Fourth, although we accounted for individual- and site-level clustering in our models, we were unable to adjust for several potentially important psychosocial factors, such as education, employment status, and prior mental health history, due to incomplete data collection across the 2 sites. Future studies should incorporate these variables to more comprehensively evaluate the sociocultural and psychological contributors to alopecia-related distress. Fifth, our cohort study focused on standard cytotoxic chemotherapy. Therefore, the implications of our findings for newer therapeutic modalities, such as antibody-drug conjugates (ADCs) used in advanced or metastatic breast cancer, remain uncertain. Because alopecia rates and mechanisms may differ with these agents, risk communication should remain patient centered and anticipatory, clarifying the expected timing, pattern, and potential persistence of hair loss, while acknowledging the limited evidence for preventive measures such as scalp cooling. Prospective studies are needed to characterize ADC-related alopecia and to test tailored preventive strategies across diverse populations. Finally, given the study’s observational design, causality cannot be inferred. Unmeasured confounding and residual bias may also have persisted despite adjustment.
+
+Conclusions
+
+In this cohort study of racial and ethnic disparities in PCIA among women with breast cancer, the convergence of genetic predisposition, hair morphology, chemotherapeutic pharmacokinetics, and sociocultural interpretation of hair loss was reflected. The high incidence and emotional burden observed among Asian women exemplified how biological vulnerability and cultural pressure could intersect and magnify health consequences. Addressing PCIA requires an integrative, interdisciplinary approach that acknowledges both the molecular and meaning-centered aspects of hair loss. Future studies should validate these findings through large-scale, multiethnic prospective cohorts with harmonized clinical, genetic, and psychosocial data collection to better inform prevention and support strategies.

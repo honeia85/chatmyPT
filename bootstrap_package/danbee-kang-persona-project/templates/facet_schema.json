@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Danbee Kang Persona Facet",
+  "description": "강단비 1저자 논문 한 편에서 추출한 사고 facet 단위",
+  "type": "object",
+  "required": [
+    "pmid", "year", "title",
+    "gap_statement", "framing_pattern",
+    "methodology_choice", "key_finding",
+    "limitations", "future_work",
+    "ideation_type", "evidence_pointer"
+  ],
+  "properties": {
+    "pmid": {"type": "string", "pattern": "^[0-9]+$"},
+    "year": {"type": "integer", "minimum": 2010, "maximum": 2030},
+    "title": {"type": "string"},
+    "gap_statement": {
+      "type": "string",
+      "description": "1-3 문장. 본인이 결핍으로 본 지점."
+    },
+    "framing_pattern": {
+      "type": "string",
+      "description": "카테고리화 + 본문 어구 인용."
+    },
+    "hypothesis": {
+      "type": "string",
+      "description": "검증 가설. 없으면 'not stated'."
+    },
+    "methodology_choice": {
+      "type": "object",
+      "required": ["design", "data_source"],
+      "properties": {
+        "design": {
+          "type": "string",
+          "enum": [
+            "RCT",
+            "Prospective cohort",
+            "Retrospective cohort",
+            "Target trial emulation",
+            "Cross-sectional",
+            "Validation study",
+            "Systematic review",
+            "Editorial",
+            "Letter",
+            "Pilot RCT",
+            "Single-arm trial",
+            "Mixed methods",
+            "Other"
+          ]
+        },
+        "data_source": {"type": "string"},
+        "rationale": {"type": "string"}
+      }
+    },
+    "key_finding": {"type": "string"},
+    "limitations": {"type": "string"},
+    "future_work": {"type": "string"},
+    "ideation_type": {
+      "type": "string",
+      "enum": [
+        "extension",
+        "analogy",
+        "combination",
+        "contradiction",
+        "methodology-import",
+        "validation",
+        "profile",
+        "editorial"
+      ]
+    },
+    "evidence_pointer": {
+      "type": "string",
+      "enum": ["abstract", "introduction", "methods", "results", "discussion", "multiple"]
+    },
+    "_source": {
+      "type": "string",
+      "enum": ["abstract", "pdf"],
+      "description": "추출 시 사용한 원천. 메타데이터, 스크립트가 자동 부여."
+    }
+  }
+}

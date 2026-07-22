@@ -1,0 +1,9 @@
+﻿Data_source_key,Count,Description
+Samsung Medical Center prospective cohort,17,Samsung Medical Center
+EuroQol / PRO instruments,9,EORTC
+Korean NHIS,8,NHIS
+Multicenter cohort,3,multicenter
+BIG-S registry,2,BIG-S
+Multinational (US+Korea),1,MSKCC
+CHARM cohort,1,CHARM
+(unmatched),16,see unmatched_data_sources.txt

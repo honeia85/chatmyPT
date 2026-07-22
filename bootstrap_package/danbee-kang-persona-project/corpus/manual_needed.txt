@@ -1,0 +1,23 @@
+# 수동 다운로드 필요 (institution 접속)
+# Format: PMID | DOI | Journal | Title
+41432961 | https://doi.org/10.1007/s11136-025-04125-4 | Qual Life Res | Quality of life, function, and symptom trajectory patterns following salivary gland cancer treatment: a 5-year prospective cohort study.
+40930618 | https://doi.org/10.1016/j.jacc.2025.07.021 | J Am Coll Cardiol | Statins in Type 1 Diabetes: Bridging the Evidence Gap With Target Trial Emulation.
+40516881 | https://doi.org/10.1016/j.jaad.2025.06.023 | J Am Acad Dermatol | Scalp cooling for preventing persistent chemotherapy-induced alopecia in anthracycline-treated patients: A single-arm trial.
+40131016 | https://doi.org/10.1093/eurheartj/ehaf153 | Eur Heart J | Less harmful alternative for smoking: addressing concerns on the observational study of electronic cigarettes and cardiovascular outcomes.
+40096290 | https://doi.org/10.1161/CIRCULATIONAHA.124.071811 | Circulation | Risk of Cancer in Newborns With Congenital Heart Disease and Their Mothers: A Nationwide Cohort Study.
+39775792 | https://doi.org/10.1093/eurheartj/ehae896 | Eur Heart J | Combustible cigarette smoking harms nearly every organ in the body.
+39429032 | https://doi.org/10.1093/eurheartj/ehae705 | Eur Heart J | Prognosis after switching to electronic cigarettes following percutaneous coronary intervention: a Korean nationwide study.
+38843479 | https://doi.org/10.1200/JCO.23.02374 | J Clin Oncol | Scalp Cooling in Preventing Persistent Chemotherapy-Induced Alopecia: A Randomized Controlled Trial.
+38484885 | https://doi.org/10.1016/j.jad.2024.03.024 | J Affect Disord | Emulating trial to evaluate the effectiveness of routine supportive care on mortality among cancer patients experiencing distress at the time of diagnosis.
+38472736 | https://doi.org/10.1007/s12282-024-01559-5 | Breast Cancer | Comprehensive Young Age Breast Cancer registry from clinical, genomics, and patient-reported outcomes measured with 15 years follow-up: the CHARM cohort profile.
+36942579 | https://doi.org/10.1017/S1478951521001711 | Palliat Support Care | Divorce after breast cancer diagnosis and its impact on quality of life.
+36512301 | https://doi.org/10.1007/s11136-022-03323-8 | Qual Life Res | Pre-treatment quality of life in patients with salivary gland cancer in comparison with those of head and neck cancer patients.
+35174421 | https://doi.org/10.1007/s00520-022-06906-w | Support Care Cancer | Impact of objective financial burden and subjective financial distress on spiritual well-being and quality of life among working-age cancer survivors.
+34728262 | https://doi.org/10.1016/j.jaad.2021.10.047 | J Am Acad Dermatol | Efficacy of a tailored moisturizer for reducing chemotherapy-induced skin dryness in breast cancer patients: A randomized controlled clinical trial.
+34507971 | https://doi.org/10.1158/1940-6207.CAPR-20-0542 | Cancer Prev Res (Phila) | The Relationship Between Breast Density Change During Menopause and the Risk of Breast Cancer in Korean Women.
+34368886 | https://doi.org/10.1007/s00520-021-06459-4 | Support Care Cancer | Effect of mind and body education on quality of life among young breast cancer patients: a randomized controlled trial.
+33241506 | https://doi.org/10.1007/s00520-020-05884-1 | Support Care Cancer | Association between body image dissatisfaction and poor quality of life and depression among patients with hematopoietic stem cell transplantation.
+31338640 | https://doi.org/10.1007/s00520-019-04982-z | Support Care Cancer | Impact of a topical lotion, CG428, on permanent chemotherapy-induced alopecia in breast cancer survivors: a pilot randomized double-blind controlled clinical trial (VOLUME RCT).
+28262081 | https://doi.org/10.1017/S1478951517000062 | Palliat Support Care | Distress and body image due to altered appearance in posttreatment and active treatment of breast cancer patients and in general population controls.
+28233366 | https://doi.org/10.1002/pon.4408 | Psychooncology | Who are happy survivors? Physical, psychosocial, and spiritual factors associated with happiness of breast cancer survivors during the transition from cancer patient to survivor.
+26198993 | https://doi.org/10.1007/s10549-015-3502-4 | Breast Cancer Res Treat | Quantitative changes in skin composition parameters due to chemotherapy in breast cancer patients: a cohort study.
